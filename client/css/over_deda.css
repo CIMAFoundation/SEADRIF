@@ -1,0 +1,78 @@
+.rfsea_box_content a,
+.rfsea_box_content p,
+.rfsea_box_content h1,
+.rfsea_box_content h2,
+.rfsea_box_content h3,
+.rfsea_box_content h4,
+.rfsea_box_content h5,
+.rfsea_box_content h6 {
+    color: #22293e;
+}
+
+
+
+/********************************************************/
+/******************* MENU START *************************/
+/********************************************************/
+
+.rfsea_box_menu {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: inherit;
+    left: inherit;
+}
+
+
+
+
+.rfsea_box_menu li a
+{
+    color: cornsilk;
+    text-decoration: none;
+}
+
+.rfsea_box_menu li a:hover, .active
+{
+    border-bottom: solid 3px cornsilk;
+}
+
+
+/********************************************************/
+/******************* HEADER *************************/
+/********************************************************/
+
+.rfsea_box_header
+{
+    width:100%;
+    height: 100vh;
+
+    background-color: #ffffff;
+    color:#232323;
+}
+
+.rfsea_box_content
+{
+    position: absolute;
+    width: 50vw;
+    height: 100%;
+    top: 0;
+    left: 0;
+    /*background: rgba(33,37,41,0.90);*/
+    background: rgba(255,252,232,0.80);
+}
+
+
+/********************************************************/
+/***************** FOOTER *******************************/
+/********************************************************/
+
+.rfsea_footer_box
+{
+    position: fixed;
+    background-color: #22293e;
+    width:100%;
+    bottom:0px;
+    padding: 10px;
+    font-size: 20px;
+}

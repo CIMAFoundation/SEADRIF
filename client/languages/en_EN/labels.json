@@ -1,0 +1,25 @@
+{
+  "label_001": "TEST LABEL",
+
+
+  "eo_0": "Undefined Pixels",
+  "eo_1": "No Water",
+  "eo_2": "Permanent Water",
+  "eo_3": "Flooded Pixels",
+
+  "compare_eo_wd_0": "Permanent Water",
+  "compare_eo_wd_1": "No Water",
+  "compare_eo_wd_2": "Likely Not Flooded",
+  "compare_eo_wd_3": "Likely To Be Flooded",
+  "compare_eo_wd_4": "Flooded Pixels",
+  "compare_eo_wd_5": "Uncertain Classification",
+
+  "cambodia": "CAMBODIA",
+  "lao_pdr": "LAOS",
+  "myanmar": "MYANMAR",
+
+  "flag_cambodia": "kh",
+  "flag_lao_pdr": "la",
+  "flag_myanmar": "mm"
+
+}

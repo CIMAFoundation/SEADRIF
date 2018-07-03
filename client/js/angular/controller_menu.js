@@ -1,0 +1,228 @@
+/**
+ * Created by Manuel on 12/02/2018.
+ */
+
+rfseaApp.controller('rfseamenuCtrl', function($rootScope, $scope, $window, rfseaSrv)
+{
+    $scope.userinfo = {
+        usrlogin: "",
+        usrlevel: "",
+        usrloginstatus: false
+    };
+
+    $scope.loginData = {
+        usr: "",
+        psw: ""
+    }
+
+    $scope.signinUsr = {
+        name: "",
+        lastname: "",
+        email: "",
+        institution: ""
+    }
+
+    $scope.usrinfo = JSON.parse(localStorage.getItem('rfsea_login'));
+
+    if ($scope.usrinfo) {
+        $scope.bLoggedInMenu = true;
+    } else {
+        $scope.bLoggedInMenu = false;
+    }
+
+    $scope.setDistrictView = function()
+    {
+        if($scope.countrySelect !== '' && $scope.countrySelect !== 'na')
+        {
+            if($scope.districtShow)
+            {
+                $scope.countryhomeshow = true;
+            } else {
+                $scope.countryhomeshow = false;
+            }
+
+            $scope.districtShow = !$scope.districtShow;
+
+            $scope.riskprofileShow = false;
+            // $scope.districtdetailsshow = false;
+
+        } else {
+            vex.dialog.alert("You must select a country");
+        }
+
+    }
+
+    $scope.setRiskProfileView = function()
+    {
+        if($scope.countrySelect !== '' && $scope.countrySelect !== 'na')
+        {
+            if($scope.riskprofileShow)
+            {
+                $scope.countryhomeshow = true;
+            } else {
+                $scope.countryhomeshow = false;
+            }
+            $scope.riskprofileShow = !$scope.riskprofileShow;
+            $scope.districtShow = false;
+            // $scope.districtdetailsshow = false;
+
+        } else {
+            vex.dialog.alert("You must select a country");
+        }
+    }
+
+    /***********************************************************/
+    /***************** LOGIN FORM ******************************/
+    /***********************************************************/
+
+    $scope.bLoginForm = false;
+    $scope.bLoginActive = false;
+    $scope.bRegisterActive = false;
+    $scope.txtBtn = "";
+
+    $scope.setLoginForm = function(type)
+    {
+
+        if(type == 'login')
+        {
+            $scope.bLoginForm = true;
+            $scope.bLoginActive = true;
+            $scope.bRegisterActive = false;
+            $scope.txtBtn = "LOGIN";
+        }
+
+        if(type=='register'){
+            $scope.bLoginForm = true;
+            $scope.bLoginActive = false;
+            $scope.bRegisterActive = true;
+            $scope.txtBtn = "REQUEST REGISTRATION";
+        }
+
+        if(type=='close'){
+            $scope.bLoginForm = false;
+            $scope.bLoginActive = false;
+            $scope.bRegisterActive = false;
+            $scope.txtBtn = "";
+            $scope.bLoggedInMenu = false;
+        }
+
+        if(type == '')
+        {
+            // Call logout API for brower cookies
+            // Get user name
+            rfseaSrv.getLogout(function(data)
+            {
+                $scope.bLoginForm = false;
+                $scope.bLoginActive = false;
+                $scope.bRegisterActive = false;
+                $scope.txtBtn = "";
+                $scope.bLoggedInMenu = false;
+                localStorage.removeItem('rfsea_login');
+                localStorage.removeItem('rfsea_country_selected');
+                $window.location.href = "index.html";
+
+            }, function(data)
+            {
+                // Error
+                console.log(data);
+            });
+        }
+
+    }
+
+    $scope.loginFormEnter = function()
+    {
+        if($scope.txtBtn == 'LOGIN'){
+            // Login action
+
+            rfseaSrv.login($scope.loginData.usr, $scope.loginData.psw, function(data)
+            {
+                // set Login cookies
+                if(data.data.success){
+                    //Login success
+
+                    console.log(data);
+
+                    // Get user name
+                    rfseaSrv.getWhoami(function(data)
+                    {
+                        console.log(data);
+
+                        $scope.userinfo = {
+                            usrlogin: data.data,
+                            usrlevel: "seaDrif",
+                            usrloginstatus: true
+                        };
+
+                        localStorage.setItem('rfsea_login', JSON.stringify($scope.userinfo));
+                        $scope.bLoginForm = false;
+                        $scope.bLoginActive = false;
+                        $scope.bRegisterActive = false;
+
+                        $window.location.href = "countries.html";
+
+                    }, function(data)
+                    {
+                        // Error
+                        console.log(data);
+                    });
+
+                } else {
+                    // Login error
+                    vex.dialog.alert({
+                        message: 'Incorrect username or password'
+                    })
+                }
+
+            }, function(data)
+            {
+                // Error
+                console.log(data);
+                vex.dialog.alert({
+                    message: 'Incorrect username or password'
+                })
+            });
+
+        } else {
+            // Register call
+
+            var mailInfo = {
+                'text': 'registration request from SEADRIF: name: ' + $scope.signinUsr.name + '; last name: ' +$scope.signinUsr.lastname + '; email: ' + $scope.signinUsr.email + '; institution: ' + $scope.signinUsr.institution,
+                'object': 'SEADRIF - Registration request',
+                //sender: mail mittente
+                'users': 'manuel.cavallaro@cimafoundation.org'
+            };
+
+            rfseaSrv.sendRegistrationRequest(mailInfo, function(data)
+            {
+
+                vex.dialog.alert({
+                    message: 'Registration request sent correctly, we will contact you as soon as possible.'
+                })
+
+            }, function(data)
+            {
+                // Error
+                console.log(data);
+                vex.dialog.alert({
+                    message: 'API error, contact us'
+                })
+            });
+        }
+    }
+
+    $scope.setHomeView = function(){
+        $scope.countryhomeshow = false;
+        localStorage.removeItem('rfsea_country_selected');
+        $window.location.href = "countries.html";
+    }
+
+    /***********************************************************/
+    /***************** UTILITY *********************************/
+    /***********************************************************/
+
+    $scope.gotoPage = function(url){
+        $window.location.href = url;
+    }
+
+});

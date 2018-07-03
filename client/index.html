@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Disaster Risk Financing and Transfer</title>
+
+    <meta name="keywords" content="Disaster Risk Financing and Transfer" />
+    <meta name="description" content="">
+    <meta name="author" content="cimafoundation.org">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Bower components & JS -->
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="bower_components/angular/angular.js"></script>
+
+    <!-- Angular Cookies -->
+    <script src="bower_components/angular-cookies/angular-cookies.js" type="text/javascript"></script>
+
+    <!-- Translate provider -->
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-translate-loader-partial/angular-translate-loader-partial.min.js"></script>
+
+    <!-- VEX DIALOG - POPUP INIZIO -->
+    <script src="js/vex-master/dist/js/vex.min.js"></script>
+    <script src="js/vex-master/dist/js/vex.combined.min.js"></script>
+    <link href="js/vex-master/dist/css/vex.css" rel="stylesheet" />
+    <link href="js/vex-master/dist/css/vex-theme-default.css" rel="stylesheet" />
+    <script>vex.defaultOptions.className = 'vex-theme-default';</script>
+    <!-- VEX DIALOG - POPUP FINE -->
+
+    <!-- RFSEA APP -->
+    <script src="js/angular/app.js"></script>
+    <script src="js/angular/services.js" type="text/javascript"></script>
+    <script src="js/angular/controller.js" type="text/javascript"></script>
+    <script src="js/angular/controller_menu.js" type="text/javascript"></script>
+    <script src="js/angular/controller_footer.js" type="text/javascript"></script>
+    <script src="js/angular/directives.js" type="text/javascript"></script>
+    <!-- RFSEA APP -->
+
+    <!-- Leaflet map -->
+    <script src="bower_components/leaflet/dist/leaflet.js"></script>
+    <link href="bower_components/leaflet/dist/leaflet.css" rel="stylesheet">
+    <!--fontawesome-->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <!--flag css-->
+    <link rel="stylesheet"  href="node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <!--animate-->
+    <link rel="stylesheet" href="css/animate.css" rel="stylesheet">
+    <!-- RFSEA CSS -->
+    <link rel="stylesheet"  href="css/rfsea.css" rel="stylesheet">
+    <link rel="stylesheet"  href="css/skin_deda.css" rel="stylesheet">
+    <!--<link rel="stylesheet"  href="css/soglie.css" rel="stylesheet">-->
+    
+</head>
+<body ng-app="rfseaApp" ng-controller="rfseaCtrl">
+
+    <div class="rfsea_box_header">
+        <div class="rfsea_header_img">
+            <div id="map" style="width:100%; height: 100vh;"></div>
+        </div>
+    </div>
+
+    <topmenu page="1" districtdetails="'false'"></topmenu>
+    <rfseafooter></rfseafooter>
+
+    <div class="container-fluid rfsea_box_content home" id="bar"  ng-class="{show: bShowBar, hide: !bShowBar}">
+
+        <!--<div class="rfsea_space_from_menu"></div>-->
+
+        <div class="rfsea_box h-100" >
+            <div class="d-inline-flex align-items-start justify-content-between  date">
+                <a class="ham not" href="" ng-click="showHideSideBar()"><i class="fa fa-2x " ng-class="{'fa-chevron-left': bShowBar, 'fa-chevron-right': !bShowBar}"></i></a>
+
+                <div class="text-center ">
+                    <h2>Welcome to the SEA DRIF platform</h2>
+                    <hr>
+                    <h3><!--[{{"label_001" | translate}}]--></h3>
+                </div>
+            </div>
+
+                <!--<div class="jumbotron" ng-if="bShowBar">-->
+                    <div class="container"  ng-if="bShowBar">
+                        <!--<div class="row" >-->
+                            <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">-->
+                        <div class="d-flex justify-content-center flex-column">
+                            <div class="row">
+                                <p class="text-justify ">
+                                    This platform computes flood maps, population affected and return periods for floods in Southeast Asia.
+                                </p>
+                                <p>
+                                    Please login to start the analysis.
+                                </p>
+                                <br /><br /><br />
+                            </div>
+                            <!--<div class="row">-->
+                            <div class="text-center rfsea_big_txt d-flex justify-content-center align-items-center ">
+
+                                <a href="">Support</a>
+                                <span class="sep">|</span>
+                                <a href="">Contact</a>
+                                <br /><br />
+                            </div>
+                            <!--</div>-->
+                            <div class="row media logo">
+                                <!--<div class="text-center ">-->
+
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 text-center">
+                                    <!--<img src="http://via.placeholder.com/130x70/22293e/ffffff">-->
+                                    <a href="http://www.worldbank.org/en/programs/disaster-risk-financing-and-insurance-program" target="_blank">
+                                        <img src="img/logo_01.png" alt="">
+                                    </a>
+
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 text-center">
+                                    <!--<img src="http://via.placeholder.com/130x70/22293e/ffffff">-->
+                                    <a href="https://www.gfdrr.org/en" target="_blank">
+                                        <img src="img/logo_02.png" alt="">
+                                    </a>
+
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 text-center">
+                                    <!--<img src="http://via.placeholder.com/130x70/22293e/ffffff">-->
+                                    <a href="https://www.rockefellerfoundation.org/">
+                                        <img src="img/logo_03.png" alt="">
+                                    </a>
+
+                                </div>
+                                <!--</div>-->
+                            </div>
+                            <div class="row media logo" style="font-size: 3em; margin-top:10px;">
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 text-center">
+                                    <span class="flag-icon flag-icon-kh"></span>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 text-center">
+                                    <span class="flag-icon flag-icon-la"></span>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 text-center">
+                                    <span class="flag-icon flag-icon-mm"></span>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 text-center">
+                                    <span class="flag-icon flag-icon-jp"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                <!--</div>-->
+
+
+                    </div>
+                <!--</div>-->
+            <!--</div>-->
+
+        </div>
+        <div class="rfsea_space_from_menu"></div>
+
+
+
+    </div>
+
+
+
+</body>
+</html>

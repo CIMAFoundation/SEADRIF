@@ -1,0 +1,204 @@
+/********************************************************/
+/***************** tooltip  *******************************/
+/********************************************************/
+/********************************************************/
+/***************** switch *******************************/
+/********************************************************/
+/********************************************************/
+/***************** colors *******************************/
+/********************************************************/
+/*
+* {
+  &,
+  &:before,
+  &:after {
+    box-sizing: border-box;
+  }
+}
+
+body {
+  font-family: sans-serif;
+  padding: 60px 20px;
+
+  @media (min-width: 600px) {
+    padding:50px $pad_initial;
+  }
+}
+
+.range-slider {  margin: 50vh 0 0 0%;}
+*/
+.chiaro, .scuro,
+.wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 300px; }
+
+#slider {
+  margin-top: 150px; }
+
+.chiaro, .scuro {
+  min-height: 50px; }
+
+.chiaro {
+  background: cornsilk; }
+
+.scuro {
+  background: #22293e;
+  opacity: 0.5; }
+
+.chiaro, .scuro {
+  margin: auto;
+  text-align: center; }
+
+.range-bck, .range-soglia {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  transition: inherit; }
+.range-bck {
+  width: 300px;
+  height: 50px;
+  border-bottom: 4px solid #22293e; }
+
+.range-bck > .value__1 {
+  transition: inherit;
+  margin-top: 50px;
+  padding-left: calc( (300px / 6) - 4px );
+  border-right: 4px solid #22293e;
+  padding-top: 20%; }
+  .range-bck > .value__1 label {
+    position: absolute;
+    width: 100px;
+    margin-left: -50px;
+    transition: inherit; }
+  .range-bck > .value__1:nth-child(odd) {
+    height: 50%;
+    padding-top: 10%; }
+
+.range-bck > .value__2 {
+  transition: inherit;
+  margin-top: 50px;
+  padding-left: calc( (300px / 6) - 4px );
+  border-right: 4px solid #22293e;
+  padding-top: 20%; }
+  .range-bck > .value__2 label {
+    position: absolute;
+    width: 100px;
+    margin-left: -50px;
+    transition: inherit; }
+  .range-bck > .value__2:nth-child(odd) {
+    height: 50%;
+    padding-top: 10%; }
+
+.range-bck > .value__3 {
+  transition: inherit;
+  margin-top: 50px;
+  padding-left: calc( (300px / 6) - 4px );
+  border-right: 4px solid #22293e;
+  padding-top: 20%; }
+  .range-bck > .value__3 label {
+    position: absolute;
+    width: 100px;
+    margin-left: -50px;
+    transition: inherit; }
+  .range-bck > .value__3:nth-child(odd) {
+    height: 50%;
+    padding-top: 10%; }
+
+.range-bck > .value__4 {
+  transition: inherit;
+  margin-top: 50px;
+  padding-left: calc( (300px / 6) - 4px );
+  border-right: 4px solid #22293e;
+  padding-top: 20%; }
+  .range-bck > .value__4 label {
+    position: absolute;
+    width: 100px;
+    margin-left: -50px;
+    transition: inherit; }
+  .range-bck > .value__4:nth-child(odd) {
+    height: 50%;
+    padding-top: 10%; }
+
+.range-bck > .value__5 {
+  transition: inherit;
+  margin-top: 50px;
+  padding-left: calc( (300px / 6) - 4px );
+  border-right: 4px solid #22293e;
+  padding-top: 20%; }
+  .range-bck > .value__5 label {
+    position: absolute;
+    width: 100px;
+    margin-left: -50px;
+    transition: inherit; }
+  .range-bck > .value__5:nth-child(odd) {
+    height: 50%;
+    padding-top: 10%; }
+
+.range-bck > .value__6 {
+  transition: inherit;
+  margin-top: 50px;
+  padding-left: calc( (300px / 6) - 4px );
+  border-right: 4px solid #22293e;
+  padding-top: 20%; }
+  .range-bck > .value__6 label {
+    position: absolute;
+    width: 100px;
+    margin-left: -50px;
+    transition: inherit; }
+  .range-bck > .value__6:nth-child(odd) {
+    height: 50%;
+    padding-top: 10%; }
+
+.range-bck {
+  background-image: linear-gradient(90deg, green 0%, lime 50px, yellow 100px, red 100%); }
+
+.soglia__value {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 4px solid #22293e;
+  border-radius: 50%;
+  background-color: cornsilk;
+  margin-top: -34px;
+  margin-left: 18px; }
+  .soglia__value.value__3 {
+    color: #22293e;
+    font-size: 25px;
+    height: 100px;
+    width: 100px;
+    padding-top: 33.3333333333px;
+    letter-spacing: -0.05em;
+    margin-top: -150px;
+    margin-left: -16px; }
+
+.thr {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column; }
+  .thr i {
+    margin-top: -1em; }
+
+.bar {
+  width: 4px;
+  background-color: #22293e;
+  z-index: 1;
+  position: absolute;
+  top: 100%;
+  height: 75px; }
+
+.rp {
+  font-size: 50%;
+  padding: 5px 1rem;
+  background: cornsilk;
+  border: 4px solid #22293e;
+  border-radius: 2rem;
+  transform: scale(0.7) translateY(-20px);
+  font-weight: bolder;
+  letter-spacing: 0.002em;
+  z-index: 1; }
+
+/*# sourceMappingURL=soglie.css.map */

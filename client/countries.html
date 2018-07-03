@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Disaster Risk Financing and Transfer - Countries list</title>
+
+    <meta name="keywords" content="Disaster Risk Financing and Transfer" />
+    <meta name="description" content="">
+    <meta name="author" content="cimafoundation.org">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Bower components & JS -->
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="bower_components/angular/angular.js"></script>
+
+    <!-- Angular Cookies -->
+    <script src="bower_components/angular-cookies/angular-cookies.js" type="text/javascript"></script>
+
+    <!-- Translate provider -->
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-translate-loader-partial/angular-translate-loader-partial.min.js"></script>
+
+    <!-- VEX DIALOG - POPUP INIZIO -->
+    <script src="js/vex-master/dist/js/vex.min.js"></script>
+    <script src="js/vex-master/dist/js/vex.combined.min.js"></script>
+    <link href="js/vex-master/dist/css/vex.css" rel="stylesheet" />
+    <link href="js/vex-master/dist/css/vex-theme-default.css" rel="stylesheet" />
+    <script>vex.defaultOptions.className = 'vex-theme-default';</script>
+    <!-- VEX DIALOG - POPUP FINE -->
+
+    <!-- Chart libraries-->
+    <link href="bower_components/highcharts/css/highcharts.css" rel="stylesheet">
+    <script src="bower_components/highcharts/js/highcharts.js"></script>
+    <!--<script src="bower_components/highcharts/js/highcharts-3d.js"></script>-->
+    <!--<script src="bower_components/highcharts/js/modules/exporting.js"></script>-->
+    <script src="bower_components/highcharts/js/highcharts-more.js"></script>
+    <script src="bower_components/highcharts/js/modules/solid-gauge.js"></script>
+
+    <!-- RFSEA APP -->
+    <script src="js/angular/app.js"></script>
+    <script src="js/angular/services.js" type="text/javascript"></script>
+    <script src="js/angular/controller_countries_list.js" type="text/javascript"></script>
+    <script src="js/angular/controller_menu.js" type="text/javascript"></script>
+    <script src="js/angular/controller_footer.js" type="text/javascript"></script>
+    <script src="js/angular/controller_map_legend.js" type="text/javascript"></script>
+    <script src="js/angular/controller_chart_people.js" type="text/javascript"></script>
+    <script src="js/angular/controller_slider.js" type="text/javascript"></script>
+    <script src="js/angular/directives.js" type="text/javascript"></script>
+    <!-- RFSEA APP -->
+
+    <!-- Leaftlet -->
+    <script src="bower_components/leaflet/dist/leaflet.js"></script>
+    <link href="bower_components/leaflet/dist/leaflet.css" rel="stylesheet">
+
+    <!--fontawesome-->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <!--flag css-->
+    <link rel="stylesheet"  href="node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <!--animate-->
+    <link rel="stylesheet" href="css/animate.css" rel="stylesheet">
+    <!-- RFSEA CSS -->
+    <link rel="stylesheet"  href="css/rfsea.css" rel="stylesheet">
+    <link rel="stylesheet"  href="css/skin_deda.css" rel="stylesheet">
+    <!--<link rel="stylesheet"  href="css/soglie.css" rel="stylesheet">-->
+
+</head>
+<body ng-app="rfseaApp" ng-controller="rfsea_countries_Ctrl">
+
+    <!------------------------------------------------------->
+    <!------------------- Date picker ----------------------->
+    <!------------------------------------------------------->
+    <div ng-if="bDatePicker" class="animated fadeIn">
+        <div class="rfsea_date_picker_box">
+            <div class="pull-right"><a href="" ng-click="setVisibilityDatePicker()"><strong>X</strong></a></div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h3>SELECT AVAILABLE DATE</h3>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label><strong>Available years</strong></label><br />
+                    <div ng-repeat="yrs in availableYears" class="btn-group">
+                        <span class="btn btn-sm btn-success rfsea_margin_bottom" ng-click="setNewYearSelected(0)" ng-if="yearSelected == yrs">{{yrs}}</span>
+                        <span class="btn btn-sm btn-primary rfsea_margin_bottom" ng-click="setNewYearSelected(yrs)" ng-if="yearSelected !== yrs">{{yrs}}</span>&nbsp;&nbsp;
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label><strong>Available months</strong></label><br />
+                    <div ng-repeat="mnth in availableMonths" class="btn-group">
+                        <span class="btn btn-sm btn-success rfsea_margin_bottom" ng-click="setNewMonthSelected(-1)" ng-if="monthSelected == $index">{{($index + 1) + ' - ' + mnth}}</span>
+                        <span class="btn btn-sm btn-primary rfsea_margin_bottom" ng-click="setNewMonthSelected($index)" ng-if="monthSelected !== $index">{{($index + 1) + ' - ' + mnth}}</span>&nbsp;&nbsp;
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <button class="btn btn-md btn-success" ng-disabled="yearSelected == 0 || monthSelected == -1" ng-click="searchAvailableRuns()"><i class="fa fa-search" aria-hidden="true"></i> Search available runs</button>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <i ng-if="runsAvailable.length == 0">No data found</i>
+                    <div ng-if="runsAvailable.length > 0">
+                        <div ng-repeat="run in runsAvailable" class="btn-group">
+                            <span class="btn btn-sm btn-info rfsea_margin_bottom" ng-click="setNewRunDate(run | date: 'yyyyMMdd')"><i class="fa fa-check" aria-hidden="true"></i> {{run | date:'dd/MM/yyyy'}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rfsea_box_header">
+        <div class="rfsea_header_img">
+            <div id="map" style="width:100%; height: 100vh;"></div>
+            <rfsealegend paletteobj="paletteColors" position="palettePosition" type="maptype" datatype="bPeople"></rfsealegend>
+        </div>
+    </div>
+
+    <topmenu page="2" countryhomeshow="bCountryHome.status" district-show="bDistrict" riskprofile-show="bRiskProfile.status" country-select="countrySelect" districtdetails="bdistrictDetails.status"></topmenu>
+    <rfseafooter></rfseafooter>
+    <div class="container-fluid rfsea_box_content" ng-class="{show: bShowBar, hide: !bShowBar}" ng-if="!bRiskProfile.status">
+
+        <div class="rfsea_box">
+            <div class="d-inline-flex align-items-start justify-content-between date ">
+                <a class="ham not" href="" ng-click="showHideSideBar()"><i class="fa fa-2x " ng-class="{'fa-chevron-left': bShowBar, 'fa-chevron-right': !bShowBar}"></i></a>
+                <div class="text-center" ng-if="!bCountriesList">
+
+                    <h3 data-tooltip="html"  data-tooltip-conf="shadow" style="cursor: pointer;"> <span ng-click="setVisibilityDatePicker()">{{dateTo | date: 'dd MMMM yyyy'}}</span>
+                        <div class="tooltip ">
+                            <span class="text-center">
+                                <small>Period of Analysis</small><br>
+                                <small>From: </small><br>
+                                {{dateFrom | date: 'dd MMMM'}} <br>
+                                <small>To:</small> <br>
+                                {{dateTo | date: 'dd MMMM'}}
+                            </span>
+
+                        </div>
+                    </h3>
+
+                    <br>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="rfsea_space_from_menu"></div>-->
+        <!--<div class="rfsea_space_from_menu"></div>-->
+
+        <div ng-if="bShowBar">
+            <!-- BOX Countries List -->
+            <div class="rfsea_box_country_list" ng-if="bCountriesList">
+                <br />
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="d-flex flex-column">
+                            <div class="rfsea_box_country_name" ng-repeat="country in countriesList | orderBy: 'name'">
+                                <a href="" ng-click="setCountrySelection(country)"> <span class="flag-icon flag-icon-squared flag-icon-{{('flag_' + country.name) | translate}}"></span> {{country.name | translate}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOX Country Home Details -->
+            <div class="rfsea_box_country_details" ng-if="bCountryHome.status">
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="rfsea_box title text-center">
+                            <h2 class="rfsea_box_country_details_name">{{countrySelected.name | translate}}</h2>
+                            <hr>
+                            <h5 class="rfsea_box_country_details_name_subtitle">Latest Updates</h5>
+                            <br>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="d-flex align-items-center flex-column">
+                            <table class="rfsea_table" style="width:100%;" ng-if="!bPeople">
+                                <tr>
+                                    <td colspan="2" class="text-center"><h4>estimated emergency costs</h4></td>
+                                </tr>
+                                <tr ng-repeat="d in zonesData | limitTo:3">
+                                    <td>{{d.properties.name}}</td>
+                                    <td class="text-right">{{(d.properties.data * (dollarMultiplier * 1)) | number: 0}} $</td>
+                                </tr>
+                            </table>
+                            <table class="rfsea_table" style="width:100%;" ng-if="bPeople">
+                                <tr>
+                                    <td colspan="2" class="text-center"><h4>estimated affected people</h4></td>
+                                </tr>
+                                <tr ng-repeat="zd in zonesData | limitTo:3">
+                                    <td>{{zd.properties.name}}</td>
+                                    <td class="text-right">{{zd.properties.data | number: 0}}</td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+                    <!--<div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
+                        <!--<div class="mx-auto d-flex justify-content-center"style="width:100%;">-->
+                    <div  id="rfsea_slider_container" style="width:300px;">
+
+                        <div rfseaslider id="slider" data="sliderData.data"></div>
+                        <!--<div ng-if="bPeople" rfseaslider id="slider" data="sliderData.data" ></div>-->
+                        <!--<div ng-if="!bPeople" rfseaslider id="slider" data="sliderData.data" ></div>-->
+                        <!--<div class="media d-flex justify-content-center"  ng-if="!bPeople" >
+
+                            &lt;!&ndash;<img class="align-self-center" ng-if="bPeople" src="img/Artboard%201.png" alt="">&ndash;&gt;
+                            <img class="align-self-center" src="img/Artboard%202.png" alt="">
+                        </div>-->
+
+                    </div>
+                        <!--</div>-->
+                    <!--</div>-->
+
+                </div>
+                <div class="row">
+                    <div class="mx-auto">
+                        <label class="label toggle sticky sidebar image">
+                            <input type="checkbox" class="toggle_input" ng-click="setTypeDataToShow()"/>
+                            <div class="toggle-control"></div>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Districts list -->
+            <div class="rfsea_box_country_details" ng-if="bDistrict">
+
+                <div class="row" ng-if="bShowBar">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="rfsea_box">
+                            <div class="d-inline-flex align-items-start justify-content-between date ">
+                                <div class="rfsea_box text-center">
+                                    <h2 class="rfsea_box_country_details_name">{{countrySelected.name | translate}}</h2>
+                                    <hr>
+                                    <h5 class="rfsea_box_country_details_name_subtitle">Districts</h5>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row" ng-if="bShowBar">
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <table class="rfsea_table" style="width:100%;">
+
+                            <tr ng-repeat="district in district_list | orderBy: '-properties.data * 1'">
+                                <td><a href="" ng-click="selectDistrict(district)">{{district.properties.name}}</a></td>
+                                <td class="text-right">{{district.properties.data | number}}</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- District details -->
+            <!--<div class="rfsea_box_country_details" ng-if="bdistrictDetails.status">-->
+                <!--<div class="row" ng-if="bShowBar">-->
+                    <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
+                        <!--<div class="rfsea_box">-->
+                            <!--<div class="d-inline-flex align-items-start justify-content-between date ">-->
+                                <!--<div class="rfsea_box text-center">-->
+                                    <!--<h2 class="rfsea_box_country_details_name">{{countrySelected.name}}</h2>-->
+                                    <!--<hr>-->
+                                    <!--<h5 class="rfsea_box_country_details_name_subtitle">{{districtObj.name}}</h5>-->
+                                    <!--<br>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                <!--</div>-->
+
+                <!--<div class="row">-->
+                    <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
+                        <!--<a href="" ng-click="setLayer_eo()">BTN EO</a><br />-->
+                        <!--<a href="" ng-click="setLayer_wd()">BTN WD</a><br />-->
+                        <!--<a href="" ng-click="setLayer_eo_wd()">BTN Compare EO WD</a><br />-->
+                    <!--</div>-->
+
+                <!--</div>-->
+
+            <!--</div>-->
+
+        </div>
+
+    </div>
+
+    <div ng-if="bRiskProfile.status" style="z-index: 1000; position:absolute; width: 100%;">
+        <rfseachartpeople datachart="datachart" curvex="countrycurve.x" curvey="countrycurve.y" pop-details="populationDetails" b-risk-profile="bRiskProfile.status" countryhomeshow="bCountryHome.status" sliderdata="sliderData"></rfseachartpeople>
+        <rfseafooter></rfseafooter>
+    </div>
+
+</body>
+
+</html>

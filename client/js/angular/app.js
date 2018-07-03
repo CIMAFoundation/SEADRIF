@@ -1,0 +1,43 @@
+/**
+ * Created by Manuel on 13/01/2017.
+ */
+
+var rfseaApp = angular.module('rfseaApp', ['ngCookies', 'pascalprecht.translate']);
+
+rfseaApp.run(['$http', '$cookies', function($http, $cookies) {
+    $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
+}]);
+
+var baseAPIurl = "http://seadrif.cimafoundation.org/authseadrif/api/";
+// var bLogin = false;
+// var thr_value = 0;
+// var country_id = "";
+// var country_name = "";
+// var country_courve = {};
+var dollarMultiplier = 0;
+var startDateRuns = 2018;
+
+rfseaApp.config(function($translateProvider, $translatePartialLoaderProvider, $locationProvider, $httpProvider) {
+
+    $httpProvider.defaults.withCredentials = true
+
+    /* translate provider - INIZIO */
+    $translateProvider.useLoader('$translatePartialLoader', {
+        urlTemplate: 'languages/{lang}/{part}.json'
+    });
+
+    $translatePartialLoaderProvider.addPart('labels');
+
+    $translateProvider.preferredLanguage('en_EN');
+    $translateProvider.fallbackLanguage('en_EN');
+
+    $translateProvider.useSanitizeValueStrategy('escaped');
+
+    /* translate provider - FINE */
+
+    $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+    });
+
+});

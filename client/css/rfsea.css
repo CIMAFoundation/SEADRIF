@@ -1,0 +1,578 @@
+body, html
+{
+    /* background-color: #22293e; */
+    /*color:#ffffff;*/
+    /*font-size: 15px;*/
+    overflow: hidden;
+}
+
+a, a:hover, a:active
+{
+    text-decoration: none;
+    color:#ffffff;
+}
+
+a:hover
+{
+    border-bottom:solid 3px #ffffff;
+}
+
+.rfsea_space
+{
+    margin-top: 5vh;
+}
+
+.rfsea-link-active
+{
+    color:#ff8b00 !important;
+}
+
+.rfsea_margin_bottom
+{
+    margin-bottom: 10px;
+}
+
+/********************************************************/
+/******************* DATE PICKER*************************/
+/********************************************************/
+.rfsea_date_picker_box
+{
+    position:absolute;
+    overflow: auto;
+    top:10%;
+    bottom:10%;
+    right:5%;
+    left:480px;
+    padding:20px;
+    background-color: rgba(255, 248, 220, 1);
+}
+
+
+/********************************************************/
+/******************* HEADER *************************/
+/********************************************************/
+
+.rfsea_box_header
+{
+    width:100%;
+    /*height: 45vh;*/
+    background-color: #ffffff;
+    color:#232323;
+    position: fixed;
+    top: 0;
+    z-index: -1;
+}
+
+.rfsea_box_content
+{
+    position: relative;
+}
+
+.rfsea_space_from_menu
+{
+    height:50px;
+}
+
+.rfsea_header_img
+{
+    width:100%;
+    height:100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+/********************************************************/
+/******************* MENU START *************************/
+/********************************************************/
+
+.rfsea_box_menu
+{
+    position: absolute;
+    left:25%;
+    right:25%;
+    height: 80px;
+    top:-40px;
+    background-color: #22293e;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    padding:10px;
+    font-size: 23px;
+    text-transform: uppercase;
+}
+
+.rfsea_box_menu ul
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.rfsea_box_menu li
+{
+    float: left;
+    /* display: block; */
+    /* width:33%; */
+    text-align: center;
+    border-right:solid 3px #ffffff;
+}
+
+.rfsea_box_menu li a
+{
+    color:#ffffff;
+    text-decoration: none;
+}
+
+.rfsea_box_menu li a:hover, .active
+{
+    border-bottom:solid 3px #ffffff;
+}
+
+
+.rfsea_menu_link_unavailable
+{
+    color:#a0a0a0;
+}
+
+/********************************************************/
+/******************* LOGIN FORM *************************/
+/********************************************************/
+
+.rfsea_login_form
+{
+    position: fixed;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    background-color: rgba(255,248,220,.85);
+    z-index: 100;
+    
+}
+/* .blurred_box {
+    position:fixed;
+    background-color: rgba(255,248,220,.85);
+    display:block;
+    width:100vw;
+    height:100vh;
+
+}
+ */
+.rfsea_login_form_box
+{
+    position: relative;
+    /*background-image: url('../img/template/login_form_bg.jpg');*/
+    background-image: url('../img/about_bck.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    width: 50%;
+    min-width:300px;
+    max-width:600px;
+    height: 80vh;
+    margin:auto;
+    margin-top: 5%;
+    padding:20px;
+    -webkit-box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 1);
+}
+
+.rfsea_login_form_box_opacity
+{
+    position: absolute;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    background-color: rgba(34,41,62,.4);
+    z-index: 10;
+    color:#ffffff;
+    padding: 10px;
+    font-weight: 600;
+}
+
+.rfsea_login_form_link
+{
+    font-size:16px;
+    font-weight: 600;
+    word-spacing: 2px;
+}
+
+.rfsea_btn_login_form
+{
+    position:absolute;
+    width: 90%;
+    left:0px;
+    margin: 5vh 20px;
+    text-align: center;
+    background-color: #ffffff;
+    padding: 20px 10px;
+    color:#232323;
+    cursor: pointer;
+    transition: all 0.6s;
+    /* transform: scale(2); */
+    bottom: 5vh;
+}
+
+.rfsea_btn_login_form:hover
+{
+    opacity:0.8;
+}
+
+.rfsea_btn_close_login_form
+{
+    position:absolute;
+    width:100%;
+    left:0px;
+    bottom:0px;
+    text-align: center;
+    background-color: #262628;
+    padding: 10px;
+    color:#ffffff;
+    cursor: pointer;
+    transition: all 0.6s;
+}
+
+.rfsea_btn_close_login_form:hover
+{
+    opacity:0.8;
+}
+
+.rfsea_input_style
+{
+    display: block;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    float: none;
+    z-index: auto;
+    width: 90%;
+    height: auto;
+    position: static;
+    cursor: default;
+    opacity: 1;
+    margin: 0;
+    padding: 10px 20px;
+    overflow: visible;
+    border: 1px solid #b7b7b7;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    font: normal 16px/normal Arial, Helvetica, sans-serif;
+    color: rgba(0,142,198,1);
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    background: rgba(252,252,252,1);
+    -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,0.2) inset;
+    box-shadow: 0 0 0 0 rgba(0,0,0,0.2) inset;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.66) ;
+    -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+    -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+    -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+    transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+    -webkit-transform: none;
+    transform: none;
+    -webkit-transform-origin: 50% 50% 0;
+    transform-origin: 50% 50% 0;
+}
+
+.rfsea_close_btn_up
+{
+    position:absolute;
+    top:20px;
+    right: 20px;
+    z-index: 20;
+}
+
+.rfsea_close_btn_up a:hover
+{
+    border-bottom:solid 0px #ffffff;
+}
+
+/********************************************************/
+/***************** TEXT CONTENT *************************/
+/********************************************************/
+
+.rfsea_box_text_content
+{
+    /*width:70%;*/
+    margin:auto;
+    padding:15px;
+    /*border:solid 1px #c0c0c0;*/
+}
+
+.rfsea_box_text_content p
+{
+    padding-left:10px;
+    padding-right: 10px;
+    margin-top:10px;
+}
+
+.rfsea_big_txt
+{
+    /*margin-top: 18px;*/
+    /*margin-bottom: 30px;*/
+    font-size: 25px;
+}
+
+
+/********************************************************/
+/***************** COUNTRIES LIST ***********************/
+/********************************************************/
+
+.rfsea_box_country_list
+{
+    /*width:60%;*/
+    margin: auto;
+    /*border-right: solid 5px #ffffff;*/
+    /*border-left: solid 5px #ffffff;*/
+}
+
+.rfsea_box_country_details
+{
+    /*width:80%;*/
+    margin: auto;
+    /*border-right: solid 5px #ffffff;*/
+    /*border-left: solid 5px #ffffff;*/
+    padding:20px;
+    padding-top: 0px;
+    /* overflow-y: auto; */
+    /* height: 80vh; */
+}
+
+
+.rfsea_box_country_name
+{
+    /*font-size: 40px;*/
+    text-transform: uppercase;
+    text-align: left;
+    padding:10px;
+}
+
+.rfsea_box_country_details_name
+{
+    /*font-size: 40px;*/
+    text-transform: uppercase;
+    /*color:#232323;*/
+}
+
+.rfsea_box_country_details_name_subtitle
+{
+    /*font-size: 30px;*/
+}
+
+.rfsea_box_country_name a
+{
+    /*color:#ffffff;*/
+    text-decoration: none;
+}
+
+.rfsea_districts_list
+{
+    font-size: 20px;
+    color:#232323;
+}
+
+/********************************************************/
+/***************** FOOTER *******************************/
+/********************************************************/
+
+.rfsea_footer_box
+{
+    /*position: fixed;*/
+    background-color: #605e61;
+    width:100%;
+    bottom:0px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+/********************************************************/
+/***************** CHART PAGE ***************************/
+/********************************************************/
+
+.rfsea_top_page_chart
+{
+    margin-top:0px;
+    width: 100%;
+    /* height: 80px; */
+    background-color: #fffde8;
+    padding: 0 10px;
+    color:#23283c;
+}
+
+.rfsea_top_page_chart a, .rfsea_top_page_chart a:hover
+{
+    /*font-size: 20px;*/
+    color:#23283c;
+    /*font-weight:600;*/
+    text-decoration: none;
+    border-bottom:solid 0px #ffffff;
+}
+
+.rfsea_top_page_chart_title
+{
+    /* font-size: 40px; */
+    text-transform: uppercase;
+}
+
+.bordered
+{
+    border-right:solid 3px #23283c;
+    padding-right: 20px;
+}
+
+.rfsea_box_chart_details
+{
+    /*position:fixed;*/
+    /*top:0px;*/
+    /*bottom:0px;*/
+    /*right:0px;*/
+    /*left:0px;*/
+    /*height:100vh;*/
+    /* padding:20px; */
+    background-color: transparent;
+    overflow-y: auto;
+    height: calc(100vh - 130px);
+    width: 100%;
+    padding-bottom: 100px;
+}
+
+.rfsea_chart_point_orange
+{
+    padding:3px;
+    background-color: #ff8b00;
+}
+
+/*
+.rfsea_box_chart_model
+{
+    !*background-color: rgba(255,142,1, .7);*!
+    background-color: #f9e4b9;
+}
+
+.rfsea_box_chart_historical
+{
+    background-color: #cbe2e5;
+}
+*/
+
+/********************************************************/
+/***************** CHART STYLE **************************/
+/********************************************************/
+
+.highcharts-axis-title
+{
+    font-weight: 700;
+    letter-spacing: 2px;
+    fill: #232323;
+    font-size:18px;
+}
+
+.highcharts-axis-labels
+{
+    fill: #232323;
+}
+
+.highcharts-background
+{
+    fill: rgba(255,255,255,0);
+}
+
+.highcharts-grid-line
+{
+    display: none;
+}
+
+.rfsea_highcharts-plot-line_green {
+    fill: none;
+    stroke: rgba(255,139,0,1);
+    stroke-width: 2px;
+}
+
+.rfsea_highcharts-plot-line_orange {
+    fill: none;
+    stroke: red;
+    stroke-width: 2px;
+}
+
+.rfsea_alternativeScenarioPoint
+{
+    fill: #ff8b00;
+    stroke: #ff8b00;
+}
+
+/*.highcharts-legend
+{
+    display: none;
+}
+
+.highcharts-color-0 {
+    fill: #232323;
+    stroke: #6cb598;
+}*/
+
+.rfsea_chart_label
+{
+    width: 100%;
+    padding: 3px;
+    background-color: transparent;
+    border: solid 2px #6cb598;
+    -webkit-border-radius: 20%;
+    -moz-border-radius: 20%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    /* margin-left: 70%; */
+    color: #6cb598;
+    font-size: 11px;
+}
+
+/********************************************************/
+/***************** MAP LEGEND ***************************/
+/********************************************************/
+
+.rfsea_box_legend_map
+{
+    position: absolute;
+    min-width:100px;
+    background-color: #ffffff;
+    border:solid 1px #f0f0f0;
+    padding: 8px;
+    z-index: 1000;
+    font-size: 12px;
+}
+
+.leaflet-bottom .leaflet-control-scale
+{
+    margin-bottom:85px;
+}
+
+/********************************************************/
+/***************** MAP POPUP STYLE **********************/
+/********************************************************/
+.popupCustom
+{
+    background-color: transparent;
+}
+
+.popupCustom .leaflet-popup-content-wrapper {
+    background:rgba(255, 248, 220, 1);
+    color:#232323;
+    font-size:16px;
+    line-height:24px;
+}
+.popupCustom .leaflet-popup-content-wrapper a {
+    color:rgba(0,0,0,1);
+}
+.popupCustom .leaflet-popup-tip-container {
+    width:30px;
+    height:15px;
+}
+.popupCustom .leaflet-popup-tip {
+    border-left:15px solid transparent;
+    border-right:15px solid transparent;
+    border-top:15px solid rgba(255, 248, 220, 1);
+    background:rgba(255, 248, 220, 1);
+}
+

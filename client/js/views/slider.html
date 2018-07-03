@@ -1,0 +1,50 @@
+<!--TODO passare i parametri di posizione values / label scala logaritmica e valori soglie e tooltip-->
+
+<div class="wrap">
+    <div class="chiaro">
+        <div class="range-bck">
+            <!--n° step delle soglie logaritmiche = $step SCSS-->
+            <div class="value__1" ><label>{{gridValues[1]*multipier | number:0}}</label></div>
+            <div class="value__2" ><label>{{gridValues[2]*multipier | number:0}}</label></div>
+            <div class="value__3" ><label>{{gridValues[3]*multipier | number:0}}</label></div>
+            <div class="value__4" ><label>{{gridValues[4]*multipier | number:0}}</label></div>
+            <div class="value__5" ><label>{{gridValues[5]*multipier | number:0}}</label></div>
+            <div class="value__6" ><label>{{gridValues[6]*multipier | number:0}}</label></div>
+        </div>
+
+        <div class="range-soglia">
+            <span class="soglia__value value__1" id="slider_thr1_item" data-tooltip="html"  data-tooltip-conf="bottom" style="">
+                1
+                <div class="tooltip " id="tooltip_value_1">
+                            <span class="text-justify">
+                                <small>Trigger 1 </small><br>
+                                <small>Threshold: {{data.thr1*multipier | number: 0}} Affected</small><br>
+                                <small>Drawdown: 30% of costs</small><br>
+                            </span>
+
+                    </div>
+
+            </span>
+            <span class="soglia__value value__2" id="slider_thr2_item" data-tooltip="html"  data-tooltip-conf="bottom" style="">
+                2
+                <div class="tooltip" id="tooltip_value_2">
+                    <span class="text-justify">
+                        <small>Trigger 2 </small><br>
+                        <small>Threshold: {{data.thr2*multipier | number: 0}} Affected</small><br>
+                        <small> Drawdown: 100% of costs</small><br>
+                    </span>
+
+                </div>
+            </span>
+            <span class="soglia__value value__3" id="slider_pop_item" style="">
+              <div class="thr">
+                <i ng-if="data.people" class="fa icon-people"></i>
+                <i ng-if="!data.people" class="fa icon-money"></i>
+                <label >{{data.pop*multipier | number:0}}</label>
+                <div class="bar"></div>
+               <div class="small rp">RP=10[years]</div>
+              </div>
+            </span>
+        </div>
+    </div>
+</div>

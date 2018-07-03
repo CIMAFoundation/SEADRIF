@@ -1,0 +1,68 @@
+<!--
+ palette object is an array of object
+
+ SCALE
+ {
+    color: '#ffffff',
+    label_min: 0,
+    label_max: 0
+ }
+
+ VALUE
+ {
+    color: '#ffffff',
+    label: 'label description'
+ }
+
+ VALUE-TRANSLATE
+ {
+    color: '#ffffff',
+    label: 'labelToTranslate'
+ }
+
+-->
+
+<div class="rfsea_box_legend_map" style="{{styleposition}}">
+
+    <strong ng-if="datatype && type == 'scale'">Affected people</strong>
+    <strong ng-if="!datatype && type == 'scale'">Emergency costs</strong>
+    <table ng-if="type == 'scale'">
+        <tr ng-repeat="scale in paletteobj">
+            <td><div class="" style="background-color: {{scale.color}}; width:13px; height:13px; border:solid 1px #c0c0c0;"></div></td>
+            <td ng-if="datatype">
+                <span ng-if="$index == 0"> < {{scale.label_max}}</span>
+                <span ng-if="$index !== 0 && !$last">{{(scale.label_min * 1) - 1 }} - {{scale.label_max}}</span>
+                <span ng-if="$last">> {{(scale.label_min * 1) - 1}}</span>
+            </td>
+            <td ng-if="!datatype">
+                <span ng-if="$index == 0"> < {{scale.label_max * dollarMultiplier}}</span>
+                <span ng-if="$index !== 0 && !$last">{{((scale.label_min * 1) - 1) * dollarMultiplier }} - {{scale.label_max * dollarMultiplier}}</span>
+                <span ng-if="$last">> {{((scale.label_min * 1) - 1) * dollarMultiplier}}</span>
+            </td>
+
+        </tr>
+    </table>
+
+    <strong ng-if="type == 'value-translate'">{{titletoshow}}</strong>
+    <table ng-if="type == 'value-translate'">
+        <tr ng-repeat="scale in paletteobj">
+            <td><div class="" style="background-color: {{scale.color}}; width:13px; height:13px; border:solid 1px #c0c0c0;"></div></td>
+            <td>
+                <span>{{scale.label | translate}}</span>
+            </td>
+        </tr>
+    </table>
+
+    <strong ng-if="type == 'value'">{{titletoshow}}</strong>
+    <table ng-if="type == 'value'">
+
+        <tr ng-repeat="scale in paletteobj">
+            <td><div class="" style="background-color: {{scale.color}}; width:13px; height:13px; border:solid 1px #c0c0c0;"></div></td>
+            <td>
+                <span>{{scale.label}}</span>
+            </td>
+        </tr>
+
+    </table>
+
+</div>
