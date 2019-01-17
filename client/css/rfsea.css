@@ -1,8 +1,5 @@
 body, html
 {
-    /* background-color: #22293e; */
-    /*color:#ffffff;*/
-    /*font-size: 15px;*/
     overflow: hidden;
 }
 
@@ -55,7 +52,6 @@ a:hover
 .rfsea_box_header
 {
     width:100%;
-    /*height: 45vh;*/
     background-color: #ffffff;
     color:#232323;
     position: fixed;
@@ -100,6 +96,7 @@ a:hover
     padding:10px;
     font-size: 23px;
     text-transform: uppercase;
+    z-index:1010;
 }
 
 .rfsea_box_menu ul
@@ -112,8 +109,6 @@ a:hover
 .rfsea_box_menu li
 {
     float: left;
-    /* display: block; */
-    /* width:33%; */
     text-align: center;
     border-right:solid 3px #ffffff;
 }
@@ -150,19 +145,10 @@ a:hover
     z-index: 100;
     
 }
-/* .blurred_box {
-    position:fixed;
-    background-color: rgba(255,248,220,.85);
-    display:block;
-    width:100vw;
-    height:100vh;
 
-}
- */
 .rfsea_login_form_box
 {
     position: relative;
-    /*background-image: url('../img/template/login_form_bg.jpg');*/
     background-image: url('../img/about_bck.jpg');
     background-repeat: no-repeat;
     background-position: center center;
@@ -212,7 +198,6 @@ a:hover
     color:#232323;
     cursor: pointer;
     transition: all 0.6s;
-    /* transform: scale(2); */
     bottom: 5vh;
 }
 
@@ -296,10 +281,8 @@ a:hover
 
 .rfsea_box_text_content
 {
-    /*width:70%;*/
     margin:auto;
     padding:15px;
-    /*border:solid 1px #c0c0c0;*/
 }
 
 .rfsea_box_text_content p
@@ -311,8 +294,6 @@ a:hover
 
 .rfsea_big_txt
 {
-    /*margin-top: 18px;*/
-    /*margin-bottom: 30px;*/
     font-size: 25px;
 }
 
@@ -323,28 +304,19 @@ a:hover
 
 .rfsea_box_country_list
 {
-    /*width:60%;*/
     margin: auto;
-    /*border-right: solid 5px #ffffff;*/
-    /*border-left: solid 5px #ffffff;*/
 }
 
 .rfsea_box_country_details
 {
-    /*width:80%;*/
     margin: auto;
-    /*border-right: solid 5px #ffffff;*/
-    /*border-left: solid 5px #ffffff;*/
     padding:20px;
     padding-top: 0px;
-    /* overflow-y: auto; */
-    /* height: 80vh; */
 }
 
 
 .rfsea_box_country_name
 {
-    /*font-size: 40px;*/
     text-transform: uppercase;
     text-align: left;
     padding:10px;
@@ -352,9 +324,7 @@ a:hover
 
 .rfsea_box_country_details_name
 {
-    /*font-size: 40px;*/
     text-transform: uppercase;
-    /*color:#232323;*/
 }
 
 .rfsea_box_country_details_name_subtitle
@@ -364,7 +334,6 @@ a:hover
 
 .rfsea_box_country_name a
 {
-    /*color:#ffffff;*/
     text-decoration: none;
 }
 
@@ -380,7 +349,6 @@ a:hover
 
 .rfsea_footer_box
 {
-    /*position: fixed;*/
     background-color: #605e61;
     width:100%;
     bottom:0px;
@@ -396,24 +364,22 @@ a:hover
 {
     margin-top:0px;
     width: 100%;
-    /* height: 80px; */
     background-color: #fffde8;
     padding: 0 10px;
+    padding-top: 20px;
     color:#23283c;
+    min-height: 95px;
 }
 
 .rfsea_top_page_chart a, .rfsea_top_page_chart a:hover
 {
-    /*font-size: 20px;*/
     color:#23283c;
-    /*font-weight:600;*/
     text-decoration: none;
     border-bottom:solid 0px #ffffff;
 }
 
 .rfsea_top_page_chart_title
 {
-    /* font-size: 40px; */
     text-transform: uppercase;
 }
 
@@ -425,13 +391,6 @@ a:hover
 
 .rfsea_box_chart_details
 {
-    /*position:fixed;*/
-    /*top:0px;*/
-    /*bottom:0px;*/
-    /*right:0px;*/
-    /*left:0px;*/
-    /*height:100vh;*/
-    /* padding:20px; */
     background-color: transparent;
     overflow-y: auto;
     height: calc(100vh - 130px);
@@ -444,19 +403,6 @@ a:hover
     padding:3px;
     background-color: #ff8b00;
 }
-
-/*
-.rfsea_box_chart_model
-{
-    !*background-color: rgba(255,142,1, .7);*!
-    background-color: #f9e4b9;
-}
-
-.rfsea_box_chart_historical
-{
-    background-color: #cbe2e5;
-}
-*/
 
 /********************************************************/
 /***************** CHART STYLE **************************/
@@ -502,16 +448,6 @@ a:hover
     fill: #ff8b00;
     stroke: #ff8b00;
 }
-
-/*.highcharts-legend
-{
-    display: none;
-}
-
-.highcharts-color-0 {
-    fill: #232323;
-    stroke: #6cb598;
-}*/
 
 .rfsea_chart_label
 {

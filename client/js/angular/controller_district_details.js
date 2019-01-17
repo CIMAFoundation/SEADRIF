@@ -47,7 +47,7 @@ rfseaApp.controller('rfseaCtrlDistrictMap', function($rootScope, $scope, $filter
                 $scope.mapType = "compare";
                 $scope.legendtitle = "COMPARE EO/MODEL";
 
-                rfseaSrv.getProvinceDetails($scope.countrySelected.id,  $scope.districtObj.id, function(data)
+                rfseaSrv.getProvinceDetails($scope.countrySelected.id,  $scope.districtObj.id, $scope.dateSelected, function(data)
                 {
                     // Country zone details
 
@@ -93,7 +93,7 @@ rfseaApp.controller('rfseaCtrlDistrictMap', function($rootScope, $scope, $filter
                 $scope.mapType = "eo";
                 $scope.legendtitle = "EO MAP";
 
-                rfseaSrv.getProvinceDetails($scope.countrySelected.id,  $scope.districtObj.id, function(data)
+                rfseaSrv.getProvinceDetails($scope.countrySelected.id,  $scope.districtObj.id, $scope.dateSelected, function(data)
                 {
                     // Country zone details
 
@@ -139,7 +139,7 @@ rfseaApp.controller('rfseaCtrlDistrictMap', function($rootScope, $scope, $filter
                 $scope.mapType = "model";
                 $scope.legendtitle = "MODEL MAP";
 
-                rfseaSrv.getProvinceDetails($scope.countrySelected.id,  $scope.districtObj.id, function(data)
+                rfseaSrv.getProvinceDetails($scope.countrySelected.id,  $scope.districtObj.id, $scope.dateSelected, function(data)
                 {
                     // Country zone details
                     var	bounds = new L.LatLngBounds(
@@ -192,7 +192,7 @@ rfseaApp.controller('rfseaCtrlDistrictMap', function($rootScope, $scope, $filter
         }
 
         function init(){
-            rfseaSrv.getProvinceDetails($scope.countrySelected.id,  $scope.districtObj.id, function(data)
+            rfseaSrv.getProvinceDetails($scope.countrySelected.id,  $scope.districtObj.id, $scope.dateSelected, function(data)
             {
                 // Country zone details
                 var	bounds = new L.LatLngBounds(

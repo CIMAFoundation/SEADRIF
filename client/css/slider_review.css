@@ -1,0 +1,257 @@
+*, *:before, *:after {
+    box-sizing: border-box; }
+
+body {
+    font-family: sans-serif;
+    margin: 260px 20px; }
+@media (min-width: 600px) {
+    body {
+        margin: 250px 20px; } }
+
+/*.range-slider {*/
+/*margin: 50vh 0 0 0%; }*/
+
+.wrap, .chiaro, .scuro {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    /*min-width: 100%;*/
+    width:300px;
+    /*margin: auto;*/
+    /*padding-right: 20px; */
+}
+
+.chiaro, .scuro {
+    /*width: 98%;*/
+    /*min-width:100%;*/
+    min-height: 50px;
+}
+
+.chiaro {
+    background: cornsilk; }
+
+.scuro {
+    background: darkslategrey;
+    opacity: 0.5; }
+
+.chiaro, .scuro {
+    /*margin: auto;*/
+    text-align: center; }
+
+.range-bck, .range-soglia, .range-step {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    position: relative;
+    /*width: 99%; */
+}
+.range-bck {
+    height: 50px;
+    margin: 20px;
+    border-bottom: 4px solid darkslategrey; }
+.range-bck + .range-soglia {
+    position: absolute;
+    left: 20px; }
+
+.range-bck > .value__1 {
+    margin-top: 50px;
+    /*padding-left: 46px;*/
+    border-right: 4px solid darkslategrey;
+    padding-top: 20%; }
+.range-bck > .value__1 label {
+    position: absolute; }
+.range-bck > .value__1:nth-child(odd) {
+    height: 50%;
+    padding-top: 10%; }
+
+.range-step > .step__1 {
+    background-image: linear-gradient(90deg, green, lime); }
+.range-step > .step__2 {
+    background-image: linear-gradient(90deg, yellow, tomato); }
+.range-step > .step__3 {
+    background-image: linear-gradient(90deg, red, purple); }
+
+.range-bck > .value__2 {
+    margin-top: 50px;
+    /*padding-left: 46px;*/
+    border-right: 4px solid darkslategrey;
+    padding-top: 20%; }
+.range-bck > .value__2 label {
+    position: absolute; }
+.range-bck > .value__2:nth-child(odd) {
+    height: 50%;
+    padding-top: 10%; }
+
+.range-step > .step__1 {
+    background-image: linear-gradient(90deg, green, lime); }
+.range-step > .step__2 {
+    background-image: linear-gradient(90deg, yellow, tomato); }
+.range-step > .step__3 {
+    background-image: linear-gradient(90deg, red, purple); }
+
+.range-bck > .value__3 {
+    margin-top: 50px;
+    /*padding-left: 46px;*/
+    border-right: 4px solid darkslategrey;
+    padding-top: 20%; }
+.range-bck > .value__3 label {
+    position: absolute; }
+.range-bck > .value__3:nth-child(odd) {
+    height: 50%;
+    padding-top: 10%; }
+
+.range-step > .step__1 {
+    background-image: linear-gradient(90deg, green, lime); }
+.range-step > .step__2 {
+    background-image: linear-gradient(90deg, yellow, tomato); }
+.range-step > .step__3 {
+    background-image: linear-gradient(90deg, red, purple); }
+
+.range-bck > .value__4 {
+    margin-top: 50px;
+    /*padding-left: 46px;*/
+    border-right: 4px solid darkslategrey;
+    padding-top: 20%; }
+.range-bck > .value__4 label {
+    position: absolute; }
+.range-bck > .value__4:nth-child(odd) {
+    height: 50%;
+    padding-top: 10%; }
+
+.range-step > .step__1 {
+    background-image: linear-gradient(90deg, green, lime); }
+.range-step > .step__2 {
+    background-image: linear-gradient(90deg, yellow, tomato); }
+.range-step > .step__3 {
+    background-image: linear-gradient(90deg, red, purple); }
+
+.range-bck > .value__5 {
+    margin-top: 50px;
+    /*padding-left: 46px;*/
+    border-right: 4px solid darkslategrey;
+    padding-top: 20%; }
+.range-bck > .value__5 label {
+    position: absolute; }
+.range-bck > .value__5:nth-child(odd) {
+    height: 50%;
+    padding-top: 10%; }
+
+.range-step > .step__1 {
+    background-image: linear-gradient(90deg, green, lime); }
+.range-step > .step__2 {
+    background-image: linear-gradient(90deg, yellow, tomato); }
+.range-step > .step__3 {
+    background-image: linear-gradient(90deg, red, purple); }
+
+.range-bck > .value__6 {
+    margin-top: 50px;
+    /*padding-left: 46px;*/
+    border-right: 4px solid darkslategrey;
+    padding-top: 20%;
+}
+.range-bck > .value__6 label {
+    position: absolute; }
+.range-bck > .value__6:nth-child(odd) {
+    height: 50%;
+    padding-top: 10%; }
+
+.range-bck > [class*="value__"] {
+    padding-left: 46px;
+}
+
+.range-step > .step__1 {
+    background-image: linear-gradient(90deg, green, lime); }
+.range-step > .step__2 {
+    background-image: linear-gradient(90deg, yellow, tomato); }
+.range-step > .step__3 {
+    background-image: linear-gradient(90deg, red, purple); }
+
+/*
+.range-bck {
+     background-image:
+         linear-gradient(
+           90deg,
+           green 0%,
+           lime nth($pxs, 1),
+           yellow nth($pxs, 2),
+           red 100%);
+
+}
+*/
+[class*="step__"] {
+    /*min-width: calc(100% / 3);*/
+    /*min-width: 100px;*/
+    /*border: 5px solid cyan;*/
+    height: 50px; }
+
+.range-step {
+    position: absolute;
+    /*width: 100%;*/
+    /*width: 300px;*/
+
+}
+
+.range-soglia {
+    position: absolute;
+    margin-left: 20px; }
+
+.soglia__value {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 4px solid darkslategrey;
+    border-radius: 50%;
+    background-color: cornsilk;
+    margin-top: -50px;
+    margin-left: -40px;
+    line-height: 2;
+    z-index:110
+}
+.soglia__value.value__3 {
+    color: darkslategrey;
+    font-size: 3em;
+    height: 3.6em;
+    width: 3.6em;
+    padding-top: 1.5em;
+    letter-spacing: -0.05em;
+    margin-top: -4.5em;
+    z-index:100;
+}
+
+.thr {
+    display: flex;
+    align-items: center;
+    flex-direction: column; }
+.thr i {
+    margin-top: -1em; }
+
+.bar {
+    width: 4px;
+    background-color: darkslategrey;
+    z-index: 1;
+    position: absolute;
+    top: 100%;
+    height: 1.5em; }
+
+.rp {
+    font-size: 50%;
+    padding: 5px 1rem;
+    background: cornsilk;
+    border: 4px solid darkslategrey;
+    border-radius: 2rem;
+    transform: scale(0.6) translateY(-70px);
+    font-weight: bolder;
+    letter-spacing: 0.002em;
+    z-index: 1; }
+
+/*# sourceMappingURL=soglie_new2.css.map */
+
+/*************************************************/
+/******* Footer personalizzazione ****************/
+/*************************************************/
+
+.rfsea_footer_box {
+    z-index:120;
+}

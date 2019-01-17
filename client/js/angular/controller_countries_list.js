@@ -57,7 +57,10 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
             pop: 0,
             thr1: 0,
             thr2: 0,
-            people: $scope.bPeople
+            people: $scope.bPeople,
+            pop_est:0,
+            curve_x: [],
+            curve_y: []
         }
     };
 
@@ -93,7 +96,6 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
     }, function(data)
     {
 
-        console.log('Logged off');
         // User not logged in - VISITOR, reset all coookies
         localStorage.removeItem('rfsea_login');
         localStorage.removeItem('rfsea_country_selected');
@@ -227,12 +229,11 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
     // Load country selected zones
     {
 
-        if ($scope.district_list.length == 0){
+        // if ($scope.district_list.length == 0){
 
             // First access
-            console.log('Layer lenght NO zero');
 
-            rfseaSrv.getCountryZones($scope.countrySelected.id, function(data)
+            rfseaSrv.getCountryZones($scope.countrySelected.id, $scope.dateSelected, function(data)
             {
                 $scope.district_list = data.data.geojson.features;
 
@@ -277,20 +278,17 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
                     message: 'API loading error.'
                 })
             });
-        } else {
-
-            console.log('Layer lenght zero');
-            // map.eachLayer(function (layer) {
-            //     map.removeLayer(layer);
-            // });
-
-            if($scope.bPeople){
-                loadMapLayers(false, true);
-            } else {
-                loadMapLayers(true, true);
-            }
-
-        }
+        // } else {
+        //
+        //     console.log('Layer lenght zero');
+        //
+        //     if($scope.bPeople){
+        //         loadMapLayers(false, true);
+        //     } else {
+        //         loadMapLayers(true, true);
+        //     }
+        //
+        // }
 
         loadRiskProfileData();
     }
@@ -313,7 +311,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
                 dateTo: $scope.dateTo
             };
 
-            rfseaSrv.getCountryDetails($scope.countrySelected.id, function(data)
+            rfseaSrv.getCountryDetails($scope.countrySelected.id, $scope.dateSelected, function(data)
             {
                 // Country details OK
                 $scope.populationDetails = {
@@ -324,7 +322,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
                     desc_hl: ""
                 };
 
-                $timeout(function(){
+                // $timeout(function(){
                     $scope.populationDetails.pop_est = data.data.pop_est;
                     $scope.populationDetails.pop_hg = data.data.pop_hg;
                     $scope.populationDetails.pop_hl = data.data.pop_hl;
@@ -333,7 +331,11 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
                     $scope.countrycurve = $scope.countrySelected.curve;
 
-                }, 0);
+                $scope.sliderData.data.curve_x = $scope.countrycurve.x;
+                $scope.sliderData.data.curve_y = $scope.countrycurve.y;
+                $scope.sliderData.data.pop_est = $scope.populationDetails.pop_est;
+
+                // }, 0);
 
                 setFirstView();
 
@@ -393,8 +395,6 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
         //
         // map.zoomControl.setPosition('topright');
 
-        console.log('map define');
-
         if(districtLayer){
 
             if(dollarType ){
@@ -417,8 +417,6 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
                 map.fitBounds(geojsondata.getBounds());
                 // map.setZoom(5);
-
-                console.log('map define');
 
             }
 
@@ -607,15 +605,15 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
     $scope.searchAvailableRuns = function()
     {
         // Get user name
-        rfseaSrv.getAvailableRuns($scope.monthSelected, $scope.yearSelected, function(data)
+        rfseaSrv.getAvailableRuns($scope.monthSelected + 1, $scope.yearSelected, function(data)
         {
 
             $scope.runsAvailable = data.data;
-            console.log($scope.runsAvailable);
 
         }, function(data)
         {
             // API error
+            console.log(data);
             $scope.runsAvailable = [];
             vex.dialog.alert({
                 message: 'No runs available'

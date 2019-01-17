@@ -12,20 +12,38 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter)
     this.createMapObject = function()
     {
 
+        var mapTile_1 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {id: 'map_1', attribution:''});
+        var mapTile_2 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {id: 'map_2', attribution:''}); // Esri_WorldStreetMap
+        var mapTile_3 = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png', {id: 'map_3', attribution:''}); // Stamen_Terrain
+        var mapTile_4 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {id: 'map_4', attribution:''}); //Esri_NatGeoWorldMap
+        var mapTile_5 = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {id: 'map_5', attribution:''}); // CartoDB.Positron
+        var mapTile_6 = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {id: 'map_6', attribution:''}); // CartoDB.Voyager
+
         // User not logged in - VISITOR
         var map = L.map('map', {
                 center: [19.80, 91.00],
                 zoom: 5,
-                trackResize: true
+                trackResize: true,
+                layers: [mapTile_1, mapTile_2, mapTile_3, mapTile_4, mapTile_5, mapTile_6]
             }
         );
 
         map.zoomControl.setPosition('topright');
 
-        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: ''
-        }).addTo(map);
+        var baseMaps = {
+            "Stamen_Terrain": mapTile_3,
+            "Esri_NatGeoWorldMap": mapTile_4,
+            "CartoDB.Positron": mapTile_5,
+            "CartoDB.Voyager": mapTile_6,
+            "OpenStreetMap": mapTile_1,
+            "Esri_WorldStreetMap": mapTile_2
+        };
 
+        // L.tileLayer(mapTile_1, {
+        //     attribution: ''
+        // }).addTo(map);
+
+        L.control.layers(baseMaps).addTo(map);
         L.control.scale({position: 'bottomright'}).addTo(map);
 
         return map;
@@ -70,11 +88,20 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter)
     }
 
     // This API allow the user to obtain a geojson with all the information of the provinces of a country.
-    this.getCountryZones = function(countryID, onSuccess, onError)
+    this.getCountryZones = function(countryID, date, onSuccess, onError)
     {
+
+        var url = "";
+        if(date == '')
+        {
+            url = baseAPIurl + 'data/' + countryID + '/zones/';
+        } else {
+            url = baseAPIurl + 'data/' + countryID + '/zones/?d=' + date;
+        }
+
         $http({
             method: 'GET',
-            url: baseAPIurl + 'data/' + countryID + '/zones/'
+            url: url
         }).then(function (data) {
             if(onSuccess) onSuccess(data)
         },function(data){
@@ -83,7 +110,15 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter)
     }
 
     // This API allow the user to obtain the analysis of the estimated affected population.
-    this.getProvinceDetails = function(countryID, zoneID, onSuccess, onError){
+    this.getProvinceDetails = function(countryID, zoneID, date, onSuccess, onError){
+
+        var url = "";
+        if(date == '')
+        {
+            url = baseAPIurl + 'data/' + countryID + '/' + zoneID + '/zonedetails/';
+        } else {
+            url = baseAPIurl + 'data/' + countryID + '/' + zoneID + '/zonedetails/?d=' + date;
+        }
 
         $http({
             method: 'GET',
@@ -115,11 +150,19 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter)
     /*****************************************************************************************/
 
     // This API allow the user to obtain the details of the computed population affected for a country.
-    this.getCountryDetails = function(countryID, onSuccess, onError){
+    this.getCountryDetails = function(countryID, date, onSuccess, onError){
+
+        var url = "";
+        if(date == '')
+        {
+            url = baseAPIurl + 'data/' + countryID + '/details/';
+        } else {
+            url = baseAPIurl + 'data/' + countryID + '/details/?d=' + date;
+        }
 
         $http({
             method: 'GET',
-            url: baseAPIurl + 'data/' + countryID + '/details/'
+            url: url
         }).then(function (data) {
             if(onSuccess) onSuccess(data)
         },function(data){
@@ -337,6 +380,40 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter)
     this.sendRegistrationRequest = function(mailInfo, onSuccess, onError)
     {
         // Send mail for registration
+
+    }
+
+    this.setRPValue = function(value){
+
+        if(value >= 0 && value <= 0.5){
+            return 0;
+        }
+
+        if(value > 0.5 && value <= 1){
+            return 1;
+        }
+
+        if(value >1 && value <= 10){
+            return 10;
+        }
+
+        if(value >10 && value <= 50){
+            return 50;
+        }
+
+        if(value >50 && value <= 100){
+            return 100;
+        }
+
+        if(value >100 && value <= 500){
+            return 500;
+        }
+
+        if(value >500 && value <= 1000){
+            return 1000;
+        }
+
+        return value;
 
     }
 }]);

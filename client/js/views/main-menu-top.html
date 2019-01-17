@@ -13,7 +13,8 @@
         <!-- Risk profile menu link -->
         <li ng-if="countrySelect !== 'na' && countrySelect !== ''">
             <a href="" ng-click="setRiskProfileView()" ng-if="!districtdetails">
-                <span ng-if="!riskprofileShow">Risk Profile</span>
+                <!--<span ng-if="!riskprofileShow">Risk Profile</span>-->
+                <span>Risk Profile</span>
             </a>
             <a href="" ng-click="gotoPage('countries.html?p=rp')" ng-if="districtdetails">Risk Profile</a>
         </li>

@@ -50,7 +50,7 @@
     <script src="js/angular/controller_footer.js" type="text/javascript"></script>
     <script src="js/angular/controller_map_legend.js" type="text/javascript"></script>
     <script src="js/angular/controller_chart_people.js" type="text/javascript"></script>
-    <script src="js/angular/controller_slider.js" type="text/javascript"></script>
+
     <script src="js/angular/directives.js" type="text/javascript"></script>
     <!-- RFSEA APP -->
 
@@ -181,7 +181,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="rfsea_box title text-center">
-                            <h2 class="rfsea_box_country_details_name">{{countrySelected.name | translate}}</h2>
+                            <h3 class="rfsea_box_country_details_name">{{countrySelected.name | translate}}</h3>
                             <hr>
                             <h5 class="rfsea_box_country_details_name_subtitle">Latest Updates</h5>
                             <br>
@@ -192,7 +192,10 @@
                         <div class="d-flex align-items-center flex-column">
                             <table class="rfsea_table" style="width:100%;" ng-if="!bPeople">
                                 <tr>
-                                    <td colspan="2" class="text-center"><h4>estimated emergency costs</h4></td>
+                                    <td colspan="2" class="text-center">
+                                        <h4>estimated emergency costs</h4>
+                                        <strong>Top three districts</strong>
+                                    </td>
                                 </tr>
                                 <tr ng-repeat="d in zonesData | limitTo:3">
                                     <td>{{d.properties.name}}</td>
@@ -201,7 +204,10 @@
                             </table>
                             <table class="rfsea_table" style="width:100%;" ng-if="bPeople">
                                 <tr>
-                                    <td colspan="2" class="text-center"><h4>estimated affected people</h4></td>
+                                    <td colspan="2" class="text-center">
+                                        <h4>estimated affected people</h4>
+                                        <strong>Top three districts</strong>
+                                    </td>
                                 </tr>
                                 <tr ng-repeat="zd in zonesData | limitTo:3">
                                     <td>{{zd.properties.name}}</td>
@@ -213,7 +219,7 @@
                     </div>
                     <!--<div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
                         <!--<div class="mx-auto d-flex justify-content-center"style="width:100%;">-->
-                    <div  id="rfsea_slider_container" style="width:300px;">
+                    <div  id="rfsea_slider_container">
 
                         <div rfseaslider id="slider" data="sliderData.data"></div>
                         <!--<div ng-if="bPeople" rfseaslider id="slider" data="sliderData.data" ></div>-->
@@ -231,7 +237,7 @@
                 </div>
                 <div class="row">
                     <div class="mx-auto">
-                        <label class="label toggle sticky sidebar image">
+                        <label class="label toggle sticky sidebar image" style="margin-bottom: 100px;">
                             <input type="checkbox" class="toggle_input" ng-click="setTypeDataToShow()"/>
                             <div class="toggle-control"></div>
                         </label>
@@ -248,7 +254,7 @@
                         <div class="rfsea_box">
                             <div class="d-inline-flex align-items-start justify-content-between date ">
                                 <div class="rfsea_box text-center">
-                                    <h2 class="rfsea_box_country_details_name">{{countrySelected.name | translate}}</h2>
+                                    <h3 class="rfsea_box_country_details_name">{{countrySelected.name | translate}}</h3>
                                     <hr>
                                     <h5 class="rfsea_box_country_details_name_subtitle">Districts</h5>
                                     <br>
@@ -307,11 +313,14 @@
 
     </div>
 
-    <div ng-if="bRiskProfile.status" style="z-index: 1000; position:absolute; width: 100%;">
+    <div ng-if="bRiskProfile.status" style="z-index: 1000; position:absolute; width: 100%; top:0; left:0;">
         <rfseachartpeople datachart="datachart" curvex="countrycurve.x" curvey="countrycurve.y" pop-details="populationDetails" b-risk-profile="bRiskProfile.status" countryhomeshow="bCountryHome.status" sliderdata="sliderData"></rfseachartpeople>
         <rfseafooter></rfseafooter>
     </div>
 
 </body>
+
+<link rel="stylesheet"  href="css/slider_review.css" rel="stylesheet">
+<script src="js/angular/controller_slider.js" type="text/javascript"></script>
 
 </html>

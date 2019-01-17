@@ -768,7 +768,7 @@ a {
 
 .media img {
   width: 100%;
-  max-width: 300px; }
+  max-width: 200px; }
 .media.logo a:hover, .media.logo a:focus {
   border: none; }
   .media.logo a:hover img, .media.logo a:focus img {

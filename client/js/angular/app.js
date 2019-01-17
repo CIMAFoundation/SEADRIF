@@ -16,6 +16,7 @@ var baseAPIurl = "http://seadrif.cimafoundation.org/authseadrif/api/";
 // var country_courve = {};
 var dollarMultiplier = 0;
 var startDateRuns = 2018;
+var rpValueApp = 0;
 
 rfseaApp.config(function($translateProvider, $translatePartialLoaderProvider, $locationProvider, $httpProvider) {
 

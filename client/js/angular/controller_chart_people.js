@@ -66,6 +66,11 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
 
                 serieEst = returnInterpulationPoint($scope.popDetails.pop_est, 'est');
 
+                /* Calculating RP Value from data */
+                if(serieEst.length > 0){
+                    rpValueApp = rfseaSrv.setRPValue(serieEst[0].x);
+                }
+
                 serieEst_dollar = angular.copy(serieEst);
                 serieEst_dollar[0].x = serieEst_dollar[0].x * dollarMultiplier;
                 serieEst_dollar[0].y = serieEst_dollar[0].y * dollarMultiplier;
@@ -121,7 +126,9 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                         $scope.bModel = true;
                         if(serieEst.length > 0){
                             // Estimated data
-                            chart.series[1].data[0].update({marker:{symbol: 'url(img/template/orange.png)'}});
+                            if(chart.series[1].data.length > 0){
+                                chart.series[1].data[0].update({marker:{symbol: 'url(img/template/orange.png)'}});
+                            }
                         }
 
                         // Historical low data
@@ -219,10 +226,17 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
 
             createChartPeople();
 
-            //Label update
-            $scope.populationDetails = {
-                pop_est: serieEst[0].y
-            };
+            if (serieEst.length > 0){
+                //Label update
+                $scope.populationDetails = {
+                    pop_est: serieEst[0].y
+                };
+            } else {
+                //Label update
+                $scope.populationDetails = {
+                    pop_est: 0
+                };
+            }
 
             if($scope.bModel){
                 $scope.typeTitleHeader = "ESTIMATED AFFECTED POPULATION";
@@ -237,10 +251,20 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
 
             createChartDollar();
 
+            if(serieEst_dollar.length > 0){
+                $scope.populationDetails = {
+                    pop_est: serieEst_dollar[0].y
+                };
+            } else {
+                $scope.populationDetails = {
+                    pop_est: 0
+                };
+            }
+
             //Label update
-            $scope.populationDetails = {
-                pop_est: serieEst_dollar[0].y
-            };
+            // $scope.populationDetails = {
+            //     pop_est: serieEst_dollar[0].y
+            // };
 
             if($scope.bModel){
                 $scope.typeTitleHeader = "ESTIMATED EMERGENCY COSTS";
@@ -491,7 +515,9 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                                             }
 
                                             // Historical high data -> transparent
-                                            chart.series[3].data[0].update({marker:{symbol: 'url(img/template/blue_trasp.png)'}});
+                                            if(chart.series[3].data.length > 0){
+                                                chart.series[3].data[0].update({marker:{symbol: 'url(img/template/blue_trasp.png)'}});
+                                            }
 
                                             $scope.populationDetails = {
                                                 pop_est: serieEst[0].y
@@ -510,7 +536,9 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                                             bEstimate = false;
 
                                             // Estimated data -> transparent
-                                            chart.series[1].data[0].update({marker:{symbol: 'url(img/template/orange_trasp.png)'}});
+                                            if(chart.series[1].data.length > 0){
+                                                chart.series[1].data[0].update({marker:{symbol: 'url(img/template/orange_trasp.png)'}});
+                                            }
 
                                             // Historical low data -> transparent
                                             if(serieHL.length > 0){
@@ -540,9 +568,14 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                                             bEstimate = false;
 
                                             // Estimated data -> transparent
-                                            chart.series[1].data[0].update({marker:{symbol: 'url(img/template/orange_trasp.png)'}});
+                                            if (chart.series[1].data.length > 0){
+                                                chart.series[1].data[0].update({marker:{symbol: 'url(img/template/orange_trasp.png)'}});
+                                            }
+
                                             // Historical low data -> transparent
-                                            chart.series[2].data[0].update({marker:{symbol: 'url(img/template/blue.png)'}});
+                                            if (chart.series[2].data.length > 0){
+                                                chart.series[2].data[0].update({marker:{symbol: 'url(img/template/blue.png)'}});
+                                            }
 
                                             // Historical high data -> transparent
                                             if(serieHG.length > 0){
@@ -871,7 +904,9 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                                             }
 
                                             // Historical high data -> transparent
-                                            chart.series[3].data[0].update({marker:{symbol: 'url(img/template/blue_trasp.png)'}});
+                                            if(chart.series[3].data.length > 0){
+                                                chart.series[3].data[0].update({marker:{symbol: 'url(img/template/blue_trasp.png)'}});
+                                            }
 
                                             $scope.populationDetails = {
                                                 pop_est: serieEst_dollar[0].y
@@ -890,7 +925,9 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                                             bEstimate = false;
 
                                             // Estimated data -> transparent
-                                            chart.series[1].data[0].update({marker:{symbol: 'url(img/template/orange_trasp.png)'}});
+                                            if(chart.series[1].data.length > 0){
+                                                chart.series[1].data[0].update({marker:{symbol: 'url(img/template/orange_trasp.png)'}});
+                                            }
 
                                             // Historical low data -> transparent
                                             if(serieHL_dollar.length > 0){
@@ -920,9 +957,15 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                                             bEstimate = false;
 
                                             // Estimated data -> transparent
-                                            chart.series[1].data[0].update({marker:{symbol: 'url(img/template/orange_trasp.png)'}});
+                                            if(chart.series[1].data.length > 0){
+                                                chart.series[1].data[0].update({marker:{symbol: 'url(img/template/orange_trasp.png)'}});
+                                            }
+
                                             // Historical low data -> transparent
-                                            chart.series[2].data[0].update({marker:{symbol: 'url(img/template/blue.png)'}});
+                                            if(chart.series[2].data.length > 0){
+                                                chart.series[2].data[0].update({marker:{symbol: 'url(img/template/blue.png)'}});
+                                            }
+
 
                                             // Historical high data -> transparent
                                             if(serieHG_dollar.length > 0){
@@ -1047,7 +1090,12 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                 indexPoint0 = 0;
             }
 
-            dy = (yValue - $scope.series_model[indexPoint0][1]) / ($scope.series_model[indexPoint1][1] - $scope.series_model[indexPoint0][1]);
+            if(yValue == 0){
+                dy = 0;
+            } else {
+                dy = (yValue - $scope.series_model[indexPoint0][1]) / ($scope.series_model[indexPoint1][1] - $scope.series_model[indexPoint0][1]);
+            }
+
             xVal = ($scope.series_model[indexPoint0][0] + ($scope.series_model[indexPoint1][0] - $scope.series_model[indexPoint0][0]) * dy);
 
             return [{

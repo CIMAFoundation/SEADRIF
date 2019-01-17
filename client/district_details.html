@@ -70,9 +70,11 @@
 </div>
 
 <topmenu page="2" district-show="false" riskprofile-show="false" country-select="countrySelected" districtdetails="bdistrictDetails.status"></topmenu>
-<rfseafooter></rfseafooter>
+
 
 <div class="container-fluid rfsea_box_content" ng-class="{show: bShowBar, hide: !bShowBar}">
+
+
 
 
     <div class="rfsea_box">
@@ -86,57 +88,61 @@
         </div>
     </div>
 
-    <div class="row" ng-if="bShowBar">
-        <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
-           <!-- <div class="rfsea_box title text-center">
-                <h2 class="rfsea_box_country_details_name">DISTRETTO1</h2>
-                <hr>
-                <h5 class="rfsea_box_country_details_name_subtitle">Details</h5>
-                <br>
-            </div>-->
-        <!--</div>-->
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <!--<table class="rfsea_table" style="width:100%;">
+    <div class="rfsea_box_country_details">
+        <div class="row" ng-if="bShowBar">
+            <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
+            <!-- <div class="rfsea_box title text-center">
+                 <h2 class="rfsea_box_country_details_name">DISTRETTO1</h2>
+                 <hr>
+                 <h5 class="rfsea_box_country_details_name_subtitle">Details</h5>
+                 <br>
+             </div>-->
+            <!--</div>-->
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <!--<table class="rfsea_table" style="width:100%;">
 
-                <tr >
-                    <td><i></i></td>
-                    <td class="text-left">
-                        <a href="" ng-click="setLayer_eo()">BTN EO</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td><i></i></td>
-                    <td class="text-left">
-                        <a href="" ng-click="setLayer_wd()">BTN WD</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td><i></i></td>
-                    <td class="text-left">
-                        <a href="" ng-click="setLayer_eo_wd()">BTN Compare EO WD</a>
-                    </td>
-                </tr>
+                    <tr >
+                        <td><i></i></td>
+                        <td class="text-left">
+                            <a href="" ng-click="setLayer_eo()">BTN EO</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><i></i></td>
+                        <td class="text-left">
+                            <a href="" ng-click="setLayer_wd()">BTN WD</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><i></i></td>
+                        <td class="text-left">
+                            <a href="" ng-click="setLayer_eo_wd()">BTN Compare EO WD</a>
+                        </td>
+                    </tr>
 
-            </table>-->
-            <div class="d-flex flex-column">
-                <h4 class="d-inline-flex align-items-center p-2">
-                    <i class="fa fa-2x icon-eo"></i><a class="pl-3" ng-class="{'rfsea-link-active': mapType == 'eo'}" href="" ng-click="setLayer_eo()">EO MAP</a>
-                </h4>
-                <h4 class="d-inline-flex align-items-center p-2">
-                    <i class="fa fa-2x icon-wd"></i><a class="pl-3" ng-class="{'rfsea-link-active': mapType == 'model'}" href="" ng-click="setLayer_wd()">MODEL MAP</a>
-                </h4>
-                <h4 class="d-inline-flex align-items-center p-2">
-                    <i class="fa fa-2x icon-eo-wd"></i><a class="pl-3" ng-class="{'rfsea-link-active': mapType == 'compare'}" href="" ng-click="setLayer_eo_wd()">COMPARE EO/MODEL</a>
-                </h4>
+                </table>-->
+                <div class="d-flex flex-column">
+                    <h4 class="d-inline-flex align-items-center p-2">
+                        <i class="fa fa-2x icon-eo"></i><a class="pl-3" ng-class="{'rfsea-link-active': mapType == 'eo'}" href="" ng-click="setLayer_eo()">EO MAP</a>
+                    </h4>
+                    <h4 class="d-inline-flex align-items-center p-2">
+                        <i class="fa fa-2x icon-wd"></i><a class="pl-3" ng-class="{'rfsea-link-active': mapType == 'model'}" href="" ng-click="setLayer_wd()">MODEL MAP</a>
+                    </h4>
+                    <h4 class="d-inline-flex align-items-center p-2">
+                        <i class="fa fa-2x icon-eo-wd"></i><a class="pl-3" ng-class="{'rfsea-link-active': mapType == 'compare'}" href="" ng-click="setLayer_eo_wd()">COMPARE EO/MODEL</a>
+                    </h4>
+
+                </div>
+            </div>
+
 
         </div>
     </div>
 
 
+
 </div>
-
-
-
+<rfseafooter></rfseafooter>
 
 </body>
 </html>
