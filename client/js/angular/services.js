@@ -261,7 +261,7 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter)
         var objColor = {
             color: "#22293e",
             fillColor: color[0].color,
-            fillOpacity: 0.7
+            fillOpacity: 0.5
         }
 
         return objColor;
