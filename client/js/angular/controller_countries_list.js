@@ -64,13 +64,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
         }
     };
 
-    // var map = L.map('map', {
-    //         center: [19.80, 91.00],
-    //         zoom: 5,
-    //         trackResize: true
-    //     }
-    // );
-
+    $scope.totScore = 0;
 
     var map = rfseaSrv.createMapObject();
 
@@ -249,6 +243,8 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
                 setPaletteColor(data.data.pal.colors, data.data.pal.values);
 
                 $scope.zonesData = data.data.geojson.features;
+
+                $scope.totScore = getTotalSumData($scope.zonesData);
 
                 loadMapLayers(false, true);
 
@@ -563,6 +559,18 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
         $scope.bDatePicker = false;
 
+    }
+
+    function getTotalSumData(arrayCountryFeatures) {
+        // Return properties.data sum
+        var tot = 0;
+
+        for (var i = 0; i < arrayCountryFeatures.length; i++)
+        {
+            tot = tot + arrayCountryFeatures[i].properties.data;
+        }
+
+        return tot;
     }
 
     $scope.setVisibilityDatePicker = function()

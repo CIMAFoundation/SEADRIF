@@ -194,10 +194,11 @@
                                 <tr>
                                     <td colspan="2" class="text-center">
                                         <h4>estimated emergency costs</h4>
-                                        <strong>Top three districts</strong>
+                                        <strong ng-show="totScore > 0">Most affected districts</strong>
+                                        <strong ng-show="totScore == 0"><i>No district involved</i><br /><br /></strong>
                                     </td>
                                 </tr>
-                                <tr ng-repeat="d in zonesData | limitTo:3">
+                                <tr ng-repeat="d in zonesData | limitTo:3" ng-show="totScore > 0">
                                     <td>{{d.properties.name}}</td>
                                     <td class="text-right">{{(d.properties.data * (dollarMultiplier * 1)) | number: 0}} $</td>
                                 </tr>
@@ -206,10 +207,11 @@
                                 <tr>
                                     <td colspan="2" class="text-center">
                                         <h4>estimated affected people</h4>
-                                        <strong>Top three districts</strong>
+                                        <strong ng-show="totScore > 0">Most affected districts</strong>
+                                        <strong ng-show="totScore == 0"><i>No district involved</i><br /><br /></strong>
                                     </td>
                                 </tr>
-                                <tr ng-repeat="zd in zonesData | limitTo:3">
+                                <tr ng-repeat="zd in zonesData | limitTo:3" ng-show="totScore > 0">
                                     <td>{{zd.properties.name}}</td>
                                     <td class="text-right">{{zd.properties.data | number: 0}}</td>
                                 </tr>
