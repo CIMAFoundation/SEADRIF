@@ -2,7 +2,7 @@
  * Created by Manuel on 12/02/2018.
  */
 
-rfseaApp.controller('rfseamenuCtrl', function($rootScope, $scope, $window, rfseaSrv)
+rfseaApp.controller('rfseamenuCtrl', function($rootScope, $scope, $window, rfseaSrv, $location)
 {
 
     $scope.bCountriesList = false;
@@ -34,6 +34,7 @@ rfseaApp.controller('rfseamenuCtrl', function($rootScope, $scope, $window, rfsea
 
     $scope.changeCountrySelection = function(country)
     {
+        $location.search('p', null);
         $scope.riskprofileShow = false;
         $scope.districtShow = false;
         $scope.bCountriesList = !$scope.bCountriesList;

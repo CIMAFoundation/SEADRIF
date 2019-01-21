@@ -64,8 +64,9 @@ rfseaApp.controller('rfseasliderCtrl', function($rootScope, $scope, $timeout, rf
     function setGradient(itemId, value){
 
         var item = document.getElementById(itemId);
-        item.style.width = value + "px";
-
+        if(item){
+            item.style.width = value + "px";
+        }
     }
 
     function setElementPosition_tooltip(itemId, pos) {
