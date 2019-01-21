@@ -137,16 +137,16 @@ class RFSEAResource(AcrowebResource):
         response = self._checkCountryPermission(request, None)
         if response: return response
 
-        year = kwargs['year']
-        month = kwargs['month']
+        year = int(kwargs['year'])
+        month = int(kwargs['month'])
         
         #obtain global data
         reader = DeltaresReader(None)
         
         dayRange = calendar.monthrange(int(year), int(month))
         
-        dt1 = datetime.datetime.strptime('%s%s%s'%(year, month, dayRange[0]), '%Y%m%d')
-        dt2 = datetime.datetime.strptime('%s%s%s'%(year, month, dayRange[1]), '%Y%m%d')
+        dt1 = datetime.datetime.strptime('%04d%02d%02d'%(year, month, 1), '%Y%m%d')
+        dt2 = datetime.datetime.strptime('%04d%02d%02d'%(year, month, dayRange[1]), '%Y%m%d')
         
         data = reader.getRuns(dt1, dt2)
         
