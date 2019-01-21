@@ -59,7 +59,8 @@
 </div>
 <rfseafooter></rfseafooter>
 
-<topmenu page="2" district-show="false" country-select="'na'"></topmenu>
+<!--<topmenu page="2" district-show="false" country-select="'na'"></topmenu>-->
+<topmenu userinfo="userinfo" countryselected="countrySelected" countries="countriesList" riskprofile-show="bRiskProfile.status" district-show="bDistrict" districtdetails="false"></topmenu>
 
 <div class="container-fluid rfsea_box_content home" id="bar" ng-class="{show: bShowBar, hide: !bShowBar}">
 
@@ -67,7 +68,7 @@
 
     <div class="rfsea_box h-100" >
         <div class="d-inline-flex align-items-start justify-content-between  date">
-            <a class="ham not" href="" ng-click="showHideSideBar()"><i class="fa fa-2x " ng-class="{'fa-chevron-left': bShowBar, 'fa-chevron-right': !bShowBar}"></i></a>
+            <a class="ham not" href="" ng-click="showHideSideBar()"><i class="fa fa-2x " ng-class="{'fa-times': bShowBar, 'fa-chevron-right': !bShowBar}"></i></a>
 
             <div class="text-center ">
                 <h2>About the SEA DRIF platform</h2>

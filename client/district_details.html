@@ -69,21 +69,18 @@
     </div>
 </div>
 
-<topmenu page="2" district-show="false" riskprofile-show="false" country-select="countrySelected" districtdetails="bdistrictDetails.status"></topmenu>
-
+<!--<topmenu page="2" district-show="false" riskprofile-show="false" country-select="countrySelected" districtdetails="bdistrictDetails.status"></topmenu>-->
+<topmenu userinfo="userinfo" countryselected="countrySelected" countries="countriesList" riskprofile-show="bRiskProfile.status" district-show="bDistrict" districtdetails="true"></topmenu>
 
 <div class="container-fluid rfsea_box_content" ng-class="{show: bShowBar, hide: !bShowBar}">
 
-
-
-
     <div class="rfsea_box">
         <div class="d-inline-flex align-items-start justify-content-between date ">
-            <a class="ham not" href="" ng-click="showHideSideBar()"><i class="fa fa-2x " ng-class="{'fa-chevron-left': bShowBar, 'fa-chevron-right': !bShowBar}"></i></a>
+            <a class="ham not" href="" ng-click="showHideSideBar()"><i class="fa fa-2x " ng-class="{'fa-times': bShowBar, 'fa-chevron-right': !bShowBar}"></i></a>
             <div class="rfsea_box text-center">
                 <h3 class="rfsea_box_country_details_name">{{districtObj.name}}</h3>
                 <hr>
-                <h5 class="rfsea_box_country_details_name_subtitle">{{countrySelected.name}}</h5>
+                <h5 class="rfsea_box_country_details_name_subtitle">{{countrySelected.name | translate}}</h5>
             </div>
         </div>
     </div>

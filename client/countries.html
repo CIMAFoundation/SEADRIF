@@ -130,13 +130,16 @@
         </div>
     </div>
 
-    <topmenu page="2" countryhomeshow="bCountryHome.status" district-show="bDistrict" riskprofile-show="bRiskProfile.status" country-select="countrySelect" districtdetails="bdistrictDetails.status"></topmenu>
+    <!--<topmenu page="2" countryhomeshow="bCountryHome.status" district-show="bDistrict" riskprofile-show="bRiskProfile.status" country-select="countrySelect" districtdetails="bdistrictDetails.status"></topmenu>-->
+    <topmenu userinfo="userinfo" countryselected="countrySelected" countries="countriesList" riskprofile-show="bRiskProfile.status" district-show="bDistrict" districtdetails="false"></topmenu>
+
     <rfseafooter></rfseafooter>
+
     <div class="container-fluid rfsea_box_content" ng-class="{show: bShowBar, hide: !bShowBar}" ng-if="!bRiskProfile.status">
 
         <div class="rfsea_box">
             <div class="d-inline-flex align-items-start justify-content-between date ">
-                <a class="ham not" href="" ng-click="showHideSideBar()"><i class="fa fa-2x " ng-class="{'fa-chevron-left': bShowBar, 'fa-chevron-right': !bShowBar}"></i></a>
+                <a class="ham not" href="" ng-click="showHideSideBar()"><i class="fa fa-2x " ng-class="{'fa-times': bShowBar, 'fa-chevron-right': !bShowBar}"></i></a>
                 <div class="text-center" ng-if="!bCountriesList">
 
                     <h3 data-tooltip="html"  data-tooltip-conf="shadow" style="cursor: pointer;"> <span ng-click="setVisibilityDatePicker()">{{dateTo | date: 'dd MMMM yyyy'}}</span>
@@ -162,21 +165,21 @@
 
         <div ng-if="bShowBar">
             <!-- BOX Countries List -->
-            <div class="rfsea_box_country_list" ng-if="bCountriesList">
-                <br />
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="d-flex flex-column">
-                            <div class="rfsea_box_country_name" ng-repeat="country in countriesList | orderBy: 'name'">
-                                <a href="" ng-click="setCountrySelection(country)"> <span class="flag-icon flag-icon-squared flag-icon-{{('flag_' + country.name) | translate}}"></span> {{country.name | translate}}</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!--<div class="rfsea_box_country_list" ng-if="bCountriesList">-->
+                <!--<br />-->
+                <!--<div class="row">-->
+                    <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
+                        <!--<div class="d-flex flex-column">-->
+                            <!--<div class="rfsea_box_country_name" ng-repeat="country in countriesList | orderBy: 'name'">-->
+                                <!--<a href="" ng-click="setCountrySelection(country)"> <span class="flag-icon flag-icon-squared flag-icon-{{('flag_' + country.name) | translate}}"></span> {{country.name | translate}}</a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
 
             <!-- BOX Country Home Details -->
-            <div class="rfsea_box_country_details" ng-if="bCountryHome.status">
+            <div class="rfsea_box_country_details" ng-if="!bDistrict">
 
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

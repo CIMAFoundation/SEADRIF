@@ -2,6 +2,23 @@
  * Created by Manuel on 12/02/2017.
  */
 
+// rfseaApp.directive('topmenu',function(){
+//     return {
+//         // transclude: true,
+//         restrict: 'E',
+//         controller: "rfseamenuCtrl",
+//         templateUrl: 'js/views/main-menu-top.html',
+//         scope: {
+//             page: "@",
+//             districtShow: "=",
+//             countrySelect: "=",
+//             countryhomeshow: "=",
+//             riskprofileShow: "=",
+//             districtdetails: "="
+//         }
+//     }
+// });
+
 rfseaApp.directive('topmenu',function(){
     return {
         // transclude: true,
@@ -9,11 +26,12 @@ rfseaApp.directive('topmenu',function(){
         controller: "rfseamenuCtrl",
         templateUrl: 'js/views/main-menu-top.html',
         scope: {
-            page: "@",
-            districtShow: "=",
-            countrySelect: "=",
-            countryhomeshow: "=",
+            mainmenu: "=",
+            userinfo: "=",
+            countryselected: "=",
             riskprofileShow: "=",
+            districtShow: "=",
+            countries: "=",
             districtdetails: "="
         }
     }

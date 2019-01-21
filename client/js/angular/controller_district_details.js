@@ -192,6 +192,45 @@ rfseaApp.controller('rfseaCtrlDistrictMap', function($rootScope, $scope, $filter
         }
 
         function init(){
+
+            // Get the list of available countries
+            rfseaSrv.getCountriesList(function(data)
+            {
+                // Countries list OK
+                $scope.countriesList = data.data.objects;
+                // $scope.countrySelected = JSON.parse(localStorage.getItem('rfsea_country_selected'));
+                //
+                // if($scope.countrySelected){
+                //
+                //     $scope.countrySelect = $scope.countrySelected.name;
+                //
+                //     setFirstCountryDatails();
+                //
+                // } else {
+                //     //No country saved in cookies
+                //     if($rootScope.countriesList.length > 0){
+                //
+                //         // Set first country as default country to view
+                //         setCountrySelected($scope.countriesList[0]);
+                //     }
+                // }
+                //
+                // $scope.$watch('countrySelected', function (newVal, oldVal) {
+                //
+                //     rfseaSrv.clearMap(map);
+                //     setCountrySelected($scope.countrySelected);
+                //
+                // });
+
+            }, function(data)
+            {
+                // Error
+                console.log(data);
+                vex.dialog.alert({
+                    message: 'API loading error.'
+                })
+            });
+
             rfseaSrv.getProvinceDetails($scope.countrySelected.id,  $scope.districtObj.id, $scope.dateSelected, function(data)
             {
                 // Country zone details

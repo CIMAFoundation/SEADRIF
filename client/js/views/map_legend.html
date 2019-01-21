@@ -31,13 +31,13 @@
             <td><div class="" style="background-color: {{scale.color}}; width:13px; height:13px; border:solid 1px #c0c0c0;"></div></td>
             <td ng-if="datatype">
                 <span ng-if="$index == 0"> < {{scale.label_max}}</span>
-                <span ng-if="$index !== 0 && !$last">{{(scale.label_min * 1) - 1 }} - {{scale.label_max}}</span>
-                <span ng-if="$last">> {{(scale.label_min * 1) - 1}}</span>
+                <span ng-if="$index !== 0 && !$last">{{(scale.label_min * 1) - 1 | number}} - {{scale.label_max | number}}</span>
+                <span ng-if="$last">> {{(scale.label_min * 1) - 1 | number}}</span>
             </td>
             <td ng-if="!datatype">
-                <span ng-if="$index == 0"> < {{scale.label_max * dollarMultiplier}}</span>
-                <span ng-if="$index !== 0 && !$last">{{((scale.label_min * 1) - 1) * dollarMultiplier }} - {{scale.label_max * dollarMultiplier}}</span>
-                <span ng-if="$last">> {{((scale.label_min * 1) - 1) * dollarMultiplier}}</span>
+                <span ng-if="$index == 0"> < {{scale.label_max * dollarMultiplier | number}} $</span>
+                <span ng-if="$index !== 0 && !$last">{{((scale.label_min * 1) - 1) * dollarMultiplier | number}} $ - {{scale.label_max * dollarMultiplier | number}} $</span>
+                <span ng-if="$last">> {{((scale.label_min * 1) - 1) * dollarMultiplier | number}} $</span>
             </td>
 
         </tr>

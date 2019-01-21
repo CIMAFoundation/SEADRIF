@@ -4,11 +4,64 @@
 
 rfseaApp.controller('rfseamenuCtrl', function($rootScope, $scope, $window, rfseaSrv)
 {
-    $scope.userinfo = {
-        usrlogin: "",
-        usrlevel: "",
-        usrloginstatus: false
-    };
+
+    $scope.bCountriesList = false;
+
+    if ($scope.userinfo) {
+        $scope.bLoggedInMenu = true;
+    } else {
+        $scope.bLoggedInMenu = false;
+    }
+
+    $scope.setDistrictView = function()
+    {
+        $scope.districtShow = !$scope.districtShow;
+        $scope.riskprofileShow = false;
+
+    }
+
+    $scope.setRiskProfileView = function()
+    {
+        $scope.riskprofileShow = !$scope.riskprofileShow;
+        $scope.districtShow = false;
+    }
+
+    $scope.setCountryProfileView = function()
+    {
+        $scope.riskprofileShow = false;
+        $scope.districtShow = false;
+    }
+
+    $scope.changeCountrySelection = function(country)
+    {
+        $scope.riskprofileShow = false;
+        $scope.districtShow = false;
+        $scope.bCountriesList = !$scope.bCountriesList;
+
+        $scope.countryselected = country;
+
+    }
+
+    $scope.changeCountrySelectionMovePage = function(country)
+    {
+        $scope.riskprofileShow = false;
+        $scope.districtShow = false;
+        $scope.bCountriesList = !$scope.bCountriesList;
+
+        localStorage.setItem('rfsea_country_selected', JSON.stringify(country));
+        $window.location.href = 'countries.html';
+
+    }
+
+    $scope.showHideCountriesList = function () {
+
+        $scope.bCountriesList = !$scope.bCountriesList;
+
+    }
+
+    /***********************************************************/
+    /***************** LOGIN FORM ******************************/
+    /***********************************************************/
 
     $scope.loginData = {
         usr: "",
@@ -21,59 +74,6 @@ rfseaApp.controller('rfseamenuCtrl', function($rootScope, $scope, $window, rfsea
         email: "",
         institution: ""
     }
-
-    $scope.usrinfo = JSON.parse(localStorage.getItem('rfsea_login'));
-
-    if ($scope.usrinfo) {
-        $scope.bLoggedInMenu = true;
-    } else {
-        $scope.bLoggedInMenu = false;
-    }
-
-    $scope.setDistrictView = function()
-    {
-        if($scope.countrySelect !== '' && $scope.countrySelect !== 'na')
-        {
-            if($scope.districtShow)
-            {
-                $scope.countryhomeshow = true;
-            } else {
-                $scope.countryhomeshow = false;
-            }
-
-            $scope.districtShow = !$scope.districtShow;
-
-            $scope.riskprofileShow = false;
-            // $scope.districtdetailsshow = false;
-
-        } else {
-            vex.dialog.alert("You must select a country");
-        }
-
-    }
-
-    $scope.setRiskProfileView = function()
-    {
-        if($scope.countrySelect !== '' && $scope.countrySelect !== 'na')
-        {
-            if($scope.riskprofileShow)
-            {
-                $scope.countryhomeshow = true;
-            } else {
-                $scope.countryhomeshow = false;
-            }
-            $scope.riskprofileShow = !$scope.riskprofileShow;
-            $scope.districtShow = false;
-            // $scope.districtdetailsshow = false;
-
-        } else {
-            vex.dialog.alert("You must select a country");
-        }
-    }
-
-    /***********************************************************/
-    /***************** LOGIN FORM ******************************/
-    /***********************************************************/
 
     $scope.bLoginForm = false;
     $scope.bLoginActive = false;

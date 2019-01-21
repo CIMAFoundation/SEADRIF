@@ -145,6 +145,17 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter)
 
     }
 
+    this.clearMap = function(map)
+    {
+        map.eachLayer( function(layer) {
+
+            if ( layer.myTag &&  layer.myTag === "CountryGEOJson") {
+                map.removeLayer(layer)
+            }
+
+        });
+    }
+
     /*****************************************************************************************/
     /***************** CHARTS DATA ***********************************************************/
     /*****************************************************************************************/

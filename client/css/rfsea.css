@@ -130,6 +130,25 @@ a:hover
     color:#a0a0a0;
 }
 
+.rfsea_menu_countries_list_box
+{
+    padding-left: 30px;
+    font-size: 25px;
+    line-height: 35px;
+}
+
+.rfsea_menu_countries_list_box a, .rfsea_menu_countries_list_box a:hover
+{
+    color: #22293e;
+    text-decoration: none;
+}
+
+.rfsea_row_select_country
+{
+    font-weight: 600;
+    cursor: pointer;
+}
+
 /********************************************************/
 /******************* LOGIN FORM *************************/
 /********************************************************/

@@ -6,7 +6,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 {
 
     $scope.bPeople = true;
-    $scope.bCountryHome = {status: true};
+    // $scope.bCountryHome = {status: true};
     $scope.bDistrict = false;
     $scope.bRiskProfile = {status: false};
     $scope.bdistrictDetails = {status: false};
@@ -21,6 +21,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
         usrlevel: "",
         usrloginstatus: false
     };
+    $rootScope.countriesList = [];
 
     // Date picker
     $scope.dateSelected = ""; // Format YYYY-MM-GG
@@ -70,7 +71,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
     loadMapLayers(false, false);
 
-    $scope.bCountriesList = true;
+    // $scope.bCountriesList = true;
 
     $scope.zonesData = [];
 
@@ -108,52 +109,47 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
         if ($scope.userinfo.usrloginstatus) {
             // User logged in
 
-            $scope.countriesList = [];
-            $scope.countrySelected = JSON.parse(localStorage.getItem('rfsea_country_selected'));
+            // Get the list of available countries
+            rfseaSrv.getCountriesList(function(data)
+            {
+                // Countries list OK
+                $rootScope.countriesList = data.data.objects;
+                $scope.countrySelected = JSON.parse(localStorage.getItem('rfsea_country_selected'));
 
-            // Check if country is already set
-            if($scope.countrySelected){
+                if($scope.countrySelected){
 
-                $scope.bCountriesList = false;
-                $scope.countrySelect = $scope.countrySelected.name;
+                    $scope.countrySelect = $scope.countrySelected.name;
 
-                setFirstCountryDatails();
+                    setFirstCountryDatails();
 
-            } else {
-                $scope.bCountriesList = true;
-                $scope.bCountryHome.status = false;
+                } else {
+                    //No country saved in cookies
+                    if($rootScope.countriesList.length > 0){
 
-                rfseaSrv.getCountriesList(function(data)
-                {
-                    // Countries list OK
-                    $scope.countriesList = data.data.objects;
-
-                    //If countriesList == 1 set this country like country selected
-                    if($scope.countriesList.length == 1)
-                    {
-                        //There is only one country
+                        // Set first country as default country to view
                         setCountrySelected($scope.countriesList[0]);
-
                     }
+                }
 
-                    $scope.setCountrySelection = function(country){
+                $scope.$watch('countrySelected', function (newVal, oldVal) {
 
-                        setCountrySelected(country);
+                    rfseaSrv.clearMap(map);
+                    setCountrySelected($scope.countrySelected);
 
-                    };
-
-                }, function(data)
-                {
-                    // Error
-                    console.log(data);
-                    vex.dialog.alert({
-                        message: 'API loading error.'
-                    })
                 });
-            }
+
+            }, function(data)
+            {
+                // Error
+                console.log(data);
+                vex.dialog.alert({
+                    message: 'API loading error.'
+                })
+            });
+
 
         } else {
-            // User no logged in
+            // User not logged in
             $window.location.href = "index.html";
         }
 
@@ -163,8 +159,8 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
     function setCountrySelected(country) {
 
         $scope.countrySelected = country;
-        $scope.bCountriesList = false;
-        $scope.bCountryHome.status = true;
+        // $scope.bCountriesList = false;
+        // $scope.bCountryHome.status = true;
         // $scope.bdistrictDetails.status = false;
         $scope.countrySelect = country.name;
 
@@ -223,68 +219,45 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
     // Load country selected zones
     {
 
-        // if ($scope.district_list.length == 0){
+        rfseaSrv.getCountryZones($scope.countrySelected.id, $scope.dateSelected, function(data)
+        {
+            $scope.district_list = data.data.geojson.features;
 
-            // First access
+            // Set color Palette
+            setPaletteColor(data.data.pal.colors, data.data.pal.values);
 
-            rfseaSrv.getCountryZones($scope.countrySelected.id, $scope.dateSelected, function(data)
-            {
-                $scope.district_list = data.data.geojson.features;
+            $scope.zonesData = data.data.geojson.features;
 
-                // Calculating map labels for dollar value
-                // for(var i = 0; i <= $scope.district_list.length - 1; i++){
-                // For every district i'll calculate the dollar value
-                // var obj = angular.copy($scope.district_list[i]);
-                // obj.properties.data = obj.properties.data * dollarMultiplier;
-                // $scope.district_list_dollar.push(obj);
-                // };
+            $scope.totScore = getTotalSumData($scope.zonesData);
 
-                // Set color Palette
-                setPaletteColor(data.data.pal.colors, data.data.pal.values);
+            loadMapLayers(false, true);
 
-                $scope.zonesData = data.data.geojson.features;
+            // var geojsondata = L.geoJSON(data.data.geojson.features, {
+            //         style: function (item) {
+            //             return setColorMap(item);
+            //         },
+            //         onEachFeature: onEachFeature
+            //     }
+            // ).addTo(map);
+            //
+            // map.fitBounds(geojsondata.getBounds());
+            // map.setZoom(5);
 
-                $scope.totScore = getTotalSumData($scope.zonesData);
+            $scope.selectDistrict = function(obj){
 
-                loadMapLayers(false, true);
+                var geojson_district = L.geoJSON(obj.geometry);
+                map.fitBounds(geojson_district.getBounds());
 
-                // var geojsondata = L.geoJSON(data.data.geojson.features, {
-                //         style: function (item) {
-                //             return setColorMap(item);
-                //         },
-                //         onEachFeature: onEachFeature
-                //     }
-                // ).addTo(map);
-                //
-                // map.fitBounds(geojsondata.getBounds());
-                // map.setZoom(5);
+            }
 
-                $scope.selectDistrict = function(obj){
-
-                    var geojson_district = L.geoJSON(obj.geometry);
-                    map.fitBounds(geojson_district.getBounds());
-
-                }
-
-            }, function(data)
-            {
-                // Error
-                console.log(data);
-                vex.dialog.alert({
-                    message: 'API loading error.'
-                })
-            });
-        // } else {
-        //
-        //     console.log('Layer lenght zero');
-        //
-        //     if($scope.bPeople){
-        //         loadMapLayers(false, true);
-        //     } else {
-        //         loadMapLayers(true, true);
-        //     }
-        //
-        // }
+        }, function(data)
+        {
+            // Error
+            console.log(data);
+            vex.dialog.alert({
+                message: 'API loading error.'
+            })
+        });
 
         loadRiskProfileData();
     }
@@ -385,12 +358,6 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
     function loadMapLayers(dollarType, districtLayer){
 
-        // L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        //     attribution: ''
-        // }).addTo(map);
-        //
-        // map.zoomControl.setPosition('topright');
-
         if(districtLayer){
 
             if(dollarType ){
@@ -422,6 +389,9 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
     function onEachFeature(feature, layer) {
         //bind click
+
+        layer.myTag = "CountryGEOJson";
+
         layer.on('click', function (e) {
             // e = event
             $scope.districtSelected = {
@@ -483,6 +453,8 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
     function onEachFeature_dollar(feature, layer) {
         //bind click
+        layer.myTag = "CountryGEOJson";
+
         layer.on('click', function (e) {
             // e = event
             $scope.districtSelected = {
@@ -493,26 +465,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
             localStorage.removeItem('rfsea_district');
             localStorage.setItem('rfsea_district', JSON.stringify($scope.districtSelected));
 
-            // var geojson_district = L.geoJSON(feature.geometry);
-
-            // map.fitBounds(geojson_district.getBounds());
-
             $window.location.href = "district_details.html";
-            // $timeout(function(){
-            //     $scope.bCountryHome.status = false;
-            //     $scope.bDistrict = false;
-            //     $scope.bRiskProfile.status = false;
-            //     $scope.bdistrictDetails.status = true;
-            //
-            //     $scope.districtObj = $scope.districtSelected;
-            //
-            //     $scope.paletteColors = [];
-            //     $scope.palettePosition = "bottomright";
-            //     $scope.maptype = "value";
-            //
-            //     initDistrictDetails();
-            //
-            // }, 0);
 
         });
 
@@ -543,7 +496,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
         if (bDistrictView == 'dist'){
             $scope.bDistrict = true;
             $scope.bCountriesList = false;
-            $scope.bCountryHome.status = false;
+            // $scope.bCountryHome.status = false;
             $scope.bRiskProfile.status = false;
             $scope.bdistrictDetails.status = false;
         }
@@ -551,7 +504,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
         if (bDistrictView == 'rp'){
             $scope.bDistrict = false;
             $scope.bCountriesList = false;
-            $scope.bCountryHome.status = false;
+            // $scope.bCountryHome.status = false;
             $scope.bRiskProfile.status = true;
             $scope.bdistrictDetails.status = false;
 
