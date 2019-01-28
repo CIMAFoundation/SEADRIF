@@ -265,19 +265,28 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter)
     this.setColorMap = function(dataValue, paletteColors){
 
         // Set color object for the specific zone
-        var color = $filter('filter')(paletteColors, function(item){
+        var objColor = {};
+        var color = [];
+        var opacity = 0;
+
+        if(dataValue.properties.data === 0){
+            opacity = 0.1;
+        } else {
+            opacity = 0.5;
+        }
+
+        color = $filter('filter')(paletteColors, function(item){
             return dataValue.properties.data >= item.label_min && dataValue.properties.data < item.label_max;
         });
 
-        var objColor = {
+        objColor = {
             color: "#22293e",
             fillColor: color[0].color,
-            fillOpacity: 0.5
+            fillOpacity: opacity
         }
 
         return objColor;
     }
-
 
     /*****************************************************************************************/
     /***************** RUNS AVAILABLE & UTILITIES ********************************************/
@@ -340,7 +349,6 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter)
         return aMonths;
 
     }
-
 
     /*****************************************************************************************/
     /***************** LOGIN / LOGOUT *************************************************************/
