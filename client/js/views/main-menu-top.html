@@ -6,41 +6,41 @@
     </ul>
 </div>
 
-<div class="rfsea_box_menu" ng-if="false">
-    <ul>
-        <li><a href="" ng-click="setHomeView()" ng-class="{'active' : page == '1'}">home</a></li>
+<!--<div class="rfsea_box_menu" ng-if="false">-->
+    <!--<ul>-->
+        <!--<li><a href="" ng-click="setHomeView()" ng-class="{'active' : page == '1'}">home</a></li>-->
 
-        <!-- Risk profile menu link -->
-        <li ng-if="countrySelect !== 'na' && countrySelect !== ''">
-            <a href="" ng-click="setRiskProfileView()" ng-if="!districtdetails">
-                <!--<span ng-if="!riskprofileShow">Risk Profile</span>-->
-                <span>Risk Profile</span>
-            </a>
-            <a href="" ng-click="gotoPage('countries.html?p=rp')" ng-if="districtdetails">Risk Profile</a>
-        </li>
-        <li ng-if="countrySelect == 'na' || countrySelect == ''">
-            <span class="rfsea_menu_link_unavailable">Risk profile</span>
-        </li>
+        <!--&lt;!&ndash; Risk profile menu link &ndash;&gt;-->
+        <!--<li ng-if="countrySelect !== 'na' && countrySelect !== ''">-->
+            <!--<a href="" ng-click="setRiskProfileView()" ng-if="!districtdetails">-->
+                <!--&lt;!&ndash;<span ng-if="!riskprofileShow">Risk Profile</span>&ndash;&gt;-->
+                <!--<span>Risk Profile</span>-->
+            <!--</a>-->
+            <!--<a href="" ng-click="gotoPage('countries.html?p=rp')" ng-if="districtdetails">Risk Profile</a>-->
+        <!--</li>-->
+        <!--<li ng-if="countrySelect == 'na' || countrySelect == ''">-->
+            <!--<span class="rfsea_menu_link_unavailable">Risk profile</span>-->
+        <!--</li>-->
 
-        <!-- District menu link -->
-        <li ng-if="countrySelect !== 'na' && countrySelect !== ''">
-            <a href="" ng-click="setDistrictView()" >
-                <span ng-if="!districtShow && !districtdetails">District</span>
-                <span ng-if="districtShow && !districtdetails">{{countrySelect | translate}}</span>
-            </a>
-            <a href="" ng-click="gotoPage('countries.html?p=dist')" ng-if="districtdetails">District</a>
-        </li>
-        <li ng-if="countrySelect == 'na' || countrySelect == ''">
-            <span class="rfsea_menu_link_unavailable">District</span>
-        </li>
-        <li class="last logged">
-            <a href="" ng-click="setLoginForm('')" class="d-flex align-items-center justify-content-center" >
-                <i class="fa fa-user-o"></i>
-                <h5>logout<br><small>[{{usrinfo.usrlogin}}]</small></h5>
-            </a>
-        </li>
-    </ul>
-</div>
+        <!--&lt;!&ndash; District menu link &ndash;&gt;-->
+        <!--<li ng-if="countrySelect !== 'na' && countrySelect !== ''">-->
+            <!--<a href="" ng-click="setDistrictView()" >-->
+                <!--<span ng-if="!districtShow && !districtdetails">District</span>-->
+                <!--<span ng-if="districtShow && !districtdetails">{{countrySelect | translate}}</span>-->
+            <!--</a>-->
+            <!--<a href="" ng-click="gotoPage('countries.html?p=dist')" ng-if="districtdetails">District</a>-->
+        <!--</li>-->
+        <!--<li ng-if="countrySelect == 'na' || countrySelect == ''">-->
+            <!--<span class="rfsea_menu_link_unavailable">District</span>-->
+        <!--</li>-->
+        <!--<li class="last logged">-->
+            <!--<a href="" ng-click="setLoginForm('')" class="d-flex align-items-center justify-content-center" >-->
+                <!--<i class="fa fa-user-o"></i>-->
+                <!--<h5>logout<br><small>[{{usrinfo.usrlogin}}]</small></h5>-->
+            <!--</a>-->
+        <!--</li>-->
+    <!--</ul>-->
+<!--</div>-->
 
 <!-- Menu for COUNTRY DETAILS page -->
 <div class="rfsea_box_menu" ng-show="bLoggedInMenu && !districtdetails">
@@ -108,7 +108,6 @@
 
 <div class="container">
     <div class="row">
-
         <!-- FORM LOGIN & REGISTER -->
         <div class="rfsea_login_form animated fadeIn" ng-if="bLoginForm">
             <div class="rfsea_login_form_box">
