@@ -4,7 +4,6 @@
 
 rfseaApp.controller('rfseasliderCtrl', function($rootScope, $scope, $timeout, rfseaSrv, $filter) {
 
-
     var gridValues = [0, 3000, 10000, 100000, 500000, 1000000, 10000000];
 
     var marginLeftZeroValue = 60;
@@ -125,7 +124,7 @@ rfseaApp.controller('rfseasliderCtrl', function($rootScope, $scope, $timeout, rf
 
     }
 
-    $scope.$watch('data.pop', function (newVal, oldVal) {
+    $scope.$watch('[data.pop, data.thr1]', function (newVal, oldVal) {
 
         setElementPosition('slider_thr1_item', getPercPos($scope.data.thr1));
         setElementPosition('slider_thr2_item', getPercPos($scope.data.thr2));
