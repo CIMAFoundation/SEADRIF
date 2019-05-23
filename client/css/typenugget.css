@@ -6,7 +6,8 @@
 /*! Start Type Nugget Styles */
 
 body {
-	font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+	/*font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;*/
+	font-family: 'Helvetica Regular';
 	font-size: 15px;
 	color: #333;
 	/*background-color: #FFF;*/
@@ -18,6 +19,8 @@ body {
 h1,h2,h3,h4,h5,h6 {
 	font-weight: 600;
 	line-height: 1.2;
+	font-family: 'Helvetica Bold';
+
 }
 
 h1 {
@@ -70,14 +73,11 @@ p {
 
 strong {
 	font-weight: 700;
+	font-family: 'Helvetica Bold';
 }
 
 em {
 	font-style: italic;
-}
-
-a {
-	color: #790cf4;
 }
 
 ul,ol {

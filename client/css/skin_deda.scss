@@ -1,15 +1,14 @@
 //@import "../node_modules/suitcss-utils-flex/index.css";
-@import 'variables';
+@import '_variables';
 @import 'tooltip';
 @import 'toggle';
-@import 'soglie';
-@import 'responsive';
+@import '_slider_latest';
 @import 'typenugget.css';
 @import url('icons/style.css');
+@import url('fonts/style.css');
+@import '_responsive';
 
 
-$color_font: #22293e;
-$color_base: cornsilk;
 
 
 body {
@@ -17,51 +16,58 @@ body {
 }
 
 
-
 /********************************************************/
-/******************* flex*************************/
-/********************************************************/
-
-
-/********************************************************/
-/******************* FONT *************************/
+/******************* carousel *************************/
 /********************************************************/
 
-/*
-h1, h3,p,blockquote,pre {
-  font-style: normal;
-  font-variant: normal;
-  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+
+.grad-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: url(../images/grad-overlay.png) no-repeat;
+  background-position: bottom;
+  background-size: cover;
+}
+.fill {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-h1,h2,h3,h4,h5,h6 {
-  font-weight: 500;
+
+[class*="image"] {
+  height:100vh;
+  width:100%;
+
 }
 
-h1 {
-  font-size: 24px;
-  line-height: 26.4px;
+.carousel-inner:before {
+  background: url('../images/grad-overlay.png') center no-repeat;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  content: '';
+  display: block;
 }
-h3 {
-  font-size: 14px;
-  line-height: 15.4px;
-}
-p {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 20px;
-}
-blockquote {
-  font-size: 21px;
-  font-weight: 400;
-  line-height: 30px;
-}
-pre {
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 18.5714px;
-}
-*/
+.carousel-control-next, .carousel-control-prev {z-index: 2; }
+.carousel-control-prev-icon,
+.carousel-control-next-icon {transform: scale(3);}
+
+
+
+
+/********************************************************/
+/******************* tooltip*************************/
+/********************************************************/
+
+
+
+
+
 
 
 //scrollbar webkit
@@ -76,19 +82,28 @@ pre {
 
 
 .rfsea_box_content {
+  a, p, h1, h2, h3, h4, h5, h6, strong, span, label {color: $color_font;}
+
+}
+
+
+.rfsea_box_content {
   //border:none;
   //width:90%;
   position: absolute;
-  height: 100%;
+  height: calc(100vh - 100px);
+  padding-bottom: 100px;
   top: 0;
   left: 0;
   padding: 2em;
 
+
   &.show {
-    //width: 33vw;
+
     width:auto;
     min-width:330px;
     max-width:450px;
+    z-index: 1050; //Over all
     &.home {
       width: 50vw;
     }
@@ -101,9 +116,10 @@ pre {
     border-width: 3px;
     .invert {border-color: $color_base; }
   }
-  background: rgba($color_base,0.75);
+  //background: rgba($color_base,0.85);
+  background: $color_base;
 
-  a, p, h1, h2, h3, h4, h5, h6 {
+  a, p, h1, h2, h3, h4, h5, h6, strong {
     color: $color_font;
     &.invert, .invert {color: $color_base;}
   }
@@ -113,9 +129,26 @@ pre {
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
+
+
+  //[data-tooltip="html"] .tooltip {
+  //  background-color: $color_base;
+  //}
+
+}
+
+.rfsea_top_page_chart {
+  background-color: $color_base;
+  color:$color_font;
 }
 
 
+.rfsea_box_legend_map
+{
+  background-color: $color_base;
+  color:$color_font;
+  border:solid 2px $color_font;
+}
 
 .sep {
   //border-left:2px solid $color_font;
@@ -137,7 +170,10 @@ pre {
 a {
   color: $color_font;
   &:hover, &:focus {
-    border-bottom: solid $b_width $color_font;
+    //border-bottom: solid $b_width $color_font;
+    //padding-bottom: 1em;
+    transform: scale(1.05);
+    text-decoration: none;
   }
   .direct {
     color: $color_font;
@@ -161,8 +197,13 @@ a {
       font-size:110%;
     }
   }
-
 }
+
+//.rfsea_box_country_details a {
+//  &:hover, &:focus {
+//    border-bottom: solid $b_width $color_font;
+//  }
+//}
 
 
 .media {
@@ -180,7 +221,7 @@ a {
   }
 }
 
-  .rfsea_table td,
+  //.rfsea_table td,
   .rfsea_table a {
     padding:0.5vh 0 0;
     //font-size: 2em;
@@ -190,8 +231,12 @@ a {
     //line-height: 1em;
     letter-spacing:-0.03em;
     color:$color_font;
-
+    &:hover, &:focus {
+      border-bottom: solid $b_width $color_font;
+    }
   }
+
+.rfsea_table td {color:$color_font; font-size: 125%;}
 
 
 
@@ -210,12 +255,12 @@ a {
     color:$color_base;
     a, p, h1, h2, h3, h4, h5, h6 {
       border-bottom: none;
-      color:$color_base;
+      color:$color_font;
     }
+
     a:focus, a:hover {
-      border-bottom: solid 3px $color_base;
       transition: $transition;
-      @include border('bottom', $b_width, $b_style, $color_base);
+      @include border('bottom', $b_width, $b_style, $color_font);
       margin-top: -$b_width;
 
     }
@@ -228,21 +273,39 @@ a {
   .rfsea_btn_close_login_form {color: $color_base; background: $color_font;}
 
    .rfsea_input_style {
-     background: $color_base;
+     //background: $color_base;
+     background-color: inherit;
      color:$color_font;
      outline: none;
      border:none;
      -webkit-shape-outside: none;
-     box-shadow: inset 0 0 2px $color_font;
+     //box-shadow: inset 0 0 2px $color_font;
      text-shadow:inherit;
-     &:focus {outline: none;}
+     &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+       color: $color_font;
+     }
+     &::-moz-placeholder { /* Firefox 19+ */
+       color: $color_font;
+     }
+     &:-ms-input-placeholder { /* IE 10+ */
+       color: $color_font;
+     }
+     &:-moz-placeholder { /* Firefox 18- */
+       color: $color_font;
+     }
+
      &:hover,
      &:focus {
-       background:rgba($color_font, 0.6);
-       color: $color_base;
+       background:rgba($color_base, 0.45);
+       color: $color_font;
        border-color:inherit;
        box-shadow: inherit;
-       @include border('bottom', $b_width, $b_style, $color_base);
+       @include border('bottom', $b_width, $b_style, $color_font);
+       -webkit-transition: all .4s;
+       -moz-transition: all .4s;
+       -ms-transition: all .4s;
+       -o-transition: all .4s;
+       transition: all .4s;
        outline: none;
 
      }
@@ -282,6 +345,8 @@ a {
 
   .rfsea_box {
     width:80%;
+    //height: 100vh;
+
     h1,h2,h3,h4,h5,h6,span,hr { margin:0;}
     hr {margin:10px auto;}
     br {margin-bottom:1em;}
@@ -306,14 +371,37 @@ a {
   .rfsea_box_chart_model
   {
     /*background-color: rgba(255,142,1, .7);*/
-    background-color: rgba(252, 216, 172, 0.8);
+    background-color: rgba(white, 0.9);
   }
 
   .rfsea_box_chart_historical
   {
-    background-color: rgba(203, 226, 229, 0.8);
+    background-color: rgba($tooltip-warning, 0.85);
   }
 
+
+[class*="rfsea_box_chart_"] {
+  $step: 6;
+  $pxs: ();
+
+  @for $i from 1 through $step {
+    $pxs: append($pxs, $i * 100% / $step );
+    .range-bck > .value__#{$i} {
+      @include border('right', $b_width, $b_style, $shade-10);
+    }
+  }
+  .range-bck {
+    height:calc( #{$range-height} + #{$b_width} );
+    @include border('bottom', $b_width, $b_style, $shade-10);
+    @include border('top', $b_width, $b_style, $shade-10);
+    @include border('left', $b_width, $b_style, $shade-10);
+    @include border('right', $b_width, $b_style, $shade-10);
+  }
+  [class*="step__"] {
+    height:calc( #{$range-height} - #{$b_width} );
+  }
+  .soglia__value {color:$color_font;}
+}
 
 
   /********************************************************/
@@ -328,6 +416,7 @@ a {
     border-radius:40px;
     height: inherit;
     left: inherit;
+    i {color: $color_font;}
     li {
       border-right-color:$color_font;
       padding:0px 1em;
@@ -347,7 +436,145 @@ a {
       }
     }
   }
+.rfsea-link-active {
+  color:$color_events;
+}
 
+
+
+
+
+
+
+
+
+
+
+@mixin z-0($blur, $color, $op){
+  -webkit-box-shadow: 0px 0px $blur rgba($color, $op);
+  -moz-box-shadow: 0px 0px $blur rgba($color, $op);
+  box-shadow: 0px 0px $blur rgba($color, $op);
+}
+
+@mixin box-shadow($x-axis: 0, $y-axis: 0px, $blur: 25, $color: $default) {
+  -webkit-box-shadow: $x-axis $y-axis $blur rgba($color, 0.8);
+  -moz-box-shadow: $x-axis $y-axis $blur rgba($color, 0.8);
+  box-shadow: $x-axis $y-axis $blur rgba($color, 0.8);
+}
+
+
+@mixin trans($type, $time, $interpolation){
+  -webkit-transition: $type $time $interpolation;
+  -moz-transition: $type $time $interpolation;
+  -o-transition: $type $time $interpolation;
+  transition: $type $time $interpolation;
+}
+
+/*
+
+********************************************************
+******************* LOGIN FORM *************************
+********************************************************
+
+*/
+.rfsea_login_form {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: rgba($color_font ,0.8);
+  z-index: 100;
+  &_box {
+    position: relative;
+    background: $color_base  url('../images/1024/hero_05.jpg') center no-repeat;
+    // background-repeat: no-repeat;
+    // background-position: center center;
+     background-size: cover;
+    width: 50%;
+    min-width: 300px;
+    max-width: 600px;
+    height: 80vh;
+    margin: auto;
+    margin-top: 5%;
+    padding: 20px;
+    //@include z-0(25, $color_base, 1);
+    @include box-shadow(0, 0, 25, $color_base);
+  }
+}
+
+.rfsea_btn_login_form {
+  position: absolute;
+  width: 90%;
+  left: 0px;
+  margin: 5vh 20px;
+  text-align: center;
+  background-color: $color_font;
+  padding: 20px 10px;
+  color: $color_base;
+  cursor: pointer;
+  @include trans(all, 0.6s, ease);
+  bottom: 5vh;
+  a:hover, a:focus {
+    opacity: 0.8;
+    border-bottom-color: $color_font;
+  }
+}
+.rfsea_btn_close_login_form {
+  position: absolute;
+  width: 100%;
+  left: 0px;
+  bottom: 0px;
+  text-align: center;
+   background-color: $color_base;
+  padding: 10px;
+  color: $color_font;
+  cursor: pointer;
+  @include trans( all, 100ms,  cubic-bezier(0.42, 0, 0.58, 1));
+  &:hover, &:focus {
+    transform: scaleY(1.1);
+
+  }
+}
+
+.rfsea_close_btn_up {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 20;
+  a {
+    &:hover {
+      border-bottom: solid 0px #fff;
+    }
+  }
+}
+
+
+
+
+
+
+
+//stripe on current language
+
+  /*
+  .skew {
+    height: 100%;
+    background: rgba($color_font,0.25);
+    margin-top:-1em;
+    overflow:hidden;
+    transform:skewX(-12deg);
+    display: flex;
+    justify-content: center;
+    .flag-icon {
+      line-height: 100px;
+      overflow: hidden;
+      //transform:skewX(12deg)
+    }
+  }
+  */
+
+//.rfsea_box_menu {max-height:80px; overflow:hidden;}
 
 
   .last {
@@ -389,14 +616,30 @@ a {
     width:100%;
     height: 100vh;
 
-    background-color: #ffffff;
-    color:#232323;
+    background-color: $color_base;
+    color:$color_font;
 
     position: fixed;
     top: 0;
     z-index: -1;
   }
 
+
+.rfsea_date_picker_box {
+  background-color: $color_base ;
+  color: $color_font;
+}
+
+  /********************************************************/
+  /***************** slider home ***************************/
+  /********************************************************/
+
+
+.rfsea_box_country_details  #rfsea_slider_container {
+
+  margin: 0;
+  padding-bottom: 25%;
+}
 
   /********************************************************/
   /***************** FOOTER *******************************/
@@ -405,8 +648,8 @@ a {
   .rfsea_footer_box
   {
     position: fixed;
-    background-color: $color_font;
-    color:$color_base;
+    background-color:$color_base ;
+    color:$color_font;
     width:100%;
     bottom: 0;
     padding: 10px;
@@ -428,8 +671,9 @@ a {
   .toggle {
     &.sticky {
       position: absolute;
-      bottom:10px;
-      margin-left:0;
+      //bottom:10px;
+      //margin-left:0;
+      display: contents;
       &.sidebar {
         left:36%;
       }
@@ -445,11 +689,15 @@ a {
       transform: scale(0.5);
       input {
         &:checked + .toggle-control {
-          &:before {content:'off'; font-size:1.6em; color: $color_base; left:$pad;top:10px;}
+          &:before {content:'off';
+            font-size:1.6em; color: $color_font; left:$pad;top:10px;
+          }
         }
       }
       .toggle-control {
-        &:before {content:'on'; font-size:1.6em; color: $color_font; right:$pad;top:10px;}
+        &:before {content:'on';
+          font-size:1.6em; color: $color_font; right:$pad;top:10px;
+        }
       }
     }
     &.image {
@@ -457,17 +705,25 @@ a {
         &:checked + .toggle-control {
           &:before {
             content:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAeCAYAAABNChwpAAAACXBIWXMAACxKAAAsSgF3enRNAAAEtElEQVRIx8WXXYhbVRDHm020FB9EtCBUwU+QFkWw6oufi/ixfqxFacW2VhSsragoFQVBtGB1W/Rp3Yr0QfSh1i2ifRCsili7fanb1g/sQ9vdNNlNskl2N5vPTXJnjv9zZ5LcJHe3NmXrwyHn3pw78zsz/5lz7yJjzKIORpfPvUAntjpxLo64ejXT9LtM6U+Yi/d1CtGRc+by9eREx8gZNeSEjf01lFura4ILCeAaZ5rqE8fREsYsOacNUWzYGA4pZGChAEICMNkPACInAueRKgAcorGTAFh8tqnoLAJcvLcRfuzeGTGA6jsfKWg44OI97Ex8R058iHlmk6c6AgsJ0CURKDwE9Q9AjMuNcS5hnn6HObPlDCUaOFcAdT57C8KekxRE8hBhrFYJKMv3fNLQ1Ra9DgACriGmi8kZ/1vyHq0AwMiIVkWMYWYu3eVxpru21cFL/msE/MKl5Zful91GHHXOOvTeaSaKH9ZqUMEWegB9GONPpuwLrVUyX4sNtii/2+5Qdl936jNsKjJvyTOVG7A+26iWsEEKb/f68okAXwBhLW2G4sVMsaNwUCFK7nV/myEUbPwvpCOJecGY6jLDhV7RSrQsDcsC1KMQ8gKowMo3oqMdIooilpnXaxB46EWp9dQX6II7WtLgAYgNoxrekCgkv8V5cRkcJ2S9OyrwcbP6C7YDUHJQ1a3hqqxAk18CI1EbSqmA2D9zpIHtM+gP3bDzjQvMMy/j+m6miX3Qxs/M+R4s8BWhDUeXPDhazyV2cCWMbCHnFOb5xwGwUnfvp4Gq7HzqQzbVK3A96W4CaWFKDBElDuH3F2zgGID2IEWXt2kAO74WpPvR1/9gmnkVCn5QjW7VQ2i7CNE6awMgGxmm8eNW5TbUcHakIUDvsNHJvOkBsI4nBhEBhMqO+E+g/VGcT+5QcV4EIR5zS625DKm5JAHBpW7ZUO45PbTKIlx7aCV3I6UpNK3tdQBcbLNUzZTWeXqgoRHbhMYijf8jpnleuw6XEbleN6Wce94jWI1Q5jUrzCYAosmdCNcB7Ho/FpF0uTCh9u/XphHSSF1nePY2VMMuVfo++1bk6obivxsu3WG4vKJ2LAPgWQWo6LFtAd6G/Tie6/MApAcgku8hjr2SY1u3tgoKj/n1cNxfpUdwv3F14pbol+3Hdm5DqwZskwJMFnr62AOQ+hz1PwSAQSXWMiw82gJwoZ3D8Hpxmt6F6litAHt0Xaj+4sK5Z6Sq4sOI0EE3apzdjPtrINKVDQ1w8QHcXIcU/ADnGTxwVAEeaQGoGa4BfAaAJxTgK09Pqa1ba0vYhh09YIM7R1Ob8zBCK0WNJn6D0TVSKoWHzw0grwDT78PxSx6AoEazqRMGAXCEKT4Eo+vnB8g/fXYAma1wvKklAiG/CKABxQ/C6Lr/CwARSPxq3HyNVKGNHv+jOf+U+78APCnz1G4fDQB0FP9NbcN8MwBgM7txHoDoiD12hfYkaIu9cwCsdv+XKlgl8+TXnjUKkMVGTthW/oFo4IQcUD4A8sVDmVesczQcfHaldjJXr2p5g9EvI2cpesBHaEq3okNeirV4QS3d2fpmzO7nW+pTNKebcLBdIzYry8/wQnJ+x7+jFUq7v9JJ3gAAAABJRU5ErkJggg==');
+            content:"\e905";
             margin-left: 0;
             margin-left: $pad;
             margin-top: $pad;
+            font-size: 2em;
           }
         }
       }
       .toggle-control {
         &:before {
           content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAeCAMAAAB61OwbAAAACXBIWXMAACxKAAAsSgF3enRNAAACfFBMVEX5+vr////7+/v9/f3+/v7+/v/////9/f39/f79/v7+/v719fb8/Pz8/P38/f39/f37+/v8/Pz8/P35+fn5+fr6+vr7+/v8/Pz5+fv19vf5+fr29vb29vf19fby8vTw8PLy8/Py8/Tt7e/t7u/r6+3n6Orl5ujq6+3k5ujn5+rh4uTe4OLg4eTe3+Lg4eTd3+LU1dna297a29/V1trV19vV1trP0dXW19zMztPO0NTP0dXHyc7Jy9DGyM3Fx8zExsvFx83Bw8nAw8jAwsi6vcO6vMK7vcS2uL+8vsW0t764u8G5vMK9v8W0t768vsS0t725u8G5u8Kusbm4usG5u8Kusbi3ucC4usGtsLetsLevsbmxtburrrWtsLemqbGnqrKlqbGrrrWlp7Ckpq+mqbKjpq6ipa2fo6ykp7Ccn6ijpq6kpq6jpq6doKmUmKKLj5mKjpiIjJeIjZeHi5aHjJaNkJuDh5KSlqCRlZ+Slp+MkJp8gY2BhZKAhZF9gY59go58gY1xdYJ4fYl0eYZyd4R7gIx8gY18go1obXt7gIx3e4dgY3FkanhcYnFaYG9bYnFdY3JeZHNgZnRPVWVPVWVNVGRKUGFPVmZNU2RGTF0+RVY/RVc4P1I5P1E7Q1Q6QVMzO00zOk02PU84QFEjKz8lLUItNkggKDwgKT0cJTkbIzgoMEMEDSQJEigTGzEbIzgeJjsfKDwGDiUGDyYdJjseJjsgKD0CCyIDDCMEDSMEDSQGDyYHECYHECcIECcIEScIESgJESgJEigKEykKEyoKFCoLEyoLFCoMFCsMFSsNFisOFiwOFywPGC0SGzATGzAXHzQaIjgbIzgcJTraDkALAAAAt3RSTlMAAAEBAQEBAgICAgMDAwMDBAQEBQUFBQUGBwcICAkLDAwMEBATFBUVGRkeHx8gICEkJSYoKCkqKi8vLzQ0NTY3Nzw9QEFDREVGR0hKSktLTE1NTk5OT09PUFFRUVJUWVlaWltcXF1eYWRlZWVma250dXh4eXl+f3+AgISIiYqMjI2PkpOUmZmZmpqboKGkrKysrq68vb6/wMHGy8/Q09XW3N7g4ejs7O3v8vT1/f39/f39/v7+/v6YoEcWAAAB0ElEQVQoz2NgJAAYGBnZBbEAHha4AhYCJrAxOudm5GShguycdFWoTgZG/3UndkHBzh0w1u5D02RZWCAKGg5PjE9LBYPkJAidmpC3bJs+I1RBzWYPLFZP3qLDwsPOAlJQuydcUArkcClGq25GRrAfxHmnXNYBqWMBKwhk5AWzHWaen+AENpiNccplLQ0jQ0VGhAIWRu0VC1uWdzDyQxRcVHc/vWGuMRtcAQ9j4n4bRiUVmAmXNNX6F+8tRZjAwWiyal4UM8TpICuAbohbU4niBrc5B2dZMrLDFbAH7ahAUgAETLFLZ4uAwgdqQiSqAoVQacb69fKMCAURyAr4GV13zJ90soeFkxG7AlYWGd8Z58rk2FgwFYTwSvACAQ+jeSMjGy8fkCnEPxmhoGaTN5a4mLpVD6ag7vD0guIiICgsKiwpAoOS/OrVG3VhChxXnt23d+/u3XuRwZEzfcKCUAWMptGBwYE+fsFIICDMS5JRAKqAC2wnNwOaI9h4RXljICaw84rxGizpxeJSz+3ljGCN7IxmFxa5WNvZogB72+a1VRAFLIzKCw4fPn7sOCo4eupACkQBUIVFU3traycqaOvKZIYqwJN7YI7Hmv8EeRAKcAIAm+/Q+k0SdX8AAAAASUVORK5CYII=');
-          margin-left: calc((#{$width}/2) + #{$pad});
+          content:"\e904";
+          font-family: 'icomoon' !important;
+          //margin-left: calc((#{$width}/2) + #{$pad});
+          margin-left: calc((#{$height}/2) + #{$pad});
+          //margin-left:2em;
           margin-top: $pad;
+          font-size: 2em;
+          color:$color_font;
         }
       }
     }

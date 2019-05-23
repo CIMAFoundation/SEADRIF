@@ -1,4 +1,4 @@
-@import 'variables';
+@import '_variables';
 
 /********************************************************/
 /***************** tooltip  *******************************/
@@ -21,10 +21,10 @@ $color-invert: $color_base;
 $tooltip-default: $color-default;
 $tooltip-invert: $color-invert;
 
-$tooltip-success: #8bc34a;
-$tooltip-info: #29D2E4;
-$tooltip-warning: #F87D09;
-$tooltip-danger: #e91e63;
+$tooltip-success: #8bb83d;
+$tooltip-info: #63b1ba;
+$tooltip-warning: #e8ded3;
+$tooltip-danger: #e67460;
 
 
 

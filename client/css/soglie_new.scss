@@ -1,7 +1,9 @@
+@import '_variables';
+
 // Base Colors
-$shade-10: cornsilk !default;
+$shade-10: $color_base !default;
 $shade-1: orange !default;
-$shade-0: darkslategrey !default;
+$shade-0: $color_font!default;
 $shade-2: magenta !default;
 $teal: #1abc9c !default;
 
@@ -57,7 +59,7 @@ $b_style:solid;
 }
 
 body {
-  font-family: sans-serif;
+  //font-family: sans-serif;
   margin: 260px 20px;
 
   @media (min-width: 600px) {
