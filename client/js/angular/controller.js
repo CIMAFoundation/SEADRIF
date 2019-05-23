@@ -11,6 +11,8 @@ rfseaApp.controller('rfseaCtrl', function($rootScope, $scope, $window, rfseaSrv)
         usrloginstatus: false
     };
 
+    $scope.bDisclaimer = false;
+
     // Get user name
     rfseaSrv.getWhoami(function(data)
     {
@@ -73,6 +75,16 @@ rfseaApp.controller('rfseaCtrl', function($rootScope, $scope, $window, rfseaSrv)
     $scope.showHideSideBar = function()
     {
         $scope.bShowBar = !$scope.bShowBar;
+    }
+
+    /***************************************************/
+    /********* DISCLAIMER ******************************/
+    /***************************************************/
+
+    $scope.showDisclaimer = function () {
+
+        $scope.bDisclaimer = !$scope.bDisclaimer;
+
     }
 
 });

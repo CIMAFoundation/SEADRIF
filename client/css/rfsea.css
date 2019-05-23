@@ -29,6 +29,28 @@ a:hover
     margin-bottom: 10px;
 }
 
+.rfsea_disclaimer
+{
+    position: fixed;
+    margin: auto;
+    width:60%;
+    color:#ffffff;
+    background-color: #605e61;
+}
+
+.rfsea_disclaimer_box
+{
+    position:fixed;
+    overflow: auto;
+    top:10%;
+    bottom:10%;
+    right:5%;
+    left:480px;
+    padding:20px;
+    background-color: #243746;
+    color:#F0C319;
+}
+
 /********************************************************/
 /******************* DATE PICKER*************************/
 /********************************************************/
@@ -41,7 +63,7 @@ a:hover
     right:5%;
     left:480px;
     padding:20px;
-    /*background-color: rgba(255, 248, 220, 1);*/
+    background-color: rgba(255, 248, 220, 1);
 }
 
 
