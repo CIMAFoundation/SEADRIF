@@ -118,12 +118,15 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
                 if($scope.countrySelected){
 
+                    console.log('init country selected');
+
                     $scope.countrySelect = $scope.countrySelected.name;
 
                     setFirstCountryDatails();
 
                 } else {
                     //No country saved in cookies
+                    console.log('init NO country selected')
                     if($rootScope.countriesList.length > 0){
 
                         // Set first country as default country to view
@@ -132,9 +135,12 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
                 }
 
                 $scope.$watch('countrySelected', function (newVal, oldVal) {
+                    console.log('watch');
+                    if(newVal !== oldVal){
+                        rfseaSrv.clearMap(map);
+                        setCountrySelected($scope.countrySelected);
+                    }
 
-                    rfseaSrv.clearMap(map);
-                    setCountrySelected($scope.countrySelected);
 
                 });
 
@@ -164,10 +170,11 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
         // $scope.bdistrictDetails.status = false;
         $scope.countrySelect = country.name;
 
+        console.log('Set Country Selected');
         loadCountryZones();
 
         localStorage.setItem('rfsea_country_selected', JSON.stringify(country));
-        setFirstCountryDatails();
+        // setFirstCountryDatails();
 
     }
 
@@ -202,6 +209,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
             // ReloadGlobals($scope.country_globals.data_day, step);
             // }
 
+            console.log('Set first country');
             loadCountryZones();
 
         }, function(data)
@@ -222,6 +230,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
         rfseaSrv.getCountryZones($scope.countrySelected.id, $scope.dateSelected, function(data)
         {
             $scope.district_list = data.data.geojson.features;
+            console.log($scope.district_list);
 
             // Set color Palette
             setPaletteColor(data.data.pal.colors, data.data.pal.values);
