@@ -1,59 +1,339 @@
-/*
-Error: Undefined variable: "$color_tooltip".
-        on line 16 of tooltip.scss
+/********************************************************/
+/***************** colors *******************************/
+/********************************************************/
+/********************************************************/
+/***************** colors *******************************/
+/********************************************************/
+/********************************************************/
+/***************** tooltip  *******************************/
+/********************************************************/
+/********************************************************/
+/***************** switch *******************************/
+/********************************************************/
+/********************************************************/
+/***************** soglie *******************************/
+/********************************************************/
+/********************************************************/
+/***************** tooltip  *******************************/
+/********************************************************/
+[data-tooltip] {
+  position: relative; }
+  [data-tooltip]:after {
+    bottom: 100%;
+    box-sizing: border-box;
+    color: #243746;
+    content: attr(data-tooltip);
+    font-family: "Century Gothic", AppleGothic, "CenturyGothic", sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    left: 50%;
+    line-height: 21px;
+    max-width: 320px;
+    opacity: 0;
+    overflow: hidden;
+    padding: 8px;
+    pointer-events: none;
+    position: absolute;
+    text-align: center;
+    text-overflow: ellipsis;
+    transform: translate(-50%, 8px/2);
+    transition: opacity 0.3s cubic-bezier(0.73, 0.01, 0, 1), transform 0.3s cubic-bezier(0.73, 0.01, 0, 1);
+    white-space: nowrap;
+    z-index: 100000;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden; }
+  [data-tooltip]:before {
+    border-style: solid;
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    border-bottom-width: 0;
+    content: '';
+    height: 0;
+    left: 50%;
+    opacity: 0;
+    position: absolute;
+    top: -2px;
+    transform: translate(-50%, calc(-50% - (8px/2)));
+    transition: opacity 0.1s cubic-bezier(0.73, 0.01, 0, 1) 0s, transform 0.6s cubic-bezier(0.73, 0.01, 0, 1) 0s;
+    width: 0;
+    z-index: 110000;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden; }
+  [data-tooltip]:after {
+    background: #F0C319; }
+  [data-tooltip]:before {
+    border-top-color: #F0C319;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent; }
+  [data-tooltip][data-tooltip-conf*='right']:before {
+    border-top-color: transparent;
+    border-right-color: #F0C319;
+    border-bottom-color: transparent;
+    border-left-color: transparent; }
+  [data-tooltip][data-tooltip-conf*='bottom']:before {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: #F0C319;
+    border-left-color: transparent; }
+  [data-tooltip][data-tooltip-conf*='left']:before {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: #F0C319; }
+  [data-tooltip]:hover:before, [data-tooltip]:hover:after, [data-tooltip]:focus:before, [data-tooltip]:focus:after {
+    opacity: 1; }
+  [data-tooltip]:hover:before, [data-tooltip]:focus:before {
+    transform: translate(-50%, calc(-50% - 2px));
+    transition: opacity 0.1s cubic-bezier(0.73, 0.01, 0, 1) 0.1s, transform 0.6s cubic-bezier(0.73, 0.01, 0, 1) 0.1s; }
+  [data-tooltip]:hover:after, [data-tooltip]:focus:after {
+    transform: translate(-50%, -4px); }
+  [data-tooltip][data-tooltip-conf*='right']:before {
+    border-style: solid;
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    border-left-width: 0;
+    left: auto;
+    right: -10px;
+    top: 50%;
+    transform: translate(calc(-50% + 7px), -50%); }
+  [data-tooltip][data-tooltip-conf*='right']:after {
+    bottom: auto;
+    left: 100%;
+    top: 50%;
+    transform: translate(-12px, -50%); }
+  [data-tooltip][data-tooltip-conf*='right']:hover:before, [data-tooltip][data-tooltip-conf*='right']:focus:before {
+    transform: translate(calc(-50% + 3px), -50%); }
+  [data-tooltip][data-tooltip-conf*='right']:hover:after, [data-tooltip][data-tooltip-conf*='right']:focus:after {
+    transform: translate(7px, -50%); }
+  [data-tooltip][data-tooltip-conf*='bottom']:before {
+    border-style: solid;
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    border-top-width: 0;
+    bottom: -10px;
+    left: 50%;
+    top: auto;
+    transform: translate(-50%, calc(-50% + 6px)); }
+  [data-tooltip][data-tooltip-conf*='bottom']:after {
+    bottom: auto;
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%, -12px); }
+  [data-tooltip][data-tooltip-conf*='bottom']:hover:before, [data-tooltip][data-tooltip-conf*='bottom']:focus:before {
+    transform: translate(-50%, calc(-50% + 2px)); }
+  [data-tooltip][data-tooltip-conf*='bottom']:hover:after, [data-tooltip][data-tooltip-conf*='bottom']:focus:after {
+    transform: translate(-50%, 6px); }
+  [data-tooltip][data-tooltip-conf*='left']:before {
+    border-style: solid;
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    border-right-width: 0;
+    height: 0;
+    left: -2px;
+    top: 50%;
+    transform: translate(calc(-50% - 8px), -50%);
+    width: 0; }
+  [data-tooltip][data-tooltip-conf*='left']:after {
+    bottom: auto;
+    left: auto;
+    right: 100%;
+    top: 50%;
+    transform: translate(12px, -50%); }
+  [data-tooltip][data-tooltip-conf*='left']:hover:after, [data-tooltip][data-tooltip-conf*='left']:focus:after {
+    transform: translate(-7px, -50%); }
+  [data-tooltip][data-tooltip-conf*='left']:hover:before, [data-tooltip][data-tooltip-conf*='left']:focus:before {
+    transform: translate(calc(-50% - 3px), -50%); }
+  [data-tooltip][data-tooltip-conf*='multiline']:after {
+    min-width: 230px;
+    text-overflow: clip;
+    white-space: normal;
+    word-break: break-word; }
+  [data-tooltip][data-tooltip-conf*='delay']:before {
+    transition: opacity 0.2s cubic-bezier(0.73, 0.01, 0, 1) 0s, transform 0.3s cubic-bezier(0.73, 0.01, 0, 1) 0s; }
+  [data-tooltip][data-tooltip-conf*='delay']:after {
+    transition: opacity 0.3s cubic-bezier(0.73, 0.01, 0, 1) 0s, transform 0.3s cubic-bezier(0.73, 0.01, 0, 1) 0s; }
+  [data-tooltip][data-tooltip-conf*='delay']:hover:before, [data-tooltip][data-tooltip-conf*='delay']:focus:before {
+    transition: opacity 0.2s cubic-bezier(0.73, 0.01, 0, 1) 0.5s, transform 0.6s cubic-bezier(0.73, 0.01, 0, 1) 0.5s; }
+  [data-tooltip][data-tooltip-conf*='delay']:hover:after, [data-tooltip][data-tooltip-conf*='delay']:focus:after {
+    transition: opacity 0.3s cubic-bezier(0.73, 0.01, 0, 1) 0.4s, transform 0.3s cubic-bezier(0.73, 0.01, 0, 1) 0.4s; }
+  [data-tooltip][data-tooltip-conf*='shadow']:after {
+    box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.1); }
+  [data-tooltip][data-tooltip-conf*='no-fading']:before, [data-tooltip][data-tooltip-conf*='no-fading']:after {
+    transition: none; }
+  [data-tooltip][data-tooltip-conf*='no-arrow']:before {
+    display: none; }
+  [data-tooltip][data-tooltip-conf*='square']:after {
+    border-radius: 0; }
+  [data-tooltip][data-tooltip-conf*='invert']:after {
+    color: #F0C319;
+    background: #243746; }
+  [data-tooltip][data-tooltip-conf*='invert']:before {
+    border-top-color: #243746;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent; }
+  [data-tooltip][data-tooltip-conf*='invert'][data-tooltip-conf*='right']:before {
+    border-top-color: transparent;
+    border-right-color: #243746;
+    border-bottom-color: transparent;
+    border-left-color: transparent; }
+  [data-tooltip][data-tooltip-conf*='invert'][data-tooltip-conf*='bottom']:before {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: #243746;
+    border-left-color: transparent; }
+  [data-tooltip][data-tooltip-conf*='invert'][data-tooltip-conf*='left']:before {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: #243746; }
+  [data-tooltip][data-tooltip-conf*='success']:after {
+    background: #8bb83d; }
+  [data-tooltip][data-tooltip-conf*='success']:before {
+    border-top-color: #8bb83d;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent; }
+  [data-tooltip][data-tooltip-conf*='success'][data-tooltip-conf*='right']:before {
+    border-top-color: transparent;
+    border-right-color: #8bb83d;
+    border-bottom-color: transparent;
+    border-left-color: transparent; }
+  [data-tooltip][data-tooltip-conf*='success'][data-tooltip-conf*='bottom']:before {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: #8bb83d;
+    border-left-color: transparent; }
+  [data-tooltip][data-tooltip-conf*='success'][data-tooltip-conf*='left']:before {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: #8bb83d; }
+  [data-tooltip][data-tooltip-conf*='info']:after {
+    background: #63b1ba; }
+  [data-tooltip][data-tooltip-conf*='info']:before {
+    border-top-color: #63b1ba;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent; }
+  [data-tooltip][data-tooltip-conf*='info'][data-tooltip-conf*='right']:before {
+    border-top-color: transparent;
+    border-right-color: #63b1ba;
+    border-bottom-color: transparent;
+    border-left-color: transparent; }
+  [data-tooltip][data-tooltip-conf*='info'][data-tooltip-conf*='bottom']:before {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: #63b1ba;
+    border-left-color: transparent; }
+  [data-tooltip][data-tooltip-conf*='info'][data-tooltip-conf*='left']:before {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: #63b1ba; }
+  [data-tooltip][data-tooltip-conf*='warning']:after {
+    background: #e8ded3; }
+  [data-tooltip][data-tooltip-conf*='warning']:before {
+    border-top-color: #e8ded3;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent; }
+  [data-tooltip][data-tooltip-conf*='warning'][data-tooltip-conf*='right']:before {
+    border-top-color: transparent;
+    border-right-color: #e8ded3;
+    border-bottom-color: transparent;
+    border-left-color: transparent; }
+  [data-tooltip][data-tooltip-conf*='warning'][data-tooltip-conf*='bottom']:before {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: #e8ded3;
+    border-left-color: transparent; }
+  [data-tooltip][data-tooltip-conf*='warning'][data-tooltip-conf*='left']:before {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: #e8ded3; }
+  [data-tooltip][data-tooltip-conf*='danger']:after {
+    background: #e67460; }
+  [data-tooltip][data-tooltip-conf*='danger']:before {
+    border-top-color: #e67460;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent; }
+  [data-tooltip][data-tooltip-conf*='danger'][data-tooltip-conf*='right']:before {
+    border-top-color: transparent;
+    border-right-color: #e67460;
+    border-bottom-color: transparent;
+    border-left-color: transparent; }
+  [data-tooltip][data-tooltip-conf*='danger'][data-tooltip-conf*='bottom']:before {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: #e67460;
+    border-left-color: transparent; }
+  [data-tooltip][data-tooltip-conf*='danger'][data-tooltip-conf*='left']:before {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: #e67460; }
+  [data-tooltip][data-tooltip='']:before, [data-tooltip][data-tooltip='']:after, [data-tooltip][data-tooltip='html']:before, [data-tooltip][data-tooltip='html']:after {
+    display: none; }
+  [data-tooltip][data-tooltip=''] > .tooltip, [data-tooltip][data-tooltip='html'] > .tooltip {
+    opacity: 0; }
+  [data-tooltip][data-tooltip='']:hover > .tooltip, [data-tooltip][data-tooltip='html']:hover > .tooltip {
+    opacity: 1; }
 
-11: $border-width: 10px;
-12: $z-index: 110000;
-13: $arrow-position: 10px;
-14: 
-15: // Colors
-16: $color-default: $color_tooltip;
-17: $color-invert: #fefefe;
-18: $tooltip-default: $color-default;
-19: $tooltip-invert: $color-invert;
-20: 
-21: $tooltip-success: #8bc34a;
+[data-tooltip="html"] .tooltip {
+  box-sizing: border-box;
+  color: #243746;
+  content: attr(data-tooltip);
+  font-family: "Century Gothic", AppleGothic, "CenturyGothic", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  line-height: 21px;
+  padding: 8px;
+  pointer-events: none;
+  position: absolute;
+  text-overflow: ellipsis;
+  transform: translate(-50%, 8px/2);
+  transition: opacity 0.3s cubic-bezier(0.73, 0.01, 0, 1), transform 0.3s cubic-bezier(0.73, 0.01, 0, 1);
+  white-space: nowrap;
+  text-align: center;
+  z-index: 100000;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background: #F0C319; }
+[data-tooltip="html"] .tooltip:before {
+  border-style: solid;
+  border-top-width: 10px;
+  border-right-width: 10px;
+  border-bottom-width: 10px;
+  border-left-width: 10px;
+  border-top-width: 0;
+  content: '';
+  height: 0;
+  left: 50%;
+  position: absolute;
+  top: -0px;
+  transform: translate(-50%, calc(-50% - (8px/2)));
+  transition: opacity 0.1s cubic-bezier(0.73, 0.01, 0, 1) 0s, transform 0.6s cubic-bezier(0.73, 0.01, 0, 1) 0s;
+  width: 0;
+  z-index: 110000;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-top-color: transparent;
+  border-bottom-color: #F0C319;
+  border-left-color: transparent;
+  border-right-color: transparent; }
+[data-tooltip="html"][data-tooltip-conf*='shadow'] .tooltip {
+  box-shadow: 0 2px 10px 4px rgba(0, 0, 0, 0.2); }
 
-Backtrace:
-tooltip.scss:16
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/script/tree/variable.rb:49:in `_perform'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/script/tree/node.rb:50:in `perform'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:482:in `visit_variable'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:36:in `visit'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/stack.rb:79:in `block in with_base'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/stack.rb:135:in `with_frame'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/stack.rb:79:in `with_base'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:162:in `visit'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:52:in `map'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:171:in `block in visit_children'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:170:in `visit_children'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:190:in `visit_root'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/base.rb:36:in `visit'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:161:in `visit'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/visitors/perform.rb:10:in `visit'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/root_node.rb:36:in `css_tree'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/engine.rb:389:in `_render_with_sourcemap'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/engine.rb:307:in `render_with_sourcemap'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/plugin/compiler.rb:209:in `each'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/plugin.rb:82:in `update_stylesheets'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/exec/sass_scss.rb:340:in `watch_or_update'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/exec/sass_scss.rb:51:in `process_result'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/exec/base.rb:52:in `parse'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/lib/sass/exec/base.rb:19:in `parse!'
-C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.5.1/bin/scss:13:in `<top (required)>'
-C:/Ruby23-x64/bin/scss:22:in `load'
-C:/Ruby23-x64/bin/scss:22:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Undefined variable: \"$color_tooltip\".\A         on line 16 of tooltip.scss\A \A 11: $border-width: 10px;\A 12: $z-index: 110000;\A 13: $arrow-position: 10px;\A 14: \A 15: // Colors\A 16: $color-default: $color_tooltip;\A 17: $color-invert: #fefefe;\A 18: $tooltip-default: $color-default;\A 19: $tooltip-invert: $color-invert;\A 20: \A 21: $tooltip-success: #8bc34a;"; }
+/*# sourceMappingURL=tooltip.css.map */

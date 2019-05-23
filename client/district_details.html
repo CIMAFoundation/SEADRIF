@@ -119,15 +119,27 @@
 
                 </table>-->
                 <div class="d-flex flex-column">
-                    <h4 class="d-inline-flex align-items-center p-2">
-                        <i class="fa fa-2x icon-eo"></i><a class="pl-3" ng-class="{'rfsea-link-active': mapType == 'eo'}" href="" ng-click="setLayer_eo()">EO MAP</a>
-                    </h4>
-                    <h4 class="d-inline-flex align-items-center p-2">
-                        <i class="fa fa-2x icon-wd"></i><a class="pl-3" ng-class="{'rfsea-link-active': mapType == 'model'}" href="" ng-click="setLayer_wd()">MODEL MAP</a>
-                    </h4>
-                    <h4 class="d-inline-flex align-items-center p-2">
-                        <i class="fa fa-2x icon-eo-wd"></i><a class="pl-3" ng-class="{'rfsea-link-active': mapType == 'compare'}" href="" ng-click="setLayer_eo_wd()">COMPARE EO/MODEL</a>
-                    </h4>
+                    <!--<h4 >-->
+                        <a class="d-inline-flex align-items-center p-4" ng-class="{'rfsea-link-active': mapType == 'eo'}" href="" ng-click="setLayer_eo()">
+                            <i class="fa fa-2x icon-eo"></i>
+                            <h4 class="pl-3">EO MAP</h4>
+                        </a>
+
+                    <!--</h4>-->
+                    <!--<h4 >-->
+                        <a class="d-inline-flex align-items-center p-4" ng-class="{'rfsea-link-active': mapType == 'model'}" href="" ng-click="setLayer_wd()">
+                            <i class="fa fa-2x icon-wd"></i>
+                            <h4 class="pl-3">MODEL MAP</h4>
+                        </a>
+
+                    <!--</h4>-->
+                    <!--<h4 >-->
+                        <a class="d-inline-flex align-items-center p-4" ng-class="{'rfsea-link-active': mapType == 'compare'}" href="" ng-click="setLayer_eo_wd()">
+                            <i class="fa fa-2x icon-eo-wd"></i>
+                            <h4 class="pl-3">COMPARE EO/MODEL</h4>
+                        </a>
+
+                    <!--</h4>-->
 
                 </div>
             </div>

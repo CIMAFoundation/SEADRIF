@@ -3,7 +3,7 @@ body, html
     overflow: hidden;
 }
 
-a, a:hover, a:active
+/*a, a:hover, a:active
 {
     text-decoration: none;
     color:#ffffff;
@@ -12,7 +12,7 @@ a, a:hover, a:active
 a:hover
 {
     border-bottom:solid 3px #ffffff;
-}
+}*/
 
 .rfsea_space
 {
@@ -21,7 +21,7 @@ a:hover
 
 .rfsea-link-active
 {
-    color:#ff8b00 !important;
+    /*color:#ff8b00 !important;*/
 }
 
 .rfsea_margin_bottom
@@ -41,7 +41,7 @@ a:hover
     right:5%;
     left:480px;
     padding:20px;
-    background-color: rgba(255, 248, 220, 1);
+    /*background-color: rgba(255, 248, 220, 1);*/
 }
 
 
@@ -52,8 +52,8 @@ a:hover
 .rfsea_box_header
 {
     width:100%;
-    background-color: #ffffff;
-    color:#232323;
+    /*background-color: #ffffff;*/
+    /*color:#232323;*/
     position: fixed;
     top: 0;
     z-index: -1;
@@ -89,7 +89,7 @@ a:hover
     right:25%;
     height: 80px;
     top:-40px;
-    background-color: #22293e;
+    /*background-color: #22293e;*/
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;
@@ -110,18 +110,18 @@ a:hover
 {
     float: left;
     text-align: center;
-    border-right:solid 3px #ffffff;
+    /*border-right:solid 3px #ffffff;*/
 }
 
 .rfsea_box_menu li a
 {
-    color:#ffffff;
+    /*color:#ffffff;*/
     text-decoration: none;
 }
 
 .rfsea_box_menu li a:hover, .active
 {
-    border-bottom:solid 3px #ffffff;
+    /*border-bottom:solid 3px #ffffff;*/
 }
 
 
@@ -139,7 +139,7 @@ a:hover
 
 .rfsea_menu_countries_list_box a, .rfsea_menu_countries_list_box a:hover
 {
-    color: #22293e;
+    /*color: #22293e;*/
     text-decoration: none;
 }
 
@@ -148,10 +148,11 @@ a:hover
     font-weight: 600;
     cursor: pointer;
 }
+/*
 
-/********************************************************/
-/******************* LOGIN FORM *************************/
-/********************************************************/
+!********************************************************!
+!******************* LOGIN FORM *************************!
+!********************************************************!
 
 .rfsea_login_form
 {
@@ -243,7 +244,8 @@ a:hover
 {
     opacity:0.8;
 }
-
+*/
+/*
 .rfsea_input_style
 {
     display: block;
@@ -292,7 +294,7 @@ a:hover
 .rfsea_close_btn_up a:hover
 {
     border-bottom:solid 0px #ffffff;
-}
+}*/
 
 /********************************************************/
 /***************** TEXT CONTENT *************************/
@@ -329,7 +331,7 @@ a:hover
 .rfsea_box_country_details
 {
     margin: auto;
-    padding:20px;
+    padding:0 20px 4em 0;
     padding-top: 0px;
 }
 
@@ -383,7 +385,7 @@ a:hover
 {
     margin-top:0px;
     width: 100%;
-    background-color: #fffde8;
+
     padding: 0 10px;
     padding-top: 20px;
     color:#23283c;
@@ -392,7 +394,7 @@ a:hover
 
 .rfsea_top_page_chart a, .rfsea_top_page_chart a:hover
 {
-    color:#23283c;
+    /*color:#23283c;*/
     text-decoration: none;
     border-bottom:solid 0px #ffffff;
 }
@@ -489,10 +491,10 @@ a:hover
 
 .rfsea_box_legend_map
 {
+    /*background-color: #ffffff;*/
+    /*border:solid 1px #f0f0f0;*/
     position: absolute;
     min-width:100px;
-    background-color: #ffffff;
-    border:solid 1px #f0f0f0;
     padding: 8px;
     z-index: 1000;
     font-size: 12px;

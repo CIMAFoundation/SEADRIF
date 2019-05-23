@@ -1,0 +1,245 @@
+// Base Colors
+$shade-10: $color_base !default;
+$shade-1: orange !default;
+$shade-0: $color_font !default;
+$shade-2: magenta !default;
+$teal: #1abc9c !default;
+
+// Range Slider
+$range-width: 98% !default;
+$range-width: 300px;
+$range-height: 50px !default;
+
+$range-handle-color: $shade-10 !default;
+$range-handle-color-hover: $teal !default;
+$range-handle-size: 50px !default;
+
+$range-track-color: $shade-1 !default;
+$range-track-height: 10px !default;
+
+$range-label-color: $shade-10 !default;
+$range-label-width: 60px !default;
+$range-slider-height:30px;
+$range-border-width: 3px;
+
+$segment_value:200px;
+$segment_value-a: 100px;
+$segment_value-b: 200px;
+$segment_value-c: 150px;
+$segment-value-sum: $segment_value-a + $segment_value-b + $segment_value-c;
+
+$range-label-height-min: 30px;
+$range-label-height-max: 3em;
+$range-label-pad-min:8px;
+$range-label-pad-max:2em;
+
+$thr_size: 40px;
+$pad_initial:20px;
+
+
+$b_width:4px;
+$b_style:solid;
+
+@mixin border($direction, $b_width, $b_style, $color) {
+  border-#{$direction}: $b_width $b_style $color;
+}
+@mixin border-default {
+  border: $b_width $b_style $shade-0;
+}
+
+
+// START Reset
+* {
+  &,
+  &:before,
+  &:after {
+    box-sizing: border-box;
+  }
+}
+
+
+body {
+  //font-family: sans-serif;
+  //padding: 60px 20px;
+  //margin:260px 0;
+  margin: calc(#{$width} - 2 * #{$pad_initial});
+
+
+  @media (min-width: 600px) {
+    //padding:50px $pad_initial;
+    margin:250px 0;
+  }
+}
+
+// END Reset
+
+
+
+
+
+
+.range-slider {  margin: 50vh 0 0 0;}
+
+.wrap, .chiaro, .scuro  {
+
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:flex-start;
+  position:relative;
+  //width:99vw;
+  width:$range-width;
+
+}
+
+.chiaro, .scuro {
+  //width: $range-width;
+  min-height: $range-height;
+}
+.chiaro {background:$shade-10;}
+.scuro {background:$shade-0; opacity:0.5;}
+.chiaro, .scuro {
+  //margin:auto;
+  text-align:center;
+}
+
+
+
+
+.range {
+  &-bck, &-soglia, &-step {
+    display:inline-flex;
+    flex-direction:row;
+    justify-content:flex-start;
+    position:relative;
+    //width:99%;
+
+  }
+
+  &-bck {
+    height:calc( #{$range-height} + #{$b_width} );
+    margin:$pad_initial;
+    @include border('bottom', $b_width, $b_style, $shade-0);
+
+
+  }
+  &-bck + &-soglia {
+    position:absolute;
+    left: $pad_initial;
+  }
+
+}
+
+
+// .range-step {position:absolute; width:100%;}
+
+
+$step: 6;
+$pxs: ();
+$cxs: green, lime, yellow, tomato, red, purple;
+$ab: green, lime;
+$bc: yellow, tomato;
+$cd: red, purple;
+
+@for $i from 1 through $step {
+  $pxs: append($pxs, $i * 100% / $step );
+  .range-bck > .value__#{$i} {
+    margin-top:$range-height;
+    //padding-left: 100% / $step;
+    @include border('right', $b_width, $b_style, $shade-0);
+    padding-top:20%;
+    label {position:absolute;}
+    &:nth-child(odd) {
+      height:50%;
+      padding-top:10%;
+    }
+  }
+  .range-step {
+    >.step__1 {    background-image: linear-gradient(90deg, $ab);}
+    >.step__2 {    background-image: linear-gradient(90deg, $bc);}
+    >.step__3 {    background-image: linear-gradient(90deg, $cd);}
+    //@include border('bottom', $b_width, $b_style, $shade-0);
+
+  }
+}
+
+.range-bck > [class*="value__"] {
+  padding-left: ( $range-width / $step ) - $b_width;
+  //padding-left: 300px;
+}
+
+[class*="step__"] {
+  //width:calc(100% / 3);
+  //border:5px solid cyan;
+  //height:$range-height;
+  height:calc( #{$range-height} );
+}
+.range-step {
+  position:absolute;
+  //width:100%;
+}
+
+$value_3_pos: $range-label-height-max * 1.5;
+
+
+.range-soglia {position:absolute; margin-left:$pad_initial;}
+
+.soglia__value {
+  position:absolute;
+  width:$thr_size; height:$thr_size;
+  @include border-default;
+  border-radius:50%;
+  background-color: $shade-10;
+  margin-top: - $range-height;
+  line-height:2;
+  // padding:1em;
+  &.value__3 {
+    color:$shade-0;
+    // position:absolute;
+    font-size: $range-label-height-max;
+    // line-height: $range-label-height-max/2;
+    height: $range-label-height-max*1.2;
+    width: $range-label-height-max*1.2;
+    padding-top: $range-label-height-max/2;
+    letter-spacing:-0.05em;
+    margin-top: -$value_3_pos;
+    z-index: 110;
+  }
+}
+
+.thr {
+  display:flex;
+  align-items:center;
+  flex-direction:column;
+  // Icona soglia max
+  i {margin-top:-1em;}
+}
+.bar {
+  width: $b_width;
+  background-color: $shade-0;
+  z-index:1;
+  position:absolute;
+  top: 100%;
+  // height: calc((100% - #{$thr_size}) - (#{$range-height} + #{$b_width} + #{$value_3_pos}));
+  height:  $value_3_pos - $range-label-height-max;
+}
+
+.rp {
+  font-size:50%;
+  padding: 5px 1rem;
+  background:$shade-10;
+  @include border-default;
+  border-radius:2rem;
+  transform:scale(0.6) translateY(-$range-height - $thr_size/2);
+  font-weight:bolder;
+  letter-spacing:0.002em;
+  z-index:1;
+
+}
+/*************************************************/
+/******* Footer personalizzazione ****************/
+/*************************************************/
+
+.rfsea_footer_box {
+  z-index:120;
+}
