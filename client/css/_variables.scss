@@ -1,0 +1,72 @@
+
+/********************************************************/
+/***************** colors *******************************/
+/********************************************************/
+
+
+$color_font: #F0C319;
+$color_base: #243746;
+$color_estimate: #ff8b00;
+$color_events: #61A744;
+
+/********************************************************/
+/***************** colors *******************************/
+/********************************************************/
+
+$second_green: #2d8a3f;
+$second_blue: #009aa4;
+$second_red: #bd627a;
+$second_rose: #c8a297;
+
+
+
+
+/********************************************************/
+/***************** tooltip  *******************************/
+/********************************************************/
+
+
+$tooltip-success: #8bb83d;
+$tooltip-info: #63b1ba;
+$tooltip-warning: #e8ded3;
+$tooltip-danger: #e67460;
+
+// Misc
+$font-size: 20px;
+$font-family: 'Century Gothic',AppleGothic,'CenturyGothic',sans-serif;
+$transition-style: cubic-bezier(0.73, 0.01, 0, 1);
+$border-width: 10px;
+$z-index: 110000;
+$arrow-position: 10px;
+
+// Colors
+$color_tooltip: $tooltip-success;
+$color-default: $color_tooltip;
+$color-invert: invert($color_font);
+$tooltip-default: $color-default;
+$tooltip-invert: $color-invert;
+
+
+/********************************************************/
+/***************** switch *******************************/
+/********************************************************/
+
+//$color_font: #22293e;
+//$color_base: cornsilk;
+
+//$transition: .3s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+$transition: inherit;
+$width: 6em;
+$height: $width/2;
+$pad: 8px;
+
+
+
+
+
+/********************************************************/
+/***************** soglie *******************************/
+/********************************************************/
+
+
+
