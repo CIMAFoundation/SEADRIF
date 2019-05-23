@@ -1,4 +1,4 @@
-@import 'variables';
+@import '_variables';
 /********************************************************/
 /***************** switch *******************************/
 /********************************************************/
@@ -49,14 +49,14 @@ $pad: 8px;
   input{
     display: none;
     &:checked + .toggle-control{
-      border-color: $color_base;
-      background-color: $color_font;
+      border-color: $color_font;
+      background-color: $color_base;
       &:after{
         left: calc((#{$width}/2) + (#{$pad}/2));
-        background-color: $color_base;
+        background-color: $color_font;
       }
       &:before {
-        // color:$color_base;
+         color:$color_font;
         position: absolute;
 
       }

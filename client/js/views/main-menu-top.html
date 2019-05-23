@@ -59,7 +59,7 @@
         <li>
             <a href="" ng-class="{'active' : districtShow}" ng-click="setDistrictView()"><span>Districts</span></a>
         </li>
-        <li>
+        <li class="skew">
             <span class="flag-icon flag-icon-gb" style="width: 1em;" title="Language: English"></span>
         </li>
         <li class="last logged">
@@ -80,7 +80,8 @@
 <div class="rfsea_box_menu" ng-show="bLoggedInMenu && districtdetails">
     <ul>
         <li>
-            <a href="" ng-class="{'active' : !riskprofileShow && !districtShow}" ng-click="gotoPage('countries.html')"><span class="flag-icon flag-icon-squared flag-icon-{{('flag_' + countryselected.name) | translate}}"></span> {{countryselected.name | translate}}</a>
+            <a href="" ng-class="{'active' : !riskprofileShow && !districtShow}" ng-click="gotoPage('countries.html')">
+                <span class="flag-icon flag-icon-squared flag-icon-{{('flag_' + countryselected.name) | translate}}"></span> {{countryselected.name | translate}}</a>
             &nbsp;&nbsp;
             <span ng-show="countries.length > 1" ng-click="showHideCountriesList()">
                 <i class="fa fa-angle-down rfsea_row_select_country" aria-hidden="true" ng-show="!bCountriesList"></i>
@@ -88,10 +89,14 @@
             </span>
         </li>
         <li>
-            <a href="" ng-class="{'active' : riskprofileShow}" ng-click="gotoPage('countries.html?p=rp')"><span>Risk Profile</span></a>
+            <a href="" ng-class="{'active' : riskprofileShow}" ng-click="gotoPage('countries.html?p=rp')">
+                <span>Risk Profile</span>
+            </a>
         </li>
         <li>
-            <a href="" ng-class="{'active' : districtShow}" ng-click="gotoPage('countries.html?p=dist')"><span>Districts</span></a>
+            <a href="" ng-class="{'active' : districtShow}" ng-click="gotoPage('countries.html?p=dist')">
+                <span>Districts</span>
+            </a>
         </li>
         <li class="last logged">
             <a href="" ng-click="setLoginForm('')" class="d-flex align-items-center justify-content-center" >
@@ -102,7 +107,8 @@
     </ul>
     <div class="rfsea_menu_countries_list_box" ng-show="bCountriesList">
         <div ng-repeat="country in countries | orderBy: 'name'">
-            <a href="" ng-show="country.name !== countryselected.name" ng-click="changeCountrySelectionMovePage(country)"> <span class="flag-icon flag-icon-squared flag-icon-{{('flag_' + country.name) | translate}}"></span> {{country.name | translate}}</a>
+            <a href="" ng-show="country.name !== countryselected.name" ng-click="changeCountrySelectionMovePage(country)">
+                <span class="flag-icon flag-icon-squared flag-icon-{{('flag_' + country.name) | translate}}"></span> {{country.name | translate}}</a>
         </div>
     </div>
 </div>
@@ -114,6 +120,7 @@
         <!-- FORM LOGIN & REGISTER -->
         <div class="rfsea_login_form animated fadeIn" ng-if="bLoginForm">
             <div class="rfsea_login_form_box">
+
                 <div class="rfsea_close_btn_up">
                     <a href="" ng-click="setLoginForm('close')">
                         <i class="fa fa-close fa-2x"></i>

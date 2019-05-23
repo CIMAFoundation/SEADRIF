@@ -130,53 +130,42 @@
         </div>
     </div>
 
-    <!--<topmenu page="2" countryhomeshow="bCountryHome.status" district-show="bDistrict" riskprofile-show="bRiskProfile.status" country-select="countrySelect" districtdetails="bdistrictDetails.status"></topmenu>-->
     <topmenu userinfo="userinfo" countryselected="countrySelected" countries="countriesList" riskprofile-show="bRiskProfile.status" district-show="bDistrict" districtdetails="false"></topmenu>
 
     <rfseafooter></rfseafooter>
 
     <div class="container-fluid rfsea_box_content" ng-class="{show: bShowBar, hide: !bShowBar}" ng-if="!bRiskProfile.status">
 
+
         <div class="rfsea_box">
             <div class="d-inline-flex align-items-start justify-content-between date ">
                 <a class="ham not" href="" ng-click="showHideSideBar()"><i class="fa fa-2x " ng-class="{'fa-times': bShowBar, 'fa-chevron-right': !bShowBar}"></i></a>
                 <div class="text-center" ng-if="!bCountriesList">
 
-                    <h3 data-tooltip="html"  data-tooltip-conf="shadow" style="cursor: pointer;"> <span ng-click="setVisibilityDatePicker()">{{dateTo | date: 'dd MMMM yyyy'}}</span>
+                    <div data-tooltip="html"  data-tooltip-conf="shadow" style="cursor: pointer;"> <span ng-click="setVisibilityDatePicker()" >
+                        <h3>{{dateTo | date: 'dd MMMM yyyy'}}</h3>
+                        </span>
                         <div class="tooltip ">
-                            <span class="text-center">
+                            <div class="text-center">
                                 <small>Period of Analysis</small><br>
                                 <small>From: </small><br>
                                 {{dateFrom | date: 'dd MMMM'}} <br>
                                 <small>To:</small> <br>
                                 {{dateTo | date: 'dd MMMM'}}
-                            </span>
+                            </div>
 
                         </div>
-                    </h3>
+                    </div>
 
                     <br>
                 </div>
             </div>
         </div>
 
-        <!--<div class="rfsea_space_from_menu"></div>-->
-        <!--<div class="rfsea_space_from_menu"></div>-->
+
 
         <div ng-if="bShowBar">
             <!-- BOX Countries List -->
-            <!--<div class="rfsea_box_country_list" ng-if="bCountriesList">-->
-                <!--<br />-->
-                <!--<div class="row">-->
-                    <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
-                        <!--<div class="d-flex flex-column">-->
-                            <!--<div class="rfsea_box_country_name" ng-repeat="country in countriesList | orderBy: 'name'">-->
-                                <!--<a href="" ng-click="setCountrySelection(country)"> <span class="flag-icon flag-icon-squared flag-icon-{{('flag_' + country.name) | translate}}"></span> {{country.name | translate}}</a>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
 
             <!-- BOX Country Home Details -->
             <div class="rfsea_box_country_details" ng-if="!bDistrict">
@@ -222,22 +211,10 @@
 
                         </div>
                     </div>
-                    <!--<div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
-                        <!--<div class="mx-auto d-flex justify-content-center"style="width:100%;">-->
+
                     <div  id="rfsea_slider_container">
-
                         <div rfseaslider id="slider" data="sliderData.data"></div>
-                        <!--<div ng-if="bPeople" rfseaslider id="slider" data="sliderData.data" ></div>-->
-                        <!--<div ng-if="!bPeople" rfseaslider id="slider" data="sliderData.data" ></div>-->
-                        <!--<div class="media d-flex justify-content-center"  ng-if="!bPeople" >
-
-                            &lt;!&ndash;<img class="align-self-center" ng-if="bPeople" src="img/Artboard%201.png" alt="">&ndash;&gt;
-                            <img class="align-self-center" src="img/Artboard%202.png" alt="">
-                        </div>-->
-
                     </div>
-                        <!--</div>-->
-                    <!--</div>-->
 
                 </div>
                 <div class="row">
@@ -286,33 +263,7 @@
             </div>
 
             <!-- District details -->
-            <!--<div class="rfsea_box_country_details" ng-if="bdistrictDetails.status">-->
-                <!--<div class="row" ng-if="bShowBar">-->
-                    <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
-                        <!--<div class="rfsea_box">-->
-                            <!--<div class="d-inline-flex align-items-start justify-content-between date ">-->
-                                <!--<div class="rfsea_box text-center">-->
-                                    <!--<h2 class="rfsea_box_country_details_name">{{countrySelected.name}}</h2>-->
-                                    <!--<hr>-->
-                                    <!--<h5 class="rfsea_box_country_details_name_subtitle">{{districtObj.name}}</h5>-->
-                                    <!--<br>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
 
-                <!--</div>-->
-
-                <!--<div class="row">-->
-                    <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
-                        <!--<a href="" ng-click="setLayer_eo()">BTN EO</a><br />-->
-                        <!--<a href="" ng-click="setLayer_wd()">BTN WD</a><br />-->
-                        <!--<a href="" ng-click="setLayer_eo_wd()">BTN Compare EO WD</a><br />-->
-                    <!--</div>-->
-
-                <!--</div>-->
-
-            <!--</div>-->
 
         </div>
 
@@ -325,7 +276,7 @@
 
 </body>
 
-<link rel="stylesheet"  href="css/slider_review.css" rel="stylesheet">
+<!--<link rel="stylesheet"  href="css/slider_review.css" rel="stylesheet">-->
 <script src="js/angular/controller_slider.js" type="text/javascript"></script>
 
 </html>
