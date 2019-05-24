@@ -111,7 +111,6 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
             rfseaSrv.getCountriesList(function(data)
             {
 
-                console.log(data);
                 // Countries list OK
                 $rootScope.countriesList = data.data.objects;
                 $scope.countrySelected = JSON.parse(localStorage.getItem('rfsea_country_selected'));

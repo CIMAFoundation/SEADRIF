@@ -128,7 +128,6 @@ rfseaApp.controller('rfseasliderCtrl', function($rootScope, $scope, $timeout, rf
 
     $scope.$watch('[data.pop, data.thr1]', function (newVal, oldVal) {
 
-        console.log($scope.data);
         setElementPosition('slider_thr1_item', getPercPos($scope.data.thr1));
         setElementPosition('slider_thr2_item', getPercPos($scope.data.thr2));
         setElementPosition('slider_pop_item', getPercPos($scope.data.pop));
