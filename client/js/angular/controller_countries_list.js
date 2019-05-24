@@ -394,38 +394,19 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
         layer.myTag = "CountryGEOJson";
 
-        layer.on('click', function (e) {
-            // e = event
-            $scope.districtSelected = {
-                id: feature.properties.ID,
-                name: feature.properties.name
-            };
-
-            localStorage.removeItem('rfsea_district');
-            localStorage.setItem('rfsea_district', JSON.stringify($scope.districtSelected));
-
-            // var geojson_district = L.geoJSON(feature.geometry);
-
-            // map.fitBounds(geojson_district.getBounds());
-
-            $window.location.href = "district_details.html";
-            // $timeout(function(){
-            //     $scope.bCountryHome.status = false;
-            //     $scope.bDistrict = false;
-            //     $scope.bRiskProfile.status = false;
-            //     $scope.bdistrictDetails.status = true;
-            //
-            //     $scope.districtObj = $scope.districtSelected;
-            //
-            //     $scope.paletteColors = [];
-            //     $scope.palettePosition = "bottomright";
-            //     $scope.maptype = "value";
-            //
-            //     initDistrictDetails();
-            //
-            // }, 0);
-
-        });
+        // layer.on('click', function (e) {
+        //     // e = event
+        //     $scope.districtSelected = {
+        //         id: feature.properties.ID,
+        //         name: feature.properties.name
+        //     };
+        //
+        //     localStorage.removeItem('rfsea_district');
+        //     localStorage.setItem('rfsea_district', JSON.stringify($scope.districtSelected));
+        //
+        //     $window.location.href = "district_details.html";
+        //
+        // });
 
         // var popPercent = $filter('number')(feature.properties.data * 100 / feature.properties.pop, 0) + '%';
 
@@ -457,19 +438,19 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
         //bind click
         layer.myTag = "CountryGEOJson";
 
-        layer.on('click', function (e) {
-            // e = event
-            $scope.districtSelected = {
-                id: feature.properties.ID,
-                name: feature.properties.name
-            };
-
-            localStorage.removeItem('rfsea_district');
-            localStorage.setItem('rfsea_district', JSON.stringify($scope.districtSelected));
-
-            $window.location.href = "district_details.html";
-
-        });
+        // layer.on('click', function (e) {
+        //     // e = event
+        //     $scope.districtSelected = {
+        //         id: feature.properties.ID,
+        //         name: feature.properties.name
+        //     };
+        //
+        //     localStorage.removeItem('rfsea_district');
+        //     localStorage.setItem('rfsea_district', JSON.stringify($scope.districtSelected));
+        //
+        //     $window.location.href = "district_details.html";
+        //
+        // });
 
         layer.bindPopup(feature.properties.name + ': ' + $filter('number')(feature.properties.data * dollarMultiplier, 0) + '$');
 
