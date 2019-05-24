@@ -126,7 +126,7 @@
     <div class="rfsea_box_header">
         <div class="rfsea_header_img">
             <div id="map" style="width:100%; height: 100vh;"></div>
-            <rfsealegend paletteobj="paletteColors" position="palettePosition" type="maptype" datatype="bPeople"></rfsealegend>
+            <rfsealegend paletteobj="paletteColors" position="palettePosition" type="maptype" datatype="bPeople" titletoshow="legendtitle"></rfsealegend>
         </div>
     </div>
 
@@ -240,6 +240,9 @@
                                     <hr>
                                     <h5 class="rfsea_box_country_details_name_subtitle">Districts</h5>
                                     <br>
+                                    <a href="" ng-click="addLayersMap('eo', 'EO MAP')">EO</a> |
+                                    <a href="" ng-click="addLayersMap('model', 'MODEL MAP')">MODEL</a> |
+                                    <a href="" ng-click="addLayersMap('compare', 'EO/MODEL MAP')">EO/MODEL</a>
                                 </div>
                             </div>
                         </div>

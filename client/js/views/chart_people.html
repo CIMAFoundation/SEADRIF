@@ -5,206 +5,119 @@
                 <div class="d-flex justify-content-between align-items-center" >
                     <div class="d-flex flex-sm-column justify-content-center fa-2x" >
                         <a href="" ng-click="closePage()" >
-                            <!--<i class="fa fa-times " aria-hidden="true"></i>-->
                             <span style="font-size: 1.5em; text-transform: uppercase; font-family: 'Helvetica Bold';">{{(datachart.countryName | translate)}}</span><br />
                             <small>Country view</small>
                         </a>
-                        <!--<span class="small"><small>CLOSE</small></span>-->
                     </div>
-                    <!--<h1 class="m-0" style="font-size: 3em;">-->
-                        <!--{{(datachart.countryName | translate)}}-->
-                    <!--</h1>-->
-                    <!--<div class="d-flex align-items-center justify-content-end h-100" >-->
-                        <!--<div class="">-->
-                            <!--<div class="rfsea_top_page_chart_title bordered">{{countrySelected.name}}</div>-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash;<div class="pl-lg-2 pr-lg-2">&ndash;&gt;-->
-                            <!--&lt;!&ndash;<img src="img/estimated@2x.png" alt="" ng-if="bModel" />&ndash;&gt;-->
-                            <!--&lt;!&ndash;<img src="img/events.png" alt="" ng-if="!bModel"  />&ndash;&gt;-->
-                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<div class=" d-flex flex-column align-items-start">&ndash;&gt;-->
-                            <!--&lt;!&ndash;<h2 class="rfsea_top_page_chart_title align-self-end">{{populationDetails.pop_est | number: 0}} <span ng-if="!bPeople">$</span></h2>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<span class="rfsea_top_page_chart_title align-self-end" ng-if="bPeople"><span style="font-size:1.5em">{{(populationDetails.pop_est * 100) / datachart.population | number: 2}}% <span style="text-transform: lowercase;">of</span> {{datachart.population | number: 0}}</span></span>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<span class="rfsea_top_page_chart_title align-self-end" ng-if="!bPeople"><span style="font-size:1.5em">{{(populationDetails.pop_est * 100) / (datachart.population * dollarValue) | number: 2}}% <span style="text-transform: lowercase;">of</span> {{datachart.population * dollarValue | number: 0}}$</span></span>&ndash;&gt;-->
-                            <!--&lt;!&ndash;&lt;!&ndash;<span style="font-size:1.5em; margin-bottom: 15px;">{{typeTitleHeader}}</span>&ndash;&gt;&ndash;&gt;-->
-                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<div class=" pl-lg-2 pr-lg-2 media "><img src="img/people_dark@4x_64.png" alt="" /></div>&ndash;&gt;-->
-                    <!--</div>-->
                 </div>
             </div>
 
-
-
-                <!--</div>-->
-                <!--<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">-->
-
-                <!--<div class="d-flex flex-row align-items-center justify-content-end" style="height: 80px">
-                    <div class="pl-2"><div class="rfsea_top_page_chart_title bordered">{{countrySelected.name}}</div></div>
-                    <div class="pl-2">
-                        <img src="img/estimated@2x.png" alt="" ng-if="bModel" style="height: 60px"/>
-                        <img src="img/events.png" alt="" ng-if="!bModel" style="height: 60px" />
-                    </div>
-                    <div class="pl-2 d-flex flex-column align-items-start">
-                        <span class="rfsea_top_page_chart_title align-self-end">{{populationDetails.pop_est | number: 0}}</span>
-                        <p>{{typeTitleHeader}}</p>
-                    </div>
-                    <div class="pl-2 media"><img src="img/people_dark@4x_64.png" alt="" /></div>
-                </div>-->
-
-                <!--</div>-->
-            <!--</div>-->
         </div>
 
+        <div class="rfsea_box_chart_details" ng-class="{'rfsea_box_chart_model': bModel, 'rfsea_box_chart_historical': !bModel}">
+            <div class="container-fluid">
+                <div class="row">
 
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
 
+                        <div class="d-flex flex-column">
+                            <div class="d-flex align-items-center">
+                                <label class="label toggle classic onoff align-self-center">
+                                    <input type="checkbox" class="toggle_input" ng-click="setAlternativeScenario()" checked="false"/>
+                                    <div class="toggle-control"></div>
+                                </label>
+                                <p>Show Alternative Scenario</p>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <label class="label toggle classic onoff align-self-center">
+                                    <input type="checkbox" class="toggle_input" ng-click="setPastEventsData()"/>
+                                    <div class="toggle-control"></div>
+                                </label>
+                                <p>Show Past Events</p>
+                            </div>
+                        </div>
 
-            <div class="rfsea_box_chart_details" ng-class="{'rfsea_box_chart_model': bModel, 'rfsea_box_chart_historical': !bModel}">
-                <div class="container-fluid">
-                	<div class="row">
+                        <div>
+                            <div id="chartRFSEA_people_model" class="delay"></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
 
-                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-
-                            <div class="d-flex flex-column">
-                                <div class="d-flex align-items-center">
-                                    <label class="label toggle classic onoff align-self-center">
-                                        <input type="checkbox" class="toggle_input" ng-click="setAlternativeScenario()" checked="false"/>
-                                        <div class="toggle-control"></div>
-                                    </label>
-                                    <p>Show Alternative Scenario</p>
+                        <div ng-if="bModel">
+                            <div class="row" style="margin-top:30px;">
+                                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                                    <img src="img/estimated@2x.png" alt="" />
                                 </div>
-                                <div class="d-flex align-items-center">
-                                    <label class="label toggle classic onoff align-self-center">
-                                        <input type="checkbox" class="toggle_input" ng-click="setPastEventsData()"/>
-                                        <div class="toggle-control"></div>
-                                    </label>
-                                    <p>Show Past Events</p>
+                                <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+                                    <div class="text-left" style="margin-left:20px;">
+                                        <span style="font-size: 2em; text-transform: uppercase;">{{detailsTitle}}</span><br />
+                                        <strong><span style="font-size: 2em;">{{populationDetails.pop_est | number: 0}} <span ng-if="!bPeople">$</span></span></strong>
+                                        <br />
+                                        <span class="" ng-if="bPeople"><span style="font-size:1.5em">{{(populationDetails.pop_est * 100) / datachart.population | number: 2}}% <span style="text-transform: lowercase;">of</span> {{datachart.population | number: 0}}</span></span>
+                                        <span class="" ng-if="!bPeople"><span style="font-size:1.5em">{{(populationDetails.pop_est * 100) / (datachart.population * dollarValue) | number: 2}}% <span style="text-transform: lowercase;">of</span> {{datachart.population * dollarValue | number: 0}}$</span></span>
+                                    </div>
+
                                 </div>
                             </div>
-
-                            <!--<div ng-click="setAnalysisData()">
-                                <span ng-if="bAnalysis">ON</span>
-                                <span ng-if="!bAnalysis">OFF</span></spab> Show Alternative Scenario</div>
                             <br />
-                            <div ng-click="setPastEventsData()">
-                                <span ng-show="bPastEvents">ON</span>
-                                <span ng-show="!bPastEvents">OFF</span> Show Past Events</div><br />
-                            <br /><br />-->
-                            <div>
-                                <div id="chartRFSEA_people_model" class="delay"></div>
-                            </div>
+                            <h2 style="font-size: 1.5em;">SEA DRIF calculation</h2>
+                            <p class="text-justify">
+                                The best estimate of people affected refers to a seven-day period, from {{datachart.dateFrom | date: 'MMMM dd'}} to {{datachart.dateTo | date: 'MMMM dd'}}. The JRC-GHS population density grid was used (see alternative scenarios for other population grids).
+                                Flood information that was used:
+                                Gauge data from 5 MRC stations,
+                                2 MODIS images (3-day composites),
+                                22 stations from GLOFFIS hydrologic model,
+                                8 stations from GLOSSIS storm surge model.
+                            </p>
+
                         </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                        <div ng-if="!bModel">
 
-                            <div ng-if="bModel">
-                                <!--<div class="d-flex align-items-center p-5">-->
-                                <div class="row" style="margin-top:30px;">
-                                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                                        <img src="img/estimated@2x.png" alt="" />
-                                    </div>
-                                    <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
-                                        <div class="text-left" style="margin-left:20px;">
-                                            <span style="font-size: 2em; text-transform: uppercase;">{{detailsTitle}}</span><br />
-                                            <strong><span style="font-size: 2em;">{{populationDetails.pop_est | number: 0}} <span ng-if="!bPeople">$</span></span></strong>
-                                            <br />
-                                            <span class="" ng-if="bPeople"><span style="font-size:1.5em">{{(populationDetails.pop_est * 100) / datachart.population | number: 2}}% <span style="text-transform: lowercase;">of</span> {{datachart.population | number: 0}}</span></span>
-                                            <span class="" ng-if="!bPeople"><span style="font-size:1.5em">{{(populationDetails.pop_est * 100) / (datachart.population * dollarValue) | number: 2}}% <span style="text-transform: lowercase;">of</span> {{datachart.population * dollarValue | number: 0}}$</span></span>
-                                        </div>
-
-                                    </div>
+                            <div class="row" style="margin-top:30px;">
+                                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                                    <img src="img/events.png" alt="" />
                                 </div>
-                                <br />
-                                <h2 style="font-size: 1.5em;">SEA DRIF calculation</h2>
-                                <!--<div class="row">-->
-                                    <!--<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">-->
-                                        <p class="text-justify">
-                                            The best estimate of people affected refers to a seven-day period, from {{datachart.dateFrom | date: 'MMMM dd'}} to {{datachart.dateTo | date: 'MMMM dd'}}. The JRC-GHS population density grid was used (see alternative scenarios for other population grids).
-                                            Flood information that was used:
-                                            Gauge data from 5 MRC stations,
-                                            2 MODIS images (3-day composites),
-                                            22 stations from GLOFFIS hydrologic model,
-                                            8 stations from GLOSSIS storm surge model.
-                                        </p>
-                                    <!--</div>-->
-                                    <!--<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">-->
+                                <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+                                    <div class="text-left" style="margin-left:20px;">
+                                        <span style="font-size: 2em; text-transform: uppercase;">{{detailsTitle}}</span><br />
+                                        <strong><span style="font-size: 2em;">{{populationDetails.pop_est | number: 0}} <span ng-if="!bPeople">$</span></span></strong>
+                                        <br />
+                                        <span class="" ng-if="bPeople"><span style="font-size:1.5em">{{(populationDetails.pop_est * 100) / datachart.population | number: 2}}% <span style="text-transform: lowercase;">of</span> {{datachart.population | number: 0}}</span></span>
+                                        <span class="" ng-if="!bPeople"><span style="font-size:1.5em">{{(populationDetails.pop_est * 100) / (datachart.population * dollarValue) | number: 2}}% <span style="text-transform: lowercase;">of</span> {{datachart.population * dollarValue | number: 0}}$</span></span>
+                                    </div>
 
-                                    <!--</div>-->
-                                <!--</div>-->
-
+                                </div>
                             </div>
-                            <div ng-if="!bModel">
+                            <br />
 
-                                <div class="row" style="margin-top:30px;">
-                                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                                        <img src="img/events.png" alt="" />
-                                    </div>
-                                    <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
-                                        <div class="text-left" style="margin-left:20px;">
-                                            <span style="font-size: 2em; text-transform: uppercase;">{{detailsTitle}}</span><br />
-                                            <strong><span style="font-size: 2em;">{{populationDetails.pop_est | number: 0}} <span ng-if="!bPeople">$</span></span></strong>
-                                            <br />
-                                            <span class="" ng-if="bPeople"><span style="font-size:1.5em">{{(populationDetails.pop_est * 100) / datachart.population | number: 2}}% <span style="text-transform: lowercase;">of</span> {{datachart.population | number: 0}}</span></span>
-                                            <span class="" ng-if="!bPeople"><span style="font-size:1.5em">{{(populationDetails.pop_est * 100) / (datachart.population * dollarValue) | number: 2}}% <span style="text-transform: lowercase;">of</span> {{datachart.population * dollarValue | number: 0}}$</span></span>
-                                        </div>
+                            <h2>{{titleHistoricalSelected}}</h2>
+                            <p class="text-justify">
+                                {{descHistoricalSelected}}
+                                <!--Tropical Storm Sonca brought heavy rain across Cambodia, which caused flooding in theprovinces of Preah Vihear, Oddar Meanchey, Stung Treng, and Kampot since July 25.-->
+                                <!--At least two people were killed in Preah Vihear and 250 families were evacuated from Preah-->
 
-                                    </div>
-                                </div>
-                                <br />
-
-
-
-                                <!--<div class="d-flex align-items-center p-5">-->
-                                    <!--<div class=""></div>-->
-                                    <!--<h2 class="rfsea_top_page_chart_title pl-lg-5">{{detailsTitle}}</h2>-->
-
-                                <!--</div>-->
-                                <!--<br /><br />-->
-                                <h2>{{titleHistoricalSelected}}</h2>
-                                <p class="text-justify">
-                                    Tropical Storm Sonca brought heavy rain across Cambodia, which caused flooding in theprovinces of Preah Vihear, Oddar Meanchey, Stung Treng, and Kampot since July 25.
-                                    At least two people were killed in Preah Vihear and 250 families were evacuated from Preah
-
-                                </p>
-                            </div>
-
-                            <!--<div class="media">-->
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                    <div rfseaslider id="slider" data="sliderdata.data" style="margin-top: 30% !important;"></div>
-                                </div>
-                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                    <label class="label toggle calssic image align-self-center" style="margin-top: 30%;">
-                                        <input type="checkbox" class="toggle_input" ng-click="setTypeDataToShow()"/>
-                                        <div class="toggle-control"></div>
-                                    </label>
-                                </div>
-
-                                <!--<img class="align-self-center" ng-if="!bPeople" src="img/Artboard%201.png" alt="" style=" max-height: 400px; width: auto; margin: auto;">-->
-                                <!--<img class="align-self-center" ng-if="bPeople" src="img/Artboard%202.png" alt="" style=" max-height: 400px; width: auto; margin: auto;">-->
-                                <!--<span ng-if="!bPeople">SLIDER IMAGE DOLLAR</span>-->
-                            </div>
+                            </p>
                         </div>
-                        <!--<div class="rfsea_space"></div>-->
-                        <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
-                            <!--<div class="rfsea_space"></div>-->
-                            <!--<div class="d-flex justify-content-center pt-5">-->
-                                <!--<label class="label toggle calssic image align-self-center">-->
-                                    <!--<input type="checkbox" class="toggle_input" ng-click="setTypeDataToShow()"/>-->
-                                    <!--<div class="toggle-control"></div>-->
-                                <!--</label>-->
-                            <!--</div>-->
-                        <!--</div>-->
+
+                        <!--<div class="media">-->
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <div rfseaslider id="slider" data="sliderdata.data" style="margin-top: 30% !important;"></div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <label class="label toggle calssic image align-self-center" style="margin-top: 30%;">
+                                    <input type="checkbox" class="toggle_input" ng-click="setTypeDataToShow()"/>
+                                    <div class="toggle-control"></div>
+                                </label>
+                            </div>
+
+                        </div>
                     </div>
 
                 </div>
+
             </div>
-
-<!--
-            <div class="rfsea_box_header">
-                <div class="rfsea_header_img" style="background-image: url('img/template/rf_sea_area.png');">
-                </div>
-
-            </div>-->
-
+        </div>
 
     </div>
 </div>

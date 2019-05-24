@@ -2,7 +2,7 @@
  * Created by Manuel on 21/02/2018.
  */
 
-rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window, $timeout, $filter, $location, rfseaSrv)
+rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window, $timeout, $filter, $location, rfseaSrv, $q)
 {
 
     $scope.bPeople = true;
@@ -111,6 +111,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
             rfseaSrv.getCountriesList(function(data)
             {
 
+                console.log(data);
                 // Countries list OK
                 $rootScope.countriesList = data.data.objects;
                 $scope.countrySelected = JSON.parse(localStorage.getItem('rfsea_country_selected'));
@@ -144,6 +145,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
                 $scope.$watch('countrySelected', function (newVal, oldVal) {
                     if(newVal !== oldVal){
                         rfseaSrv.clearMap(map);
+                        $scope.maptype = 'scale';
                         setCountrySelected($scope.countrySelected);
                     }
                 });
@@ -172,7 +174,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
         $scope.countrySelect = country.name;
 
         setFirstCountryDatails();
-        // loadCountryZones();
+        //loadCountryZones();
 
         localStorage.setItem('rfsea_country_selected', JSON.stringify(country));
 
@@ -288,23 +290,24 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
                     pop_hg: 0,
                     pop_hl: 0,
                     desc_hg: "",
-                    desc_hl: ""
+                    long_desc_hg: "",
+                    desc_hl: "",
+                    long_desc_hl: ""
                 };
 
-                // $timeout(function(){
-                    $scope.populationDetails.pop_est = data.data.pop_est;
-                    $scope.populationDetails.pop_hg = data.data.pop_hg;
-                    $scope.populationDetails.pop_hl = data.data.pop_hl;
-                    $scope.populationDetails.desc_hl = data.data.hl;
-                    $scope.populationDetails.desc_hg = data.data.hg;
+                $scope.populationDetails.pop_est = data.data.pop_est;
+                $scope.populationDetails.pop_hg = data.data.pop_hg;
+                $scope.populationDetails.pop_hl = data.data.pop_hl;
+                $scope.populationDetails.desc_hl = data.data.hl;
+                $scope.populationDetails.long_desc_hl = data.data.hl_descr;
+                $scope.populationDetails.desc_hg = data.data.hg;
+                $scope.populationDetails.long_desc_hg = data.data.hg_descr;
 
-                    $scope.countrycurve = $scope.countrySelected.curve;
+                $scope.countrycurve = $scope.countrySelected.curve;
 
                 $scope.sliderData.data.curve_x = $scope.countrycurve.x;
                 $scope.sliderData.data.curve_y = $scope.countrycurve.y;
                 $scope.sliderData.data.pop_est = $scope.populationDetails.pop_est;
-
-                // }, 0);
 
                 setFirstView();
 
@@ -525,6 +528,156 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
         return tot;
     }
+
+    /***************************************************/
+    /********* MAP EO NATIONAL START *******************/
+    /***************************************************/
+
+    $scope.addLayersMap = function(mapType, legendTitle){
+
+        rfseaSrv.clearMapLayerNational(map);
+        var promises = [];
+        $scope.mapType = mapType;
+        $scope.legendtitle = legendTitle;
+
+        if($scope.mapType == 'eo'){
+            angular.forEach($scope.district_list, function(value, key){
+                promises.push(setLayer_eo($scope.countrySelected.id, value.properties.ID));
+            });
+        }
+
+        if($scope.mapType == 'compare'){
+            angular.forEach($scope.district_list, function(value, key){
+                promises.push(setLayer_eo_wd($scope.countrySelected.id, value.properties.ID));
+            });
+        }
+
+        if($scope.mapType == 'model'){
+            angular.forEach($scope.district_list, function(value, key){
+                promises.push(setLayer_wd($scope.countrySelected.id, value.properties.ID));
+            });
+        }
+
+        $q.all(promises).then(function(reponse) {
+            //Do nothing
+        });
+
+    }
+
+    function setLayer_eo(idCountry, idDistrict){
+
+        rfseaSrv.getProvinceDetails(idCountry,  idDistrict, $scope.dateSelected, function(data)
+        {
+            // Country zone details
+
+            var	bounds = new L.LatLngBounds(
+                new L.LatLng(data.data.imgs.eo.extent.ne[0],data.data.imgs.eo.extent.ne[1]),
+                new L.LatLng(data.data.imgs.eo.extent.sw[0],data.data.imgs.eo.extent.sw[1])
+            );
+
+            // Set legend parameters
+            $scope.paletteColors = data.data.imgs.eo.legend;
+            $scope.palettePosition = "bottomright";
+            $scope.maptype = "value-translate";
+
+            $scope.overlay = new L.ImageOverlay(baseAPIurl + 'data/img/?img=' + data.data.imgs.eo.img, bounds, {
+                opacity: 1,
+                interactive: true,
+                attribution: ''
+            });
+
+            $scope.overlay.myTag = "MapCompaire";
+
+            map.addLayer($scope.overlay);
+
+        }, function(data)
+        {
+            // Error
+            console.log(data);
+            vex.dialog.alert({
+                message: 'API loading error.'
+            })
+        });
+
+    }
+
+    function setLayer_eo_wd(idCountry, idDistrict) {
+
+        rfseaSrv.getProvinceDetails(idCountry,  idDistrict, $scope.dateSelected, function(data)
+        {
+            // Country zone details
+
+            var	bounds = new L.LatLngBounds(
+                new L.LatLng(data.data.imgs.compare_eo_wd.extent.ne[0],data.data.imgs.compare_eo_wd.extent.ne[1]),
+                new L.LatLng(data.data.imgs.compare_eo_wd.extent.sw[0],data.data.imgs.compare_eo_wd.extent.sw[1])
+            );
+
+            // Set legend parameters
+            $scope.paletteColors = data.data.imgs.compare_eo_wd.legend;
+            $scope.palettePosition = "bottomright";
+            $scope.maptype = "value-translate";
+
+            $scope.overlay = new L.ImageOverlay(baseAPIurl + 'data/img/?img=' + data.data.imgs.compare_eo_wd.img, bounds, {
+                opacity: 1,
+                interactive: true,
+                attribution: ''
+            });
+
+            $scope.overlay.myTag = "MapCompaire";
+
+            map.addLayer($scope.overlay);
+
+        }, function(data)
+        {
+            // Error
+            console.log(data);
+            vex.dialog.alert({
+                message: 'API loading error.'
+            })
+        });
+
+    }
+
+    function setLayer_wd(idCountry, idDistrict) {
+
+        rfseaSrv.getProvinceDetails(idCountry,  idDistrict, $scope.dateSelected, function(data)
+        {
+            // Country zone details
+
+            var	bounds = new L.LatLngBounds(
+                new L.LatLng(data.data.imgs.wd.extent.ne[0],data.data.imgs.wd.extent.ne[1]),
+                new L.LatLng(data.data.imgs.wd.extent.sw[0],data.data.imgs.wd.extent.sw[1])
+            );
+
+            // Set legend parameters
+            $scope.paletteColors = data.data.imgs.wd.legend;
+            $scope.palettePosition = "bottomright";
+            $scope.maptype = "value-translate";
+
+            $scope.overlay = new L.ImageOverlay(baseAPIurl + 'data/img/?img=' + data.data.imgs.wd.img, bounds, {
+                opacity: 1,
+                interactive: true,
+                attribution: ''
+            });
+
+            $scope.overlay.myTag = "MapCompaire";
+
+            map.addLayer($scope.overlay);
+
+        }, function(data)
+        {
+            // Error
+            console.log(data);
+            vex.dialog.alert({
+                message: 'API loading error.'
+            })
+        });
+
+    }
+
+    /***************************************************/
+    /********* MAP EO NATIONAL END *********************/
+    /***************************************************/
 
     $scope.setVisibilityDatePicker = function()
     {

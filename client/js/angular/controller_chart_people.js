@@ -23,6 +23,7 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
     var serieAlternative3 = [];
     var serieAlternative3_dollar = [];
     $scope.titleHistoricalSelected = "";
+    $scope.descHistoricalSelected = "";
     var chart = {};
     $scope.dollarValue  =dollarMultiplier;
 
@@ -527,7 +528,7 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                                         }
                                     }
 
-                                    // Historical high cliecked
+                                    // Historical high clicked
                                     if(serieHG.length > 0){
                                         if((item.point.x == serieHG[0].x && item.point.y == serieHG[0].y))
                                         {
@@ -554,6 +555,7 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                                             }
 
                                             $scope.titleHistoricalSelected = $scope.popDetails.desc_hg;
+                                            $scope.descHistoricalSelected = $scope.popDetails.long_desc_hg;
 
                                             $scope.sliderdata.data.pop = serieHG[0].y;
                                         }
@@ -586,6 +588,7 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                                             }
 
                                             $scope.titleHistoricalSelected = $scope.popDetails.desc_hl;
+                                            $scope.descHistoricalSelected = $scope.popDetails.long_desc_hl;
 
                                             $scope.sliderdata.data.pop = serieHL[0].y;
 

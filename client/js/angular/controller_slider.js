@@ -6,7 +6,8 @@ rfseaApp.controller('rfseasliderCtrl', function($rootScope, $scope, $timeout, rf
 
     var gridValues = [0, 3000, 10000, 100000, 500000, 1000000, 10000000];
 
-    var marginLeftZeroValue = 60;
+    var marginLeftZeroValue = 100;
+    var marginLeftZeroValueThr = 40;
 
     var thr1Width = 0;
     var thr2Width = 0;
@@ -34,7 +35,8 @@ rfseaApp.controller('rfseasliderCtrl', function($rootScope, $scope, $timeout, rf
                 return Math.floor(300 * ((i-1)*percGap + percGap*perc));
             }
         }
-        return 300
+        return 300;
+
     }
 
     function setElementPosition(itemId, pos) {
@@ -45,7 +47,7 @@ rfseaApp.controller('rfseasliderCtrl', function($rootScope, $scope, $timeout, rf
         } else
         {
             var elem = document.getElementById(itemId);
-            elem.style.left= "" + pos + "px";
+            elem.style.left= "" + pos - marginLeftZeroValueThr + "px";
         }
 
         if(itemId == 'slider_thr1_item')
@@ -126,6 +128,7 @@ rfseaApp.controller('rfseasliderCtrl', function($rootScope, $scope, $timeout, rf
 
     $scope.$watch('[data.pop, data.thr1]', function (newVal, oldVal) {
 
+        console.log($scope.data);
         setElementPosition('slider_thr1_item', getPercPos($scope.data.thr1));
         setElementPosition('slider_thr2_item', getPercPos($scope.data.thr2));
         setElementPosition('slider_pop_item', getPercPos($scope.data.pop));
