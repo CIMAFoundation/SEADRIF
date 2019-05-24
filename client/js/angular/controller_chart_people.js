@@ -32,8 +32,6 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
         fillColor: '#ffffff'
     };
 
-    console.log($scope.datachart);
-
     $scope.detailsTitle = "ESTIMATED AFFECTED POPULATION";
 
     $scope.bAnalysis = false;
@@ -100,6 +98,7 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
             // Get Alternative scenario points
             rfseaSrv.getCountryAnalysis($scope.datachart.idCountry, function(data)
             {
+
                 var indexRif = data.data.ref_scenario;
 
                 // Alternative series 1

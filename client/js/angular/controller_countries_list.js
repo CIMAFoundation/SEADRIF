@@ -71,8 +71,6 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
     loadMapLayers(false, false);
 
-    // $scope.bCountriesList = true;
-
     $scope.zonesData = [];
 
     init();
@@ -112,13 +110,25 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
             // Get the list of available countries
             rfseaSrv.getCountriesList(function(data)
             {
+
                 // Countries list OK
                 $rootScope.countriesList = data.data.objects;
                 $scope.countrySelected = JSON.parse(localStorage.getItem('rfsea_country_selected'));
 
                 if($scope.countrySelected){
 
-                    $scope.countrySelect = $scope.countrySelected.name;
+                    // Load new data from server
+                    var serverData = [];
+
+                    serverData = $filter('filter')($rootScope.countriesList, function(item){
+                        return item.id == $scope.countrySelected.id;
+                    });
+
+                    if (serverData && serverData.length > 0){
+                        $scope.countrySelected = serverData[0];
+                    }
+
+                    // $scope.countrySelect = $scope.countrySelected.name;
 
                     setFirstCountryDatails();
 
@@ -136,8 +146,6 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
                         rfseaSrv.clearMap(map);
                         setCountrySelected($scope.countrySelected);
                     }
-
-
                 });
 
             }, function(data)
@@ -161,15 +169,12 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
     function setCountrySelected(country) {
 
         $scope.countrySelected = country;
-        // $scope.bCountriesList = false;
-        // $scope.bCountryHome.status = true;
-        // $scope.bdistrictDetails.status = false;
         $scope.countrySelect = country.name;
 
-        loadCountryZones();
+        setFirstCountryDatails();
+        // loadCountryZones();
 
         localStorage.setItem('rfsea_country_selected', JSON.stringify(country));
-        setFirstCountryDatails();
 
     }
 
@@ -197,14 +202,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
             $scope.sliderData.data.thr1 = $scope.countrySelected.thr1;
             $scope.sliderData.data.thr2 = $scope.countrySelected.thr2;
 
-            // $scope.increaseDate = function(step)
-            // {
-            // Increase date by step (+1 or -1)
-            // $scope.country_globals.data_day.AddDays(step);
-            // ReloadGlobals($scope.country_globals.data_day, step);
-            // }
-
-            // loadCountryZones();
+            loadCountryZones();
 
         }, function(data)
         {
