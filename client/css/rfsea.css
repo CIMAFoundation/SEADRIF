@@ -5,7 +5,7 @@ body, html
 
 /*a, a:hover, a:active
 {
-    text-decoration: none;
+    text-decoration: underline;
     color:#ffffff;
 }
 
@@ -49,6 +49,27 @@ a:hover
     padding:20px;
     background-color: #243746;
     color:#F0C319;
+}
+
+.rfsea_link
+{
+    text-decoration: underline;
+}
+
+.rfsea_box_maps_command:hover, .rfsea_box_maps_command a:hover
+{
+    background-color: #F0C319;
+    color:#243746 !important;
+}
+
+.rfsea_map_active
+{
+    background-color: #F0C319;
+}
+
+.rfsea_map_active a
+{
+    color:#243746 !important;
 }
 
 /********************************************************/

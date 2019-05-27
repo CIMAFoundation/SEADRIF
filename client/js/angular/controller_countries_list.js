@@ -41,6 +41,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
     $scope.palettePosition = 'bottomright';
     $scope.paletteColors = [];
+    $scope.paletteColors_saved = [];
 
     $scope.userinfo = JSON.parse(localStorage.getItem('rfsea_login'));
 
@@ -145,6 +146,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
                     if(newVal !== oldVal){
                         rfseaSrv.clearMap(map);
                         $scope.maptype = 'scale';
+                        $scope.mapType = "";
                         setCountrySelected($scope.countrySelected);
                     }
                 });
@@ -467,6 +469,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
         // Set the palette objects for zones color and legend values
 
         $scope.paletteColors = rfseaSrv.setPaletteColor(colors, values);
+        $scope.paletteColors_saved = angular.copy($scope.paletteColors);
 
     }
 
@@ -516,31 +519,39 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
     $scope.addLayersMap = function(mapType, legendTitle){
 
         rfseaSrv.clearMapLayerNational(map);
-        var promises = [];
-        $scope.mapType = mapType;
-        $scope.legendtitle = legendTitle;
 
-        if($scope.mapType == 'eo'){
-            angular.forEach($scope.district_list, function(value, key){
-                promises.push(setLayer_eo($scope.countrySelected.id, value.properties.ID));
+        if($scope.mapType !== mapType)
+        {
+            var promises = [];
+            $scope.mapType = mapType;
+            $scope.legendtitle = legendTitle;
+
+            if($scope.mapType == 'eo'){
+                angular.forEach($scope.district_list, function(value, key){
+                    promises.push(setLayer_eo($scope.countrySelected.id, value.properties.ID));
+                });
+            }
+
+            if($scope.mapType == 'compare'){
+                angular.forEach($scope.district_list, function(value, key){
+                    promises.push(setLayer_eo_wd($scope.countrySelected.id, value.properties.ID));
+                });
+            }
+
+            if($scope.mapType == 'model'){
+                angular.forEach($scope.district_list, function(value, key){
+                    promises.push(setLayer_wd($scope.countrySelected.id, value.properties.ID));
+                });
+            }
+
+            $q.all(promises).then(function(reponse) {
+                //Do nothing
             });
+        } else {
+            $scope.mapType = "";
+            $scope.maptype = "scale";
+            $scope.paletteColors = angular.copy($scope.paletteColors_saved);
         }
-
-        if($scope.mapType == 'compare'){
-            angular.forEach($scope.district_list, function(value, key){
-                promises.push(setLayer_eo_wd($scope.countrySelected.id, value.properties.ID));
-            });
-        }
-
-        if($scope.mapType == 'model'){
-            angular.forEach($scope.district_list, function(value, key){
-                promises.push(setLayer_wd($scope.countrySelected.id, value.properties.ID));
-            });
-        }
-
-        $q.all(promises).then(function(reponse) {
-            //Do nothing
-        });
 
     }
 
