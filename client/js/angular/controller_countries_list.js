@@ -147,6 +147,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
                         rfseaSrv.clearMap(map);
                         $scope.maptype = 'scale';
                         $scope.mapType = "";
+                        bMapRaster = false;
                         setCountrySelected($scope.countrySelected);
                     }
                 });
@@ -474,7 +475,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
     }
 
     function setColorMap(dataValue){
-        return rfseaSrv.setColorMap(dataValue, $scope.paletteColors);
+        return rfseaSrv.setColorMap(dataValue, $scope.paletteColors_saved);
     }
 
     function setFirstView(){
@@ -518,7 +519,9 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
     $scope.addLayersMap = function(mapType, legendTitle){
 
+        //Clear map from others map layer
         rfseaSrv.clearMapLayerNational(map);
+        rfseaSrv.clearMap(map);
 
         if($scope.mapType !== mapType)
         {
@@ -544,22 +547,25 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
                 });
             }
 
-            $q.all(promises).then(function(reponse) {
+            $q.all(promises).then(function(response) {
                 //Do nothing
+                bMapRaster = true;
+                loadMapLayers(!$scope.bPeople, true);
+
             });
         } else {
             $scope.mapType = "";
             $scope.maptype = "scale";
             $scope.paletteColors = angular.copy($scope.paletteColors_saved);
+            bMapRaster = false;
+            loadMapLayers(!$scope.bPeople, true);
         }
 
     }
 
     function setLayer_eo(idCountry, idDistrict){
 
-        rfseaSrv.getProvinceDetails(idCountry,  idDistrict, $scope.dateSelected, function(data)
-        {
-            // Country zone details
+        rfseaSrv.getProvinceDetails_promise(idCountry, idDistrict, $scope.dateSelected).then(function(data){
 
             var	bounds = new L.LatLngBounds(
                 new L.LatLng(data.data.imgs.eo.extent.ne[0],data.data.imgs.eo.extent.ne[1]),
@@ -581,22 +587,48 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
             map.addLayer($scope.overlay);
 
-        }, function(data)
-        {
-            // Error
-            console.log(data);
-            vex.dialog.alert({
-                message: 'API loading error.'
-            })
         });
+
+
+
+        // rfseaSrv.getProvinceDetails(idCountry,  idDistrict, $scope.dateSelected, function(data)
+        // {
+        //     // Country zone details
+        //
+        //     var	bounds = new L.LatLngBounds(
+        //         new L.LatLng(data.data.imgs.eo.extent.ne[0],data.data.imgs.eo.extent.ne[1]),
+        //         new L.LatLng(data.data.imgs.eo.extent.sw[0],data.data.imgs.eo.extent.sw[1])
+        //     );
+        //
+        //     // Set legend parameters
+        //     $scope.paletteColors = data.data.imgs.eo.legend;
+        //     $scope.palettePosition = "bottomright";
+        //     $scope.maptype = "value-translate";
+        //
+        //     $scope.overlay = new L.ImageOverlay(baseAPIurl + 'data/img/?img=' + data.data.imgs.eo.img, bounds, {
+        //         opacity: 1,
+        //         interactive: true,
+        //         attribution: ''
+        //     });
+        //
+        //     $scope.overlay.myTag = "MapCompaire";
+        //
+        //     map.addLayer($scope.overlay);
+        //
+        // }, function(data)
+        // {
+        //     // Error
+        //     console.log(data);
+        //     vex.dialog.alert({
+        //         message: 'API loading error.'
+        //     })
+        // });
 
     }
 
     function setLayer_eo_wd(idCountry, idDistrict) {
 
-        rfseaSrv.getProvinceDetails(idCountry,  idDistrict, $scope.dateSelected, function(data)
-        {
-            // Country zone details
+        rfseaSrv.getProvinceDetails_promise(idCountry,  idDistrict, $scope.dateSelected).then(function(data){
 
             var	bounds = new L.LatLngBounds(
                 new L.LatLng(data.data.imgs.compare_eo_wd.extent.ne[0],data.data.imgs.compare_eo_wd.extent.ne[1]),
@@ -618,22 +650,49 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
             map.addLayer($scope.overlay);
 
-        }, function(data)
-        {
-            // Error
-            console.log(data);
-            vex.dialog.alert({
-                message: 'API loading error.'
-            })
         });
+
+
+        // rfseaSrv.getProvinceDetails(idCountry,  idDistrict, $scope.dateSelected, function(data)
+        // {
+        //     // Country zone details
+        //
+        //     var	bounds = new L.LatLngBounds(
+        //         new L.LatLng(data.data.imgs.compare_eo_wd.extent.ne[0],data.data.imgs.compare_eo_wd.extent.ne[1]),
+        //         new L.LatLng(data.data.imgs.compare_eo_wd.extent.sw[0],data.data.imgs.compare_eo_wd.extent.sw[1])
+        //     );
+        //
+        //     // Set legend parameters
+        //     $scope.paletteColors = data.data.imgs.compare_eo_wd.legend;
+        //     $scope.palettePosition = "bottomright";
+        //     $scope.maptype = "value-translate";
+        //
+        //     $scope.overlay = new L.ImageOverlay(baseAPIurl + 'data/img/?img=' + data.data.imgs.compare_eo_wd.img, bounds, {
+        //         opacity: 1,
+        //         interactive: true,
+        //         attribution: ''
+        //     });
+        //
+        //     $scope.overlay.myTag = "MapCompaire";
+        //
+        //     map.addLayer($scope.overlay);
+        //
+        // }, function(data)
+        // {
+        //     // Error
+        //     console.log(data);
+        //     vex.dialog.alert({
+        //         message: 'API loading error.'
+        //     })
+        // });
 
     }
 
     function setLayer_wd(idCountry, idDistrict) {
 
-        rfseaSrv.getProvinceDetails(idCountry,  idDistrict, $scope.dateSelected, function(data)
-        {
-            // Country zone details
+        console.log('model map')
+
+        rfseaSrv.getProvinceDetails_promise(idCountry,  idDistrict, $scope.dateSelected).then(function(data){
 
             var	bounds = new L.LatLngBounds(
                 new L.LatLng(data.data.imgs.wd.extent.ne[0],data.data.imgs.wd.extent.ne[1]),
@@ -654,15 +713,42 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
             $scope.overlay.myTag = "MapCompaire";
 
             map.addLayer($scope.overlay);
-
-        }, function(data)
-        {
-            // Error
-            console.log(data);
-            vex.dialog.alert({
-                message: 'API loading error.'
-            })
         });
+
+
+
+        // rfseaSrv.getProvinceDetails_promise(idCountry,  idDistrict, $scope.dateSelected, function(data)
+        // {
+        //     // Country zone details
+        //
+        //     var	bounds = new L.LatLngBounds(
+        //         new L.LatLng(data.data.imgs.wd.extent.ne[0],data.data.imgs.wd.extent.ne[1]),
+        //         new L.LatLng(data.data.imgs.wd.extent.sw[0],data.data.imgs.wd.extent.sw[1])
+        //     );
+        //
+        //     // Set legend parameters
+        //     $scope.paletteColors = data.data.imgs.wd.legend;
+        //     $scope.palettePosition = "bottomright";
+        //     $scope.maptype = "value-translate";
+        //
+        //     $scope.overlay = new L.ImageOverlay(baseAPIurl + 'data/img/?img=' + data.data.imgs.wd.img, bounds, {
+        //         opacity: 1,
+        //         interactive: true,
+        //         attribution: ''
+        //     });
+        //
+        //     $scope.overlay.myTag = "MapCompaire";
+        //
+        //     map.addLayer($scope.overlay);
+        //
+        // }, function(data)
+        // {
+        //     // Error
+        //     console.log(data);
+        //     vex.dialog.alert({
+        //         message: 'API loading error.'
+        //     })
+        // });
 
     }
 
@@ -730,6 +816,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
     {
         //Set new RUN date
         $scope.dateSelected = RunDate;
+        bMapRaster = false;
         init();
     }
 

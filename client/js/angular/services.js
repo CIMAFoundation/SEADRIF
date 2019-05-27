@@ -2,7 +2,7 @@
  * Created by Manuel on 13/01/2017.
  */
 
-rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter)
+rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter, $rootScope)
 {
 
     /*****************************************************************************************/
@@ -123,12 +123,31 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter)
 
         $http({
             method: 'GET',
-            url: baseAPIurl + 'data/' + countryID + '/' + zoneID + '/zonedetails/'
+            url: url
         }).then(function (data) {
             if(onSuccess) onSuccess(data)
         },function(data){
             if(onError)onError(data)
         });
+
+    }
+
+    this.getProvinceDetails_promise = function(countryID, zoneID, date){
+
+        var url = "";
+        if(date == '')
+        {
+            url = baseAPIurl + 'data/' + countryID + '/' + zoneID + '/zonedetails/';
+        } else {
+            url = baseAPIurl + 'data/' + countryID + '/' + zoneID + '/zonedetails/?d=' + date;
+        }
+
+        return $http({
+            method: 'GET',
+            url: url
+        })
+            .then(function(data){return data})
+            .catch(function(error){console.log(error)});
 
     }
 
@@ -278,21 +297,43 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter)
         var objColor = {};
         var color = [];
         var opacity = 0;
+        var paletteColorTemp = angular.copy(paletteColors);
 
-        if(dataValue.properties.data === 0){
-            opacity = 0.1;
-        } else {
-            opacity = 0.5;
-        }
-
-        color = $filter('filter')(paletteColors, function(item){
+        color = $filter('filter')(paletteColorTemp, function(item){
             return dataValue.properties.data >= item.label_min && dataValue.properties.data < item.label_max;
         });
 
-        objColor = {
-            color: "#22293e",
-            fillColor: color[0].color,
-            fillOpacity: opacity
+        if(bMapRaster){
+            //Raster Maps layer loaded
+
+            if(dataValue.properties.data === 0){
+                color= "#22293e";
+            } else {
+                color= color[0].color;
+            }
+
+            objColor = {
+                color: color,
+                fillColor: color[0].color,
+                fillOpacity: 0,
+                'stroke-width': 5
+            }
+
+        } else {
+            //Affected people layer loaded
+
+            if(dataValue.properties.data === 0){
+                opacity = 0.1;
+            } else {
+                opacity = 0.5;
+            }
+
+            objColor = {
+                color: "#22293e",
+                fillColor: color[0].color,
+                fillOpacity: opacity
+            }
+
         }
 
         return objColor;
