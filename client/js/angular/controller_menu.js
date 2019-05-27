@@ -15,7 +15,8 @@ rfseaApp.controller('rfseamenuCtrl', function($rootScope, $scope, $window, rfsea
 
     $scope.setDistrictView = function()
     {
-        $scope.districtShow = !$scope.districtShow;
+        // $scope.districtShow = !$scope.districtShow;
+        $scope.districtShow = true;
         $scope.riskprofileShow = false;
 
     }

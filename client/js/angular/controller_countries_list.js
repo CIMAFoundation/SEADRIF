@@ -383,7 +383,9 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
                     }
                 ).addTo(map);
 
-                map.fitBounds(geojsondata.getBounds());
+                if(!bMapRaster){
+                    map.fitBounds(geojsondata.getBounds());
+                }
                 // map.setZoom(5);
 
             }
@@ -689,8 +691,6 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
     }
 
     function setLayer_wd(idCountry, idDistrict) {
-
-        console.log('model map')
 
         rfseaSrv.getProvinceDetails_promise(idCountry,  idDistrict, $scope.dateSelected).then(function(data){
 
