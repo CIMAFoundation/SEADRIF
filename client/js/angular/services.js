@@ -12,30 +12,31 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter)
     this.createMapObject = function()
     {
 
-        var mapTile_1 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {id: 'map_1', attribution:''});
+        // var mapTile_1 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {id: 'map_1', attribution:''});
         var mapTile_2 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {id: 'map_2', attribution:''}); // Esri_WorldStreetMap
-        var mapTile_3 = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png', {id: 'map_3', attribution:''}); // Stamen_Terrain
-        var mapTile_4 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {id: 'map_4', attribution:''}); //Esri_NatGeoWorldMap
-        var mapTile_5 = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {id: 'map_5', attribution:''}); // CartoDB.Positron
-        var mapTile_6 = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {id: 'map_6', attribution:''}); // CartoDB.Voyager
+        // var mapTile_3 = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png', {id: 'map_3', attribution:''}); // Stamen_Terrain
+        // var mapTile_4 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {id: 'map_4', attribution:''}); //Esri_NatGeoWorldMap
+        // var mapTile_5 = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {id: 'map_5', attribution:''}); // CartoDB.Positron
+        // var mapTile_6 = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {id: 'map_6', attribution:''}); // CartoDB.Voyager
 
         // User not logged in - VISITOR
         var map = L.map('map', {
                 center: [19.80, 91.00],
                 zoom: 5,
                 trackResize: true,
-                layers: [mapTile_1, mapTile_2, mapTile_3, mapTile_4, mapTile_5, mapTile_6]
+                // layers: [mapTile_1, mapTile_2, mapTile_3, mapTile_4, mapTile_5, mapTile_6]
+                layers: [mapTile_2]
             }
         );
 
         map.zoomControl.setPosition('topright');
 
         var baseMaps = {
-            "Stamen_Terrain": mapTile_3,
-            "Esri_NatGeoWorldMap": mapTile_4,
-            "CartoDB.Positron": mapTile_5,
-            "CartoDB.Voyager": mapTile_6,
-            "OpenStreetMap": mapTile_1,
+            // "Stamen_Terrain": mapTile_3,
+            // "Esri_NatGeoWorldMap": mapTile_4,
+            // "CartoDB.Positron": mapTile_5,
+            // "CartoDB.Voyager": mapTile_6,
+            // "OpenStreetMap": mapTile_1,
             "Esri_WorldStreetMap": mapTile_2
         };
 
@@ -43,7 +44,7 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter)
         //     attribution: ''
         // }).addTo(map);
 
-        L.control.layers(baseMaps).addTo(map);
+        // L.control.layers(baseMaps).addTo(map);
         L.control.scale({position: 'bottomright'}).addTo(map);
 
         return map;
