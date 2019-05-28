@@ -73,7 +73,22 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                 serieEst_dollar = angular.copy(serieEst);
                 serieEst_dollar[0].x = serieEst_dollar[0].x * dollarMultiplier;
                 serieEst_dollar[0].y = serieEst_dollar[0].y * dollarMultiplier;
-            }
+            } //else {
+
+            //     serieEst = [{
+            //         marker: {symbol: "url(img/template/orange.png)"},
+            //         name: 'est',
+            //         x:0.1,
+            //         y:0.1
+            //     }];
+            //
+            //     serieEst_dollar = [{
+            //         marker: {symbol: "url(img/template/orange.png)"},
+            //         name: 'est',
+            //         x:0.1,
+            //         y:0.1
+            //     }];
+            // }
 
             // Historical High
             if($scope.popDetails.pop_hg){
@@ -625,12 +640,13 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                     }
                 }
             },
-            series: [{
-                showInLegend: false,
-                marker: objMarkerCurve,
-                data: $scope.series_model,
-                name: "Curve Value"
-            },
+            series: [
+                {
+                    showInLegend: false,
+                    marker: objMarkerCurve,
+                    data: $scope.series_model,
+                    name: "Curve Value"
+                },
                 {
                     // type: 'spline',
                     showInLegend: false,
@@ -664,6 +680,16 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                     type: 'scatter',
                     showInLegend: false,
                     data: serieAlternative3
+                },
+                {
+                    //Estimated ZERO value
+                    showInLegend: false,
+                    data: [{
+                        marker: {symbol: "url(img/template/orange.png)"},
+                        name: 'est',
+                        x:0.99,
+                        y:0.99
+                    }]
                 }
             ]
         });
@@ -1080,7 +1106,7 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
 
         objCurve = $filter('filter')($scope.series_model, function(item){
             return item[1] >= yValue;
-        })
+        });
 
         if (objCurve.length > 0){
             // finded points
@@ -1130,8 +1156,13 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
             }
 
             if (type == 'est'){
-                // Historical high
-                return [];
+                // Estimated value
+                return [{
+                    x: 0,
+                    y: 0,
+                    marker:{symbol: imgUrl},
+                    name: type
+                }];
             }
 
         }
