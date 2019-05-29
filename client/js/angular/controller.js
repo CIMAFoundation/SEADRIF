@@ -11,6 +11,11 @@ rfseaApp.controller('rfseaCtrl', function($rootScope, $scope, $window, rfseaSrv)
         usrloginstatus: false
     };
 
+    $scope.login = {
+        status:false,
+        type: ""
+    };
+
     $scope.bDisclaimer = false;
 
     // Get user name
@@ -67,6 +72,11 @@ rfseaApp.controller('rfseaCtrl', function($rootScope, $scope, $window, rfseaSrv)
         // L.control.scale({position: 'bottomright'}).addTo(map);
 
     });
+
+    $scope.setLoginView = function(type){
+        $scope.login.status = !$scope.login.status;
+        $scope.login.type = type;
+    }
 
     /***************************************************/
     /********* SIDEBAR SHOW/HIDE ***********************/

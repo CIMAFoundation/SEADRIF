@@ -37,6 +37,19 @@ rfseaApp.directive('topmenu',function(){
     }
 });
 
+rfseaApp.directive('loginform',function(){
+    return {
+        // transclude: true,
+        restrict: 'E',
+        controller: "rfseaCtrlloginform",
+        templateUrl: 'js/views/login-form.html',
+        scope: {
+            formstatus: "=",
+            type: "="
+        }
+    }
+});
+
 rfseaApp.directive('rfseafooter',function(){
     return {
         // transclude: true,

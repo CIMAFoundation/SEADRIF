@@ -2,7 +2,7 @@
     <ul>
         <li><a href="" ng-click="gotoPage('index.html')" ng-class="{'active' : page == '1'}">home</a></li>
         <li><a href="" ng-click="gotoPage('about.html')" ng-class="{'active' : page == '2'}">about</a></li>
-        <li class="last"><a href="" ng-click="setLoginForm('login')">login</a></li>
+        <li class="last"><a href="" ng-click="setLoginView('login')">login</a></li>
     </ul>
 </div>
 
@@ -63,7 +63,7 @@
             <!--<span class="flag-icon flag-icon-gb" style="width: 1em;" title="Language: English"></span>-->
         <!--</li>-->
         <li class="last logged">
-            <a href="" ng-click="setLoginForm('')" class="d-flex align-items-center justify-content-center" >
+            <a href="" ng-click="setLoginView('')" class="d-flex align-items-center justify-content-center" >
                 <i class="fa fa-user-o"></i>
                 <h5>logout<br><small>[{{userinfo.usrlogin}}]</small></h5>
             </a>
@@ -114,93 +114,96 @@
 </div>
 
 
+<loginform formstatus="login.status" type="login.type"></loginform>
 
-<div class="container">
-    <div class="row">
-        <!-- FORM LOGIN & REGISTER -->
-        <div class="rfsea_login_form animated fadeIn" ng-if="bLoginForm">
-            <div class="rfsea_login_form_box">
 
-                <div class="rfsea_close_btn_up">
-                    <a href="" ng-click="setLoginForm('close')">
-                        <i class="fa fa-close fa-2x"></i>
-                    </a>
-                </div>
-                <div class="rfsea_login_form_box_opacity">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                            <h2>Login</h2>
-                            <p>Please <a href="" ng-click="setLoginForm('login')" class="rfsea_link">login</a> or <a href="" ng-click="setLoginForm('register')" class="rfsea_link">sign up</a> to continue</p>
-                            <!--<div class="d-flex justify-content-center rfsea_login_form_link">-->
-                                <!--<a href="" ng-click="setLoginForm('login')" class=" active">-->
-                                    <!--<h3 class="pl-2 pr-2">login</h3>-->
-                                <!--</a>-->
 
-                                <!--<h3 class="pl-2 pr-2"> | </h3>-->
+<!--<div class="container">-->
+    <!--<div class="row">-->
+        <!--&lt;!&ndash; FORM LOGIN & REGISTER &ndash;&gt;-->
+        <!--<div class="rfsea_login_form animated fadeIn" ng-if="bLoginForm">-->
+            <!--<div class="rfsea_login_form_box">-->
 
-                                <!--<a href="" ng-click="setLoginForm('register')">-->
-                                    <!--<h3 class="pl-2 pr-2">sign up</h3>-->
-                                <!--</a>-->
-                            <!--</div>-->
-                        </div>
-
-                    </div>
-                    <!--<div class="rfsea_space"></div>-->
-
-                    <!-- login form -->
-                    <div class="row" ng-if="bLoginActive">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                            <div class="d-flex flex-column ">
-                                <div class="col-12 ">
-                                    <input type="text" class="form-control rfsea_input_style" placeholder="Email" ng-model="loginData.usr" />
-                                </div>
-                                <div class="rfsea_space"></div>
-                                <div class="col-12 ">
-                                    <input type="password" class="form-control rfsea_input_style" placeholder="Password" ng-model="loginData.psw" />
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row" ng-if="bRegisterActive">
+                <!--<div class="rfsea_close_btn_up">-->
+                    <!--<a href="" ng-click="setLoginForm('close')">-->
+                        <!--<i class="fa fa-close fa-2x"></i>-->
+                    <!--</a>-->
+                <!--</div>-->
+                <!--<div class="rfsea_login_form_box_opacity">-->
+                    <!--<div class="row">-->
                         <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">-->
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 register">
-                            <input type="text" class="form-control rfsea_input_style" placeholder="Name" ng-model="signinUsr.name" />
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 register">
-                            <input type="text" class="form-control rfsea_input_style" placeholder="Last Name" ng-model="signinUsr.lastname" />
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 register">
-                            <input type="text" class="form-control rfsea_input_style" placeholder="Email" ng-model="signinUsr.email" />
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 register">
-                            <input type="text" class="form-control rfsea_input_style" placeholder="Institution" ng-model="signinUsr.institution" />
-                        </div>
+                            <!--<h2>Login</h2>-->
+                            <!--<p>Please <a href="" ng-click="setLoginForm('login')" class="rfsea_link">login</a> or <a href="" ng-click="setLoginForm('register')" class="rfsea_link">sign up</a> to continue</p>-->
+                            <!--&lt;!&ndash;<div class="d-flex justify-content-center rfsea_login_form_link">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="" ng-click="setLoginForm('login')" class=" active">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<h3 class="pl-2 pr-2">login</h3>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</a>&ndash;&gt;-->
+
+                                <!--&lt;!&ndash;<h3 class="pl-2 pr-2"> | </h3>&ndash;&gt;-->
+
+                                <!--&lt;!&ndash;<a href="" ng-click="setLoginForm('register')">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<h3 class="pl-2 pr-2">sign up</h3>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--</div>-->
+
+                    <!--</div>-->
+                    <!--&lt;!&ndash;<div class="rfsea_space"></div>&ndash;&gt;-->
+
+                    <!--&lt;!&ndash; login form &ndash;&gt;-->
+                    <!--<div class="row" ng-if="bLoginActive">-->
+                        <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">-->
+                            <!--<div class="d-flex flex-column ">-->
+                                <!--<div class="col-12 ">-->
+                                    <!--<input type="text" class="form-control rfsea_input_style" placeholder="Email" ng-model="loginData.usr" />-->
+                                <!--</div>-->
+                                <!--<div class="rfsea_space"></div>-->
+                                <!--<div class="col-12 ">-->
+                                    <!--<input type="password" class="form-control rfsea_input_style" placeholder="Password" ng-model="loginData.psw" />-->
+
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="row" ng-if="bRegisterActive">-->
+                        <!--&lt;!&ndash;<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">&ndash;&gt;-->
                         <!--<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 register">-->
-                            <!--<input type="text" class="form-control rfsea_input_style" placeholder="Choose Password" />-->
+                            <!--<input type="text" class="form-control rfsea_input_style" placeholder="Name" ng-model="signinUsr.name" />-->
                         <!--</div>-->
                         <!--<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 register">-->
-                            <!--<input type="text" class="form-control rfsea_input_style" placeholder="Confirm Password" />-->
+                            <!--<input type="text" class="form-control rfsea_input_style" placeholder="Last Name" ng-model="signinUsr.lastname" />-->
                         <!--</div>-->
-                    </div>
+                        <!--<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 register">-->
+                            <!--<input type="text" class="form-control rfsea_input_style" placeholder="Email" ng-model="signinUsr.email" />-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 register">-->
+                            <!--<input type="text" class="form-control rfsea_input_style" placeholder="Institution" ng-model="signinUsr.institution" />-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash;<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 register">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="text" class="form-control rfsea_input_style" placeholder="Choose Password" />&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 register">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="text" class="form-control rfsea_input_style" placeholder="Confirm Password" />&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--</div>-->
 
-                    <!-- Login/Register or Close form login -->
-                    <div class="row">
-                    	<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
-                            <div class="rfsea_btn_login_form" ng-click="loginFormEnter()">
-                                {{txtBtn}}
-                            </div>
+                    <!--&lt;!&ndash; Login/Register or Close form login &ndash;&gt;-->
+                    <!--<div class="row">-->
+                    	<!--&lt;!&ndash;<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">&ndash;&gt;-->
+                            <!--<div class="rfsea_btn_login_form" ng-click="loginFormEnter()">-->
+                                <!--{{txtBtn}}-->
+                            <!--</div>-->
 
-                    	<!--</div>-->
-                        <div class="rfsea_btn_close_login_form" ng-click="setLoginForm('close')">
-                            CLOSE
-                        </div>
-                    </div>
+                    	<!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--<div class="rfsea_btn_close_login_form" ng-click="setLoginForm('close')">-->
+                            <!--CLOSE-->
+                        <!--</div>-->
+                    <!--</div>-->
 
-                </div>
-            </div>
+                <!--</div>-->
+            <!--</div>-->
 
-        </div>
-    </div>
-</div>
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->

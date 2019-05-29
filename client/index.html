@@ -39,6 +39,7 @@
     <script src="js/angular/services.js" type="text/javascript"></script>
     <script src="js/angular/controller.js" type="text/javascript"></script>
     <script src="js/angular/controller_menu.js" type="text/javascript"></script>
+    <script src="js/angular/controller_login.js" type="text/javascript"></script>
     <script src="js/angular/controller_footer.js" type="text/javascript"></script>
     <script src="js/angular/directives.js" type="text/javascript"></script>
     <!-- RFSEA APP -->
@@ -55,7 +56,6 @@
     <!-- RFSEA CSS -->
     <link rel="stylesheet"  href="css/rfsea.css" rel="stylesheet">
     <link rel="stylesheet"  href="css/skin_deda.css" rel="stylesheet">
-    <!--<link rel="stylesheet"  href="css/soglie.css" rel="stylesheet">-->
     
 </head>
 <body ng-app="rfseaApp" ng-controller="rfseaCtrl">
@@ -70,8 +70,6 @@
     <rfseafooter></rfseafooter>
 
     <div class="container-fluid rfsea_box_content home" id="bar"  ng-class="{show: bShowBar, hide: !bShowBar}">
-
-        <!--<div class="rfsea_space_from_menu"></div>-->
 
         <div class="rfsea_box h-100" >
             <div class="d-inline-flex align-items-start justify-content-between  date">
@@ -94,16 +92,16 @@
                                 This platform computes flood maps, population affected and return periods for floods in Southeast Asia.
                             </p>
                             <p>
-                                Please login to start the analysis.
+                                Please <a href="" ng-click="setLoginView('login')" class="rfsea_link">login</a> to start the analysis.
                             </p>
                             <br /><br /><br />
                         </div>
                         <!--<div class="row">-->
                         <div class="text-center rfsea_big_txt d-flex justify-content-center align-items-center ">
 
-                            <a href="doc/seadrif.pdf" target="_blank">Support</a>
+                            <a href="doc/seadrif.pdf" target="_blank" class="rfsea_link">Support</a>
                             <span class="sep">|</span>
-                            <a href="mailto:info@cimafoundation.org">Contact</a>
+                            <a href="mailto:info@cimafoundation.org" class="rfsea_link">Contact</a>
                             <br /><br />
                         </div>
                         <!--</div>-->
@@ -188,9 +186,8 @@
                 </div>
                 <!--</div>-->
         </div>
-                <!--</div>-->
-            <!--</div>-->
 
+        <loginform formstatus="login.status" type="login.type"></loginform>
 
         <div class="rfsea_space_from_menu"></div>
     </div>
