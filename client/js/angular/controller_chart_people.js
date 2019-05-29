@@ -48,6 +48,26 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
 
         if($scope.curvex) {
             // Generatin curve
+
+            if($scope.popDetails.pop_est == 0){
+
+                $scope.series_model.push([0,0]);
+                $scope.series_model_dollar.push([0,0]);
+
+                serieEst = [{
+                    x: 0,
+                    y:0,
+                    marker: {
+                        enabled: true,
+                        symbol: 'url(img/template/orange.png)'
+                    },
+                    name: 'est'
+                }];
+
+                serieEst_dollar = angular.copy(serieEst);
+
+            }
+
             for (var i = 0; i < $scope.curvex.length; i++)
             {
                 objPoint = [];
@@ -61,7 +81,7 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
             }
 
             // Estimated value
-            if ($scope.popDetails.pop_est){
+            if ($scope.popDetails.pop_est && $scope.popDetails.pop_est > 0){
 
                 serieEst = returnInterpulationPoint($scope.popDetails.pop_est, 'est');
 
@@ -288,6 +308,32 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
     /*********************************************************/
 
     function createChartPeople(){
+
+        (function (H) {
+            // Pass error messages
+            H.Axis.prototype.allowNegativeLog = true;
+
+            // Override conversions
+            H.Axis.prototype.log2lin = function (num) {
+                var isNegative = num < 0,
+                    adjustedNum = Math.abs(num),
+                    result;
+                if (adjustedNum < 10) {
+                    adjustedNum += (10 - adjustedNum) / 10;
+                }
+                result = Math.log(adjustedNum) / Math.LN10;
+                return isNegative ? -result : result;
+            };
+            H.Axis.prototype.lin2log = function (num) {
+                var isNegative = num < 0,
+                    absNum = Math.abs(num),
+                    result = Math.pow(10, absNum);
+                if (result < 10) {
+                    result = (10 * (result - 1)) / (10 - 1);
+                }
+                return isNegative ? -result : result;
+            };
+        }(Highcharts));
 
         chart = Highcharts.chart('chartRFSEA_people_model', {
             chart: {
@@ -625,12 +671,12 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                     }
                 }
             },
-            series: [{
-                showInLegend: false,
-                marker: objMarkerCurve,
-                data: $scope.series_model,
-                name: "Curve Value"
-            },
+                series: [{
+                    showInLegend: false,
+                    marker: objMarkerCurve,
+                    data: $scope.series_model,
+                    name: "Curve Value"
+                },
                 {
                     // type: 'spline',
                     showInLegend: false,
@@ -677,6 +723,32 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
     }
 
     function createChartDollar(){
+
+        (function (H) {
+            // Pass error messages
+            H.Axis.prototype.allowNegativeLog = true;
+
+            // Override conversions
+            H.Axis.prototype.log2lin = function (num) {
+                var isNegative = num < 0,
+                    adjustedNum = Math.abs(num),
+                    result;
+                if (adjustedNum < 10) {
+                    adjustedNum += (10 - adjustedNum) / 10;
+                }
+                result = Math.log(adjustedNum) / Math.LN10;
+                return isNegative ? -result : result;
+            };
+            H.Axis.prototype.lin2log = function (num) {
+                var isNegative = num < 0,
+                    absNum = Math.abs(num),
+                    result = Math.pow(10, absNum);
+                if (result < 10) {
+                    result = (10 * (result - 1)) / (10 - 1);
+                }
+                return isNegative ? -result : result;
+            };
+        }(Highcharts));
 
         chart = Highcharts.chart('chartRFSEA_people_model', {
             chart: {
