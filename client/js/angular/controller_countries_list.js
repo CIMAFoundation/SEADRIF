@@ -420,7 +420,8 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
             {
                 'maxWidth': '400',
                 'width': '200',
-                'className' : 'popupCustom'
+                'className' : 'popupCustom',
+                'autoPan': false
             }
 
         // var popup = L.popup({});
@@ -456,8 +457,15 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
         //     $window.location.href = "district_details.html";
         //
         // });
+        var customOptions =
+            {
+                'maxWidth': '400',
+                'width': '200',
+                'className' : 'popupCustom',
+                'autoPan': false
+            }
 
-        layer.bindPopup(feature.properties.name + ': ' + $filter('number')(feature.properties.data * dollarMultiplier, 0) + '$');
+        layer.bindPopup(feature.properties.name + ': ' + $filter('number')(feature.properties.data * dollarMultiplier, 0) + '$', customOptions);
 
         layer.on('mouseover', function(){
             this.openPopup();
