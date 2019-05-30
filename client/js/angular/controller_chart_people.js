@@ -49,24 +49,24 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
         if($scope.curvex) {
             // Generatin curve
 
-            if($scope.popDetails.pop_est == 0){
-
-                $scope.series_model.push([0,0]);
-                $scope.series_model_dollar.push([0,0]);
-
-                serieEst = [{
-                    x: 0,
-                    y:0,
-                    marker: {
-                        enabled: true,
-                        symbol: 'url(img/template/orange.png)'
-                    },
-                    name: 'est'
-                }];
-
-                serieEst_dollar = angular.copy(serieEst);
-
-            }
+            // if($scope.popDetails.pop_est == 0){
+            //
+            //     $scope.series_model.push([0,0]);
+            //     $scope.series_model_dollar.push([0,0]);
+            //
+            //     serieEst = [{
+            //         x: 0,
+            //         y:0,
+            //         marker: {
+            //             enabled: true,
+            //             symbol: 'url(img/template/orange.png)'
+            //         },
+            //         name: 'est'
+            //     }];
+            //
+            //     serieEst_dollar = angular.copy(serieEst);
+            //
+            // }
 
             for (var i = 0; i < $scope.curvex.length; i++)
             {
