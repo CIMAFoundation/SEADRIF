@@ -33,6 +33,8 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
         fillColor: '#ffffff'
     };
 
+    $scope.clickChartsDisableHistorical = false;
+
     $scope.detailsTitle = "ESTIMATED AFFECTED POPULATION";
 
     $scope.bAnalysis = false;
@@ -549,10 +551,11 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
 
                                     // Estimate value clicked
                                     if(serieEst.length > 0){
-                                        if(item.point.x == serieEst[0].x && item.point.y == serieEst[0].y)
+                                        if((item.point.x == serieEst[0].x && item.point.y == serieEst[0].y) || $scope.clickChartsDisableHistorical)
                                         {
                                             // Estimated point selected
                                             bEstimate = true;
+
                                             this.update({marker: {symbol: 'url(img/template/orange.png)'}});
 
                                             // Historical low data -> transparent
@@ -572,14 +575,23 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                                             $scope.sliderdata.data.pop = serieEst[0].y;
 
                                         }
+                                    } else {
+                                        if($scope.clickChartsDisableHistorical){
+                                            bEstimate = true;
+                                            $scope.populationDetails = {
+                                                pop_est: 0
+                                            }
+                                            $scope.sliderdata.data.pop = 0;
+                                        }
                                     }
 
                                     // Historical high clicked
                                     if(serieHG.length > 0){
-                                        if((item.point.x == serieHG[0].x && item.point.y == serieHG[0].y))
+                                        if(item.point.x == serieHG[0].x && item.point.y == serieHG[0].y && !$scope.clickChartsDisableHistorical)
                                         {
                                             // Historical point selected
                                             bEstimate = false;
+                                            $scope.clickChartsDisableHistorical = true;
 
                                             // Estimated data -> transparent
                                             if(chart.series[1].data.length > 0){
@@ -609,10 +621,11 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
 
                                     // Historical low cliecked
                                     if(serieHL.length > 0){
-                                        if((item.point.x == serieHL[0].x && item.point.y == serieHL[0].y))
+                                        if(item.point.x == serieHL[0].x && item.point.y == serieHL[0].y && !$scope.clickChartsDisableHistorical)
                                         {
                                             // Historical point selected
                                             bEstimate = false;
+                                            $scope.clickChartsDisableHistorical = true;
 
                                             // Estimated data -> transparent
                                             if (chart.series[1].data.length > 0){
@@ -646,6 +659,7 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
 
                                         if ($scope.bModel)
                                         {
+                                            $scope.clickChartsDisableHistorical = false;
                                             if($scope.bPeople){
                                                 $scope.detailsTitle = "ESTIMATED AFFECTED POPULATION"
                                                 $scope.typeTitleHeader = "ESTIMATED AFFECTED POPULATION";
@@ -966,7 +980,7 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
 
                                     // Estimate value clicked
                                     if(serieEst_dollar.length > 0){
-                                        if(item.point.x == serieEst_dollar[0].x && item.point.y == serieEst_dollar[0].y)
+                                        if((item.point.x == serieEst_dollar[0].x && item.point.y == serieEst_dollar[0].y) || $scope.clickChartsDisableHistorical)
                                         {
                                             // Estimated point selected
                                             bEstimate = true;
@@ -989,14 +1003,23 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                                             $scope.sliderdata.data.pop = serieEst[0].y;
 
                                         }
+                                    } else {
+                                        if($scope.clickChartsDisableHistorical){
+                                            bEstimate = true;
+                                            $scope.populationDetails = {
+                                                pop_est: 0
+                                            }
+                                            $scope.sliderdata.data.pop = 0;
+                                        }
                                     }
 
                                     // Historical high cliecked
                                     if(serieHG_dollar.length > 0){
-                                        if((item.point.x == serieHG_dollar[0].x && item.point.y == serieHG_dollar[0].y))
+                                        if(item.point.x == serieHG_dollar[0].x && item.point.y == serieHG_dollar[0].y && !$scope.clickChartsDisableHistorical)
                                         {
                                             // Historical point selected
                                             bEstimate = false;
+                                            $scope.clickChartsDisableHistorical = true;
 
                                             // Estimated data -> transparent
                                             if(chart.series[1].data.length > 0){
@@ -1025,10 +1048,11 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
 
                                     // Historical low cliecked
                                     if(serieHL_dollar.length > 0){
-                                        if((item.point.x == serieHL_dollar[0].x && item.point.y == serieHL_dollar[0].y))
+                                        if(item.point.x == serieHL_dollar[0].x && item.point.y == serieHL_dollar[0].y && !$scope.clickChartsDisableHistorical)
                                         {
                                             // Historical point selected
                                             bEstimate = false;
+                                            $scope.clickChartsDisableHistorical = true;
 
                                             // Estimated data -> transparent
                                             if(chart.series[1].data.length > 0){
@@ -1062,6 +1086,7 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
 
                                         if ($scope.bModel)
                                         {
+                                            $scope.clickChartsDisableHistorical = false;
                                             if($scope.bPeople){
                                                 $scope.detailsTitle = "ESTIMATED AFFECTED POPULATION"
                                                 $scope.typeTitleHeader = "ESTIMATED AFFECTED POPULATION";
