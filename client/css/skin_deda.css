@@ -1207,3 +1207,9 @@ a {
   margin-top: 24px; }
 
 /*# sourceMappingURL=skin_deda.css.map */
+
+.carousel.slide [class*="image"] {
+  height:100vh;
+  width:100%;
+
+}
