@@ -39,6 +39,7 @@
     <!-- RFSEA APP -->
 
     <!--fontawesome-->
+    <script src="https://kit.fontawesome.com/b03e730a38.js"></script>
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <!--flag css-->
     <link rel="stylesheet"  href="node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
@@ -245,19 +246,24 @@
 
 <div class="container-fluid rfsea_box_content home" id="bar" ng-class="{show: bShowBar, hide: !bShowBar}">
 
-    <div class="rfsea_box h-100" >
+    <div class="rfsea_box h-100 home_bar" >
         <div class="d-inline-flex align-items-start justify-content-between  date">
             <a class="ham not" href="" ng-click="showHideSideBar()"><i class="fa fa-2x " ng-class="{'fa-times': bShowBar, 'fa-chevron-right': !bShowBar}"></i></a>
 
-            <div class="text-center ">
-                <h2>About the SEADRIF platform</h2>
-                <hr>
-                <h3><!--[{{"label_001" | translate}}]--></h3>
-            </div>
+
         </div>
 
         <div class="container"  ng-if="bShowBar">
             <div class="d-flex justify-content-center flex-column">
+                <br>
+                <hr>
+                <div class="text-center title_home ">
+
+                    <h2>About the SEADRIF platform</h2>
+                    <br>
+                    <hr>
+                    <h3><!--[{{"label_001" | translate}}]--></h3>
+                </div>
                 <div class="row">
                     <p class="text-justify ">
                         Over the past decades, Southeast Asia has suffered from flooding on multiple occasions. In order to assist Lao PDR, Cambodia and Myanmar to increase their financial resilience against floods, the World Bank has commissioned the development of tools for support of rapid response financing in the wake of a natural disaster.<br>
@@ -266,10 +272,12 @@
                     </p>
                 </div>
 
-                <div class="text-center rfsea_big_txt d-flex justify-content-center align-items-center ">
+                <div class="text-center rfsea_big_txt d-flex justify-content-center align-items-center support">
 
+                    <i class="far fa-question-circle"></i>
                     <a href="doc/seadrif.pdf" target="_blank" class="rfsea_link">Support</a>
                     <span class="sep">|</span>
+                    <i class="fas fa-at"></i>
                     <a href="mailto:info@cimafoundation.org" class="rfsea_link">Contact</a>
                     <br /><br />
                 </div>
@@ -303,7 +311,7 @@
                     <!--<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 text-center">-->
                     <span class="flag-icon flag-icon-sg p-3"></span>
                     <!--</div>-->
-
+                    <br />
                 </div>
             </div>
         </div>

@@ -48,6 +48,7 @@
     <script src="bower_components/leaflet/dist/leaflet.js"></script>
     <link href="bower_components/leaflet/dist/leaflet.css" rel="stylesheet">
     <!--fontawesome-->
+    <script src="https://kit.fontawesome.com/b03e730a38.js"></script>
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <!--flag css-->
     <link rel="stylesheet"  href="node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
@@ -71,36 +72,42 @@
 
     <div class="container-fluid rfsea_box_content home" id="bar"  ng-class="{show: bShowBar, hide: !bShowBar}">
 
-        <div class="rfsea_box h-100" >
+        <div class="rfsea_box" >
             <div class="d-inline-flex align-items-start justify-content-between  date">
                 <a class="ham not" href="" ng-click="showHideSideBar()"><i class="fa fa-2x " ng-class="{'fa-times': bShowBar, 'fa-chevron-right': !bShowBar}"></i></a>
 
-                <div class="text-center ">
-                    <h2>Welcome to the SEADRIF platform</h2>
-                    <!--<hr>-->
-                    <!--<h3>&lt;!&ndash;[{{"label_001" | translate}}]&ndash;&gt;</h3>-->
-                </div>
             </div>
 
+
+
                 <!--<div class="jumbotron" ng-if="bShowBar">-->
-                <div class="container"  ng-if="bShowBar">
+                <div class="container home_bar"  ng-if="bShowBar">
+                    <br>
+                    <hr>
+                    <div class="text-center title_home">
+                        <h2>Welcome to the SEADRIF platform</h2>
+                        <!--<hr>-->
+                        <!--<h3>&lt;!&ndash;[{{"label_001" | translate}}]&ndash;&gt;</h3>-->
+                    </div>
                     <!--<div class="row" >-->
                         <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">-->
                     <div class="d-flex justify-content-center flex-column">
-                        <div class="row">
-                            <p class="text-justify ">
+                        <div class="">
+                            <p class="text-center">
                                 This platform computes flood maps, population affected and return periods for floods in Southeast Asia.
                             </p>
-                            <p>
-                                Please <a href="" ng-click="setLoginView('login')" class="rfsea_link">login</a> to start the analysis.
+                            <hr>
+                            <p class="text-center">
+                                Please <strong><a href="" ng-click="setLoginView('login')" class="rfsea_link">login</a></strong> to start the analysis.
                             </p>
                             <br /><br /><br />
                         </div>
                         <!--<div class="row">-->
-                        <div class="text-center rfsea_big_txt d-flex justify-content-center align-items-center ">
-
+                        <div class="text-center rfsea_big_txt d-flex justify-content-center align-items-center support">
+                            <i class="far fa-question-circle"></i>
                             <a href="doc/seadrif.pdf" target="_blank" class="rfsea_link">Support</a>
                             <span class="sep">|</span>
+                            <i class="fas fa-at"></i>
                             <a href="mailto:info@cimafoundation.org" class="rfsea_link">Contact</a>
                             <br /><br />
                         </div>
