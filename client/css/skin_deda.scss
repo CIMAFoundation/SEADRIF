@@ -747,7 +747,8 @@ i.icon {
   //tooltip highchart
   .highcharts-tooltip-box {
     stroke-width: 0;
-    fill: $color_font;
+    color: white;
+    fill: white; /*$color_font*/
     fill-opacity: 1;
     //transform: scale(2);
   }
@@ -773,5 +774,124 @@ i.icon {
   stroke: $color_estimate; }
 
 
+
+
+
+
 //leaflet toggle
 .leaflet-top .leaflet-control { margin-top: 24px;}
+
+/********************************************************/
+/***************** KASA customized *******************************/
+/********************************************************/
+
+.title_home {
+  width: 100%;
+  margin-top: 25px;
+}
+rfsea_box_content.hide {
+  width: 85px;
+}
+.home_bar {font-size:0.8em;}
+
+.support {
+  .far, .fas {color: $color_font; margin-right: 8px}
+}
+
+.rfsea_box_menu {
+  font-size: 1.2em;
+  li {padding: 0px 2em;}
+}
+
+.rfsea_box_menu li a:hover, .rfsea_box_menu li a:focus, .rfsea_box_menu li a.active {
+  border-bottom: 2px solid #F0C319;
+  transition: inherit;
+}
+.rfsea_login_form_box {
+  border-radius: 15px;
+  height: 75vh;
+  box-shadow:inset 0 0 0 2000px rgba($color_base,0.7);
+}
+
+.rfsea_disclaimer_box, .rfsea_date_picker_box {
+  border-radius: 15px;
+  bottom: 12%;
+}
+
+.rfsea_btn_close_login_form {
+  border-radius: 0px 0px 15px 15px;
+}
+.rfsea_btn_login_form {
+border-radius: 8px;
+}
+
+.rfsea_input_style {
+  background-color: rgba($color_font,0.1);
+  border-radius: 8px;
+}
+
+h2, h3, h4, h5 {font-weight: 400}
+
+.rfsea_box_country_details #rfsea_slider_container {
+
+  margin: auto;
+  font-size: 1.25em;
+
+}
+
+.range-bck {
+  label {
+    margin-left: -6%;
+  }
+
+}
+
+.rfsea_top_page_chart {
+  background-color: rgba(white, 0.9);
+}
+#slider_pop_item{
+label[style] {
+  font-size: 21px !important;
+  margin-bottom: 1.5rem !important;
+
+}
+}
+
+
+.toggle.image .toggle-control::before {
+
+  margin-left: calc((2em/2) + 8px);
+  font-size: 2.5em;
+  margin-top: 2px;
+}
+.toggle.image input:checked + .toggle-control::before {
+  margin-top: 2px;
+  margin-left: 2px;
+  font-size: 2.5em;
+}
+
+.bar {
+  height: 2.2em;
+}
+
+.toggle_kasa {font-size: 0.6rem}
+
+.button_map {
+  margin-left:450px;
+img{
+  margin-right: 10px;
+}
+  .attivo::after {
+    background: #F0C319;
+    border-width: 0px 0px 0 0;
+    bottom: 8px;
+    content: " ";
+    display: block;
+    height: 8px;
+    position: absolute;
+    width: 8px;
+    z-index: 99;
+    border-radius: 100%;
+    margin-left: 18px;
+  }
+}
