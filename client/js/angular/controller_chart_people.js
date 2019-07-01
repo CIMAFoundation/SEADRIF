@@ -38,7 +38,7 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
     $scope.detailsTitle = "ESTIMATED AFFECTED POPULATION";
 
     $scope.bAnalysis = false;
-    $scope.bPastEvents = true;
+    $scope.bPastEvents = false;
 
     $scope.typeTitleHeader = "ESTIMATED AFFECTED POPULATION";
 
@@ -138,49 +138,14 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
 
                 createChartPeople();
 
+                setHistoricalSeries();
+
                 $scope.setPastEventsData = function()
                 {
 
                     $scope.bPastEvents = !$scope.bPastEvents;
 
-                    if ($scope.bPastEvents)
-                    {
-                        $scope.bModel = true;
-                        if(serieEst.length > 0){
-                            // Estimated data
-                            if(chart.series[1].data.length > 0){
-                                chart.series[1].data[0].update({marker:{symbol: 'url(img/template/orange.png)'}});
-                            }
-                        }
-
-                        // Historical low data
-                        if(serieHL.length > 0){
-                            chart.series[2].data[0].update({marker:{symbol: 'url(img/template/blue_trasp.png)'}});
-                        }
-
-                        // Historical high data -> transparent
-                        if(serieHG.length > 0){
-                            chart.series[3].data[0].update({marker:{symbol: 'url(img/template/blue_trasp.png)'}});
-                        }
-
-
-                    } else {
-                        // Historical low data -> transparent
-                        if(serieEst.length > 0){
-                            chart.series[1].data[0].update({marker:{symbol: 'url(img/template/orange.png)'}});
-                        }
-
-                        // Historical low data -> transparent
-                        if(serieHL.length > 0){
-                            chart.series[2].data[0].update({marker:{symbol: 'url()'}, dataLabels:{enabled: false }});
-                        }
-
-                        // Historical high data -> transparent
-                        if(serieHG.length > 0){
-                            chart.series[3].data[0].update({marker:{symbol: 'url()'}, dataLabels:{enabled: false }});
-                        }
-
-                    }
+                    setHistoricalSeries();
 
                 }
 
@@ -1314,6 +1279,49 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
         };
 
         return objPoints;
+
+    }
+
+    function  setHistoricalSeries() {
+
+        if ($scope.bPastEvents)
+        {
+            $scope.bModel = true;
+            if(serieEst.length > 0){
+                // Estimated data
+                if(chart.series[1].data.length > 0){
+                    chart.series[1].data[0].update({marker:{symbol: 'url(img/template/orange.png)'}});
+                }
+            }
+
+            // Historical low data
+            if(serieHL.length > 0){
+                chart.series[2].data[0].update({marker:{symbol: 'url(img/template/blue_trasp.png)'}});
+            }
+
+            // Historical high data -> transparent
+            if(serieHG.length > 0){
+                chart.series[3].data[0].update({marker:{symbol: 'url(img/template/blue_trasp.png)'}});
+            }
+
+
+        } else {
+            // Historical low data -> transparent
+            if(serieEst.length > 0){
+                chart.series[1].data[0].update({marker:{symbol: 'url(img/template/orange.png)'}});
+            }
+
+            // Historical low data -> transparent
+            if(serieHL.length > 0){
+                chart.series[2].data[0].update({marker:{symbol: 'url()'}, dataLabels:{enabled: false }});
+            }
+
+            // Historical high data -> transparent
+            if(serieHG.length > 0){
+                chart.series[3].data[0].update({marker:{symbol: 'url()'}, dataLabels:{enabled: false }});
+            }
+
+        }
 
     }
 
