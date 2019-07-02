@@ -213,6 +213,8 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
 
             createChartPeople();
 
+            setHistoricalSeries();
+
             if (serieEst.length > 0){
                 //Label update
                 $scope.populationDetails = {
@@ -237,6 +239,8 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
             // Set dollar series
 
             createChartDollar();
+
+            setHistoricalSeries();
 
             if(serieEst_dollar.length > 0){
                 $scope.populationDetails = {
