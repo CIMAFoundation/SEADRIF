@@ -2,8 +2,8 @@
 
 
 
-<div class="wrap" style="margin-top: 200px;">
-    <div class="chiaro" style="background: inherit;">
+<div class="wrap chiaro" style="margin-top: 200px;">
+    <!--<div class="chiaro" style="background: inherit;">-->
 
         <div class="range-bck">
 
@@ -44,19 +44,26 @@
                     </div>
                 </div>
             </span>
-            <span class="soglia__value value__3" id="slider_pop_item">
-              <div class="thr">
+            <span class="soglia__value value__3" id="slider_pop _item">
+              <div class="thr" data-tooltip="html"  data-tooltip-conf="shadow" style="cursor: pointer;">
                 <i ng-if="data.people" class="fa icon-people"></i>
                   <i ng-if="!data.people" class="fa icon-money"></i>
-                <label style="font-size:35px; margin-bottom: .8rem;">{{data.pop*multipier | number:0}}</label>
+                <label style="font-size:35px; margin-bottom: .8rem;" >
+                    {{data.pop*multipier | number:0}}
+                </label>
                 <div class="bar"></div>
-                 <div class="small rp">
+                   <div class="tooltip ">
+                        <div class="text-center">
+                            <small>RP={{rpValue}}</small>
+                        </div>
+                    </div>
+                 <!--<div class="small rp">
                   RP={{rpValue}}
-                </div>
+                </div>-->
               </div>
             </span>
         </div>
-    </div>
+    <!--</div>-->
 </div>
 
 <!-- OLD VERSION 03/07/2018 Manuel -->
