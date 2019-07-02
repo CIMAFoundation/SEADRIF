@@ -878,13 +878,14 @@ label[style] {
 
 .button_map {
   margin-left:450px;
+  display: flex;
 img{
   margin-right: 10px;
 }
   .attivo::after {
     background: #F0C319;
     border-width: 0px 0px 0 0;
-    bottom: 8px;
+    bottom: -12px;
     content: " ";
     display: block;
     height: 8px;
@@ -894,4 +895,5 @@ img{
     border-radius: 100%;
     margin-left: 18px;
   }
+
 }
