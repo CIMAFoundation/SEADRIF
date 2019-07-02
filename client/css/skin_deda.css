@@ -421,7 +421,7 @@
 .button_map [data-tooltip=html] .tooltip {
   bottom: 60px;
   left: calc( 50% - 6px);
-  transform: translateX(-50%);
+  transform: translateX(-49.8%);
   font-size: 15px;
   padding: 4px 8px;
   border-radius: 5px;
@@ -434,18 +434,6 @@
   -ms-transform: rotate(90deg);
   transform: rotate(180deg);
   left: calc(50% - 10px);
-}
-
-.rfsea_box_content {
-  height: calc(100vh - 90px) !important;
-}
-
-.rfsea_box_content.show {
-  z-index: 1000 !important;
-}
-
-.rfsea_footer_box, .rfsea_box_menu {
-  background-color: #182d3e !important;
 }
 
 /********************************************************/
@@ -896,6 +884,12 @@ body {
 /********************************************************/
 /******************* tooltip*************************/
 /********************************************************/
+.home_bar {
+  overflow-y: auto;
+  scrollbar-color: #F0C319 #182d3e;
+  scrollbar-width: thin;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -1607,7 +1601,7 @@ h2, h3, h4, h5 {
 }
 
 .button_map {
-  margin-left: 450px;
+  /*margin-left:450px;*/
   display: flex;
 }
 .button_map img {
@@ -1625,6 +1619,60 @@ h2, h3, h4, h5 {
   z-index: 99;
   border-radius: 100%;
   margin-left: 18px;
+}
+
+.rfsea_box_content {
+  height: calc(100vh - 90px) !important;
+}
+
+.rfsea_box_content.show {
+  z-index: 1000 !important;
+}
+
+.rfsea_footer_box, .rfsea_box_menu {
+  background-color: #182d3e !important;
+}
+
+.btn_support {
+  min-width: 380px;
+  display: grid;
+}
+.btn_support a:hover {
+  color: #dddb01;
+}
+
+.riskprof_page {
+  color: #243746;
+  padding-top: 100px;
+  padding-left: 55px;
+  padding-right: 55px;
+}
+.riskprof_page .range-soglia {
+  color: #F0C319;
+}
+.riskprof_page hr {
+  border-color: #F0C319;
+  border-width: 3px;
+}
+.riskprof_page .info_col {
+  color: #243746;
+}
+.riskprof_page a {
+  color: #243746;
+}
+.riskprof_page a:hover, .riskprof_page a:focus {
+  color: auto;
+  transform: scale(1);
+  text-decoration: none;
+}
+.riskprof_page .money_togg {
+  font-size: 0.6em;
+  margin-top: 35px;
+}
+
+.chart hr {
+  border-color: #c3c9ce;
+  border-width: 1px;
 }
 
 /*# sourceMappingURL=skin_deda.css.map */

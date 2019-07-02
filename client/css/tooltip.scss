@@ -433,7 +433,7 @@ $tooltip-danger: #e67460;
 [data-tooltip="html"] .tooltip {
   bottom: 60px;
   left: calc( 50% - 6px);
-  transform: translateX(-50%);
+  transform: translateX(-49.8%);
   font-size: 15px;
   padding: 4px 8px;
   border-radius: 5px;
@@ -449,16 +449,4 @@ $tooltip-danger: #e67460;
   }
 }
 
-.rfsea_box_content {
 
-  height: calc(100vh - 90px) !important;
-
-
-}
-.rfsea_box_content.show {
-  z-index: 1000 !important;
-}
-
-.rfsea_footer_box, .rfsea_box_menu  {
-  background-color: #182d3e !important;
-}

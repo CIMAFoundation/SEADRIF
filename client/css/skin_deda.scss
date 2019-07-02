@@ -71,6 +71,12 @@ body {
 
 
 //scrollbar webkit
+.home_bar {
+  overflow-y: auto;
+scrollbar-color: #F0C319 #182d3e;
+scrollbar-width: thin;
+}
+
 ::-webkit-scrollbar {
   width: $pad;
 
@@ -877,7 +883,7 @@ label[style] {
 .toggle_kasa {font-size: 0.6rem}
 
 .button_map {
-  margin-left:450px;
+  /*margin-left:450px;*/
   display: flex;
 img{
   margin-right: 10px;
@@ -896,4 +902,63 @@ img{
     margin-left: 18px;
   }
 
+}
+
+.rfsea_box_content {
+
+  height: calc(100vh - 90px) !important;
+
+
+}
+.rfsea_box_content.show {
+  z-index: 1000 !important;
+}
+
+.rfsea_footer_box, .rfsea_box_menu  {
+  background-color: #182d3e !important;
+}
+
+.btn_support{
+  min-width: 380px;
+  display: grid;
+  a:hover {
+    color: #dddb01;
+  }
+}
+
+.riskprof_page {
+  color: $color_base;
+  padding-top: 100px;
+  padding-left: 55px;
+  padding-right: 55px;
+  .range-soglia{
+    color: $color_font;
+  }
+  hr  {
+    border-color: #F0C319;
+    border-width: 3px;
+  }
+  .info_col{
+    color: $color_base;
+  }
+  a{
+    color: $color_base;
+  }
+  a:hover, a:focus {
+    color: auto;
+    transform: scale(1);
+    text-decoration: none;
+
+  }
+  .money_togg{
+    font-size: 0.6em;
+    margin-top: 35px;
+  }
+}
+
+.chart{
+  hr  {
+    border-color: #c3c9ce;
+    border-width: 1px;
+  }
 }
