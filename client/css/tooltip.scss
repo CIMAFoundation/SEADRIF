@@ -432,10 +432,10 @@ $tooltip-danger: #e67460;
 .button_map {
 [data-tooltip="html"] .tooltip {
   bottom: 60px;
-  left: -20px;
-  width: 80px;
+  left: calc( 50% - 6px);
+  transform: translateX(-50%);
   font-size: 15px;
-  padding: 4px;
+  padding: 4px 8px;
   border-radius: 5px;
 }
   [data-tooltip="html"] .tooltip::before {
