@@ -418,6 +418,24 @@
   box-shadow: 0 2px 10px 4px rgba(0, 0, 0, 0.2);
 }
 
+.button_map [data-tooltip=html] .tooltip {
+  bottom: 60px;
+  left: -20px;
+  width: 80px;
+  font-size: 15px;
+  padding: 4px;
+  border-radius: 5px;
+}
+.button_map [data-tooltip=html] .tooltip::before {
+  top: 30px;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(180deg);
+  left: 30px;
+}
+
 /********************************************************/
 /***************** colors *******************************/
 /********************************************************/
@@ -1578,6 +1596,7 @@ h2, h3, h4, h5 {
 
 .button_map {
   margin-left: 450px;
+  display: flex;
 }
 .button_map img {
   margin-right: 10px;
@@ -1585,7 +1604,7 @@ h2, h3, h4, h5 {
 .button_map .attivo::after {
   background: #F0C319;
   border-width: 0px 0px 0 0;
-  bottom: 8px;
+  bottom: -12px;
   content: " ";
   display: block;
   height: 8px;

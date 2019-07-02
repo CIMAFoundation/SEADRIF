@@ -429,4 +429,22 @@ $tooltip-danger: #e67460;
   }
 }
 
-
+.button_map {
+[data-tooltip="html"] .tooltip {
+  bottom: 60px;
+  left: -20px;
+  width: 80px;
+  font-size: 15px;
+  padding: 4px;
+  border-radius: 5px;
+}
+  [data-tooltip="html"] .tooltip::before {
+    top: 30px;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(180deg);
+    left: 30px;
+  }
+}
