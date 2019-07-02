@@ -11,7 +11,9 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
     $scope.bRiskProfile = {status: false};
     $scope.bdistrictDetails = {status: false};
     $scope.bDatePicker = false;
-    $scope.maptype = 'scale';
+    $scope.maptype = "scale"; // Only 'scale' or 'value-translate'
+    $scope.legendtitle= "";
+    $scope.maptypeview = "scale";
     $scope.countrySelect = "";
     $scope.district_list = [];
     $scope.district_list_people = [];
@@ -386,7 +388,6 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
                 if(!bMapRaster){
                     map.fitBounds(geojsondata.getBounds());
                 }
-                // map.setZoom(5);
 
             }
 
@@ -527,51 +528,102 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
     /********* MAP EO NATIONAL START *******************/
     /***************************************************/
 
-    $scope.addLayersMap = function(mapType, legendTitle){
+    $scope.$watch("maptypeview", function(newValue, oldValue) {
 
         //Clear map from others map layer
         rfseaSrv.clearMapLayerNational(map);
         rfseaSrv.clearMap(map);
 
-        if($scope.mapType !== mapType)
-        {
-            var promises = [];
-            $scope.mapType = mapType;
-            $scope.legendtitle = legendTitle;
+        var promises = [];
 
-            if($scope.mapType == 'eo'){
-                angular.forEach($scope.district_list, function(value, key){
-                    promises.push(setLayer_eo($scope.countrySelected.id, value.properties.ID));
-                });
-            }
+        if(newValue !== oldValue){
 
-            if($scope.mapType == 'compare'){
-                angular.forEach($scope.district_list, function(value, key){
-                    promises.push(setLayer_eo_wd($scope.countrySelected.id, value.properties.ID));
-                });
-            }
+            if($scope.maptypeview == 'scale'){
 
-            if($scope.mapType == 'model'){
-                angular.forEach($scope.district_list, function(value, key){
-                    promises.push(setLayer_wd($scope.countrySelected.id, value.properties.ID));
-                });
-            }
-
-            $q.all(promises).then(function(response) {
-                //Do nothing
-                bMapRaster = true;
+                $scope.maptype = "scale";
+                $scope.paletteColors = angular.copy($scope.paletteColors_saved);
+                bMapRaster = false;
                 loadMapLayers(!$scope.bPeople, true);
 
-            });
-        } else {
-            $scope.mapType = "";
-            $scope.maptype = "scale";
-            $scope.paletteColors = angular.copy($scope.paletteColors_saved);
-            bMapRaster = false;
-            loadMapLayers(!$scope.bPeople, true);
+            } else {
+
+                bMapRaster = true;
+
+                if($scope.maptypeview == 'eo'){
+                    angular.forEach($scope.district_list, function(value, key){
+                        promises.push(setLayer_eo($scope.countrySelected.id, value.properties.ID));
+                    });
+                }
+
+                if($scope.maptypeview == 'compare'){
+                    angular.forEach($scope.district_list, function(value, key){
+                        promises.push(setLayer_eo_wd($scope.countrySelected.id, value.properties.ID));
+                    });
+                }
+
+                if($scope.maptypeview == 'model'){
+                    angular.forEach($scope.district_list, function(value, key){
+                        promises.push(setLayer_wd($scope.countrySelected.id, value.properties.ID));
+                    });
+                }
+
+                $q.all(promises).then(function(response) {
+                    //Do nothing
+                    bMapRaster = true;
+                    loadMapLayers(!$scope.bPeople, true);
+
+                });
+
+            }
+
         }
 
-    }
+    });
+
+    // $scope.addLayersMap = function(mapType, legendTitle){
+    //
+    //     //Clear map from others map layer
+    //     rfseaSrv.clearMapLayerNational(map);
+    //     rfseaSrv.clearMap(map);
+    //
+    //     if($scope.maptype !== mapType)
+    //     {
+    //         var promises = [];
+    //         $scope.maptype = mapType;
+    //         $scope.legendtitle = legendTitle;
+    //
+    //         if($scope.maptype == 'eo'){
+    //             angular.forEach($scope.district_list, function(value, key){
+    //                 promises.push(setLayer_eo($scope.countrySelected.id, value.properties.ID));
+    //             });
+    //         }
+    //
+    //         if($scope.maptype == 'compare'){
+    //             angular.forEach($scope.district_list, function(value, key){
+    //                 promises.push(setLayer_eo_wd($scope.countrySelected.id, value.properties.ID));
+    //             });
+    //         }
+    //
+    //         if($scope.maptype == 'model'){
+    //             angular.forEach($scope.district_list, function(value, key){
+    //                 promises.push(setLayer_wd($scope.countrySelected.id, value.properties.ID));
+    //             });
+    //         }
+    //
+    //         $q.all(promises).then(function(response) {
+    //             //Do nothing
+    //             bMapRaster = true;
+    //             loadMapLayers(!$scope.bPeople, true);
+    //
+    //         });
+    //     } else {
+    //         $scope.maptype = "scale";
+    //         $scope.paletteColors = angular.copy($scope.paletteColors_saved);
+    //         bMapRaster = false;
+    //         loadMapLayers(!$scope.bPeople, true);
+    //     }
+    //
+    // }
 
     function setLayer_eo(idCountry, idDistrict){
 
@@ -598,41 +650,6 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
             map.addLayer($scope.overlay);
 
         });
-
-
-
-        // rfseaSrv.getProvinceDetails(idCountry,  idDistrict, $scope.dateSelected, function(data)
-        // {
-        //     // Country zone details
-        //
-        //     var	bounds = new L.LatLngBounds(
-        //         new L.LatLng(data.data.imgs.eo.extent.ne[0],data.data.imgs.eo.extent.ne[1]),
-        //         new L.LatLng(data.data.imgs.eo.extent.sw[0],data.data.imgs.eo.extent.sw[1])
-        //     );
-        //
-        //     // Set legend parameters
-        //     $scope.paletteColors = data.data.imgs.eo.legend;
-        //     $scope.palettePosition = "bottomright";
-        //     $scope.maptype = "value-translate";
-        //
-        //     $scope.overlay = new L.ImageOverlay(baseAPIurl + 'data/img/?img=' + data.data.imgs.eo.img, bounds, {
-        //         opacity: 1,
-        //         interactive: true,
-        //         attribution: ''
-        //     });
-        //
-        //     $scope.overlay.myTag = "MapCompaire";
-        //
-        //     map.addLayer($scope.overlay);
-        //
-        // }, function(data)
-        // {
-        //     // Error
-        //     console.log(data);
-        //     vex.dialog.alert({
-        //         message: 'API loading error.'
-        //     })
-        // });
 
     }
 
@@ -662,40 +679,6 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
         });
 
-
-        // rfseaSrv.getProvinceDetails(idCountry,  idDistrict, $scope.dateSelected, function(data)
-        // {
-        //     // Country zone details
-        //
-        //     var	bounds = new L.LatLngBounds(
-        //         new L.LatLng(data.data.imgs.compare_eo_wd.extent.ne[0],data.data.imgs.compare_eo_wd.extent.ne[1]),
-        //         new L.LatLng(data.data.imgs.compare_eo_wd.extent.sw[0],data.data.imgs.compare_eo_wd.extent.sw[1])
-        //     );
-        //
-        //     // Set legend parameters
-        //     $scope.paletteColors = data.data.imgs.compare_eo_wd.legend;
-        //     $scope.palettePosition = "bottomright";
-        //     $scope.maptype = "value-translate";
-        //
-        //     $scope.overlay = new L.ImageOverlay(baseAPIurl + 'data/img/?img=' + data.data.imgs.compare_eo_wd.img, bounds, {
-        //         opacity: 1,
-        //         interactive: true,
-        //         attribution: ''
-        //     });
-        //
-        //     $scope.overlay.myTag = "MapCompaire";
-        //
-        //     map.addLayer($scope.overlay);
-        //
-        // }, function(data)
-        // {
-        //     // Error
-        //     console.log(data);
-        //     vex.dialog.alert({
-        //         message: 'API loading error.'
-        //     })
-        // });
-
     }
 
     function setLayer_wd(idCountry, idDistrict) {
@@ -722,41 +705,6 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
             map.addLayer($scope.overlay);
         });
-
-
-
-        // rfseaSrv.getProvinceDetails_promise(idCountry,  idDistrict, $scope.dateSelected, function(data)
-        // {
-        //     // Country zone details
-        //
-        //     var	bounds = new L.LatLngBounds(
-        //         new L.LatLng(data.data.imgs.wd.extent.ne[0],data.data.imgs.wd.extent.ne[1]),
-        //         new L.LatLng(data.data.imgs.wd.extent.sw[0],data.data.imgs.wd.extent.sw[1])
-        //     );
-        //
-        //     // Set legend parameters
-        //     $scope.paletteColors = data.data.imgs.wd.legend;
-        //     $scope.palettePosition = "bottomright";
-        //     $scope.maptype = "value-translate";
-        //
-        //     $scope.overlay = new L.ImageOverlay(baseAPIurl + 'data/img/?img=' + data.data.imgs.wd.img, bounds, {
-        //         opacity: 1,
-        //         interactive: true,
-        //         attribution: ''
-        //     });
-        //
-        //     $scope.overlay.myTag = "MapCompaire";
-        //
-        //     map.addLayer($scope.overlay);
-        //
-        // }, function(data)
-        // {
-        //     // Error
-        //     console.log(data);
-        //     vex.dialog.alert({
-        //         message: 'API loading error.'
-        //     })
-        // });
 
     }
 

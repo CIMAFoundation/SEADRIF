@@ -1,49 +1,52 @@
 
 <div class="rfsea_footer_box d-inline-flex  align-items-center justify-content-between">
-    <div class="button_map">
-        <a href="#" class="attivo"><img src="./img/people_map.svg" width="45px"></a>
-        <a href="#"><img src="./img/sta_map.svg" width="45px"></a>
-        <a href="#"><img src="./img/model_map.svg" width="45px"></a>
-        <a href="#"><img src="./img/layer_map.svg" width="45px"></a>
+    <div class="button_map" >
+        <div ng-show="maptype">
+            <a href="#" ng-class="{'attivo': maptype=='scale'}" ng-click="addLayersMap('scale', '')"><img src="./img/people_map.svg" width="45px"></a>
+            <a href="#" ng-class="{'attivo': maptype=='eo'}" ng-click="addLayersMap('eo', 'EO MAP')"><img src="./img/sta_map.svg" width="45px"></a>
+            <a href="#" ng-class="{'attivo': maptype=='model'}" ng-click="addLayersMap('model', 'MODEL MAP')"><img src="./img/model_map.svg" width="45px"></a>
+            <a href="#" ng-class="{'attivo': maptype=='compare'}" ng-click="addLayersMap('compare', 'EO/MODEL MAP')"><img src="./img/layer_map.svg" width="45px"></a>
+        </div>
+
     </div>
     <div>
-    <a href="http://www.worldbank.org/en/programs/disaster-risk-financing-and-insurance-program" target="_blank" style="text-decoration: none; border-bottom:0px !important; padding:0 10px;">
-        <img src="img/logo_01_mono.png" alt="" style="height:70px;" >
-    </a>
-   <!-- <a href="https://www.gfdrr.org/en" target="_blank" style="text-decoration: none; border-bottom:0px !important; padding:0 10px;">
-        <img src="img/logo_02_mono.png" alt="" style="height:70px;">
-    </a>
-    <a href="https://www.rockefellerfoundation.org/" target="_blank" style="text-decoration: none; border-bottom:0px !important; padding:0 10px;">
-        <img src="img/logo_03_mono.png" alt="" style="height:70px;" >
-    </a>-->
-    <!--<span class="flag-icon flag-icon-jp" style=" margin:0 10px;"></span>-->
-    <!--
-
-    <div style="padding:5px; background-color: rgba(255, 248, 220, 0.75); margin-right: 20px;" >
-        <a href="http://www.worldbank.org/en/programs/disaster-risk-financing-and-insurance-program" target="_blank" style="text-decoration: none; border-bottom:0px !important;">
-            <img src="img/logo_01.png" alt="" style="max-width:80px;" >
+        <a href="http://www.worldbank.org/en/programs/disaster-risk-financing-and-insurance-program" target="_blank" style="text-decoration: none; border-bottom:0px !important; padding:0 10px;">
+            <img src="img/logo_01_mono.png" alt="" style="height:70px;" >
         </a>
-        <a href="https://www.gfdrr.org/en" target="_blank" style="text-decoration: none; border-bottom:0px !important;">
-            <img src="img/logo_02.png" alt="" style="max-width:80px;">
+       <!-- <a href="https://www.gfdrr.org/en" target="_blank" style="text-decoration: none; border-bottom:0px !important; padding:0 10px;">
+            <img src="img/logo_02_mono.png" alt="" style="height:70px;">
         </a>
-        <a href="https://www.rockefellerfoundation.org/" target="_blank" style="text-decoration: none; border-bottom:0px !important;">
-            <img src="img/logo_03.png" alt="" style="max-width:80px;" >
+        <a href="https://www.rockefellerfoundation.org/" target="_blank" style="text-decoration: none; border-bottom:0px !important; padding:0 10px;">
+            <img src="img/logo_03_mono.png" alt="" style="height:70px;" >
+        </a>-->
+        <!--<span class="flag-icon flag-icon-jp" style=" margin:0 10px;"></span>-->
+        <!--
+
+        <div style="padding:5px; background-color: rgba(255, 248, 220, 0.75); margin-right: 20px;" >
+            <a href="http://www.worldbank.org/en/programs/disaster-risk-financing-and-insurance-program" target="_blank" style="text-decoration: none; border-bottom:0px !important;">
+                <img src="img/logo_01.png" alt="" style="max-width:80px;" >
+            </a>
+            <a href="https://www.gfdrr.org/en" target="_blank" style="text-decoration: none; border-bottom:0px !important;">
+                <img src="img/logo_02.png" alt="" style="max-width:80px;">
+            </a>
+            <a href="https://www.rockefellerfoundation.org/" target="_blank" style="text-decoration: none; border-bottom:0px !important;">
+                <img src="img/logo_03.png" alt="" style="max-width:80px;" >
+            </a>
+
+            <img src="img/japan_flag.png" alt="" style="max-width:45px;" >
+
+        </div>
+    -->
+        <a href="">
+            <img src="img/SEADRIF_full color-hor.png" alt="" style="height:70px;" >
         </a>
 
-        <img src="img/japan_flag.png" alt="" style="max-width:45px;" >
-
-    </div>
--->
-    <a href="">
-        <img src="img/SEADRIF_full color-hor.png" alt="" style="height:70px;" >
-    </a>
-
-    <!--<span class="invert " style="font-size:1.5em; font-weight: 600">SEADRIF</span>-->
-<!--    <span class="sep invert">|</span>-->
-    <!--<span class="invert" style="font-size:0.75em; font-weight: 700">RISK PLATFORM </span>-->
-    <small> v.0.9 </small>
-    <span class="pl-4"><a href="mailto:info@cimafoundation.org" class="invert small focus_alt"><i class="fa fa-envelope"></i></a></span>
-    <span class="pl-4"><a href="doc/seadrif.pdf" target="_blank" class="invert small focus_alt"><i class="fa fa-info-circle" ></i></a></span>
+        <!--<span class="invert " style="font-size:1.5em; font-weight: 600">SEADRIF</span>-->
+    <!--    <span class="sep invert">|</span>-->
+        <!--<span class="invert" style="font-size:0.75em; font-weight: 700">RISK PLATFORM </span>-->
+        <small> v.0.9 </small>
+        <span class="pl-4"><a href="mailto:info@cimafoundation.org" class="invert small focus_alt"><i class="fa fa-envelope"></i></a></span>
+        <span class="pl-4"><a href="doc/seadrif.pdf" target="_blank" class="invert small focus_alt"><i class="fa fa-info-circle" ></i></a></span>
     </div>
 
     <!--<div class="">-->

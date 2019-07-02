@@ -54,8 +54,12 @@ rfseaApp.directive('rfseafooter',function(){
     return {
         // transclude: true,
         restrict: 'E',
-        controller: "rfseafooetrCtrl",
-        templateUrl: 'js/views/footer.html'
+        controller: "rfseafooterCtrl",
+        templateUrl: 'js/views/footer.html',
+        scope: {
+            maptype: "=",
+            legendtitle: "="
+        }
     }
 });
 

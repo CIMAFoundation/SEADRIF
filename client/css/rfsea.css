@@ -418,6 +418,7 @@ a:hover
     bottom:0px;
     padding: 10px;
     font-size: 20px;
+    z-index:1010 !important;
 }
 
 /********************************************************/

@@ -133,7 +133,7 @@
 
     <topmenu userinfo="userinfo" countryselected="countrySelected" countries="countriesList" riskprofile-show="bRiskProfile.status" district-show="bDistrict" districtdetails="false"></topmenu>
 
-    <rfseafooter></rfseafooter>
+
 
     <div class="container-fluid rfsea_box_content home_bar" ng-class="{show: bShowBar, hide: !bShowBar}" ng-if="!bRiskProfile.status">
 
@@ -243,17 +243,17 @@
                                     <hr>
                                     <h5 class="rfsea_box_country_details_name_subtitle">Districts</h5>
                                     <br>
-                                    <div class="row text-center rfsea_margin_bottom">
-                                        <div class="col rfsea_box_maps_command" ng-class="{'rfsea_map_active': mapType == 'eo'}">
-                                            <a href="" ng-click="addLayersMap('eo', 'EO MAP')" class="rfsea_link">EO</a>
-                                        </div>
-                                        <div class="col rfsea_box_maps_command" ng-class="{'rfsea_map_active': mapType == 'model'}">
-                                            <a href="" ng-click="addLayersMap('model', 'MODEL MAP')" class="rfsea_link">MODEL</a>
-                                        </div>
-                                        <div class="col rfsea_box_maps_command" ng-class="{'rfsea_map_active': mapType == 'compare'}">
-                                            <a href="" ng-click="addLayersMap('compare', 'EO/MODEL MAP')" class="rfsea_link">EO/MODEL</a>
-                                        </div>
-                                    </div>
+                                    <!--<div class="row text-center rfsea_margin_bottom">-->
+                                        <!--<div class="col rfsea_box_maps_command" ng-class="{'rfsea_map_active': mapType == 'eo'}">-->
+                                            <!--<a href="" ng-click="addLayersMap('eo', 'EO MAP')" class="rfsea_link">EO</a>-->
+                                        <!--</div>-->
+                                        <!--<div class="col rfsea_box_maps_command" ng-class="{'rfsea_map_active': mapType == 'model'}">-->
+                                            <!--<a href="" ng-click="addLayersMap('model', 'MODEL MAP')" class="rfsea_link">MODEL</a>-->
+                                        <!--</div>-->
+                                        <!--<div class="col rfsea_box_maps_command" ng-class="{'rfsea_map_active': mapType == 'compare'}">-->
+                                            <!--<a href="" ng-click="addLayersMap('compare', 'EO/MODEL MAP')" class="rfsea_link">EO/MODEL</a>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
                                 </div>
                             </div>
                         </div>
@@ -283,8 +283,10 @@
 
     <div ng-if="bRiskProfile.status" style="z-index: 1000; position:absolute; width: 100%; top:0; left:0;">
         <rfseachartpeople datachart="datachart" curvex="countrycurve.x" curvey="countrycurve.y" pop-details="populationDetails" b-risk-profile="bRiskProfile.status" countryhomeshow="bCountryHome.status" sliderdata="sliderData"></rfseachartpeople>
-        <rfseafooter></rfseafooter>
+        <!--<rfseafooter maptype="maptypeview" legendtitle="legendtitle"></rfseafooter>-->
     </div>
+
+    <rfseafooter maptype="maptypeview" legendtitle="legendtitle"></rfseafooter>
 
 </body>
 
