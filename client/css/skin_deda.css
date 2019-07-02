@@ -436,6 +436,18 @@
   left: calc(50% - 10px);
 }
 
+.rfsea_box_content {
+  height: calc(100vh - 90px) !important;
+}
+
+.rfsea_box_content.show {
+  z-index: 1000 !important;
+}
+
+.rfsea_footer_box, .rfsea_box_menu {
+  background-color: #182d3e !important;
+}
+
 /********************************************************/
 /***************** colors *******************************/
 /********************************************************/
