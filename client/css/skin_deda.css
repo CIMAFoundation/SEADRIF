@@ -433,7 +433,7 @@
   -o-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   transform: rotate(180deg);
-  left: 30px;
+  left: calc(50% - 10px);
 }
 
 /********************************************************/
