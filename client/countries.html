@@ -135,7 +135,7 @@
 
     <rfseafooter></rfseafooter>
 
-    <div class="container-fluid rfsea_box_content" ng-class="{show: bShowBar, hide: !bShowBar}" ng-if="!bRiskProfile.status">
+    <div class="container-fluid rfsea_box_content home_bar" ng-class="{show: bShowBar, hide: !bShowBar}" ng-if="!bRiskProfile.status">
 
 
         <div class="rfsea_box">
@@ -220,10 +220,12 @@
                 </div>
                 <div class="row">
                     <div class="mx-auto">
+                        <div class="toggle_kasa">
                         <label class="label toggle sticky sidebar image" style="margin-bottom: 100px;">
                             <input type="checkbox" class="toggle_input" ng-click="setTypeDataToShow()"/>
                             <div class="toggle-control"></div>
                         </label>
+                            </div>
                     </div>
                 </div>
 
