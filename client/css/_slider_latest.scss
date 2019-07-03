@@ -1,6 +1,7 @@
+
 // Base Colors
 $shade-10: $color_base !default;
-$shade-1: orange !default;
+$shade-1: $color_font !default;
 $shade-0: $color_font !default;
 $shade-2: magenta !default;
 $teal: #1abc9c !default;
@@ -22,22 +23,22 @@ $range-label-width: 60px !default;
 $range-slider-height:30px;
 $range-border-width: 3px;
 
-$segment_value:200px;
+$segment_value: 200px;
 $segment_value-a: 100px;
 $segment_value-b: 200px;
 $segment_value-c: 150px;
 $segment-value-sum: $segment_value-a + $segment_value-b + $segment_value-c;
 
 $range-label-height-min: 30px;
-$range-label-height-max: 3em;
-$range-label-pad-min:8px;
-$range-label-pad-max:2em;
+$range-label-height-max: 100px;
+$range-label-pad-min: 8px;
+$range-label-pad-max: 50px;
 
 $thr_size: 40px;
-$pad_initial:20px;
+$pad_initial: 20px;
 
 
-$b_width:4px;
+$b_width: 4px;
 $b_style:solid;
 
 @mixin border($direction, $b_width, $b_style, $color) {
@@ -46,6 +47,10 @@ $b_style:solid;
 @mixin border-default {
   border: $b_width $b_style $shade-0;
 }
+@mixin border-inverse {
+  border: $b_width $b_style $shade-10;
+}
+
 
 
 // START Reset
@@ -63,6 +68,7 @@ body {
   //padding: 60px 20px;
   //margin:260px 0;
   margin: calc(#{$width} - 2 * #{$pad_initial});
+
 
 
   @media (min-width: 600px) {
@@ -87,19 +93,12 @@ body {
   align-items:center;
   justify-content:flex-start;
   position:relative;
-  //width:99vw;
-  width:$range-width;
-
-}
-
-.chiaro, .scuro {
-  //width: $range-width;
   min-height: $range-height;
+
 }
-.chiaro {background:$shade-10;}
-.scuro {background:$shade-0; opacity:0.5;}
-.chiaro, .scuro {
-  //margin:auto;
+
+.chiaro, .scuro, .wrap {
+
   text-align:center;
 }
 
@@ -112,7 +111,7 @@ body {
     flex-direction:row;
     justify-content:flex-start;
     position:relative;
-    //width:99%;
+
 
   }
 
@@ -125,13 +124,8 @@ body {
   }
   &-bck + &-soglia {
     position:absolute;
-    left: $pad_initial;
   }
-
 }
-
-
-// .range-step {position:absolute; width:100%;}
 
 
 $step: 6;
@@ -145,7 +139,6 @@ $cd: red, purple;
   $pxs: append($pxs, $i * 100% / $step );
   .range-bck > .value__#{$i} {
     margin-top:$range-height;
-    //padding-left: 100% / $step;
     @include border('right', $b_width, $b_style, $shade-0);
     padding-top:20%;
     label {position:absolute;}
@@ -155,31 +148,29 @@ $cd: red, purple;
     }
   }
   .range-step {
-    >.step__1 {    background-image: linear-gradient(90deg, $ab);}
-    >.step__2 {    background-image: linear-gradient(90deg, $bc);}
-    >.step__3 {    background-image: linear-gradient(90deg, $cd);}
-    //@include border('bottom', $b_width, $b_style, $shade-0);
-
+    .step__1 {    background-image: linear-gradient(90deg, $ab);}
+    .step__2 {    background-image: linear-gradient(90deg, $bc);}
+    .step__3 {    background-image: linear-gradient(90deg, $cd);}
   }
 }
 
-.range-bck > [class*="value__"] {
+
+
+.range-bck [class*="value__"] {
   padding-left: ( $range-width / $step ) - $b_width;
-  //padding-left: 300px;
+  // color: $color_font;
 }
 
-[class*="step__"] {
-  //width:calc(100% / 3);
-  //border:5px solid cyan;
-  //height:$range-height;
+[class*="step__"]  {
   height:calc( #{$range-height} );
+  width:( $range-width / 3 );
+  // color: $shade-0;
 }
 .range-step {
   position:absolute;
-  //width:100%;
 }
 
-$value_3_pos: $range-label-height-max * 1.5;
+$value_3_pos: $range-label-height-max;
 
 
 .range-soglia {position:absolute; margin-left:$pad_initial;}
@@ -187,23 +178,26 @@ $value_3_pos: $range-label-height-max * 1.5;
 .soglia__value {
   position:absolute;
   width:$thr_size; height:$thr_size;
+  //margin-left: -($thr_size / 2);
   @include border-default;
   border-radius:50%;
-  background-color: $shade-10;
+  // background-color: $shade-10;
   margin-top: - $range-height;
-  line-height:2;
-  // padding:1em;
+   line-height:2;
+  z-index:120;
   &.value__3 {
-    color:$shade-0;
-    // position:absolute;
-    font-size: $range-label-height-max;
-    // line-height: $range-label-height-max/2;
+    // color:$shade-0;
+    font-size: $range-label-height-max / 3;
     height: $range-label-height-max;
     width: $range-label-height-max;
-    padding-top: $range-label-height-max/2;
+    padding-top: $range-label-height-max / 2;
     letter-spacing:-0.05em;
-    margin-top: -$value_3_pos;
+    line-height: inherit;
+    // altezza pop + mezza altezza range - border width
+    //top: -($range-label-height-max + ($range_height / 2 - $b_width) );
+    top: -$range-label-height-max ;
     z-index: 110;
+    margin-left: -($range-label-height-max / 2);
   }
 }
 
@@ -216,29 +210,75 @@ $value_3_pos: $range-label-height-max * 1.5;
 }
 .bar {
   width: $b_width;
-  background-color: $shade-0;
+  // background-color: $shade-0;
   z-index:1;
   position:absolute;
   top: 100%;
-  // height: calc((100% - #{$thr_size}) - (#{$range-height} + #{$b_width} + #{$value_3_pos}));
-  height:  $value_3_pos - $range-label-height-max;
+  height:  $range-label-height-max;
 }
 
 .rp {
   font-size:50%;
   padding: 5px 1rem;
-  background:$shade-10;
+  // background:$shade-10;
   @include border-default;
   border-radius:2rem;
-  transform:scale(0.6) translateY(-$range-height - $thr_size/2);
+  $operation: -$range-height;
+  transform: scale(0.6) translateY(#{$operation});
   font-weight:bolder;
   letter-spacing:0.002em;
   z-index:1;
 
 }
-/*************************************************/
-/******* Footer personalizzazione ****************/
-/*************************************************/
+/*
+==================================================================
+Color set base chiaro/scuro
+==================================================================
+*/
+.chiaro .wrap {
+
+  //background: $shade-10;
+  color: $shade-0;
+  .rp, .soglia__value {
+    background: $shade-10; color: $shade-1;
+  }
+  .soglia__value__3 {
+    color: $shade-1;
+  }
+  .bar {
+    background: $shade-0;
+  }
+  .range-bck > [class*="value__"] {
+    color: $shade-0;
+
+  }
+}
+.scuro .wrap {
+    //background:$shade-0;
+    color:$shade-10;
+    .rp, .soglia__value { background:rgb(254,254,254); color: $shade-10;}
+    .soglia__value__3 {
+      color:$shade-10;
+    }
+    .bar {background:$shade-10;}
+    .range-bck {@include border('bottom', $b_width, $b_style, $shade-10);}
+    .soglia__value, .rp {@include border-inverse;}
+    .range-bck > [class*="value__"] {
+      @include border('right', $b_width, $b_style, $shade-10);
+      color: $shade-10;
+    }
+
+}
+
+
+
+
+/*
+==================================================================
+footer
+==================================================================
+*/
+
 
 .rfsea_footer_box {
   z-index:120;

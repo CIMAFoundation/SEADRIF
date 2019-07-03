@@ -6,8 +6,8 @@ rfseaApp.controller('rfseasliderCtrl', function($rootScope, $scope, $timeout, rf
 
     var gridValues = [0, 3000, 10000, 100000, 500000, 1000000, 10000000];
 
-    var marginLeftZeroValue = 88;
-    var marginLeftZeroValueThr = 40;
+    var marginLeftZeroValue = 0;
+    var marginLeftZeroValueThr = 0;
 
     var thr1Width = 0;
     var thr2Width = 0;
