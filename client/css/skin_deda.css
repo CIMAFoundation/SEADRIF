@@ -1656,6 +1656,7 @@ h2, h3, h4, h5 {
 }
 .riskprof_page .info_col {
   color: #243746;
+  margin-bottom: 100px;
 }
 .riskprof_page a {
   color: #243746;
@@ -1673,6 +1674,14 @@ h2, h3, h4, h5 {
 .chart hr {
   border-color: #c3c9ce;
   border-width: 1px;
+}
+
+html {
+  overflow: auto;
+}
+
+.chart_ctr {
+  height: 250px;
 }
 
 /*# sourceMappingURL=skin_deda.css.map */

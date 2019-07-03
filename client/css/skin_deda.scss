@@ -940,6 +940,7 @@ img{
   }
   .info_col{
     color: $color_base;
+    margin-bottom: 100px;
   }
   a{
     color: $color_base;
@@ -962,3 +963,7 @@ img{
     border-width: 1px;
   }
 }
+
+html {overflow: auto}
+
+.chart_ctr{height: 250px;}
