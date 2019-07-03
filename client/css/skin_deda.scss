@@ -37,11 +37,12 @@ body {
   background-size: cover;
 }
 
-
+.carousel{
 [class*="image"] {
   height:100vh;
   width:100%;
 
+}
 }
 
 .carousel-inner:before {
@@ -754,7 +755,7 @@ i.icon {
   .highcharts-tooltip-box {
     stroke-width: 0;
     color: white;
-    fill: white; /*$color_font*/
+    fill: $color_font; /*$color_font*/
     fill-opacity: 1;
     //transform: scale(2);
   }
@@ -852,9 +853,9 @@ h2, h3, h4, h5 {font-weight: 400}
 
 }
 
-.rfsea_top_page_chart {
+/*.rfsea_top_page_chart {
   background-color: rgba(white, 0.9);
-}
+}*/
 #slider_pop_item{
 label[style] {
   font-size: 21px !important;
@@ -931,6 +932,7 @@ img{
   padding-top: 100px;
   padding-left: 55px;
   padding-right: 55px;
+  min-height:100vh;
   .range-soglia{
     color: $color_font;
   }
@@ -962,8 +964,9 @@ img{
     border-color: #c3c9ce;
     border-width: 1px;
   }
+  label {
+    margin-bottom: 0 !important;
+  }
 }
 
 html {overflow: auto}
-
-.chart_ctr{height: 250px;}

@@ -267,6 +267,8 @@ Color set base chiaro/scuro
       @include border('right', $b_width, $b_style, $shade-10);
       color: $shade-10;
     }
+  margin-bottom: 50px; /*margin per vista mobile*/
+  margin-top: -45px;
 
 }
 

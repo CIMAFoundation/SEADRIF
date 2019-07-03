@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="rfsea_top_page_chart riskprof_page">
+        <div class="rfsea_top_page_chart riskprof_page" ng-class="{'rfsea_box_chart_model': bModel, 'rfsea_box_chart_historical': !bModel}">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-8">
                     <div class="d-flex justify-content-between align-items-center" >
@@ -14,32 +14,27 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6 chart">
+                        <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 chart">
                             <div>
                                 <div id="chartRFSEA_people_model" class="delay"></div>
                             </div>
                             <hr>
-                            <div class="d-flex flex-row justify-content-between mt-3 chart_ctr">
-                                <div class="d-flex flex-column align-items-center">
-                                    <label>Alternative Scenario</label>
+                            <div class="d-flex flex-row align-items-center">
                                     <label class="label toggle classic onoff align-self-center">
                                         <input type="checkbox" class="toggle_input" ng-click="setAlternativeScenario()" checked="false"/>
                                         <div class="toggle-control"></div>
+
                                     </label>
+                                <label>Alternative Scenario</label>
                                 </div>
-                                <div class="d-flex flex-column align-items-center">
-                                    <label>Past Events</label>
+                            <div class="d-flex flex-row align-items-center">
+
                                     <label class="label toggle classic onoff align-self-center">
                                         <input type="checkbox" class="toggle_input" ng-click="setPastEventsData()" checked="false"/>
                                         <div class="toggle-control"></div>
                                     </label>
-                                </div>
-                                <div class="d-flex flex-column align-items-center">
-                                    <label class="label toggle calssic image align-self-center" style="">
-                                        <input type="checkbox" class="toggle_input" ng-click="setTypeDataToShow()"/>
-                                        <div class="toggle-control money_togg"></div>
-                                    </label>
-                                </div>
+                                <label>Past Events</label>
+
 
 
                             </div>
@@ -47,36 +42,45 @@
 
 
 
-                        <div class="col-6">
-                            <!--<div class="d-flex flex-row justify-content-center" ng-if="bModel">
-                                &lt;!&ndash;<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">&ndash;&gt;
-                                <img src="img/estimated@2x.png" alt="" style="object-fit: contain;"/>
-                                &lt;!&ndash;</div>&ndash;&gt;
-                                &lt;!&ndash;<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">&ndash;&gt;
-                                <div class="text-left" style="margin-left:20px;">
-                                    <span style="font-size: 2em; text-transform: uppercase;">{{detailsTitle}}</span><br />
-                                    <strong><span style="font-size: 2em;">{{populationDetails.pop_est | number: 0}} <span ng-if="!bPeople">$</span></span></strong>
-                                    <br />
-                                    <span class="" ng-if="bPeople"><span style="font-size:1.5em">{{(populationDetails.pop_est * 100) / datachart.population | number: 2}}% <span style="text-transform: lowercase;">of</span> {{datachart.population | number: 0}}</span></span>
-                                    <span class="" ng-if="!bPeople"><span style="font-size:1.5em">{{(populationDetails.pop_est * 100) / (datachart.population * dollarValue) | number: 2}}% <span style="text-transform: lowercase;">of</span> {{datachart.population * dollarValue | number: 0}}$</span></span>
-                                </div>
-
-                                &lt;!&ndash;</div>&ndash;&gt;
-                            </div>-->
-                            <div class="d-flex flex-row justify-content-center" ng-if="!bModel">
+                        <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12">
+                            <div class="d-flex flex-row justify-content-center" ng-if="bModel">
                                 <!--<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">-->
-                                <img src="img/events.png" alt="" style="object-fit: contain;"/>
+<!--                                <img src="img/estimated@2x.png" alt="" style="object-fit: contain;"/>-->
                                 <!--</div>-->
                                 <!--<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">-->
-                                <div class="text-left" style="margin-left:20px;">
-                                    <span style="font-size: 2em; text-transform: uppercase;">{{detailsTitle}}</span><br />
-                                    <strong><span style="font-size: 2em;">{{populationDetails.pop_est | number: 0}} <span ng-if="!bPeople">$</span></span></strong>
+                                <div class="text-center" style="margin-left:20px; line-height: 1.5;">
+                                    <span style="font-size: 1.6em; text-transform: uppercase;">{{detailsTitle}}</span><br />
+                                    <strong><span style="font-size: 3em;">{{populationDetails.pop_est | number: 0}} <span ng-if="!bPeople">$</span></span></strong>
                                     <br />
                                     <span class="" ng-if="bPeople"><span style="font-size:1.5em">{{(populationDetails.pop_est * 100) / datachart.population | number: 2}}% <span style="text-transform: lowercase;">of</span> {{datachart.population | number: 0}}</span></span>
                                     <span class="" ng-if="!bPeople"><span style="font-size:1.5em">{{(populationDetails.pop_est * 100) / (datachart.population * dollarValue) | number: 2}}% <span style="text-transform: lowercase;">of</span> {{datachart.population * dollarValue | number: 0}}$</span></span>
                                 </div>
 
                                 <!--</div>-->
+                            </div>
+                            <div class="d-flex flex-row justify-content-center" ng-if="!bModel">
+                                <!--<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">-->
+<!--                                <img src="img/events.png" alt="" style="object-fit: contain;"/>-->
+                                <!--</div>-->
+                                <!--<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">-->
+                                <div class="text-center" style="margin-left:20px; line-height: 1.5;">
+                                    <span style="font-size: 1.6em; text-transform: uppercase;">{{detailsTitle}}</span><br />
+                                    <strong><span style="font-size: 3em;">{{populationDetails.pop_est | number: 0}} <span ng-if="!bPeople">$</span></span></strong>
+                                    <br />
+                                    <span class="" ng-if="bPeople"><span style="font-size:1.5em">{{(populationDetails.pop_est * 100) / datachart.population | number: 2}}% <span style="text-transform: lowercase;">of</span> {{datachart.population | number: 0}}</span></span>
+                                    <span class="" ng-if="!bPeople"><span style="font-size:1.5em">{{(populationDetails.pop_est * 100) / (datachart.population * dollarValue) | number: 2}}% <span style="text-transform: lowercase;">of</span> {{datachart.population * dollarValue | number: 0}}$</span></span>
+                                </div>
+
+
+
+                                <!--</div>-->
+                            </div>
+
+                            <div class="d-flex flex-row justify-content-center">
+                                <label class="label toggle classic image align-self-center" style="">
+                                    <input type="checkbox" class="toggle_input" ng-click="setTypeDataToShow()"/>
+                                    <div class="toggle-control money_togg"></div>
+                                </label>
                             </div>
 
                             <div class="d-flex flex-row justify-content-around scuro">
@@ -87,24 +91,39 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-4 info_col">
-                    <h2 style="font-size: 1.5em;">SEADRIF calculation</h2>
-                    <hr>
-                    <p class="text-justify">
-                        The best estimate of people affected refers to a seven-day period, from {{datachart.dateFrom | date: 'MMMM dd'}} to {{datachart.dateTo | date: 'MMMM dd'}}. The JRC-GHS population density grid was used (see alternative scenarios for other population grids).
-                        Flood information that was used:
-                        Gauge data from 5 MRC stations,
-                        2 MODIS images (3-day composites),
-                        22 stations from GLOFFIS hydrologic model,
-                        8 stations from GLOSSIS storm surge model.
-                    </p>
+
+                    <div class="" ng-if="bModel">
+                        <h2 style="font-size: 1.5em;">SEADRIF calculation</h2>
+                        <hr>
+                        <p class="text-justify">
+                            The best estimate of people affected refers to a seven-day period, from {{datachart.dateFrom | date: 'MMMM dd'}} to {{datachart.dateTo | date: 'MMMM dd'}}. The JRC-GHS population density grid was used (see alternative scenarios for other population grids).
+                            Flood information that was used:
+                            Gauge data from 5 MRC stations,
+                            2 MODIS images (3-day composites),
+                            22 stations from GLOFFIS hydrologic model,
+                            8 stations from GLOSSIS storm surge model.
+                        </p>
+                    </div>
+
+                    <div class="" ng-if="!bModel">
+                        <h2 style="font-size: 1.5em;">EVENT Description</h2>
+                        <hr>
+                            <h2 style="font-size: 1.2em;">{{titleHistoricalSelected}}</h2>
+
+                            <p class="text-justify">
+                                {{descHistoricalSelected}}
+                            </p>
+                    </div>
+
+
                 </div>
             </div>
 
         </div>
 
 
-        <!-- CHIEDERE MANUELITO
-        <div class="rfsea_box_chart_details" ng-class="{'rfsea_box_chart_model': bModel, 'rfsea_box_chart_historical': !bModel}">
+
+        <!--<div class="rfsea_box_chart_details" ng-class="{'rfsea_box_chart_model': bModel, 'rfsea_box_chart_historical': !bModel}">
             <div class="container-fluid">
 
 
@@ -126,6 +145,10 @@
                 </div>
             </div>
         </div>-->
+
+
+
+
     </div>
 </div>
 
