@@ -970,3 +970,74 @@ img{
 }
 
 html {overflow: auto}
+
+.flags {font-size: 3em; margin-top:10px;}
+
+
+/*------------------------------------*/
+/*-----------CSS MOBILE --------------*/
+/*------------------------------------*/
+@media only screen and (max-width: 900px) {
+  .btn_support {
+    min-width: 0px;
+  }
+  .rfsea_box_content.show.home {
+    min-width: 400px;
+  }
+
+  .rfsea_disclaimer_box {
+    position: inherit;
+    text-align: center;
+  }
+  .rfsea_box_menu li {
+    float: left;
+    padding: 0px !important;
+    margin-right: 10px;
+    margin-left: 10px;
+    border-right: none;
+    border-right-color: currentcolor;
+    border-bottom: 0px solid #F0C319;
+  }
+  .rfsea_box_menu {
+    left: 85px !important;
+    right: auto !important;
+  }
+
+}
+
+@media only screen and (max-width: 600px) {
+
+  .footer_item {
+    display: flex;
+    align-items: center;
+  }
+
+  .rfsea_footer_box {
+    display: inline !important;
+  }
+
+  .mobile__menu {
+    display: inline;
+    z-index: 999999;
+    position: relative;
+  }
+
+
+  .rfsea_box_content.show.home {
+    min-width: 100vw;
+  }
+
+  .rfsea_box_menu {
+    left: auto !important;;
+    right: 55px !important;;
+  }
+  .flags {font-size: 2.5em; margin-top:10px;}
+
+
+
+
+
+
+
+
+}
