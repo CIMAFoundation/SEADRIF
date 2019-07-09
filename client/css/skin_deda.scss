@@ -985,10 +985,17 @@ html {overflow: auto}
   .rfsea_login_form {
     z-index: 9999;
   }
+  .rfsea_box_menu li {
+    padding: 0px 1em;
+  }
+  .rfsea_login_form_box {
+
+    margin-top: 95px;
+  }
+  .box_ctr{
+    margin-top: 55px;
+  }
 }
-
-
-
 
 @media only screen and (max-width: 900px) {
   .btn_support {
@@ -1011,10 +1018,8 @@ html {overflow: auto}
     border-right-color: currentcolor;
     border-bottom: 0px solid #F0C319;
   }
-  //.rfsea_box_menu {
-  //  left: 85px !important;
-  //  right: auto !important;
-  //}
+
+
 
 }
 
@@ -1047,6 +1052,17 @@ html {overflow: auto}
     b{display: none}
   }
   .flags {font-size: 2.5em; margin-top:10px;}
+  .box_ctr{
+    margin-top: 110px;
+  }
+
+  .footer_item {
+    justify-content: center;
+  }
+  .button_map{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  }
 
 
 
