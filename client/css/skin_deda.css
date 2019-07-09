@@ -1725,9 +1725,18 @@ html {
   margin-top: 10px;
 }
 
+.footer_item img {
+  height: 70px;
+}
+
 /*------------------------------------*/
 /*-----------CSS MOBILE --------------*/
 /*------------------------------------*/
+@media only screen and (max-width: 1600px) {
+  .rfsea_login_form {
+    z-index: 9999;
+  }
+}
 @media only screen and (max-width: 900px) {
   .btn_support {
     min-width: 0px;
@@ -1751,16 +1760,14 @@ html {
     border-right-color: currentcolor;
     border-bottom: 0px solid #F0C319;
   }
-
-  .rfsea_box_menu {
-    left: 85px !important;
-    right: auto !important;
-  }
 }
 @media only screen and (max-width: 600px) {
   .footer_item {
     display: flex;
     align-items: center;
+  }
+  .footer_item img {
+    height: 55px;
   }
 
   .rfsea_footer_box {
@@ -1779,7 +1786,10 @@ html {
 
   .rfsea_box_menu {
     left: auto !important;
-    right: 55px !important;
+    right: 10px !important;
+  }
+  .rfsea_box_menu b {
+    display: none;
   }
 
   .flags {
