@@ -183,7 +183,8 @@ $value_3_pos: $range-label-height-max;
   border-radius:50%;
   // background-color: $shade-10;
   margin-top: - $range-height;
-   line-height:2;
+  margin-left: -$thr_size/2;
+  line-height:2;
   z-index:120;
   &.value__3 {
     // color:$shade-0;

@@ -148,9 +148,12 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
                     if(newVal !== oldVal){
                         rfseaSrv.clearMap(map);
                         $scope.maptype = 'scale';
-                        $scope.mapType = "";
                         bMapRaster = false;
                         setCountrySelected($scope.countrySelected);
+
+                        $timeout(function(){
+                            $scope.maptypeview = 'scale';
+                        }, 1500)
                     }
                 });
 
