@@ -1647,7 +1647,7 @@ h2, h3, h4, h5 {
 .button_map .attivo::after {
   background: #F0C319;
   border-width: 0px 0px 0 0;
-  bottom: -12px;
+  bottom: -4px;
   content: " ";
   display: block;
   height: 8px;
