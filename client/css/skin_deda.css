@@ -1730,6 +1730,11 @@ html {
   height: 70px;
 }
 
+.rfsea_box_legend_map {
+  bottom: 150px;
+  right: 20px;
+}
+
 /*------------------------------------*/
 /*-----------CSS MOBILE --------------*/
 /*------------------------------------*/
@@ -1821,6 +1826,14 @@ html {
   .button_map {
     margin-top: 15px;
     margin-bottom: 15px;
+  }
+
+  .logged--in {
+    font-size: 1em;
+  }
+
+  .legend-map {
+    margin-bottom: 55px;
   }
 }
 
