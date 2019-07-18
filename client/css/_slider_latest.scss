@@ -183,7 +183,7 @@ $value_3_pos: $range-label-height-max;
   border-radius:50%;
   // background-color: $shade-10;
   margin-top: - $range-height;
-  margin-left: -$thr_size/2;
+  margin-left: -$thr_size/2 + $b_width;
   line-height:2;
   z-index:120;
   &.value__3 {
@@ -236,7 +236,7 @@ $value_3_pos: $range-label-height-max;
 Color set base chiaro/scuro
 ==================================================================
 */
-.chiaro .wrap {
+.scuro .wrap {
 
   //background: $shade-10;
   color: $shade-0;
@@ -253,8 +253,14 @@ Color set base chiaro/scuro
     color: $shade-0;
 
   }
+  .range-bck {
+    @include border('bottom', $b_width, $b_style, $shade-0);
+    @include border('top', $b_width, $b_style, $shade-0);
+    @include border('left', $b_width, $b_style, $shade-0);
+    @include border('right', $b_width, $b_style, $shade-0);
+  }
 }
-.scuro .wrap {
+.chiaro .wrap {
     //background:$shade-0;
     color:$shade-10;
     .rp, .soglia__value { background:rgb(254,254,254); color: $shade-10;}
@@ -262,7 +268,13 @@ Color set base chiaro/scuro
       color:$shade-10;
     }
     .bar {background:$shade-10;}
-    .range-bck {@include border('bottom', $b_width, $b_style, $shade-10);}
+    .range-bck {
+      //@include border('bottom', $b_width, $b_style, $shade-10);
+      @include border('bottom', $b_width, $b_style, $shade-10);
+      @include border('top', $b_width, $b_style, $shade-10);
+      @include border('left', $b_width, $b_style, $shade-10);
+      @include border('right', $b_width, $b_style, $shade-10);
+    }
     .soglia__value, .rp {@include border-inverse;}
     .range-bck > [class*="value__"] {
       @include border('right', $b_width, $b_style, $shade-10);

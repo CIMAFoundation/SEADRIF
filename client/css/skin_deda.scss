@@ -387,28 +387,34 @@ a {
   }
 
 
-[class*="rfsea_box_chart_"] {
+
+//ciclo for x risk bar
+
+//[class*="rfsea_box_chart_"] {
   $step: 6;
   $pxs: ();
 
   @for $i from 1 through $step {
     $pxs: append($pxs, $i * 100% / $step );
-    .range-bck > .value__#{$i} {
+    .chiaro .range-bck > .value__#{$i} {
       @include border('right', $b_width, $b_style, $shade-10);
+    }
+    .scuro.range-bck > .value__#{$i} {
+      @include border('right', $b_width, $b_style, $shade-0);
     }
   }
   .range-bck {
     height:calc( #{$range-height} + #{$b_width} );
-    @include border('bottom', $b_width, $b_style, $shade-10);
+    /*@include border('bottom', $b_width, $b_style, $shade-10);
     @include border('top', $b_width, $b_style, $shade-10);
     @include border('left', $b_width, $b_style, $shade-10);
-    @include border('right', $b_width, $b_style, $shade-10);
+    @include border('right', $b_width, $b_style, $shade-10);*/
   }
   [class*="step__"] {
     height:calc( #{$range-height} - #{$b_width} );
   }
   .soglia__value {color:$color_font;}
-}
+//}
 
 
   /********************************************************/
@@ -996,128 +1002,131 @@ html {overflow: auto}
   .fa {margin-bottom: 5px}
 }
 
-[data-tooltip="html"] .tooltip {
-  line-height: 18px;
-  padding: 15px;
-  font-size: 17px;
-  font-weight: bold;
-}
-
+//todo: tooltip ovunque
 .tooltip {
   border-radius: 8px;
-  top: 55px;
-
 }
-
-.rfsea_margin_right {margin-right: 10px}
-
-.leaflet-popup-tip {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.4);
-  padding: 0px;
-  margin: -14px auto 0;
-}
-
-
-
-
-/*------------------------------------*/
-/*-----------CSS MOBILE --------------*/
-/*------------------------------------*/
-@media only screen and (max-width: 1600px) {
-  .rfsea_login_form {
-    z-index: 9999;
+.run_available {
+  [data-tooltip="html"] .tooltip {
+    line-height: 18px;
+    padding: 15px;
+    font-size: 17px;
+    font-weight: bold;
   }
-  .rfsea_box_menu li {
-    padding: 0px 1em;
-  }
-  .rfsea_login_form_box {
-
-    margin-top: 95px;
-  }
-  .box_ctr{
-    margin-top: 55px;
+  .tooltip {
+    top: 55px;
   }
 }
 
-@media only screen and (max-width: 900px) {
-  .btn_support {
-    min-width: 0px;
-  }
-  .rfsea_box_content.show.home {
-    min-width: 400px;
-  }
+  .rfsea_margin_right {margin-right: 10px}
 
-  .rfsea_disclaimer_box {
-    position: inherit;
-    text-align: center;
-  }
-  .rfsea_box_menu li {
-    float: left;
-    padding: 0px !important;
-    margin-right: 10px;
-    margin-left: 10px;
-    border-right: none;
-    border-right-color: currentcolor;
-    border-bottom: 0px solid #F0C319;
-  }
-
-
-
-}
-
-@media only screen and (max-width: 600px) {
-
-  .footer_item {
-    display: flex;
-    align-items: center;
-    img{height: 55px}
-  }
-
-  .rfsea_footer_box {
-    display: inline !important;
-  }
-
-  .mobile__menu {
-    display: inline;
-    z-index: 999999;
-    position: relative;
-  }
-
-
-  .rfsea_box_content.show.home {
-    min-width: 100vw;
-  }
-
-  .rfsea_box_menu {
-    left: auto !important;
-    right: 10px !important;
-    b{display: none}
-  }
-  .flags {font-size: 2.5em; margin-top:10px;}
-  .box_ctr{
-    margin-top: 110px;
-  }
-
-  .footer_item {
-    justify-content: center;
-  }
-  .button_map{
-  margin-top: 15px;
-  margin-bottom: 15px;
-  }
-  .logged--in{
-    font-size: 1em;
-  }
-
-  .legend-map{
-  margin-bottom: 55px;
+  .leaflet-popup-tip {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+    padding: 0px;
+    margin: -14px auto 0;
   }
 
 
 
 
+  /*------------------------------------*/
+  /*-----------CSS MOBILE --------------*/
+  /*------------------------------------*/
+  @media only screen and (max-width: 1600px) {
+    .rfsea_login_form {
+      z-index: 9999;
+    }
+    .rfsea_box_menu li {
+      padding: 0px 1em;
+    }
+    .rfsea_login_form_box {
+
+      margin-top: 95px;
+    }
+    .box_ctr{
+      margin-top: 55px;
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    .btn_support {
+      min-width: 0px;
+    }
+    .rfsea_box_content.show.home {
+      min-width: 400px;
+    }
+
+    .rfsea_disclaimer_box {
+      position: inherit;
+      text-align: center;
+    }
+    .rfsea_box_menu li {
+      float: left;
+      padding: 0px !important;
+      margin-right: 10px;
+      margin-left: 10px;
+      border-right: none;
+      border-right-color: currentcolor;
+      border-bottom: 0px solid #F0C319;
+    }
+
+
+
+  }
+
+  @media only screen and (max-width: 600px) {
+
+    .footer_item {
+      display: flex;
+      align-items: center;
+      img{height: 55px}
+    }
+
+    .rfsea_footer_box {
+      display: inline !important;
+    }
+
+    .mobile__menu {
+      display: inline;
+      z-index: 999999;
+      position: relative;
+    }
+
+
+    .rfsea_box_content.show.home {
+      min-width: 100vw;
+    }
+
+    .rfsea_box_menu {
+      left: auto !important;
+      right: 10px !important;
+      b{display: none}
+    }
+    .flags {font-size: 2.5em; margin-top:10px;}
+    .box_ctr{
+      margin-top: 110px;
+    }
+
+    .footer_item {
+      justify-content: center;
+    }
+    .button_map{
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+    .logged--in{
+      font-size: 1em;
+    }
+
+    .legend-map{
+      margin-bottom: 55px;
+    }
 
 
 
 
-}
+
+
+
+
+  }
