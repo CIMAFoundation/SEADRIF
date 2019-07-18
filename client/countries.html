@@ -78,7 +78,7 @@
     <!------------------------------------------------------->
     <!------------------- Date picker ----------------------->
     <!------------------------------------------------------->
-    <div ng-if="bDatePicker" class="animated fadeIn">
+    <div ng-if="bDatePicker" class="animated fadeIn date_selector">
         <div class="rfsea_date_picker_box">
             <div class="pull-right"><a href="" ng-click="setVisibilityDatePicker()"><strong>X</strong></a></div>
             <div class="row">
@@ -91,8 +91,8 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <label><strong>Available years</strong></label><br />
                     <div ng-repeat="yrs in availableYears" class="btn-group">
-                        <span class="btn btn-sm btn-success rfsea_margin_bottom" ng-click="setNewYearSelected(0)" ng-if="yearSelected == yrs">{{yrs}}</span>
-                        <span class="btn btn-sm btn-primary rfsea_margin_bottom" ng-click="setNewYearSelected(yrs)" ng-if="yearSelected !== yrs">{{yrs}}</span>&nbsp;&nbsp;
+                        <span class="btn btn-sm btn-success rfsea_margin_bottom" ng-click="setNewYearSelected(0)" ng-if="yearSelected == yrs"><i class="fa fa-calendar fa-3x"></i>{{yrs}}</span>
+                        <span class="btn btn-sm btn-primary rfsea_margin_bottom" ng-click="setNewYearSelected(yrs)" ng-if="yearSelected !== yrs"><i class="fa fa-calendar fa-3x"></i>{{yrs}}</span>&nbsp;&nbsp;
                     </div>
                 </div>
             </div>
@@ -101,8 +101,8 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <label><strong>Available months</strong></label><br />
                     <div ng-repeat="mnth in availableMonths" class="btn-group">
-                        <span class="btn btn-sm btn-success rfsea_margin_bottom" ng-click="setNewMonthSelected(-1)" ng-if="monthSelected == $index">{{($index + 1) + ' - ' + mnth}}</span>
-                        <span class="btn btn-sm btn-primary rfsea_margin_bottom" ng-click="setNewMonthSelected($index)" ng-if="monthSelected !== $index">{{($index + 1) + ' - ' + mnth}}</span>&nbsp;&nbsp;
+                        <span class="btn btn-sm btn-success rfsea_margin_bottom" ng-click="setNewMonthSelected(-1)" ng-if="monthSelected == $index"><i class="fa fa-calendar-check-o fa-3x"></i>{{($index + 1) + ' - ' + mnth}}</span>
+                        <span class="btn btn-sm btn-primary rfsea_margin_bottom" ng-click="setNewMonthSelected($index)" ng-if="monthSelected !== $index"><i class="fa fa-calendar-check-o fa-3x"></i>{{($index + 1) + ' - ' + mnth}}</span>&nbsp;&nbsp;
                     </div>
                 </div>
             </div>
@@ -118,7 +118,7 @@
                     <i ng-if="runsAvailable.length == 0">No data found</i>
                     <div ng-if="runsAvailable.length > 0">
                         <div ng-repeat="run in runsAvailable" class="btn-group">
-                            <span class="btn btn-sm btn-info rfsea_margin_bottom" ng-click="setNewRunDate(run | date: 'yyyyMMdd')"><i class="fa fa-check" aria-hidden="true"></i> {{run | date:'dd/MM/yyyy'}}</span>
+                            <span class="btn btn-sm btn-info rfsea_margin_bottom rfsea_margin_right" ng-click="setNewRunDate(run | date: 'yyyyMMdd')"><i class="fa fa-eye fa-3x" aria-hidden="true"></i> {{run | date:'dd/MM/yyyy'}}</span>
                         </div>
                     </div>
                 </div>
@@ -147,6 +147,7 @@
 
                     <div data-tooltip="html"  data-tooltip-conf="shadow" style="cursor: pointer;"> <span ng-click="setVisibilityDatePicker()" >
                         <h3>{{dateTo | date: 'dd MMMM yyyy'}}</h3>
+                        Select Available Run
                         </span>
                         <div class="tooltip ">
                             <div class="text-center">
