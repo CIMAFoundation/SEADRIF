@@ -73,12 +73,17 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
             for (var i = 0; i < $scope.curvex.length; i++)
             {
                 objPoint = [];
-                objPoint =[$scope.curvex[i], $scope.curvey[i]];
-                $scope.series_model.push(objPoint);
 
-                objPoint_dollar = [];
-                objPoint_dollar = [angular.copy($scope.curvex[i]) * dollarMultiplier, angular.copy($scope.curvey[i]) * dollarMultiplier];
-                $scope.series_model_dollar.push(objPoint_dollar);
+                if($scope.curvex[i] <= 250){
+
+                    objPoint =[$scope.curvex[i], $scope.curvey[i]];
+                    $scope.series_model.push(objPoint);
+
+                    objPoint_dollar = [];
+                    objPoint_dollar = [angular.copy($scope.curvex[i]) * dollarMultiplier, angular.copy($scope.curvey[i]) * dollarMultiplier];
+                    $scope.series_model_dollar.push(objPoint_dollar);
+
+                }
 
             }
 
@@ -325,7 +330,8 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                 lineColor: '#232323',
                 lineWidth: 1,
                 gridLineWidth: 0,
-                type: 'logarithmic',
+                //type: 'logarithmic',
+                type: 'linear',
                 title: {
                     text: 'Return Period [Years]'
                 }
@@ -337,7 +343,8 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                 lineColor: '#232323',
                 lineWidth: 1,
                 gridLineWidth: 0,
-                type: 'logarithmic',
+                // type: 'logarithmic',
+                type: 'linear',
                 title: {
                     text: 'People Affected [Number]'
                 },
@@ -750,7 +757,8 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                 crosshair: {
                     snap: false
                 },
-                type: 'logarithmic',
+                // type: 'logarithmic',
+                type: 'linear',
                 title: {
                     text: 'Return Period [Years]'
                 }
@@ -759,7 +767,8 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
                 crosshair: {
                     snap: false
                 },
-                type: 'logarithmic',
+                // type: 'logarithmic',
+                type: 'linear',
                 title: {
                     text: 'Emergency Costs [Dollar]'
                 },
