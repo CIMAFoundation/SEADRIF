@@ -145,13 +145,19 @@ rfseaApp.controller('rfseasliderCtrl', function($rootScope, $scope, $timeout, rf
 
 
         //tooltip position
-        setElementPosition_tooltip('tooltip_value_1', getPercPos($scope.data.thr1))
-        setElementPosition_tooltip('tooltip_value_2', getPercPos($scope.data.thr2))
+        setElementPosition_tooltip('tooltip_value_1', getPercPos($scope.data.thr1));
+        setElementPosition_tooltip('tooltip_value_2', getPercPos($scope.data.thr2));
 
     });
 
     $scope.$watch('data.people', function (newVal, oldVal) {
         $scope.multipier = newVal ? 1 : dollarMultiplier;
     });
+
+    // convert number to abbreviate mode
+    $scope.convertNumber = function(number, decimal) {
+        // apply the correct / factor
+        return rfseaSrv.convertNumber(number, decimal);
+    };
 
 });
