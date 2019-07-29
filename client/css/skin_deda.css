@@ -771,6 +771,10 @@ Color set base chiaro/scuro
   box-shadow: 0px 0px 2px #243746;
 }
 
+.rfsea_box_chart_historical .chiaro .wrap .riskbar__pillow {
+  background: #eed2b0 !important;
+}
+
 .scuro .wrap {
   color: #F0C319;
 }
@@ -1839,6 +1843,10 @@ html {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
   padding: 0px;
   margin: -14px auto 0;
+}
+
+.rfsea_box_chart_historical .soglia__value {
+  background: #eed2b0 !important;
 }
 
 /*------------------------------------*/

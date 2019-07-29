@@ -258,6 +258,14 @@ Color set base chiaro/scuro
   box-shadow: 0px 0px 2px $shade-10;
 }
 
+.rfsea_box_chart_historical { //historical background for risk bar item
+  .chiaro .wrap {
+    .riskbar__pillow {
+      background: rgb(238, 210, 176) !important;;
+    }
+  }
+}
+
 
 .scuro .wrap {
 
