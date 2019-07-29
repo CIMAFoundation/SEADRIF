@@ -4,7 +4,7 @@
 
 rfseaApp.controller('rfseasliderCtrl', function($rootScope, $scope, $timeout, rfseaSrv, $filter) {
 
-    var gridValues = [0, 3000, 10000, 100000, 500000, 1000000, 10000000];
+    var gridValues = [0, 500000, 1000000, 1500000, 2000000, 2500000, 3000000];
 
     var marginLeftZeroValue = 0;
     var marginLeftZeroValueThr = 0;
