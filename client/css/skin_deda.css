@@ -751,6 +751,26 @@ body {
 Color set base chiaro/scuro
 ==================================================================
 */
+.eap .tooltip {
+  margin-top: -85px;
+}
+.eap .tooltip::before {
+  margin-top: 38px;
+  -webkit-transform: scaleY(-1) translate(-50%);
+  transform: scaleY(-1) translate(-50%);
+}
+
+#slider {
+  text-transform: lowercase;
+}
+
+.riskbar__pillow {
+  padding: 0px 15px;
+  border-radius: 15px;
+  color: #243746 !important;
+  box-shadow: 0px 0px 2px #243746;
+}
+
 .scuro .wrap {
   color: #F0C319;
 }
@@ -772,6 +792,9 @@ Color set base chiaro/scuro
   border-top: 4px solid #F0C319;
   border-left: 4px solid #F0C319;
   border-right: 4px solid #F0C319;
+}
+.scuro .wrap .riskbar__pillow {
+  background-color: #F0C319;
 }
 
 .chiaro .wrap {
@@ -802,6 +825,9 @@ Color set base chiaro/scuro
 .chiaro .wrap .range-bck > [class*=value__] {
   border-right: 4px solid #243746;
   color: #243746;
+}
+.chiaro .wrap .riskbar__pillow {
+  background-color: #fefefe;
 }
 
 /*
