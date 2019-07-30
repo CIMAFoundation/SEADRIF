@@ -436,6 +436,12 @@
   left: calc(50% - 10px);
 }
 
+/*POSIZIONE TOOLTIP*/
+.tooltip[style] {
+  left: unset !important;
+  transform: translate(calc(-50% + 16px));
+}
+
 /********************************************************/
 /***************** colors *******************************/
 /********************************************************/
@@ -832,6 +838,13 @@ Color set base chiaro/scuro
 }
 .chiaro .wrap .riskbar__pillow {
   background-color: #fefefe;
+}
+.chiaro .wrap .tooltip {
+  background-color: #243746;
+  color: white;
+}
+.chiaro .wrap .tooltip::before {
+  border-bottom-color: #243746;
 }
 
 /*
