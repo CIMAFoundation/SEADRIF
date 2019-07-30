@@ -204,7 +204,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
             $scope.country_globals.pop = data.data.pop;
 
             $scope.dateFrom = angular.copy($scope.country_globals.data_day);
-            $scope.dateFrom.AddDays(-7);
+            $scope.dateFrom.AddDays(-21);
             $scope.dateTo = $scope.country_globals.data_day;
 
             $scope.sliderData.data.pop = data.data.pop;
