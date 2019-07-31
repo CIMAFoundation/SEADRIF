@@ -50,7 +50,7 @@
               <div class="thr eap" data-tooltip="html"  data-tooltip-conf="shadow" >
                 <i ng-if="data.people" class="fa icon-people"></i>
                   <i ng-if="!data.people" class="fa icon-money"></i>
-                <label style="font-size:35px; margin-bottom: .8rem;" class="riskbar__pillow">{{data.pop | number: 0}}</label>  <!--=== MANUEL NUMBER ABBR === convertNumber(data.pop*multipier | number:0, 2) -->
+                <label style="font-size:35px; margin-bottom: .8rem;" class="riskbar__pillow">{{data.pop*multipier | number: 0}}</label>  <!--=== MANUEL NUMBER ABBR === convertNumber(data.pop*multipier | number:0, 2) -->
                   <div class="tooltip ">
                     <div class="text-center">
                         <small>RP={{rpValue}}</small>
