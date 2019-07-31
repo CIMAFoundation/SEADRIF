@@ -814,6 +814,13 @@ Color set base chiaro/scuro
 .chiaro .wrap .soglia__value__3 {
   color: #243746;
 }
+.chiaro .wrap .tooltip {
+  background-color: #243746;
+  color: white;
+}
+.chiaro .wrap .tooltip::before {
+  border-bottom-color: #243746;
+}
 .chiaro .wrap .bar {
   background: #243746;
 }
@@ -1847,6 +1854,11 @@ html {
 
 .rfsea_box_chart_historical .soglia__value {
   background: #eed2b0 !important;
+}
+
+.tooltip[style] {
+  left: unset !important;
+  transform: translate(calc(-50% + 16px));
 }
 
 /*------------------------------------*/
