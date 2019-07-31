@@ -16,10 +16,12 @@
 
             <div class="value__1" ><label>{{convertNumber(gridValues[1]*multipier | number:0, 0)}}</label></div>
             <div class="value__2" ><label>{{convertNumber(gridValues[2]*multipier | number:0, 0)}}</label></div>
-            <div class="value__3" ><label>{{convertNumber(gridValues[3]*multipier | number:0, 0)}}</label></div>
+            <div class="value__3" ><label>{{convertNumber(gridValues[3]*multipier | number:0, 1)}}</label></div>
             <div class="value__4" ><label>{{convertNumber(gridValues[4]*multipier | number:0, 0)}}</label></div>
-            <div class="value__5" ><label>{{convertNumber(gridValues[5]*multipier | number:0, 0)}}</label></div>
+            <div class="value__5" ><label>{{convertNumber(gridValues[5]*multipier | number:0, 1)}}</label></div>
             <div class="value__6" ><label>{{convertNumber(gridValues[6]*multipier | number:0, 0)}}</label></div>
+<!--            <div class="value__7" ><label>{{convertNumber(gridValues[7]*multipier | number:0, 2)}}</label></div>-->
+<!--            <div class="value__8" ><label>{{convertNumber(gridValues[8]*multipier | number:0, 0)}}</label></div>-->
 
         </div>
 
@@ -45,10 +47,10 @@
                 </div>
             </span>
             <span class="soglia__value value__3" id="slider_pop_item">
-              <div class="thr" data-tooltip="html"  data-tooltip-conf="shadow" >
+              <div class="thr eap" data-tooltip="html"  data-tooltip-conf="shadow" >
                 <i ng-if="data.people" class="fa icon-people"></i>
                   <i ng-if="!data.people" class="fa icon-money"></i>
-                <label style="font-size:35px; margin-bottom: .8rem;">{{convertNumber(data.pop*multipier | number:0, 2)}}</label>
+                <label style="font-size:35px; margin-bottom: .8rem;" class="riskbar__pillow">{{data.pop | number: 0}}</label>  <!--=== MANUEL NUMBER ABBR === convertNumber(data.pop*multipier | number:0, 2) -->
                   <div class="tooltip ">
                     <div class="text-center">
                         <small>RP={{rpValue}}</small>
