@@ -402,7 +402,7 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter, $root
     }
 
     /*****************************************************************************************/
-    /***************** LOGIN / LOGOUT *************************************************************/
+    /***************** LOGIN / LOGOUT ********************************************************/
     /*****************************************************************************************/
 
     this.login = function (usr, psw, onSuccess, onError)
@@ -486,5 +486,45 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter, $root
         return value;
 
     }
+
+    /*****************************************************************************************/
+    /***************** NUMBR ABBREVIATION ****************************************************/
+    /*****************************************************************************************/
+
+    this.convertNumber = function(number, decimal) {
+
+        var customSelector 	 = "dataconvert";
+        var kFactor 		 = "K";
+        var mFactor 		 = "M";
+        var decNumK 		 = 0;
+        var decNumM 		 = 0;
+        var separator 		 = '';
+        var realNumbers 	 = [];
+        var convertedNumbers = [];
+
+        // apply the correct / factor
+        number = parseInt(number.replace(/,/g, separator));
+
+        if (number >= 1000000) {
+            // math round
+            number = (number / 1000000);
+            // adding decimal positions
+            number = number.toFixed(decimal);
+            // adding suffix
+            number = number + mFactor;
+            // optional replace separator
+            return number;
+
+        } else if (number >= 1000) {
+            number = (number / 1000);
+            number = number.toFixed(decimal);
+            number = number + kFactor;
+            return number;
+        }
+
+        return number;
+
+    };
+
 }]);
 

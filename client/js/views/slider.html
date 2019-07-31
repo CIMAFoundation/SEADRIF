@@ -14,12 +14,12 @@
 
             </div>
 
-            <div class="value__1" ><label>{{gridValues[1]*multipier | number:0}}</label></div>
-            <div class="value__2" ><label>{{gridValues[2]*multipier | number:0}}</label></div>
-            <div class="value__3" ><label>{{gridValues[3]*multipier | number:0}}</label></div>
-            <div class="value__4" ><label>{{gridValues[4]*multipier | number:0}}</label></div>
-            <div class="value__5" ><label>{{gridValues[5]*multipier | number:0}}</label></div>
-            <div class="value__6" ><label>{{gridValues[6]*multipier | number:0}}</label></div>
+            <div class="value__1" ><label>{{convertNumber(gridValues[1]*multipier | number:0, 0)}}</label></div>
+            <div class="value__2" ><label>{{convertNumber(gridValues[2]*multipier | number:0, 0)}}</label></div>
+            <div class="value__3" ><label>{{convertNumber(gridValues[3]*multipier | number:0, 0)}}</label></div>
+            <div class="value__4" ><label>{{convertNumber(gridValues[4]*multipier | number:0, 0)}}</label></div>
+            <div class="value__5" ><label>{{convertNumber(gridValues[5]*multipier | number:0, 0)}}</label></div>
+            <div class="value__6" ><label>{{convertNumber(gridValues[6]*multipier | number:0, 0)}}</label></div>
 
         </div>
 
@@ -29,7 +29,7 @@
                 <div class="tooltip " id="tooltip_value_1">
                     <div class="text-justify">
                         <small>Trigger 1 </small><br>
-                        <small>Threshold: {{data.thr1*multipier | number: 0}} Affected</small><br>
+                        <small>Threshold: {{convertNumber(data.thr1*multipier | number: 0, 0)}} Affected</small><br>
                         <small>Drawdown: 30% of costs</small><br>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                 <div class="tooltip" id="tooltip_value_2">
                     <div class="text-justify">
                         <small>Trigger 2 </small><br>
-                        <small>Threshold: {{data.thr2*multipier | number: 0}} Affected</small><br>
+                        <small>Threshold: {{convertNumber(data.thr2*multipier | number: 0, 0)}} Affected</small><br>
                         <small>Drawdown: 100% of costs</small><br>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
               <div class="thr" data-tooltip="html"  data-tooltip-conf="shadow" >
                 <i ng-if="data.people" class="fa icon-people"></i>
                   <i ng-if="!data.people" class="fa icon-money"></i>
-                <label style="font-size:35px; margin-bottom: .8rem;">{{data.pop*multipier | number:0}}</label>
+                <label style="font-size:35px; margin-bottom: .8rem;">{{convertNumber(data.pop*multipier | number:0, 2)}}</label>
                   <div class="tooltip ">
                     <div class="text-center">
                         <small>RP={{rpValue}}</small>
