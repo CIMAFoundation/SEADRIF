@@ -1032,6 +1032,10 @@ html {overflow: auto}
   }
  }
 
+.tooltip[style] {
+  left: unset !important;
+  transform: translate(calc(-50% + 16px));
+}
 
 
 

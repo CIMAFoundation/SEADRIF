@@ -302,6 +302,13 @@ Color set base chiaro/scuro
     .soglia__value__3 {
       color:$shade-10;
     }
+  .tooltip {
+    background-color: #243746;
+    color: white;
+  }
+  .tooltip::before {
+    border-bottom-color: #243746;
+  }
     .bar {background:$shade-10;}
     .range-bck {
       //@include border('bottom', $b_width, $b_style, $shade-10);
