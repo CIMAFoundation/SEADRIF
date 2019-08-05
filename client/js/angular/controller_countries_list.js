@@ -239,7 +239,15 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
             $scope.totScore = getTotalSumData($scope.zonesData);
 
-            loadMapLayers(false, true);
+
+
+            if($scope.bPeople){
+                //Load people Affected
+                loadMapLayers(false, true);
+            } else {
+                // Load dollar emergency coasts
+                loadMapLayers(true, true);
+            }
 
             // var geojsondata = L.geoJSON(data.data.geojson.features, {
             //         style: function (item) {
@@ -745,6 +753,8 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
     {
         $scope.bPeople = !$scope.bPeople;
         $scope.sliderData.data.people = $scope.bPeople;
+
+        $scope.maptypeview = 'scale';
 
         bDistrictView = "";
 
