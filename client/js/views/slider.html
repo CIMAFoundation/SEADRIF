@@ -32,26 +32,46 @@
         </div>
 
         <div class="range-soglia">
-            <span class="soglia__value value__1" id="slider_thr1_item" data-toggle="tooltip" data-html="true" title="
+            <!-- People view -->
+            <span ng-show="multipier == 1" class="soglia__value value__1" id="slider_thr1_item" data-toggle="tooltip" data-html="true" title="
                                                                                                                     Trigger 1 <br>
-                                                                                                                    Threshold: {{convertNumber(data.thr1*multipier | number: 0, 0)}} Affected<br>
+                                                                                                                    Threshold: {{convertNumber(data.thr1 | number: 0, 0)}} Affected<br>
                                                                                                                     Drawdown: 30% of costs<br>
                                                                                                                     " onmouseenter="$(this).tooltip('show')">
                 1
 
             </span>
-            <span class="soglia__value value__2" id="slider_thr2_item" data-toggle="tooltip" data-html="true" title="
+
+            <!-- Dollar view -->
+            <span ng-show="multipier > 1" class="soglia__value value__1" id="slider_thr1_item_dollar" data-toggle="tooltip" data-html="true" title="
+                                                                                                                    Trigger 1 <br>
+                                                                                                                    Threshold: {{convertNumber(data.thr1*tooltipMultipier | number: 0, 0)}} Affected<br>
+                                                                                                                    Drawdown: 30% of costs<br>
+                                                                                                                    " onmouseenter="$(this).tooltip('show')">
+                1
+
+            </span>
+
+            <!-- People view -->
+            <span ng-show="multipier == 1" class="soglia__value value__2" id="slider_thr2_item" data-toggle="tooltip" data-html="true" title="
                                                                                                                     Trigger 2<br>
-                                                                                                                    Threshold: {{convertNumber(data.thr2*multipier | number: 0, 0)}} Affected<br>
+                                                                                                                    Threshold: {{convertNumber(data.thr2 | number: 0, 0)}} Affected<br>
                                                                                                                     Drawdown: 100% of costs<br>
                                                                                                                     " onmouseenter="$(this).tooltip('show')">
 
                 2
-
-
-
-
             </span>
+            <!-- Dollar view -->
+            <span ng-show="multipier > 1" class="soglia__value value__2" id="slider_thr2_item_dollar" data-toggle="tooltip" data-html="true" title="
+                                                                                                                    Trigger 2<br>
+                                                                                                                    Threshold: {{convertNumber(data.thr2*tooltipMultipier | number: 0, 0)}} Affected<br>
+                                                                                                                    Drawdown: 100% of costs<br>
+                                                                                                                    " onmouseenter="$(this).tooltip('show')">
+
+                2
+            </span>
+
+
             <span class="soglia__value value__3" id="slider_pop_item">
               <div class="thr eap" data-toggle="tooltip" data-html="true" title="
                                                                                 RP={{rpValue}}
