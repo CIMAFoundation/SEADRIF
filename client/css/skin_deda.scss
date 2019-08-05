@@ -884,21 +884,26 @@ label[style] {
 }
 
 .bar {
-  height: 2.2em;
+  height: 2.43em;
 }
 
 .toggle_kasa {font-size: 0.6rem}
+
+.btn-map-container{
+  margin-right: 10px;
+  cursor: pointer;
+}
 
 .button_map {
   /*margin-left:450px;*/
   display: flex;
 img{
-  margin-right: 10px;
+  //margin-right: 10px;
 }
   .attivo::after {
     background: #F0C319;
     border-width: 0px 0px 0 0;
-    bottom: -4px;
+    //bottom: -4px;
     content: " ";
     display: block;
     height: 8px;
@@ -1032,6 +1037,36 @@ html {overflow: auto}
   }
  }
 
+
+/*------------------------------------*/
+/*-----------TOOLTIP CUSTOMIZATION--------------*/
+/*------------------------------------*/
+
+.tooltip-main {
+  background: $color_font;
+  border: 0px;
+  color: $shade-10;
+}
+
+.tooltip-inner {
+  background: $color_font;
+  border: 0px;
+  color: $shade-10;
+}
+
+.tooltip.show {
+  opacity: 1;
+}
+
+.bs-tooltip-auto[x-placement^=bottom] .arrow::before,
+.bs-tooltip-bottom .arrow::before,
+.bs-tooltip-top .arrow::before{
+  border-bottom-color: $color_font;
+}
+
+.bs-tooltip-auto[x-placement^="top"] .arrow::before, .bs-tooltip-top .arrow::before {
+  border-top-color: $color_font;
+}
 
 
 

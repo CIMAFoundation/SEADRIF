@@ -1714,24 +1714,25 @@ h2, h3, h4, h5 {
 }
 
 .bar {
-  height: 2.2em;
+  height: 2.43em;
 }
 
 .toggle_kasa {
   font-size: 0.6rem;
 }
 
+.btn-map-container {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
 .button_map {
   /*margin-left:450px;*/
   display: flex;
 }
-.button_map img {
-  margin-right: 10px;
-}
 .button_map .attivo::after {
   background: #F0C319;
   border-width: 0px 0px 0 0;
-  bottom: -4px;
   content: " ";
   display: block;
   height: 8px;
@@ -1860,6 +1861,35 @@ html {
 
 .rfsea_box_chart_historical .soglia__value {
   background: #eed2b0 !important;
+}
+
+/*------------------------------------*/
+/*-----------TOOLTIP CUSTOMIZATION--------------*/
+/*------------------------------------*/
+.tooltip-main {
+  background: #F0C319;
+  border: 0px;
+  color: #243746;
+}
+
+.tooltip-inner {
+  background: #F0C319;
+  border: 0px;
+  color: #243746;
+}
+
+.tooltip.show {
+  opacity: 1;
+}
+
+.bs-tooltip-auto[x-placement^=bottom] .arrow::before,
+.bs-tooltip-bottom .arrow::before,
+.bs-tooltip-top .arrow::before {
+  border-bottom-color: #F0C319;
+}
+
+.bs-tooltip-auto[x-placement^=top] .arrow::before, .bs-tooltip-top .arrow::before {
+  border-top-color: #F0C319;
 }
 
 /*------------------------------------*/

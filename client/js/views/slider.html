@@ -5,6 +5,12 @@
 <div class="wrap" style="margin-top: 150px;">
     <!--<div class="chiaro" style="background: inherit;">-->
 
+<!--    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="buttino">
+        BUTTONE
+    </button>-->
+
+
+
         <div class="range-bck">
 
             <div class="range-step">
@@ -26,36 +32,37 @@
         </div>
 
         <div class="range-soglia">
-            <span class="soglia__value value__1" id="slider_thr1_item" data-tooltip="html"  data-tooltip-conf="bottom">
+            <span class="soglia__value value__1" id="slider_thr1_item" data-toggle="tooltip" data-html="true" title="
+                                                                                                                    Trigger 1 <br>
+                                                                                                                    Threshold: {{convertNumber(data.thr1*multipier | number: 0, 0)}} Affected<br>
+                                                                                                                    Drawdown: 30% of costs<br>
+                                                                                                                    " onmouseenter="$(this).tooltip('show')">
                 1
-                <div class="tooltip " id="tooltip_value_1">
-                    <div class="text-justify">
-                        <small>Trigger 1 </small><br>
-                        <small>Threshold: {{convertNumber(data.thr1*multipier | number: 0, 0)}} Affected</small><br>
-                        <small>Drawdown: 30% of costs</small><br>
-                    </div>
-                </div>
+
             </span>
-            <span class="soglia__value value__2" id="slider_thr2_item" data-tooltip="html"  data-tooltip-conf="bottom">
+            <span class="soglia__value value__2" id="slider_thr2_item" data-toggle="tooltip" data-html="true" title="
+                                                                                                                    Trigger 2<br>
+                                                                                                                    Threshold: {{convertNumber(data.thr2*multipier | number: 0, 0)}} Affected<br>
+                                                                                                                    Drawdown: 100% of costs<br>
+                                                                                                                    " onmouseenter="$(this).tooltip('show')">
+
                 2
-                <div class="tooltip" id="tooltip_value_2">
-                    <div class="text-justify">
-                        <small>Trigger 2 </small><br>
-                        <small>Threshold: {{convertNumber(data.thr2*multipier | number: 0, 0)}} Affected</small><br>
-                        <small>Drawdown: 100% of costs</small><br>
-                    </div>
-                </div>
+
+
+
+
             </span>
             <span class="soglia__value value__3" id="slider_pop_item">
-              <div class="thr eap" data-tooltip="html"  data-tooltip-conf="shadow" >
+              <div class="thr eap" data-toggle="tooltip" data-html="true" title="
+                                                                                RP={{rpValue}}
+                                                                                " onmouseenter="$(this).tooltip('show')">
+
                 <i ng-if="data.people" class="fa icon-people"></i>
                   <i ng-if="!data.people" class="fa icon-money"></i>
-                <label style="font-size:35px; margin-bottom: .8rem;" class="riskbar__pillow">{{data.pop | number: 0}}</label>  <!--=== MANUEL NUMBER ABBR === convertNumber(data.pop*multipier | number:0, 2) -->
-                  <div class="tooltip ">
-                    <div class="text-center">
-                        <small>RP={{rpValue}}</small>
-                    </div>
-                </div>
+                <label style="font-size:35px; margin-bottom: .8rem;" class="riskbar__pillow">{{data.pop*multipier | number: 0}}</label>  <!--=== MANUEL NUMBER ABBR === convertNumber(data.pop*multipier | number:0, 2) -->
+
+
+
                 <div class="bar"></div>
                   <!--<div class="small rp">
                    RP={{rpValue}}
