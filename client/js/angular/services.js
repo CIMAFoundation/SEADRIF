@@ -494,8 +494,8 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter, $root
     this.convertNumber = function(number, decimal) {
 
         var customSelector 	 = "dataconvert";
-        var kFactor 		 = "K";
-        var mFactor 		 = "M";
+        var kFactor 		 = "k";
+        var mFactor 		 = "m";
         var decNumK 		 = 0;
         var decNumM 		 = 0;
         var separator 		 = '';

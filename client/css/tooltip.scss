@@ -449,4 +449,9 @@ $tooltip-danger: #e67460;
   }
 }
 
+/*POSIZIONE TOOLTIP*/
+.tooltip[style] {
+  left: unset !important;
+  transform: translate(calc(-50% + 16px));
+}
 

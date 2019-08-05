@@ -329,6 +329,14 @@ Color set base chiaro/scuro
     background-color: rgb(254,254,254);
   }
 
+  .tooltip {
+    background-color: $shade-10;
+    color: white;
+  }
+  .tooltip::before{
+    border-bottom-color: $shade-10;
+  }
+
 }
 
 

@@ -14,6 +14,7 @@ rfseaApp.controller('rfseasliderCtrl', function($rootScope, $scope, $timeout, rf
 
     $scope.gridValues = gridValues;
     $scope.multipier = $scope.data.people ? 1 : dollarMultiplier;
+    $scope.tooltipMultipier = dollarMultiplier;
 
     $scope.$watch('data.curve_x', function (newVal, oldVal) {
         $scope.series_model = [];
@@ -50,12 +51,12 @@ rfseaApp.controller('rfseasliderCtrl', function($rootScope, $scope, $timeout, rf
             elem.style.left= "" + pos - marginLeftZeroValueThr + "px";
         }
 
-        if(itemId == 'slider_thr1_item')
+        if(itemId == 'slider_thr1_item' || itemId == 'slider_thr1_item_dollar')
         {
             thr1Width = pos;
         }
 
-        if(itemId == 'slider_thr2_item')
+        if(itemId == 'slider_thr2_item' || itemId == 'slider_thr2_item_dollar')
         {
             thr2Width = pos;
         }
@@ -129,7 +130,9 @@ rfseaApp.controller('rfseasliderCtrl', function($rootScope, $scope, $timeout, rf
     $scope.$watch('[data.pop, data.thr1]', function (newVal, oldVal) {
 
         setElementPosition('slider_thr1_item', getPercPos($scope.data.thr1));
+        setElementPosition('slider_thr1_item_dollar', getPercPos($scope.data.thr1));
         setElementPosition('slider_thr2_item', getPercPos($scope.data.thr2));
+        setElementPosition('slider_thr2_item_dollar', getPercPos($scope.data.thr2));
         setElementPosition('slider_pop_item', getPercPos($scope.data.pop));
 
         // Calculate the with of scale gradient
