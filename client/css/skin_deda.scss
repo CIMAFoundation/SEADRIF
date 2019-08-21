@@ -1103,6 +1103,11 @@ html {overflow: auto}
       min-width: 0px;
     }
 
+    .riskprof_page .info_col {
+      margin-top: 45px;
+
+    }
+
 
 
     .rfsea_box_content.show.home {
@@ -1209,6 +1214,10 @@ html {overflow: auto}
   }
 
   @media only screen and (max-width: 600px) {
+
+    .riskprof_page .info_col {
+      margin-bottom: 170px;
+    }
 
     .dropdown-content {
       min-width: 220px;
