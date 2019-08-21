@@ -1904,6 +1904,10 @@ html {
   border-top-color: #F0C319;
 }
 
+.menu_mobile {
+  display: none;
+}
+
 /*------------------------------------*/
 /*-----------CSS MOBILE --------------*/
 /*------------------------------------*/
@@ -1919,12 +1923,8 @@ html {
   .rfsea_login_form_box {
     margin-top: 95px;
   }
-
-  .box_ctr {
-    margin-top: 55px;
-  }
 }
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1200px) {
   .btn_support {
     min-width: 0px;
   }
@@ -1947,8 +1947,91 @@ html {
     border-right-color: currentcolor;
     border-bottom: 0px solid #F0C319;
   }
+
+  /*============================MENU MOBILE===============================*/
+  .rfsea_box_menu {
+    display: none;
+    background-color: #243746 !important;
+    right: 55px;
+    top: 24px;
+  }
+  .rfsea_box_menu label {
+    margin-bottom: 0px;
+  }
+
+  .menu_mobile {
+    display: inherit !important;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #F0C319;
+    border-radius: 5px;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    right: 0;
+    min-width: 260px;
+    top: 45px;
+  }
+
+  .dropdown-content a {
+    color: #243746;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  /* MENU COLOR MOBILE*/
+  .rfsea_box_menu li a {
+    color: #243746;
+    text-decoration: none;
+  }
+
+  .rfsea_box_menu li {
+    width: 90%;
+    text-align: left;
+    margin-top: 0px;
+  }
+
+  a:hover, .rfsea_box_menu li a:focus, .rfsea_box_menu li a.active {
+    border-bottom: 2px solid #243746;
+    transition: inherit;
+  }
+
+  .dropdown-content i {
+    color: #243746;
+    padding: 5px;
+  }
+
+  .rfsea_menu_countries_list_box {
+    padding-left: 30px;
+    font-size: 15px;
+    line-height: 20px;
+  }
+
+  /* nascondiamo il checkbox */
+  input[type=checkbox] {
+    display: none;
+  }
+
+  /* mostriamo il menu quando il checkbox viene selezionato */
+  input[type=checkbox]:checked ~ .dropdown-content {
+    display: block;
+  }
+
+  /*======================== FINE MENU MOBILE =========================*/
 }
 @media only screen and (max-width: 600px) {
+  .dropdown-content {
+    min-width: 220px;
+  }
+
+  .rfsea_box_menu {
+    right: 30px;
+  }
+
   .footer_item {
     display: flex;
     align-items: center;
@@ -1971,21 +2054,18 @@ html {
     min-width: 100vw;
   }
 
-  .rfsea_box_menu {
-    left: auto !important;
-    right: 10px !important;
-  }
-  .rfsea_box_menu b {
-    display: none;
-  }
-
+  /*    .rfsea_box_menu {
+        left: auto !important;
+        right: 10px !important;
+        b{display: none}
+      }*/
   .flags {
     font-size: 2.5em;
     margin-top: 10px;
   }
 
   .box_ctr {
-    margin-top: 110px;
+    margin-top: 60px;
   }
 
   .footer_item {
