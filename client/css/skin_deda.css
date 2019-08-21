@@ -1949,6 +1949,12 @@ html {
   }
 
   /*============================MENU MOBILE===============================*/
+  .mobile_menu_nations {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   .rfsea_box_menu {
     display: none;
     background-color: #243746 !important;
@@ -1995,9 +2001,10 @@ html {
     margin-top: 0px;
   }
 
-  a:hover, .rfsea_box_menu li a:focus, .rfsea_box_menu li a.active {
+  .rfsea_box_menu li a:focus, .rfsea_box_menu li a.active {
     border-bottom: 2px solid #243746;
     transition: inherit;
+    width: 100%;
   }
 
   .dropdown-content i {

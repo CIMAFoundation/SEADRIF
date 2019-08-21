@@ -5,6 +5,27 @@
         <li class="last"><a href="" ng-click="setLoginView('login')"><b class="fas fa-sign-in-alt"></b> login</a></li>
     </ul>
 </div>
+
+
+<!--==========================LOGIN MENU MOBILE==============-->
+<!--UNCHECK SCRIPT-->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".uncheck").click(function(){
+            $("#showMenu").prop("checked", false);
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".uncheck").click(function(){
+            $("#showMenu2").prop("checked", false);
+        });
+    });
+</script>
+
+
+
 <div class="rfsea_box_menu menu_mobile"  ng-show="!bLoggedInMenu">
     <!--<ul>
         <li><a href="" ng-click="gotoPage('index.html')" ng-class="{'active' : page == '1'}"><b class="fa fa-home"></b> home mobile</a></li>
@@ -17,9 +38,9 @@
     <input type="checkbox" id="showMenu" role="button">
 
         <div class="dropdown-content">
-            <a href="" ng-click="gotoPage('index.html')" ng-class="{'active' : page == '1'}"><b class="fa fa-home"></b> home</a>
-            <a href="" ng-click="gotoPage('about.html')" ng-class="{'active' : page == '2'}"><b class="fas fa-comments"></b> about</a>
-            <a href="" ng-click="setLoginView('login')"><b class="fas fa-sign-in-alt"></b> login</a>
+            <a class="uncheck" href="" ng-click="gotoPage('index.html')" ng-class="{'active' : page == '1'}"><b class="fa fa-home"></b> home</a>
+            <a class="uncheck" href="" ng-click="gotoPage('about.html')" ng-class="{'active' : page == '2'}"><b class="fas fa-comments"></b> about</a>
+            <a class="uncheck" href="" ng-click="setLoginView('login')"><b class="fas fa-sign-in-alt"></b> login</a>
         </div>
 
 
@@ -106,26 +127,26 @@
 
 
             <ul>
-                <li>
-                    <a href="" ng-class="{'active' : !riskprofileShow && !districtShow}" ng-click="setCountryProfileView()"><span class="flag-icon flag-icon-squared flag-icon-{{('flag_' + countryselected.name) | translate}}"></span> <b>{{countryselected.name | translate}}</b>
-                    &nbsp;&nbsp;
-                    <span ng-show="countries.length > 1" ng-click="showHideCountriesList()">
+                <li class="mobile_menu_nations">
+                    <a class="uncheck" href="" ng-class="{'active' : !riskprofileShow && !districtShow}" ng-click="setCountryProfileView()"><span class="flag-icon flag-icon-squared flag-icon-{{('flag_' + countryselected.name) | translate}}"></span> <b>{{countryselected.name | translate}}</b>
+                                       </a>
+                    &nbsp;&nbsp;  <span ng-show="countries.length > 1" ng-click="showHideCountriesList()">
                         <i class="fa fa-angle-down rfsea_row_select_country" aria-hidden="true" ng-show="!bCountriesList"></i>
                         <i class="fa fa-angle-up rfsea_row_select_country" aria-hidden="true" ng-show="bCountriesList"></i>
                     </span>
-                    </a>
+
 
                 </li>
-                <div class="rfsea_menu_countries_list_box" ng-show="bCountriesList">
+                <div class="rfsea_menu_countries_list_box uncheck" ng-show="bCountriesList">
                     <div ng-repeat="country in countries | orderBy: 'name'">
-                        <a href="" ng-show="country.name !== countryselected.name" ng-click="changeCountrySelection(country)"> <span class="flag-icon flag-icon-squared flag-icon-{{('flag_' + country.name) | translate}}"></span> {{country.name | translate}}</a>
+                        <a  href="" ng-show="country.name !== countryselected.name" ng-click="changeCountrySelection(country)"> <span class="flag-icon flag-icon-squared flag-icon-{{('flag_' + country.name) | translate}}"></span> {{country.name | translate}}</a>
                     </div>
                 </div>
                 <li>
-                    <a href="" ng-class="{'active' : districtShow}" ng-click="setDistrictView()"><span>Districts</span></a>
+                    <a class="uncheck" href="" ng-class="{'active' : districtShow}" ng-click="setDistrictView()"><span>Districts</span></a>
                 </li>
                 <li>
-                    <a href="" ng-class="{'active' : riskprofileShow}" ng-click="setRiskProfileView()"><span>Risk Profile</span></a>
+                    <a class="uncheck" href="" ng-class="{'active' : riskprofileShow}" ng-click="setRiskProfileView()"><span>Risk Profile</span></a>
                 </li>
 
                 <!--<li class="skew">-->
@@ -188,6 +209,12 @@
     </label>
     <input type="checkbox" id="showMenu2" role="button">
     <div class="dropdown-content">
+
+
+
+
+
+
 
     <ul>
         <li>
