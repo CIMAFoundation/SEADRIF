@@ -33,6 +33,8 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
         fillColor: '#ffffff'
     };
 
+    $scope.aHistoricalEventListDesc = [];
+
     $scope.clickChartsDisableHistorical = false;
 
     $scope.detailsTitle = "ESTIMATED AFFECTED POPULATION";
@@ -49,6 +51,7 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
     $scope.$watch("curvex", function(newValue, oldValue) {
 
         if($scope.curvex) {
+
             // Generatin curve
 
             // if($scope.popDetails.pop_est == 0){
@@ -69,6 +72,8 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
             //     serieEst_dollar = angular.copy(serieEst);
             //
             // }
+
+            $scope.aHistoricalEventListDesc = rfseaSrv.getHistoricalEventsDesc($scope.datachart.idCountry);
 
             for (var i = 0; i < $scope.curvex.length; i++)
             {
@@ -273,6 +278,8 @@ rfseaApp.controller('rfseaCtrlchartpeople', function($rootScope, $scope, $timeou
         }
 
     }
+
+
 
     //insert element into array in a specific index
     Array.prototype.insert = function ( index, item ) {

@@ -339,6 +339,32 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter, $root
         return objColor;
     }
 
+    this.getHistoricalEventsDesc = function(countryCode)
+    {
+        console.log(countryCode);
+        if(countryCode){
+
+            if(countryCode == '1'){
+                // Cambodia
+                return [];
+            }
+
+            if(countryCode == '2'){
+                // Laos
+                return ['2018: 460,000 affected (GHS model), 220,000 (WorldPop model) or 615,000 (reported)','2011: 190,000 affected (GHS model), 140,000 (WorldPop model) or 430,000 (reported)','2008: 350,000 affected (GHS model), 180,000 (WorldPop model) or 150,000 (reported)'];
+            }
+
+            if(countryCode == '3'){
+                // Myanmar
+                return ['2018: 690,000 affected (GHS model), 1,800,000 (WorldPop model) or 220,000 (reported)', '2016: 1,100,000 affected (GHS model), 2,200,000 (WorldPop model) or 550,000 (reported)', '2015: 1,700,000 affected (GHS model), 3,000,000 (WorldPop model) or 1,700,000 (reported)', '2008: 1,900,000 affected (GHS model), 2,800,000 (WorldPop model) or 2,400,000 (reported)'];
+            }
+
+        } else {
+            return "";
+        }
+
+    }
+
     /*****************************************************************************************/
     /***************** RUNS AVAILABLE & UTILITIES ********************************************/
     /*****************************************************************************************/
