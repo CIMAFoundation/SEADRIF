@@ -95,14 +95,28 @@
                     <div class="" ng-if="bModel">
                         <h2 style="font-size: 1.5em;">SEADRIF calculation</h2>
                         <hr>
-                        <p class="text-justify">
+                        <!--<p class="text-justify">
                             The best estimate of people affected refers to a seven-day period, from {{datachart.dateFrom | date: 'MMMM dd'}} to {{datachart.dateTo | date: 'MMMM dd'}}. The JRC-GHS population density grid was used (see alternative scenarios for other population grids).
                             Flood information that was used:
                             Gauge data from 5 MRC stations,
                             2 MODIS images (3-day composites),
                             22 stations from GLOFFIS hydrologic model,
                             8 stations from GLOSSIS storm surge model.
-                        </p>
+                        </p>-->
+                            <p>
+                            The estimated affected population is based on maximum flood extent over a 21-day period and GHS population density.
+                            </p>
+                            <p>
+                            The risk profile is based on 10,000 years of stochastic events. Estimated population affected can be compared to modelled and reported numbers for historical events:
+                            </p>
+                        <!-- FOR REGION INSERT li inside ul below -->
+                            <u>
+
+
+                            </u>
+
+
+
                     </div>
 
                     <div class="" ng-if="!bModel">
