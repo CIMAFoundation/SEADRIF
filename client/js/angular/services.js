@@ -351,12 +351,12 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter, $root
 
             if(countryCode == '2'){
                 // Laos
-                return ['2018: 460,000 affected (GHS model), 220,000 (WorldPop model) or 615,000 (reported)','2011: 190,000 affected (GHS model), 140,000 (WorldPop model) or 430,000 (reported)','2008: 350,000 affected (GHS model), 180,000 (WorldPop model) or 150,000 (reported)'];
+                return ['2018: Annual Floods; 197,746 people affected','2011: Annual Floods; 110,448 people affected','2008: Annual floods; 100,765 people affected '];
             }
 
             if(countryCode == '3'){
                 // Myanmar
-                return ['2018: 690,000 affected (GHS model), 1,800,000 (WorldPop model) or 220,000 (reported)', '2016: 1,100,000 affected (GHS model), 2,200,000 (WorldPop model) or 550,000 (reported)', '2015: 1,700,000 affected (GHS model), 3,000,000 (WorldPop model) or 1,700,000 (reported)', '2008: 1,900,000 affected (GHS model), 2,800,000 (WorldPop model) or 2,400,000 (reported)'];
+                return ['2017: Monsoon Floods; 2,019,301 people affected','2016: Monsoon Floods; 2,253,685 people affected','2015: Monsoon floods 2,973,850 people affected','2008: Cyclone Nargis; 2,840,861 people affected'];
             }
 
         } else {
