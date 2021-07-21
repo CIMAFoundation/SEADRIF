@@ -1,8 +1,16 @@
 
 <div class="rfsea_footer_box d-inline-flex  align-items-center justify-content-between">
     <div class="btn_support footer_item">
-        <span class="pl-4"><a href="mailto:info@cimafoundation.org" class="small focus_alt"><i class="fa fa-envelope"></i></a></span>
+      <div>
+        <span class="pl-4"><a href="mailto:info@cimafoundation.org" class="small focus_alt"><i class="fa fa-envelope"></i></a></span><br>
         <span class="pl-4"><a href="doc/seadrif.pdf" target="_blank" class="small focus_alt"><i class="fa fa-info-circle" ></i></a></span>
+      </div>
+      <div class="pl-3 d-flex align-items-center">
+        <div class="user-guide-btn">
+          <span class="fa fa-file-pdf-o mr-1"></span>User Guide
+        </div>
+      </div>
+
     </div>
     <div class="button_map footer_item">
 
@@ -42,10 +50,10 @@
         </div>
         <!--DOWNLOAD BUTTON-->
         <div  class="btn-map-container" data-toggle="tooltip" data-html="true" title="EO/MODEL">
-          <a href="#"  ng-click=""><img src="./img/dwl_icon.svg" width="45px"></a>
-          <div class="dwl-menu">
+          <a href="#"  ng-click="openDwlPanel()"><img src="./img/dwl_icon.svg" width="45px"></a>
+          <div class="dwl-menu" ng-if="showDwlPanel">
             <div class="dwl-title">
-              <span>Download Data</span><span class="fa fa-times"></span>
+              <span>Download Data</span><span class="fa fa-times" ng-click="openDwlPanel()"></span>
             </div>
             <div class="dwl-item">Affected People (.csv)</div>
             <div class="dwl-item">EO (.gtiff)</div>

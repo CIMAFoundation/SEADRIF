@@ -16,5 +16,10 @@ rfseaApp.controller('rfseafooterCtrl', function($rootScope, $scope, rfseaSrv)
         }
     }
 
+    $scope.showDwlPanel = false
+    $scope.openDwlPanel = function() {
+      $scope.showDwlPanel = !$scope.showDwlPanel
+    }
+
 
 });

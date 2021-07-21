@@ -1740,7 +1740,7 @@ h2, h3, h4, h5 {
   font-size: 0.65em;
   border-radius: 5px;
   position: absolute;
-  bottom: 70px;
+  bottom: 77px;
   left: 50%;
   transform: translateX(-50%);
   cursor: default;
@@ -1765,6 +1765,18 @@ h2, h3, h4, h5 {
   border-radius: 5px 5px 0 0;
   display: flex;
   justify-content: space-between;
+}
+.dwl-menu .dwl-title .fa-times {
+  cursor: pointer;
+}
+.dwl-menu:after {
+  content: "";
+  border-style: solid;
+  border-color: #F0C319 transparent transparent transparent;
+  border-width: 16px 20px 0 20px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .button_map {
@@ -1798,10 +1810,21 @@ h2, h3, h4, h5 {
 
 .btn_support {
   min-width: 380px;
-  display: grid;
+  display: flex;
 }
 .btn_support a:hover {
   color: #dddb01;
+}
+.btn_support .user-guide-btn {
+  border-radius: 5px;
+  border: 2px solid #F0C319;
+  font-size: 0.8em;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+.btn_support .user-guide-btn:hover {
+  background-color: #F0C319;
+  color: #243746;
 }
 
 .riskprof_page {

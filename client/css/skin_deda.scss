@@ -901,7 +901,7 @@ label[style] {
   font-size: 0.65em;
   border-radius: 5px;
   position: absolute;
-  bottom: 70px;
+  bottom: 77px;
   left: 50%;
   transform: translateX(-50%);
   cursor: default;
@@ -915,7 +915,6 @@ label[style] {
       cursor: pointer;
       background-color: #eaba01;
     }
-
     &:last-child {
       border-bottom: 0px
     }
@@ -926,6 +925,18 @@ label[style] {
     border-radius: 5px 5px 0 0;
     display: flex;
     justify-content: space-between;
+    .fa-times {
+      cursor: pointer;
+    }
+  }
+  &:after {
+    content: '';
+    border-style: solid;
+    border-color: $color_font transparent transparent transparent;
+    border-width: 16px 20px 0 20px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
@@ -967,9 +978,20 @@ img{
 
 .btn_support{
   min-width: 380px;
-  display: grid;
+  display: flex;
   a:hover {
     color: #dddb01;
+  }
+  .user-guide-btn {
+    border-radius: 5px;
+    border: 2px solid $color_font;
+    font-size: 0.8em;
+    padding: 5px 8px;
+    cursor: pointer;
+    &:hover {
+      background-color: $color_font;
+      color: $color_base;
+    }
   }
 }
 
