@@ -892,6 +892,41 @@ label[style] {
 .btn-map-container{
   margin-right: 10px;
   cursor: pointer;
+  position: relative;
+}
+
+.dwl-menu {
+  background-color: $color_font;
+  color: $color_base;
+  font-size: 0.65em;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: default;
+  padding-bottom: 5px;
+  min-width: 180px;
+  box-shadow: #0000004d 0px 0px 8px;;
+  .dwl-item {
+    padding: 5px 10px;
+    border-bottom: 1px solid #ffffff7a;
+    &:hover {
+      cursor: pointer;
+      background-color: #eaba01;
+    }
+
+    &:last-child {
+      border-bottom: 0px
+    }
+  }
+  .dwl-title {
+    padding: 5px 10px;
+    background-color: #d0a701;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .button_map {

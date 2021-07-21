@@ -1731,6 +1731,40 @@ h2, h3, h4, h5 {
 .btn-map-container {
   margin-right: 10px;
   cursor: pointer;
+  position: relative;
+}
+
+.dwl-menu {
+  background-color: #F0C319;
+  color: #243746;
+  font-size: 0.65em;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: default;
+  padding-bottom: 5px;
+  min-width: 180px;
+  box-shadow: #0000004d 0px 0px 8px;
+}
+.dwl-menu .dwl-item {
+  padding: 5px 10px;
+  border-bottom: 1px solid #ffffff7a;
+}
+.dwl-menu .dwl-item:hover {
+  cursor: pointer;
+  background-color: #eaba01;
+}
+.dwl-menu .dwl-item:last-child {
+  border-bottom: 0px;
+}
+.dwl-menu .dwl-title {
+  padding: 5px 10px;
+  background-color: #d0a701;
+  border-radius: 5px 5px 0 0;
+  display: flex;
+  justify-content: space-between;
 }
 
 .button_map {

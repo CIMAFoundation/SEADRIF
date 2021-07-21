@@ -5,8 +5,8 @@
         <span class="pl-4"><a href="doc/seadrif.pdf" target="_blank" class="small focus_alt"><i class="fa fa-info-circle" ></i></a></span>
     </div>
     <div class="button_map footer_item">
-      
-      <div ng-show="maptype" class="d-flex">
+
+      <div  class="d-flex"> <!--ng-show="maptype" TODO remove-->
 
         <div  class="btn-map-container" data-toggle="tooltip" data-html="true" title="Affected People">
             <a href="#" ng-class="{'attivo': maptype=='scale'}" ng-click="addLayersMap('scale', '')"><img src="./img/people_map.svg" width="45px" ></a>
@@ -39,6 +39,19 @@
                     <small>EO/MODEL</small>
                 </div>
             </div>-->
+        </div>
+        <!--DOWNLOAD BUTTON-->
+        <div  class="btn-map-container" data-toggle="tooltip" data-html="true" title="EO/MODEL">
+          <a href="#"  ng-click=""><img src="./img/dwl_icon.svg" width="45px"></a>
+          <div class="dwl-menu">
+            <div class="dwl-title">
+              <span>Download Data</span><span class="fa fa-times"></span>
+            </div>
+            <div class="dwl-item">Affected People (.csv)</div>
+            <div class="dwl-item">EO (.gtiff)</div>
+            <div class="dwl-item">MODEL (.gtiff)</div>
+            <div class="dwl-item">EO/MODEL (.gtiff)</div>
+          </div>
         </div>
       </div>
 
@@ -75,7 +88,7 @@
             <img src="img/SEADRIF_full color-hor.png" alt="" style="" >
         </a>
 
-       
+
     <!--<span class="invert " style="font-size:1.5em; font-weight: 600">SEADRIF</span>-->
 <!--    <span class="sep invert">|</span>-->
     <!--<span class="invert" style="font-size:0.75em; font-weight: 700">RISK PLATFORM </span>-->
