@@ -14,7 +14,7 @@
     </div>
     <div class="button_map footer_item">
 
-      <div  class="d-flex"> <!--ng-show="maptype" TODO remove-->
+      <div  class="d-flex" ng-show="maptype">
 
         <div  class="btn-map-container" data-toggle="tooltip" data-html="true" title="Affected People">
             <a href="#" ng-class="{'attivo': maptype=='scale'}" ng-click="addLayersMap('scale', '')"><img src="./img/people_map.svg" width="45px" ></a>
@@ -55,10 +55,10 @@
             <div class="dwl-title">
               <span>Download Data</span><span class="fa fa-times" ng-click="openDwlPanel()"></span>
             </div>
-            <div class="dwl-item">Affected People (.csv)</div>
-            <div class="dwl-item">EO (.gtiff)</div>
-            <div class="dwl-item">MODEL (.gtiff)</div>
-            <div class="dwl-item">EO/MODEL (.gtiff)</div>
+            <div class="dwl-item" ng-click="openDwlPanel()">Affected People (.csv)</div>
+            <div class="dwl-item" ng-click="openDwlPanel()">EO (.gtiff)</div>
+            <div class="dwl-item" ng-click="openDwlPanel()">MODEL (.gtiff)</div>
+            <div class="dwl-item" ng-click="openDwlPanel()">EO/MODEL (.gtiff)</div>
           </div>
         </div>
       </div>

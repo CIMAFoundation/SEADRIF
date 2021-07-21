@@ -453,6 +453,22 @@ a {
   color:$color_events;
 }
 
+.sidebar-dwl-btn {
+  background-color: $color-font;
+  cursor: pointer;
+  border-radius: 5px;
+  &:hover {
+    background-color: #e0ba2d;
+  }
+  .pre-dwl {
+    background-color: #d4a800;
+    border-radius: 5px 0 0 5px;
+    border-right: solid 1px rgba(255, 255, 255, 0.47);
+    .fa {
+      color: $color-base;
+    }
+  }
+}
 
 
 

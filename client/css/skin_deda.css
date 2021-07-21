@@ -1358,6 +1358,23 @@ a.focus_alt:hover, a.focus_alt:focus {
   color: #61A744;
 }
 
+.sidebar-dwl-btn {
+  background-color: #F0C319;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.sidebar-dwl-btn:hover {
+  background-color: #e0ba2d;
+}
+.sidebar-dwl-btn .pre-dwl {
+  background-color: #d4a800;
+  border-radius: 5px 0 0 5px;
+  border-right: solid 1px rgba(255, 255, 255, 0.47);
+}
+.sidebar-dwl-btn .pre-dwl .fa {
+  color: #243746;
+}
+
 /*
 
 ********************************************************

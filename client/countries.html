@@ -156,11 +156,11 @@
                 <div class="text-center" ng-if="!bCountriesList">
 
                     <div class="run_available"  style="cursor: pointer;" data-toggle="tooltip" data-html="true" title="
-                                                                                                                                        <small>Period of Analysis</small><br>
-                                                                                                                                        <small>From: </small><br>
-                                                                                                                                        {{dateFrom | date: 'dd MMMM'}} <br>
-                                                                                                                                        <small>To:</small> <br>
-                                                                                                                                        {{dateTo | date: 'dd MMMM'}}
+                      <small>Period of Analysis</small><br>
+                      <small>From: </small><br>
+                      {{dateFrom | date: 'dd MMMM'}} <br>
+                      <small>To:</small> <br>
+                      {{dateTo | date: 'dd MMMM'}}
                     " onmouseenter="$(this).tooltip('show')">
                         <span ng-click="setVisibilityDatePicker()" ><h3>{{dateTo | date: 'dd MMMM yyyy'}}</h3>
                         Select Available Run
@@ -182,6 +182,21 @@
             </div>
         </div>
 
+      <!--DWNLOAD BUTTON-->
+      <div class="row my-2">
+        <div class="col-6 p-1">
+          <div class="sidebar-dwl-btn d-flex">
+            <div class="pre-dwl p-1"><span class="fa fa-arrow-circle-right"></span></div>
+            <div class="p-1">DOWNLOAD INPUT DATA</div>
+          </div>
+        </div>
+        <div class="col-6 p-1">
+          <div class="sidebar-dwl-btn d-flex">
+            <div class="pre-dwl p-1"><span class="fa fa-cogs"></span></div>
+            <div class="p-1">DOWNLOAD WORK DATA</div>
+          </div>
+        </div>
+      </div>
 
 
         <div ng-if="bShowBar">
