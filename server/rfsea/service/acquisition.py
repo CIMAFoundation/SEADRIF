@@ -83,10 +83,16 @@ if __name__ == '__main__':
         
         # Load the source data as a gdalnumeric array
         srcArray = gdalnumeric.LoadFile(raster_path)
+        
+#         if the_set=='eo':
+#             #TODO: tapullo per cambio codici(0-->1 1==3)
+#             srcArray[srcArray==1] = 3
+#             srcArray[srcArray==0] = 1
     
         # Also load as a gdal image to get geotransform
         srcImage = gdal.Open(raster_path)
-        geoTrans = srcImage.GetGeoTransform()
+        geoTrans = srcImage.GetGeoTransform()        
+        srcImage = None
     
         #downscale the image
 #         out_file = os.path.join(output_dir, output_file_name%(the_set, 'global'))
@@ -124,25 +130,56 @@ if __name__ == '__main__':
 
             clip = srcArray[ulY:lrY, ulX:lrX]
         
-            pixels = []
+        
+#             pixels = []
+#             geom = poly.GetGeometryRef()        
+#             pts = None
+#             area=0
+#             for i in range(0, geom.GetGeometryCount()):
+#                 tmp_area = geom.GetGeometryRef(i).GetArea()
+#                 if tmp_area > area or pts==None:
+#                     area = tmp_area
+#                     pts = geom.GetGeometryRef(i)
+#              
+#             while pts.GetGeometryCount() > 0:
+#                 pts = pts.GetGeometryRef(0)
+#             
+#             for p in range(pts.GetPointCount()):
+#                 px, py = world2Pixel(geoTrans, pts.GetX(p), pts.GetY(p))
+#                 pixels.append((px-ulX, py-ulY))
+#             rasterPoly = Image.new("L", (pxWidth, pxHeight), 1)
+#             rasterize = ImageDraw.Draw(rasterPoly)
+#             rasterize.polygon(pixels, 0)
+
+
+#             geom = poly.GetGeometryRef()        
+#             rasterPoly = Image.new("L", (pxWidth, pxHeight), 1)
+#             rasterize = ImageDraw.Draw(rasterPoly)
+#             for i in range(0, geom.GetGeometryCount()):
+#                 tmp_geom = geom.GetGeometryRef(i)           
+#                 for j in range(0, tmp_geom.GetGeometryCount()):      
+#                     pts = tmp_geom.GetGeometryRef(0)
+#                     
+#                     pixels = []
+#                     for p in range(pts.GetPointCount()):
+#                         px, py = world2Pixel(geoTrans, pts.GetX(p), pts.GetY(p))
+#                         pixels.append((px-ulX, py-ulY))
+#                     rasterize.polygon(pixels, 0)
+        
+        
             geom = poly.GetGeometryRef()        
-            pts = None
-            area=0
-            for i in range(0, geom.GetGeometryCount()):
-                tmp_area = geom.GetGeometryRef(i).GetArea()
-                if tmp_area > area or pts==None:
-                    area = tmp_area
-                    pts = geom.GetGeometryRef(i)
-             
-            while pts.GetGeometryCount() > 0:
-                pts = pts.GetGeometryRef(0)
-            
-            for p in range(pts.GetPointCount()):
-                px, py = world2Pixel(geoTrans, pts.GetX(p), pts.GetY(p))
-                pixels.append((px-ulX, py-ulY))
             rasterPoly = Image.new("L", (pxWidth, pxHeight), 1)
             rasterize = ImageDraw.Draw(rasterPoly)
-            rasterize.polygon(pixels, 0)
+            for i in range(0, geom.GetGeometryCount()):
+                pts = geom.GetGeometryRef(i)     
+                while pts.GetGeometryCount() > 0:
+                    pts = pts.GetGeometryRef(0)      
+                    
+                pixels = []
+                for p in range(pts.GetPointCount()):
+                    px, py = world2Pixel(geoTrans, pts.GetX(p), pts.GetY(p))
+                    pixels.append((px-ulX, py-ulY))
+                rasterize.polygon(pixels, 0)
             
 #             t = time.time()
             

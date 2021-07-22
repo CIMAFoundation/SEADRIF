@@ -20,17 +20,75 @@ import numpy
 #     lat = float(ulY) - (float(y) * float(yDist))
 #     return (lon, lat)
 
+# eo: 
+#     0: Undefined Pixels
+#     1: No Water
+#     2: Permanent Water
+#     3: Flooded Pixel
+
+EO_UNDEFIND = 0
+EO_NO_WATER = 1
+EO_PERMANENT_WATER = 2
+EO_FLOODED = 3
+
+# compare:
+#     0: Permanent Water
+#     1: No Water
+#     2: Likely Not Flooded
+#     3: Likely To Be Flooded
+#     4: Flooded Pixels
+#     5: Uncertain Pixels
+
+CMP_PERMANENT_WATER = 0
+CMP_NO_WATER = 1
+CMP_LIKELY_NOT_FLOODED = 2
+CMP_LIKELY_TO_BE_FLOODED = 3
+CMP_FLOODED = 4
+CMP_UNCERTAIN = 5
+
+# def compare(eo, wd):
+#     if eo==255: return 255
+#     wd = 1 if wd <= 0.3 else 3 
+#     if eo==2: return 0
+#     if eo == 1 and wd == 1: return 1
+#     if eo == 0 and wd == 1: return 2
+#     if eo == 0 and wd == 3: return 3
+#     if eo == 3 and wd == 3: return 4
+#     if eo != wd:return 5
+#     print 'NOOOOOO eo=%s wd=%s'%(eo, wd)
+#     return 255
+
+
 def compare(eo, wd):
     if eo==255: return 255
     wd = 1 if wd <= 0.3 else 3 
-    if eo==2: return 0
-    if eo == 1 and wd == 1: return 1
-    if eo == 0 and wd == 1: return 2
-    if eo == 0 and wd == 3: return 3
-    if eo == 3 and wd == 3: return 4
-    if eo != wd:return 5    
+    
+#     EO: Permanent Water  + Modello: Any class -> Final code: Permanent Water
+    if eo==EO_PERMANENT_WATER: return CMP_PERMANENT_WATER
+    
+#     EO: Unclassified (blind spot)  + Modello: Flood -> Final code: Likely to be Flooded
+    if eo == EO_UNDEFIND and wd == 3: return CMP_LIKELY_TO_BE_FLOODED
+    
+#     EO: Unclassified (blind spot)  + Modello:  noFlood -> Final code: Likely not flooded     
+    if eo == EO_UNDEFIND and wd == 1: return CMP_LIKELY_NOT_FLOODED
+
+#     EO: noFlood  + Modello:  noFlood -> Final code: No Water
+    if eo == EO_NO_WATER and wd == 1: return CMP_NO_WATER
+    
+#     EO: noFlood  + Modello:  Flood -> Final code: Likely to be Flooded
+    if eo == EO_NO_WATER and wd == 3: return CMP_LIKELY_TO_BE_FLOODED
+    
+#     EO: Flooded  + Modello:  Flood -> Final code: Flooded Areas
+    if eo == EO_FLOODED and wd == 3: return CMP_FLOODED
+    
+#     EO: Flooded  + Modello:  noFlood -> Final code: Likely to be Flooded
+    if eo == EO_FLOODED and wd == 1: return CMP_LIKELY_TO_BE_FLOODED
+    
+#     if eo != wd:return 5    
+    
     print 'NOOOOOO eo=%s wd=%s'%(eo, wd)
     return 255
+
 
 class EOWDComparator(object):
 

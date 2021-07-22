@@ -16,9 +16,9 @@ from osgeo import gdalnumeric
 from rfsea.service.eo_wd_comparator import EOWDComparator
 
 
-raster_base_path = '/home/rfsea/tiff'
+raster_base_path = '/home/doy/tmp/rfsea/tiff'
 
-output_base_dir = '/home/rfsea/data/runs/2018/02/06/images'
+output_base_dir = '/home/doy/tmp/rfsea/data/runs/2018/02/06/images'
 
 image_sets = {
     'wd': 'merged_output1.tif_com.tif',
@@ -110,7 +110,7 @@ if __name__ == '__main__':
 
         continue
         
-        shapefile_path = '/home/rfsea/provinces/provinces.shp'
+        shapefile_path = '/home/doy/tmp/rfsea/provinces/provinces.shp'
         output_dir = os.path.join(output_base_dir, the_set)
         if not os.path.exists(output_dir): os.makedirs(output_dir)
         

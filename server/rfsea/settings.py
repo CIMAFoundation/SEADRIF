@@ -18,7 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'keep the secret key used in production secret!'
+SECRET_KEY = '60gyy2y26sdfa4@6gp@=9n(f&e4khq3__v)6kz5zryv5yp*@%g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -68,9 +68,9 @@ WSGI_APPLICATION = 'rfsea.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-DATABASE_NAME = 'rfsea'
-DATABASE_USER = 'rfsea'
-DATABASE_PASSWORD = 'rfsea'
+DATABASE_NAME = 'seadrif'
+DATABASE_USER = 'postgres'
+DATABASE_PASSWORD = 'root'
 DATABASE_HOST = 'localhost'
 DATABASE_PORT = '5432'
 
@@ -113,11 +113,13 @@ STATIC_URL = '/static/'
 TASTYPIE_DEFAULT_FORMATS = ['json']
 
 
-DATA_BASE_DIR = '/home/seadrift/data'
+DATA_BASE_DIR = '/home/doy/tmp/seadrift/data'
 SPATIALS_DIR_NAME = 'spatials'
 DATA_DIR_NAME = 'runs'
 POP_FILE_NAME = 'output_pop.csv'
 RUN_IMAGES_DIR_NAME = 'images'
 
-SPOOL_DIR = '/home/seadrift/spool'
-SPLIT_SHP = '/home/seadrift/provinces/provinces.shp'
+SPOOL_DIR = '/home/doy/tmp/seadrift/spool'
+SPLIT_SHP = '/home/doy/tmp/seadrift/provinces/provinces.shp'
+SPLIT_SHP_COUNTRIES = '/home/doy/tmp/seadrift/provinces/countries.shp'
+

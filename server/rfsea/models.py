@@ -22,17 +22,19 @@ class Country(models.Model):
     thr1 = models.FloatField(default=0)
     thr2 = models.FloatField(default=0)
     pcost = models.FloatField(default=50)
-    curve = models.TextField()    
+    curve = models.TextField()
+    descr = models.TextField()
     pop = models.FloatField(default=0)
     def __unicode__(self):
         return self.name
-    
+
 class HistoricalEvent(models.Model):
     name = models.CharField(max_length=255)
     year = models.IntegerField()
     pop = models.IntegerField()
     source = models.TextField()
     country = models.ForeignKey(Country)
+    descr = models.TextField()
     def __unicode__(self):
         return '%s --> %s - %s'%(self.country.name, self.name, self.year)
     

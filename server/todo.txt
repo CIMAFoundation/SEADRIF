@@ -1,0 +1,82 @@
+
+NOTE:
+
+1) nella schermata globale del paese: 	
+	
+	- come costruiamo il testo?
+	
+	- lo slider temporale sparisce?
+		si perchè mettiamo sempre 7 giorni
+	
+	- di default carichiamo l'ultimo run disponibile e poi consentiamo di cambiare data con il controllo calendario e/o con due puldsanti +/- 1d?
+		si
+	
+	- la soglia è parametrica fissa per ogni paese
+	
+	
+2) nella schermata view:
+	
+	- colorare le features in base ad uno degli scenari (parametrizzare)
+		fatto: scenario GUF 1 (considerando il set 1,2,3... quindi il primo) è il best estimate  
+	
+	- non zoommabile
+	
+	
+3) nella scheramta "zona"
+	
+	- mettere come sfondo osm ed il layer di popolazione. Poi visualizzare in trasparenza il "layer informativo" che può essere:
+		- solo best estimate
+		- solo mappa eo
+			0 : Insufficient data to make water determination (cloudy, missing images, swath gaps swaths, or bad data values).
+			1 : No water detected.
+			2 : Water detected AND coinciding with reference water (e.g., not flood).
+			3 : Water detected, beyond reference water, so is likely flood. 			
+		
+		- mappa differenza (ottenuta categorizzando la best estimate secondo le categorie della mappa eo e facendo differenza)
+			occhio perchè sono su griglie diverse 
+
+			categorizzazione (bec):						
+				sotto i 30 cm di be = 1
+				sopra i 30 cm di be = 3
+				
+			diff:
+				rigriglio tutto su be
+				se eo == 2 --> 					0 FIUME trasparente (blu)
+
+				se eo == bec == 1 --> 			1 SAFE  verde
+				se eo == 0 && bec == 1 --> 		2 FORSE SAFE giallo 
+
+				se eo == 0 && bec == 3 --> 		3 FORSE INDONDATO arancione
+				se eo == bec == 3 --> 			4 INONDATO  rosso
+
+				se eo != bec --> 				5 DISCORDANTI grigio
+				
+	
+	- nella barra visualizzare sempre il tot (45.000)
+	
+	- il numero della zona (12.345) lo visualizziamo nella barra al posto di detail (nome provincia e numero pop)
+	
+	- non c'è più la possibilità di dettagliare
+	
+	
+4) nella schermata details (arrivando da view)
+	
+	- eliminare lo slider
+	
+	- aggiungere una barra di volume affianco alle legende
+	
+	- grafico 
+		il pallino arancione è lo scenario di riferimento (quello parametrizzato)
+		i pallini blu sono gli storici (quello immediatamente prima e dopo)... come li ottengo?
+		il pallino rosso non c'è perchè non abbiamo il dato
+	
+		
+5) schermata details details
+	
+	- eliminare i pulsanti in alto
+	
+	- eliminare lo slider
+	
+	- nel testo mettere tutti i metadati del run... come li ottengo?
+	
+	

@@ -8,7 +8,6 @@ from rfsea.settings import DATA_BASE_DIR, SPATIALS_DIR_NAME, DATA_DIR_NAME,\
 import os
 import ogr
 import csv
-from __builtin__ import int
 from datetime import timedelta
 from rfsea.models import AppSetting
 import json
@@ -215,8 +214,10 @@ class DeltaresReader(object):
             'pop_est': totalPop,
             'pop_hl': littlerEv.pop if littlerEv is not None else None,
             'hl': '%s - %s'%(littlerEv.name, littlerEv.year) if littlerEv is not None else None,
+            'hl_descr': littlerEv.descr if littlerEv is not None else None,
             'pop_hg': biggerEv.pop if biggerEv is not None else None,
             'hg': '%s - %s'%(biggerEv.name, biggerEv.year) if biggerEv is not None else None,
+            'hg_descr': biggerEv.descr if biggerEv is not None else None,
             }
         
         return data

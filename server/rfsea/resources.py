@@ -26,6 +26,12 @@ class RFSEAResource(AcrowebResource):
                 URLHelper('/%s/analysis'%self.strParam('country'), 'country_analysis'),
                 URLHelper('/%s/%s/zonedetails'%(self.strParam('country'), self.strParam('zone')), 'zone_details'),
                 URLHelper('/img', 'img'),
+                URLHelper('/%s/downloadpop'%self.strParam('country'), 'download_pop'),
+                URLHelper('/%s/downloadeo'%self.strParam('country'), 'download_eo'),
+                URLHelper('/%s/downloadmodel'%self.strParam('country'), 'download_model'),
+                URLHelper('/%s/downloadeomodel'%self.strParam('country'), 'download_eo_model'),
+                URLHelper('/downloadwork', 'download_work'),
+                URLHelper('/downloadinput', 'download_input'),
                 ]
 
     def _checkCountryPermission(self, request, countryPK):        
@@ -169,4 +175,12 @@ class RFSEAResource(AcrowebResource):
         response['Content-Length'] = len(bytes)
         return response
 
+    def download_pop(self, request, **kwargs):
+        self.method_check(request, allowed=['get'])
+        response = self._checkCountryPermission(request, None)
+        if response: return response
 
+        day = datetime.datetime.strptime(request.GET['d'], '%Y%m%d') if 'd' in request.GET else datetime.date.today()
+        country = Country.objects.get(pk=kwargs['country'])
+
+        
