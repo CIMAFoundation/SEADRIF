@@ -113,7 +113,7 @@ STATIC_URL = '/static/'
 TASTYPIE_DEFAULT_FORMATS = ['json']
 
 
-DATA_BASE_DIR = '/home/doy/tmp/seadrift/data'
+DATA_BASE_DIR = '/home/doy/tmp/seadrif/data'
 SPATIALS_DIR_NAME = 'spatials'
 DATA_DIR_NAME = 'runs'
 POP_FILE_NAME = 'output_pop.csv'

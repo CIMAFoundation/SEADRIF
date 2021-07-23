@@ -177,10 +177,53 @@ class RFSEAResource(AcrowebResource):
 
     def download_pop(self, request, **kwargs):
         self.method_check(request, allowed=['get'])
-        response = self._checkCountryPermission(request, None)
-        if response: return response
+        # response = self._checkCountryPermission(request, None)
+        # if response: return response
 
         day = datetime.datetime.strptime(request.GET['d'], '%Y%m%d') if 'd' in request.GET else datetime.date.today()
         country = Country.objects.get(pk=kwargs['country'])
 
+        reader = DeltaresReader(country)
+        data = reader.getCountryPopulationCSV(day)
         
+        response = HttpResponse(data, content_type='application/force-download')
+        response['Content-Disposition'] = 'attachment; filename=%s_population_%s.csv'%(country.name, day)
+        return response
+
+    def __download(self, day, country, data_type, data_type_descr=None):
+        reader = DeltaresReader(country)
+        data = reader.getCountryGeoTiffBytes(day, data_type)        
+        response = HttpResponse(data, content_type='application/force-download')
+        data_type_descr = data_type_descr if data_type_descr != None else data_type
+        response['Content-Disposition'] = 'attachment; filename=%s_%s_%s.tif'%(country.name, data_type_descr, day)
+        return response
+
+    def download_eo(self, request, **kwargs):
+        self.method_check(request, allowed=['get'])
+        # response = self._checkCountryPermission(request, None)
+        # if response: return response
+
+        day = datetime.datetime.strptime(request.GET['d'], '%Y%m%d') if 'd' in request.GET else datetime.date.today()
+        country = Country.objects.get(pk=kwargs['country'])
+
+        return self.__download(day, country, 'eo')
+
+    def download_model(self, request, **kwargs):
+        self.method_check(request, allowed=['get'])
+        # response = self._checkCountryPermission(request, None)
+        # if response: return response
+
+        day = datetime.datetime.strptime(request.GET['d'], '%Y%m%d') if 'd' in request.GET else datetime.date.today()
+        country = Country.objects.get(pk=kwargs['country'])
+
+        return self.__download(day, country, 'wd', 'model')
+       
+    def download_eo_model(self, request, **kwargs):
+        self.method_check(request, allowed=['get'])
+        # response = self._checkCountryPermission(request, None)
+        # if response: return response
+
+        day = datetime.datetime.strptime(request.GET['d'], '%Y%m%d') if 'd' in request.GET else datetime.date.today()
+        country = Country.objects.get(pk=kwargs['country'])
+
+        return self.__download(day, country, 'compare_eo_wd', 'eo-model')

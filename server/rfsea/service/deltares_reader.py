@@ -3,6 +3,7 @@ Created on Feb 6, 2018
 
 @author: doy
 '''
+import io
 from rfsea.settings import DATA_BASE_DIR, SPATIALS_DIR_NAME, DATA_DIR_NAME,\
     POP_FILE_NAME, RUN_IMAGES_DIR_NAME
 import os
@@ -17,7 +18,6 @@ import gdalnumeric
 import numpy
 from PIL import Image
 import time
-import io
 
 
 def my_int(v):
@@ -34,6 +34,7 @@ class DeltaresReader(object):
     reader for the rfsea data
     '''
     countriesIDs = {}
+    countriesIdNames = {}
 
     def __init__(self, country):
         '''
@@ -65,8 +66,7 @@ class DeltaresReader(object):
             day = day - timedelta(days=1)        
         return runs         
 
-    def _readPopData(self, day):
-        #search for the latest available at "day"
+    def __getRunDir(self, day):
         runDir = None
         while runDir is None and day.year >= 1970:
             p = os.path.join(self.dataDir, day.strftime('%Y'), day.strftime('%m'), day.strftime('%d'))
@@ -76,6 +76,11 @@ class DeltaresReader(object):
         
         #read the pop data
         if not os.path.exists(runDir): raise ValueError('invald run dir: %s'%runDir)
+        return runDir
+
+    def _readPopData(self, day):
+        runDir = self.__getRunDir(day)
+
         popFile = os.path.join(runDir, POP_FILE_NAME)
         if not os.path.exists(popFile): raise ValueError('cannot find pop file: %s'%popFile)
         fields=None
@@ -103,7 +108,9 @@ class DeltaresReader(object):
             for feature in lyr:
                 prop = feature.ExportToJson(as_object=True)
                 ids.append(str(prop['properties']['ID']))
+                self.countriesIdNames[str(prop['properties']['ID'])] = str(prop['properties']['name'])
             self.countriesIDs[self.country.name] = ids
+
             
         return self.countriesIDs[self.country.name]
 
@@ -223,6 +230,31 @@ class DeltaresReader(object):
         return data
         
     
+    def getCountryPopulationCSV(self, day):
+        #rad population data
+        _, fields, popData, _ = self._readPopData(day)
+        #ensure that all country ids are decoded with name
+        ids = self._readZonesIds()
+        #build csv string
+        
+        
+        output = io.BytesIO()
+        # output = open('/tmp/pippo.csv', 'w')
+        writer = csv.writer(output, dialect=csv.excel, delimiter=';')
+        writer.writerow([u'id', u'name'] + fields)
+        for fid in popData:
+            if fid in ids:
+                writer.writerow([fid, self.countriesIdNames[fid]] + popData[fid]) 
+
+        csv_string = output.getvalue()
+
+        output.close()
+        
+        # csv_string = open('/tmp/pippo.csv', 'r').read()
+        
+        return csv_string
+
+
     
     def getCountryAnalysis(self, day):
         
@@ -363,5 +395,25 @@ class DeltaresReader(object):
         
         return bytes_io.getvalue()
         
+    def getCountryGeoTiffBytes(self, day, data_type):
+
+        run_dir = self.__getRunDir(day)
         
+        country_geotiff = os.path.join(run_dir, '%s_%s.tif'%(self.country.name, data_type))
+
+        if not os.path.exists(country_geotiff):
+            tif_folder = os.path.join(run_dir, 'images/%s'%(data_type))
+            ids = self._readZonesIds()
+            tif_files = [os.path.join(tif_folder, '%s_%s.tif'%(data_type, i)) for i in ids]
+            tif_files_param = ' '.join(tif_files)
+
+            # cmd = 'gdal_merge.py -init 255 -n 255 -co "COMPRESS=DEFLATE" -o %s %s/*'%(country_geotiff, tiff_folder)
+            cmd = 'gdal_merge.py -n 255 -co "COMPRESS=DEFLATE" -o %s %s'%(country_geotiff, tif_files_param)
+            print('running %s'%cmd)
+            os.system(cmd)
+            print('\tDONE!');
+
+        with open(country_geotiff, 'rb') as f:
+            return f.read()
+
             
