@@ -1,15 +1,19 @@
 """
 dds client resources
 """
+import glob
+import io
+import os
+from rfsea.settings import DATA_BASE_DIR, DELTARES_WORK_DIR
 from acroweb.core.resources import AcrowebResource, URLHelper
 from rfsea.service.deltares_reader import DeltaresReader
 from rfsea.models import Country
 import datetime
-from django.http.response import HttpResponse
+from django.http import FileResponse, HttpResponse, response
 import calendar
 from tastypie.http import HttpUnauthorized
 import json
-
+import zipfile
 
 class RFSEAResource(AcrowebResource):
     
@@ -177,7 +181,7 @@ class RFSEAResource(AcrowebResource):
 
     def download_pop(self, request, **kwargs):
         self.method_check(request, allowed=['get'])
-        # response = self._checkCountryPermission(request, None)
+        # response = self._checkCountryPermission(request, kwargs['country'])
         # if response: return response
 
         day = datetime.datetime.strptime(request.GET['d'], '%Y%m%d') if 'd' in request.GET else datetime.date.today()
@@ -200,7 +204,7 @@ class RFSEAResource(AcrowebResource):
 
     def download_eo(self, request, **kwargs):
         self.method_check(request, allowed=['get'])
-        # response = self._checkCountryPermission(request, None)
+        # response = self._checkCountryPermission(request, kwargs['country'])
         # if response: return response
 
         day = datetime.datetime.strptime(request.GET['d'], '%Y%m%d') if 'd' in request.GET else datetime.date.today()
@@ -210,7 +214,7 @@ class RFSEAResource(AcrowebResource):
 
     def download_model(self, request, **kwargs):
         self.method_check(request, allowed=['get'])
-        # response = self._checkCountryPermission(request, None)
+        # response = self._checkCountryPermission(request, kwargs['country'])
         # if response: return response
 
         day = datetime.datetime.strptime(request.GET['d'], '%Y%m%d') if 'd' in request.GET else datetime.date.today()
@@ -220,10 +224,51 @@ class RFSEAResource(AcrowebResource):
        
     def download_eo_model(self, request, **kwargs):
         self.method_check(request, allowed=['get'])
-        # response = self._checkCountryPermission(request, None)
+        # response = self._checkCountryPermission(request, kwargs['country'])
         # if response: return response
 
         day = datetime.datetime.strptime(request.GET['d'], '%Y%m%d') if 'd' in request.GET else datetime.date.today()
         country = Country.objects.get(pk=kwargs['country'])
 
         return self.__download(day, country, 'compare_eo_wd', 'eo-model')
+
+    def download_input(self, request, **kwargs):
+        self.method_check(request, allowed=['get'])
+
+        # response = self._checkCountryPermission(request, None)
+        # if response: return response
+
+        response = FileResponse(open(os.path.join(DATA_BASE_DIR, 'Input.tgz'), 'rb'), content_type='application/force-download')
+        response['Content-Disposition'] = 'attachment; filename=input_data.tgz'
+        return response
+
+
+    def download_work(self, request, **kwargs):
+        self.method_check(request, allowed=['get'])
+
+        # response = self._checkCountryPermission(request, None)
+        # if response: return response
+
+        day = datetime.datetime.strptime(request.GET['d'], '%Y%m%d') if 'd' in request.GET else datetime.date.today()
+
+        #get last valid day
+        _, day = DeltaresReader(None).getRunDir(day)
+
+        #go to the next days for the work dir
+        day = day + datetime.timedelta(days=1)
+
+        work_run_dir = os.path.join(DELTARES_WORK_DIR, day.strftime('%Y-%m-%d'))
+
+        output = io.BytesIO()
+
+        zip_file = zipfile.ZipFile(output, 'w')
+
+        csv_files = glob.glob(os.path.join(work_run_dir, '*.csv')) 
+        for f in csv_files:
+            zip_file.write(f, 'work_%s/%s'%(day.strftime('%Y%m%d'), os.path.basename(f)))
+        zip_file.close()
+
+        response = HttpResponse(output.getvalue(), content_type='application/force-download')
+        response['Content-Disposition'] = 'attachment; filename=work_data_%s.zip'%(day)
+        return response
+

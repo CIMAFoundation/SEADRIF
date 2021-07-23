@@ -66,7 +66,7 @@ class DeltaresReader(object):
             day = day - timedelta(days=1)        
         return runs         
 
-    def __getRunDir(self, day):
+    def getRunDir(self, day):
         runDir = None
         while runDir is None and day.year >= 1970:
             p = os.path.join(self.dataDir, day.strftime('%Y'), day.strftime('%m'), day.strftime('%d'))
@@ -76,10 +76,10 @@ class DeltaresReader(object):
         
         #read the pop data
         if not os.path.exists(runDir): raise ValueError('invald run dir: %s'%runDir)
-        return runDir
+        return runDir, day
 
     def _readPopData(self, day):
-        runDir = self.__getRunDir(day)
+        runDir, _ = self.getRunDir(day)
 
         popFile = os.path.join(runDir, POP_FILE_NAME)
         if not os.path.exists(popFile): raise ValueError('cannot find pop file: %s'%popFile)
@@ -397,7 +397,7 @@ class DeltaresReader(object):
         
     def getCountryGeoTiffBytes(self, day, data_type):
 
-        run_dir = self.__getRunDir(day)
+        run_dir, _ = self.getRunDir(day)
         
         country_geotiff = os.path.join(run_dir, '%s_%s.tif'%(self.country.name, data_type))
 
