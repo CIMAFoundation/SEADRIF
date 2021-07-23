@@ -263,6 +263,7 @@ class RFSEAResource(AcrowebResource):
 
         zip_file = zipfile.ZipFile(output, 'w')
 
+        #add all cvs files to archive
         csv_files = glob.glob(os.path.join(work_run_dir, '*.csv')) 
         for f in csv_files:
             zip_file.write(f, 'work_%s/%s'%(day.strftime('%Y%m%d'), os.path.basename(f)))
