@@ -79,7 +79,7 @@ class DeltaresReader(object):
         return runDir, day
 
     def _readPopData(self, day):
-        runDir, _ = self.getRunDir(day)
+        runDir, day = self.getRunDir(day)
 
         popFile = os.path.join(runDir, POP_FILE_NAME)
         if not os.path.exists(popFile): raise ValueError('cannot find pop file: %s'%popFile)
