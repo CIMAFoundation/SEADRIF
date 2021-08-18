@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
-
-
+from django.utils import timezone
 
 class UserSetting(models.Model):
     user = models.ForeignKey(User, unique=True)
@@ -38,3 +36,9 @@ class HistoricalEvent(models.Model):
     def __unicode__(self):
         return '%s --> %s - %s'%(self.country.name, self.name, self.year)
     
+
+class LogActivity(models.Model):
+    user = models.CharField(max_length=255)
+    dt = models.DateTimeField(default=timezone.now)
+    address = models.TextField()
+    activity = models.TextField()

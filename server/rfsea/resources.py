@@ -14,6 +14,7 @@ import calendar
 from tastypie.http import HttpUnauthorized
 import json
 import zipfile
+from rfsea import add_logbook_activity
 
 class RFSEAResource(AcrowebResource):
     
@@ -181,11 +182,14 @@ class RFSEAResource(AcrowebResource):
 
     def download_pop(self, request, **kwargs):
         self.method_check(request, allowed=['get'])
-        # response = self._checkCountryPermission(request, kwargs['country'])
-        # if response: return response
+
+        response = self._checkCountryPermission(request, kwargs['country'])
+        if response: return response
 
         day = datetime.datetime.strptime(request.GET['d'], '%Y%m%d') if 'd' in request.GET else datetime.date.today()
         country = Country.objects.get(pk=kwargs['country'])
+
+        add_logbook_activity(request, 'download pop: %s;%s'%(country.name, day))
 
         reader = DeltaresReader(country)
         data = reader.getCountryPopulationCSV(day)
@@ -204,18 +208,22 @@ class RFSEAResource(AcrowebResource):
 
     def download_eo(self, request, **kwargs):
         self.method_check(request, allowed=['get'])
-        # response = self._checkCountryPermission(request, kwargs['country'])
-        # if response: return response
+
+        response = self._checkCountryPermission(request, kwargs['country'])
+        if response: return response
 
         day = datetime.datetime.strptime(request.GET['d'], '%Y%m%d') if 'd' in request.GET else datetime.date.today()
         country = Country.objects.get(pk=kwargs['country'])
+
+        add_logbook_activity(request, 'download eo: %s;%s'%(country.name, day))
 
         return self.__download(day, country, 'eo')
 
     def download_model(self, request, **kwargs):
         self.method_check(request, allowed=['get'])
-        # response = self._checkCountryPermission(request, kwargs['country'])
-        # if response: return response
+
+        response = self._checkCountryPermission(request, kwargs['country'])
+        if response: return response
 
         day = datetime.datetime.strptime(request.GET['d'], '%Y%m%d') if 'd' in request.GET else datetime.date.today()
         country = Country.objects.get(pk=kwargs['country'])
@@ -224,19 +232,24 @@ class RFSEAResource(AcrowebResource):
        
     def download_eo_model(self, request, **kwargs):
         self.method_check(request, allowed=['get'])
-        # response = self._checkCountryPermission(request, kwargs['country'])
-        # if response: return response
+
+        response = self._checkCountryPermission(request, kwargs['country'])
+        if response: return response
 
         day = datetime.datetime.strptime(request.GET['d'], '%Y%m%d') if 'd' in request.GET else datetime.date.today()
         country = Country.objects.get(pk=kwargs['country'])
+
+        add_logbook_activity(request, 'download eo_model: %s;%s'%(country.name, day))
 
         return self.__download(day, country, 'compare_eo_wd', 'eo-model')
 
     def download_input(self, request, **kwargs):
         self.method_check(request, allowed=['get'])
 
-        # response = self._checkCountryPermission(request, None)
-        # if response: return response
+        response = self._checkCountryPermission(request, None)
+        if response: return response
+
+        add_logbook_activity(request, 'download input')
 
         response = FileResponse(open(os.path.join(DATA_BASE_DIR, 'Input.tgz'), 'rb'), content_type='application/force-download')
         response['Content-Disposition'] = 'attachment; filename=input_data.tgz'
@@ -246,8 +259,8 @@ class RFSEAResource(AcrowebResource):
     def download_work(self, request, **kwargs):
         self.method_check(request, allowed=['get'])
 
-        # response = self._checkCountryPermission(request, None)
-        # if response: return response
+        response = self._checkCountryPermission(request, None)
+        if response: return response
 
         day = datetime.datetime.strptime(request.GET['d'], '%Y%m%d') if 'd' in request.GET else datetime.date.today()
 
@@ -257,6 +270,8 @@ class RFSEAResource(AcrowebResource):
         #go to the next days for the work dir
         day = day + datetime.timedelta(days=1)
 
+        add_logbook_activity(request, 'download wok: %s'%(day))
+        
         work_run_dir = os.path.join(DELTARES_WORK_DIR, day.strftime('%Y-%m-%d'))
 
         output = io.BytesIO()
