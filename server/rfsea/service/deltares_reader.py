@@ -152,7 +152,7 @@ class DeltaresReader(object):
         return data
     
     
-    def getZones(self, day):
+    def getZones(self, day, simplify=False):
         '''
         return the zone of the country in geojson format
         for each zone is computed also the population value
@@ -177,7 +177,9 @@ class DeltaresReader(object):
             'features': []
             }        
         lyr = ds.GetLayer(0)
-        for feature in lyr:    
+        for feature in lyr:
+            if simplify:
+                feature.SetGeometry(feature.GetGeometryRef().SimplifyPreserveTopology(0.01))    
             prop = feature.ExportToJson(as_object=True)
             prop['properties']['data'] = popData[str(prop['properties']['ID'])][scenarioIdx]            
             fc['features'].append(prop)

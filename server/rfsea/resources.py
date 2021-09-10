@@ -27,6 +27,7 @@ class RFSEAResource(AcrowebResource):
                 URLHelper('/runs/%s/%s'%(self.strParam('year'), self.strParam('month')), 'runs'),
                 URLHelper('/%s/globals'%self.strParam('country'), 'globals'), 
                 URLHelper('/%s/zones'%self.strParam('country'), 'country_zones'),
+                URLHelper('/zones', 'all_zones'),
                 URLHelper('/%s/details'%self.strParam('country'), 'country_details'),
                 URLHelper('/%s/analysis'%self.strParam('country'), 'country_analysis'),
                 URLHelper('/%s/%s/zonedetails'%(self.strParam('country'), self.strParam('zone')), 'zone_details'),
@@ -37,6 +38,8 @@ class RFSEAResource(AcrowebResource):
                 URLHelper('/%s/downloadeomodel'%self.strParam('country'), 'download_eo_model'),
                 URLHelper('/downloadwork', 'download_work'),
                 URLHelper('/downloadinput', 'download_input'),
+                URLHelper('/%s/inputfloodmaps'%self.strParam('country'), 'get_input_floodmaps'),
+                URLHelper('/%s/downloadinputfloodmaps/%s'%(self.strParam('country'), self.strParam('map')), 'download_floodmap'),
                 ]
 
     def _checkCountryPermission(self, request, countryPK):        
@@ -95,6 +98,23 @@ class RFSEAResource(AcrowebResource):
         data = reader.getZones(day)
         
         return self.create_response(request, data)
+
+    def all_zones(self, request, **kwargs):
+        self.method_check(request, allowed=['get'])
+        
+        day = datetime.datetime.strptime(request.GET['d'], '%Y%m%d') if 'd' in request.GET else datetime.date.today()
+
+        all_data = None
+        for country in Country.objects.all():
+            #obtain global data
+            reader = DeltaresReader(country)
+            data = reader.getZones(day, simplify=True)
+            if all_data is None:
+                all_data = data
+            else:
+                all_data['geojson']['features'].extend(data['geojson']['features'])
+        
+        return self.create_response(request, all_data)
 
     def country_details(self, request, **kwargs):
         self.method_check(request, allowed=['get'])
@@ -255,6 +275,36 @@ class RFSEAResource(AcrowebResource):
         response['Content-Disposition'] = 'attachment; filename=input_data.tgz'
         return response
 
+    def get_input_floodmaps(self, request, **kwargs):
+        self.method_check(request, allowed=['get'])
+
+        response = self._checkCountryPermission(request, kwargs['country'])
+        if response: return response
+
+        country = Country.objects.get(pk=kwargs['country'])
+        country_dir = os.path.join(DATA_BASE_DIR, 'input_downloads', country.name)
+
+        data = os.listdir(country_dir)
+
+        return self.create_response(request, [str(os.path.splitext(f)[0]) for f in data])
+
+
+    def download_floodmap(self, request, **kwargs):
+        self.method_check(request, allowed=['get'])
+
+        response = self._checkCountryPermission(request, None)
+        if response: return response
+
+        country = Country.objects.get(pk=kwargs['country'])
+        country_dir = os.path.join(DATA_BASE_DIR, 'input_downloads', country.name)
+
+        flood_map = '%s.tif'%kwargs['map']
+
+        add_logbook_activity(request, 'download input')
+
+        response = FileResponse(open(os.path.join(country_dir, flood_map), 'rb'), content_type='application/force-download')
+        response['Content-Disposition'] = 'attachment; filename=%s'%flood_map
+        return response
 
     def download_work(self, request, **kwargs):
         self.method_check(request, allowed=['get'])
