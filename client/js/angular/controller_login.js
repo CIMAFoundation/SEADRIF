@@ -94,8 +94,6 @@ rfseaApp.controller('rfseaCtrlloginform', function($rootScope, $scope, $timeout,
                 if(data.data.success){
                     //Login success
 
-                    console.log(data);
-
                     // Get user name
                     rfseaSrv.getWhoami(function(data)
                     {

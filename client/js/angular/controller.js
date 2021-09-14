@@ -2,7 +2,7 @@
  * Created by Manuel on 13/01/2017.
  */
 
-rfseaApp.controller('rfseaCtrl', function($rootScope, $scope, $window, rfseaSrv)
+rfseaApp.controller('rfseaCtrl', function($rootScope, $scope, $filter, $window, rfseaSrv)
 {
 
     $scope.userinfo = {
@@ -10,13 +10,20 @@ rfseaApp.controller('rfseaCtrl', function($rootScope, $scope, $window, rfseaSrv)
         usrlevel: "",
         usrloginstatus: false
     };
-
     $scope.login = {
         status:false,
         type: ""
     };
-
     $scope.bDisclaimer = false;
+
+    $scope.district_list = [];
+    $scope.zonesData = [];
+    $scope.palettePosition = 'bottomright';
+    $scope.paletteColors = [];
+    $scope.paletteColors_saved = [];
+    $scope.maptype = "scale";
+    $scope.bPeople = true;
+    $scope.legendtitle= "";
 
     // Get user name
     rfseaSrv.getWhoami(function(data)
@@ -56,26 +63,83 @@ rfseaApp.controller('rfseaCtrl', function($rootScope, $scope, $window, rfseaSrv)
 
         var map = rfseaSrv.createMapObject();
 
-        // var map = L.map('map', {
-        //         center: [19.80, 91.00],
-        //         zoom: 5,
-        //         trackResize: true
-        //     }
-        // );
-
-        // map.zoomControl.setPosition('topright');
-
-        // L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        //     attribution: ''
-        // }).addTo(map);
-        //
-        // L.control.scale({position: 'bottomright'}).addTo(map);
+        getZonesForGuest (map);
 
     });
 
     $scope.setLoginView = function(type){
         $scope.login.status = !$scope.login.status;
         $scope.login.type = type;
+    }
+
+    function getZonesForGuest (map){
+
+        rfseaSrv.getCountryDataForGuest(function(data)
+        {
+            $scope.district_list = data.data.geojson.features;
+
+            // Set color Palette
+            setPaletteColor(data.data.pal.colors, data.data.pal.values);
+
+            $scope.zonesData = data.data.geojson.features;
+
+            loadMapLayers( map);
+
+        }, function(data)
+        {
+            console.log(data);
+        });
+    }
+
+    function setPaletteColor(colors, values) {
+        // Set the palette objects for zones color and legend values
+
+        $scope.paletteColors = rfseaSrv.setPaletteColor(colors, values);
+        $scope.paletteColors_saved = angular.copy($scope.paletteColors);
+
+    }
+
+    function loadMapLayers(map){
+
+        var geojsondata = L.geoJSON($scope.district_list, {
+            style: function (item) {
+                return setColorMap(item);
+            },
+            onEachFeature: onEachFeature
+        }
+        ).addTo(map);
+
+        if(!bMapRaster){
+            map.fitBounds(geojsondata.getBounds());
+        }
+
+    }
+
+    function onEachFeature(feature, layer) {
+        //bind click
+
+        layer.myTag = "CountryGEOJson";
+
+        var customPopup = feature.properties.name + ': ' + $filter('number')(feature.properties.data);
+        var customOptions = {
+            'maxWidth': '400',
+            'width': '200',
+            'className' : 'popupCustom',
+            'autoPan': false
+        }
+
+        layer.bindPopup(customPopup, customOptions);
+
+        layer.on('mouseover', function(){
+            this.openPopup();
+        });
+        layer.on('mouseout', function(){
+            this.closePopup();
+        });
+    }
+
+    function setColorMap(dataValue){
+        return rfseaSrv.setColorMap(dataValue, $scope.paletteColors_saved);
     }
 
     /***************************************************/

@@ -48,6 +48,7 @@ rfseaApp.controller('rfseamenuCtrl', function($rootScope, $scope, $window, rfsea
         $scope.bCountriesList = !$scope.bCountriesList;
 
         $scope.countryselected = country;
+        $rootScope.contry_selected = country;
 
     }
 

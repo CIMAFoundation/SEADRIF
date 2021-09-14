@@ -225,6 +225,20 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter, $root
 
     }
 
+    // This API allow the guest to view affected people
+    this.getCountryDataForGuest = function(onSuccess, onError){
+
+        $http({
+            method: 'GET',
+            url: baseAPIurl + 'data/zones/'
+        }).then(function (data) {
+            if(onSuccess) onSuccess(data)
+        },function(data){
+            if(onError)onError(data)
+        });
+
+    }
+
     /*****************************************************************************************/
     /***************** COUNTRY ZONE COLOR SETTINGS *******************************************/
     /*****************************************************************************************/
@@ -551,6 +565,114 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter, $root
         return number;
 
     };
+
+    /*****************************************************************************************/
+    /***************** DOWNLOAD DATA *********************************************************/
+    /*****************************************************************************************/
+
+    this.getDownloadPop = function(country_id, dateData, onSuccess, onError)
+    {
+        $http({
+            method: 'GET',
+            url: baseAPIurl + 'data/' + country_id + '/downloadpop/?d=' + dateData
+        }).then(function (data) {
+            if(onSuccess) onSuccess(data)
+        },function(data){
+            if(onError)onError(data)
+        });
+    }
+
+    this.getDownloadEO = function(country_id, dateData, onSuccess, onError)
+    {
+        $http({
+            method: 'GET',
+            url: baseAPIurl + 'data/' + country_id + '/downloadeo/?d=' + dateData,
+            responseType: 'blob'
+        }).then(function (data) {
+            if(onSuccess) onSuccess(data)
+        },function(data){
+            if(onError)onError(data)
+        });
+    }
+
+    this.getDownloadMODEL = function(country_id, dateData, onSuccess, onError)
+    {
+        $http({
+            method: 'GET',
+            url: baseAPIurl + 'data/' + country_id + '/downloadmodel/?d=' + dateData,
+            responseType: 'blob'
+        }).then(function (data) {
+            if(onSuccess) onSuccess(data)
+        },function(data){
+            if(onError)onError(data)
+        });
+    }
+
+    this.getDownloadEOMODEL = function(country_id, dateData, onSuccess, onError)
+    {
+        $http({
+            method: 'GET',
+            url: baseAPIurl + 'data/' + country_id + '/downloadeomodel/?d=' + dateData,
+            responseType: 'blob'
+        }).then(function (data) {
+            if(onSuccess) onSuccess(data)
+        },function(data){
+            if(onError)onError(data)
+        });
+    }
+
+    this.getDownloadWorkingDirectory = function(dateData, onSuccess, onError)
+    {
+        $http({
+            method: 'GET',
+            url: baseAPIurl + 'data/downloadwork/?d=' + dateData,
+            responseType: 'blob'
+        }).then(function (data) {
+            if(onSuccess) onSuccess(data)
+        },function(data){
+            if(onError)onError(data)
+        });
+    }
+
+    this.getDownloadInputDirectory = function(dateData, onSuccess, onError)
+    {
+        $http({
+            method: 'GET',
+            url: baseAPIurl + 'data/downloadinput/?d=' + dateData,
+            responseType: 'blob'
+        }).then(function (data) {
+            if(onSuccess) onSuccess(data)
+        },function(data){
+            if(onError)onError(data)
+        });
+    }
+
+    this.getCountryInputFloodMap = function (country_id, onSuccess, onError) {
+
+        $http({
+            method: 'GET',
+            url: baseAPIurl + 'data/' + country_id + '/inputfloodmaps/'
+        }).then(function (data) {
+            if(onSuccess) onSuccess(data)
+        },function(data){
+            if(onError)onError(data)
+        });
+
+    }
+
+    this.getDownloadCountryFloodMap = function (country_id, flood_map, onSuccess, onError) {
+
+        $http({
+            method: 'GET',
+            url: baseAPIurl + 'data/' + country_id + '/downloadinputfloodmaps/' + flood_map + '/',
+            responseType: 'blob'
+        }).then(function (data) {
+            if(onSuccess) onSuccess(data)
+        },function(data){
+            if(onError)onError(data)
+        });
+
+    }
 
 }]);
 

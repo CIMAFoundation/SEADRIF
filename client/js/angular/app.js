@@ -8,7 +8,9 @@ rfseaApp.run(['$http', '$cookies', function($http, $cookies) {
     $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
 }]);
 
+//var baseAPIurl = "https://seadrif2.cimafoundation.org/seadrif_test/api/";
 var baseAPIurl = "http://seadrif2.cimafoundation.org/seadrif/api/";
+
 var dollarMultiplier = 0;
 var startDateRuns = 2018;
 var rpValueApp = 0;

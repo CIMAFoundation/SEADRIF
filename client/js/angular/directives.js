@@ -97,7 +97,6 @@ rfseaApp.directive('rfsealegend',function(){
     }
 });
 
-
 rfseaApp.directive('rfseaslider',function(){
     return {
         // transclude: true,

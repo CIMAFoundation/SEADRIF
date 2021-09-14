@@ -11,6 +11,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
     $scope.bRiskProfile = {status: false};
     $scope.bdistrictDetails = {status: false};
     $scope.bDatePicker = false;
+
     $scope.maptype = "scale"; // Only 'scale' or 'value-translate'
     $scope.legendtitle= "";
     $scope.maptypeview = "scale";
@@ -27,6 +28,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
     // Date picker
     $scope.dateSelected = ""; // Format YYYY-MM-GG
+    $rootScope.dateSelectedGlobal = ""; // For download API
     $scope.availableYears = rfseaSrv.getAvailableYears();
     $scope.yearSelected = new Date().getFullYear();
     $scope.availableMonths = rfseaSrv.getAvailableMonths($scope.yearSelected);
@@ -35,15 +37,18 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
     var bDistrictView = $location.search().p;
 
-    $scope.country_globals =
-        {
-            data_day: new Date(),   // Country Global: available date
-            pop: ""                 // Country Global: affected population
-        };
+    $scope.country_globals = {
+        data_day: new Date(),   // Country Global: available date
+        pop: ""                 // Country Global: affected population
+    };
 
     $scope.palettePosition = 'bottomright';
     $scope.paletteColors = [];
     $scope.paletteColors_saved = [];
+    $scope.aCountryFloodMaps = [];
+    $scope.bDownloadingData = false;
+    $scope.bDownloadingInputData = false;
+    $scope.bDownloadInputData = false;
 
     $scope.userinfo = JSON.parse(localStorage.getItem('rfsea_login'));
 
@@ -143,6 +148,8 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
                         setCountrySelected($scope.countriesList[0]);
                     }
                 }
+
+                $rootScope.contry_selected = $scope.countrySelected;
 
                 $scope.$watch('countrySelected', function (newVal, oldVal) {
                     if(newVal !== oldVal){
@@ -785,6 +792,7 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
     {
         //Set new RUN date
         $scope.dateSelected = RunDate;
+        $rootScope.dateSelectedGlobal = RunDate;
         bMapRaster = false;
         init();
     }
@@ -795,6 +803,10 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
         return this;
     };
 
+    $scope.setViewDownloadInputData = function () {
+        $scope.bDownloadInputData = !$scope.bDownloadInputData;
+        countryFloodMaps();
+    }
 
     /***************************************************/
     /********* SIDEBAR SHOW/HIDE ***********************/
@@ -804,5 +816,84 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
     {
         $scope.bShowBar = !$scope.bShowBar;
     }
+
+    /**************************************************/
+    /********* DOWNLOAD DATA FOR COUNTRY **************/
+    /**************************************************/
+
+    $scope.downloadInputData = function () {
+
+        rfseaSrv.getDownloadInputDirectory($rootScope.dateSelectedGlobal,function(response)
+        {
+
+            var a = document.createElement('a');
+
+            //var fileName = response.headers['response.headers'].split("=")[1].replace(/\"/gi,'');
+            var fileName = "bulk_working_directory_" + $rootScope.dateSelectedGlobal + ".zip";
+            //var fileType = response.headers['content-type'] + ';charset=utf-8';
+            var blob = new Blob([response.data], {type:"application/octet-stream"});
+
+            a.href = URL.createObjectURL(blob);
+            a.download = fileName;
+            a.click();
+
+        }, function(data)
+        {
+            console.log("OnError");
+
+        });
+    }
+
+    $scope.getMapDescription = function (map_desc) {
+        const timeDesc = map_desc.split("_");
+        return timeDesc[2].replace("T", "years: ");
+    }
+
+    $scope.downloadFloodMap = function (flood_map) {
+
+        $scope.bDownloadingData = true;
+
+        rfseaSrv.getDownloadCountryFloodMap($rootScope.contry_selected.id, flood_map, function(response)
+        {
+
+            var a = document.createElement('a');
+
+            //var fileName = response.headers['response.headers'].split("=")[1].replace(/\"/gi,'');
+            var fileName = $rootScope.contry_selected.name + "flood_map_" + flood_map + ".tif";
+            //var fileType = response.headers['content-type'] + ';charset=utf-8';
+            var blob = new Blob([response.data], {type:"application/octet-stream"});
+
+            a.href = URL.createObjectURL(blob);
+            a.download = fileName;
+            a.click();
+
+            $scope.bDownloadingData = false;
+
+        }, function(data)
+        {
+            console.log("OnError");
+            $scope.bDownloadingData = false;
+        });
+
+    }
+
+    function countryFloodMaps () {
+
+        rfseaSrv.getCountryInputFloodMap($rootScope.contry_selected.id, function(data)
+        {
+            console.log(data);
+            $scope.aCountryFloodMaps = data.data;
+
+        }, function(data)
+        {
+            // Error
+            console.log(data);
+            vex.dialog.alert({
+                message: 'API loading error.'
+            })
+        });
+
+    }
+
 
 });
