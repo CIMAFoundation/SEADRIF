@@ -16,14 +16,12 @@ rfseaApp.controller('rfseaCtrl', function($rootScope, $scope, $filter, $window, 
     };
     $scope.bDisclaimer = false;
 
-    $scope.district_list = [];
-    $scope.zonesData = [];
-    $scope.palettePosition = 'bottomright';
+    // Guest data to view
     $scope.paletteColors = [];
+    $scope.palettePosition = 'bottomright';
+    $scope.maptype = "value-translate";
     $scope.paletteColors_saved = [];
-    $scope.maptype = "scale";
-    $scope.bPeople = true;
-    $scope.legendtitle= "";
+    $scope.legendtitle= "MODEL MAP";
 
     // Get user name
     rfseaSrv.getWhoami(function(data)
@@ -42,15 +40,15 @@ rfseaApp.controller('rfseaCtrl', function($rootScope, $scope, $filter, $window, 
         } else {
             // Visitor
             var map = L.map('map', {
-                    center: [19.80, 91.00],
-                    zoom: 5,
+                    center: [16.69, 101.55],
+                    zoom: 7,
                     trackResize: true
                 }
             );
 
             map.zoomControl.setPosition('topright');
 
-            L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
                 attribution: ''
             }).addTo(map);
 
@@ -61,7 +59,19 @@ rfseaApp.controller('rfseaCtrl', function($rootScope, $scope, $filter, $window, 
 
         // User not logged in - VISITOR
 
-        var map = rfseaSrv.createMapObject();
+        //var map = rfseaSrv.createMapObject();
+        var map = L.map('map', {
+                center: [16.69, 101.55],
+                zoom: 6,
+                trackResize: true
+            }
+        );
+
+        map.zoomControl.setPosition('topright');
+
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+            attribution: ''
+        }).addTo(map);
 
         getZonesForGuest (map);
 
@@ -76,14 +86,13 @@ rfseaApp.controller('rfseaCtrl', function($rootScope, $scope, $filter, $window, 
 
         rfseaSrv.getCountryDataForGuest(function(data)
         {
-            $scope.district_list = data.data.geojson.features;
 
-            // Set color Palette
-            setPaletteColor(data.data.pal.colors, data.data.pal.values);
+            $scope.paletteColors = data.data.legend;
 
-            $scope.zonesData = data.data.geojson.features;
+            angular.forEach(data.data.imgs, function(value, key){
+                loadLayerImage(map, value);
+            });
 
-            loadMapLayers( map);
 
         }, function(data)
         {
@@ -91,55 +100,23 @@ rfseaApp.controller('rfseaCtrl', function($rootScope, $scope, $filter, $window, 
         });
     }
 
-    function setPaletteColor(colors, values) {
-        // Set the palette objects for zones color and legend values
+    function loadLayerImage(map, data) {
 
-        $scope.paletteColors = rfseaSrv.setPaletteColor(colors, values);
-        $scope.paletteColors_saved = angular.copy($scope.paletteColors);
+        var	bounds = new L.LatLngBounds(
+            new L.LatLng(data.extent.ne[0],data.extent.ne[1]),
+            new L.LatLng(data.extent.sw[0],data.extent.sw[1])
+        );
 
-    }
-
-    function loadMapLayers(map){
-
-        var geojsondata = L.geoJSON($scope.district_list, {
-            style: function (item) {
-                return setColorMap(item);
-            },
-            onEachFeature: onEachFeature
-        }
-        ).addTo(map);
-
-        if(!bMapRaster){
-            map.fitBounds(geojsondata.getBounds());
-        }
-
-    }
-
-    function onEachFeature(feature, layer) {
-        //bind click
-
-        layer.myTag = "CountryGEOJson";
-
-        var customPopup = feature.properties.name + ': ' + $filter('number')(feature.properties.data);
-        var customOptions = {
-            'maxWidth': '400',
-            'width': '200',
-            'className' : 'popupCustom',
-            'autoPan': false
-        }
-
-        layer.bindPopup(customPopup, customOptions);
-
-        layer.on('mouseover', function(){
-            this.openPopup();
+        $scope.overlay = new L.ImageOverlay(baseAPIurl + 'data/img/?img=' + data.img, bounds, {
+            opacity: 1,
+            interactive: true,
+            attribution: ''
         });
-        layer.on('mouseout', function(){
-            this.closePopup();
-        });
-    }
 
-    function setColorMap(dataValue){
-        return rfseaSrv.setColorMap(dataValue, $scope.paletteColors_saved);
+        $scope.overlay.myTag = "MapCompaire";
+
+        map.addLayer($scope.overlay);
+
     }
 
     /***************************************************/

@@ -172,7 +172,7 @@
                         <label><strong>Flood Hazard Maps</strong></label><br />
                         <span>
                             Each Hazard map can be dowloaded at the country level for a series of predetermined Return Periods.
-                            The maps are Geotiffs that include the inundation water height at each location in cm
+                            The maps are Geotiffs that include the inundation water depth at each location in m.
                         </span>
                         <br /><br />
                     </div>
@@ -198,7 +198,6 @@
     <topmenu userinfo="userinfo" countryselected="countrySelected" countries="countriesList" riskprofile-show="bRiskProfile.status" district-show="bDistrict" districtdetails="false"></topmenu>
 
     <div class="container-fluid rfsea_box_content home_bar" ng-class="{show: bShowBar, hide: !bShowBar}" ng-if="!bRiskProfile.status">
-
 
         <div class="rfsea_box box_ctr">
             <div class="d-inline-flex align-items-start justify-content-between date ">
@@ -232,15 +231,15 @@
             </div>
         </div>
 
-      <!--DOWNLOAD BUTTON-->
-      <div class="row my-2">
-        <div class="col-6 p-1">
-          <div class="sidebar-dwl-btn d-flex" ng-click="setViewDownloadInputData()">
-            <div class="pre-dwl p-1"><span class="fa fa-arrow-circle-right"></span></div>
-            <div class="p-1">DOWNLOAD INPUT DATA</div>
-          </div>
+        <!--DOWNLOAD BUTTON-->
+        <div class="row my-2">
+            <div class="col-6 p-1">
+              <div class="sidebar-dwl-btn d-flex" ng-click="setViewDownloadInputData()">
+                <div class="pre-dwl p-1"><span class="fa fa-arrow-circle-right"></span></div>
+                <div class="p-1">DOWNLOAD INPUT DATA</div>
+              </div>
+            </div>
         </div>
-      </div>
 
 
         <div ng-if="bShowBar">
