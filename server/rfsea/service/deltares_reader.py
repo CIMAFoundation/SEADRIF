@@ -283,6 +283,17 @@ class DeltaresReader(object):
             'ref_scenario': fields.index(referenceScenario)
             }
     
+    def getWDImages(self, day, res):
+        ids = self._readZonesIds()
+        for zone_id in ids:
+            details = self.getZoneDetails(day, zone_id)            
+            if res['legend'] is None: 
+                res['legend'] = details['imgs']['wd']['legend']
+            res['imgs'].append({
+                'extent': details['imgs']['wd']['extent'],
+                'img': details['imgs']['wd']['img']
+            })
+
     
     def getZoneDetails(self, day, zoneId):        
         '''

@@ -104,15 +104,24 @@ class RFSEAResource(AcrowebResource):
         
         day = datetime.datetime.strptime(request.GET['d'], '%Y%m%d') if 'd' in request.GET else datetime.date.today()
 
-        all_data = None
+        # all_data = None
+        all_data = {
+            'legend': None,
+            'imgs': []
+        }
+
         for country in Country.objects.all():
             #obtain global data
             reader = DeltaresReader(country)
-            data = reader.getZones(day, simplify=True)
-            if all_data is None:
-                all_data = data
-            else:
-                all_data['geojson']['features'].extend(data['geojson']['features'])
+            
+            
+            reader.getWDImages(day, all_data)
+
+            # data = reader.getZones(day, simplify=True)
+            # if all_data is None:
+            #     all_data = data
+            # else:
+            #     all_data['geojson']['features'].extend(data['geojson']['features'])
         
         return self.create_response(request, all_data)
 
