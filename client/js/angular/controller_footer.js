@@ -129,4 +129,28 @@ rfseaApp.controller('rfseafooterCtrl', function($rootScope, $scope, rfseaSrv, $f
         });
     }
 
+    $scope.downloadLogBook = function () {
+
+        rfseaSrv.getDownloadLogBook(null, null, function(response)
+        {
+
+            var a = document.createElement('a');
+
+            //var fileName = response.headers['response.headers'].split("=")[1].replace(/\"/gi,'');
+            var fileName = "work_data_" + $rootScope.dateSelectedGlobal + ".zip";
+            //var fileType = response.headers['content-type'] + ';charset=utf-8';
+            var blob = new Blob([response.data], {type:"application/octet-stream"});
+
+            a.href = URL.createObjectURL(blob);
+            a.download = fileName;
+            a.click();
+
+        }, function(data)
+        {
+            console.log("OnError");
+            alert("Error: " + data.data);
+
+        });
+    }
+
 });

@@ -58,7 +58,8 @@ rfseaApp.directive('rfseafooter',function(){
         templateUrl: 'js/views/footer.html',
         scope: {
             maptype: "=",
-            legendtitle: "="
+            legendtitle: "=",
+            usersettings: "="
         }
     }
 });

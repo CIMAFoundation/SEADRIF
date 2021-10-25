@@ -60,6 +60,7 @@
             <div class="dwl-item" ng-click="downloadMODEL()">MODEL (.gtiff)</div>
             <div class="dwl-item" ng-click="downloadEOMODEL()">EO/MODEL (.gtiff)</div>
             <div class="dwl-item" ng-click="downloadWorkingDirectory()">Run data (.zip)</div>
+            <div class="dwl-item" ng-if="usersettings.allow_log" ng-click="downloadLogBook()">Logbook (.csv) {{usersettings.allow_log}}</div>
           </div>
         </div>
       </div>

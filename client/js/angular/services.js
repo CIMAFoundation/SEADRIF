@@ -674,5 +674,22 @@ rfseaApp.service("rfseaSrv", ['$http', '$filter', function($http, $filter, $root
 
     }
 
+    this.getDownloadLogBook = function(fromDate, toDate, onSuccess, onError)
+    {
+
+        let complete_url = "data/downloadlog/";
+
+        if(fromDate || toDate) complete_url = complete_url + "?from=" + fromDate + "&to=" + toDate;
+
+        $http({
+            method: 'GET',
+            url: baseAPIurl + complete_url
+        }).then(function (data) {
+            if(onSuccess) onSuccess(data)
+        },function(data){
+            if(onError)onError(data)
+        });
+    }
+
 }]);
 
