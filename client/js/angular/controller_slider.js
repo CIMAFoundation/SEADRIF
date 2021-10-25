@@ -74,8 +74,11 @@ rfseaApp.controller('rfseasliderCtrl', function($rootScope, $scope, $timeout, rf
     function setElementPosition_tooltip(itemId, pos) {
         var elem = document.getElementById(itemId);
         // elem.style.marginLeft= "-" + (pos * 0.5) - 26 + "px";
-        elem.style.left = "-95px";
-        elem.style.top = "45px";
+        if(elem) {
+            elem.style.left = "-95px";
+            elem.style.top = "45px";
+        }
+
     }
 
     function returnInterpulationPoint(yValue, type){
