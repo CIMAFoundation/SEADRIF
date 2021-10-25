@@ -2,8 +2,7 @@
  * Created by Manuel on 12/02/2018.
  */
 
-rfseaApp.controller('rfseafooterCtrl', function($rootScope, $scope, rfseaSrv, $filter)
-{
+rfseaApp.controller('rfseafooterCtrl', function($rootScope, $scope, rfseaSrv, $filter) {
 
     let todayDate = new Date();
     if (!$rootScope.dateSelectedGlobal) $rootScope.dateSelectedGlobal = todayDate;
@@ -134,15 +133,12 @@ rfseaApp.controller('rfseafooterCtrl', function($rootScope, $scope, rfseaSrv, $f
         rfseaSrv.getDownloadLogBook(null, null, function(response)
         {
 
+            //console.log(response.headers());
             var a = document.createElement('a');
-
-            //var fileName = response.headers['response.headers'].split("=")[1].replace(/\"/gi,'');
-            var fileName = "work_data_" + $rootScope.dateSelectedGlobal + ".zip";
-            //var fileType = response.headers['content-type'] + ';charset=utf-8';
-            var blob = new Blob([response.data], {type:"application/octet-stream"});
+            var blob = new Blob([response.data], {'type':"application/csv"});
 
             a.href = URL.createObjectURL(blob);
-            a.download = fileName;
+            a.download = "Log_book_data.csv";
             a.click();
 
         }, function(data)
