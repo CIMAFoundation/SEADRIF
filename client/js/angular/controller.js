@@ -29,9 +29,10 @@ rfseaApp.controller('rfseaCtrl', function($rootScope, $scope, $filter, $window, 
         if(data.status == 200){
             // User logged in
             $scope.userinfo = {
-                usrlogin: data.data,
+                usrlogin: data.data.user,
                 usrlevel: "seaDrif",
-                usrloginstatus: true
+                usrloginstatus: true,
+                user_settings: data.data.settings
             };
 
             localStorage.setItem('rfsea_login', JSON.stringify($scope.userinfo));
