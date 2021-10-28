@@ -14,7 +14,9 @@ import calendar
 from tastypie.http import HttpUnauthorized
 import json
 import zipfile
-from rfsea import add_logbook_activity
+from rfsea import add_logbook_activity, get_logbook_csv
+import django.utils.timezone
+
 
 class RFSEAResource(AcrowebResource):
     
@@ -40,6 +42,7 @@ class RFSEAResource(AcrowebResource):
                 URLHelper('/downloadinput', 'download_input'),
                 URLHelper('/%s/inputfloodmaps'%self.strParam('country'), 'get_input_floodmaps'),
                 URLHelper('/%s/downloadinputfloodmaps/%s'%(self.strParam('country'), self.strParam('map')), 'download_floodmap'),
+                URLHelper('/downloadlog', 'download_log'),
                 ]
 
     def _checkCountryPermission(self, request, countryPK):        
@@ -195,8 +198,8 @@ class RFSEAResource(AcrowebResource):
     def img(self, request, **kwargs):
         self.method_check(request, allowed=['get'])
         
-        response = self._checkCountryPermission(request, None)
-        if response: return response
+#        response = self._checkCountryPermission(request, None)
+#        if response: return response
 
         if 'img' not in request.GET: raise ValueError('img query param not found')
         rel_path = request.GET['img']
@@ -353,4 +356,36 @@ class RFSEAResource(AcrowebResource):
         response = HttpResponse(output.getvalue(), content_type='application/force-download')
         response['Content-Disposition'] = 'attachment; filename=work_data_%s.zip'%(day)
         return response
+
+
+    def download_log(self, request, **kwargs):
+        self.method_check(request, allowed=['get'])
+
+        if request.user is None or not request.user.is_authenticated(): 
+            return self.create_response(request, 'not authenticated', HttpUnauthorized)        
+        
+        userSettingSet = request.user.usersetting_set.all()
+        if not userSettingSet or len(userSettingSet)==0:
+            return self.create_response(request, 'cannot find user settings', HttpUnauthorized)
+        
+        try:
+            userSettings = json.loads(userSettingSet[0].data)
+            
+            if 'allow_log' not in userSettings or userSettings['allow_log'].lower() != 'true':
+                return self.create_response(request, 'operation not permitted', HttpUnauthorized)
+            
+        except:
+            return self.create_response(request, 'error reading user settings', HttpUnauthorized)
+
+        dt_to = datetime.datetime.strptime(request.GET['to'], '%Y%m%d') if 'to' in request.GET else django.utils.timezone.now()
+        s_dt_to = dt_to.strftime('%Y%m%d')
+        dt_from = datetime.datetime.strptime(request.GET['from'], '%Y%m%d') if 'from' in request.GET else dt_to - datetime.timedelta(days=1)
+        s_dt_from = dt_from.strftime('%Y%m%d')
+        
+        data = get_logbook_csv(dt_from, dt_to)
+
+        response = HttpResponse(data, content_type='application/force-download')
+        response['Content-Disposition'] = 'attachment; filename=log_from_%s_to_%s.csv'%(s_dt_from, s_dt_to)
+        return response
+
 

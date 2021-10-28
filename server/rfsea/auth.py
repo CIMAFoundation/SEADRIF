@@ -104,6 +104,15 @@ class LoginResource(AcrowebResource):
     def whoami(self, request, **kwargs):
         self.method_check(request, allowed=['get'])
         if request.user and request.user.is_authenticated():
-            return self.create_response(request, request.user.username)
+
+            userSettingSet = request.user.usersetting_set.all()
+            if not userSettingSet or len(userSettingSet)==0:
+                return self.create_response(request, 'cannot find user settings', HttpUnauthorized)
+            userSettings = json.loads(userSettingSet[0].data)
+
+            return self.create_response(request, {
+                'user': request.user.username,
+                'settings': userSettings
+            })
         else:
             return self.create_response(request, None, HttpUnauthorized)
