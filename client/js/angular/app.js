@@ -9,7 +9,7 @@ rfseaApp.run(['$http', '$cookies', function($http, $cookies) {
 }]);
 
 var baseAPIurl = "http://seadrif2.cimafoundation.org/seadrif_test/api/";
-//var baseAPIurl = "http://seadrif2.cimafoundation.org/seadrif_test/api/";
+//var baseAPIurl = "http://seadrif2.cimafoundation.org/seadrif/api/";
 
 var dollarMultiplier = 0;
 var startDateRuns = 2018;
