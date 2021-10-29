@@ -823,6 +823,8 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
 
     $scope.downloadInputData = function () {
 
+        $scope.bDownloadingData = true;
+
         rfseaSrv.getDownloadInputDirectory($rootScope.dateSelectedGlobal,function(response)
         {
 
@@ -837,10 +839,12 @@ rfseaApp.controller('rfsea_countries_Ctrl', function($rootScope, $scope, $window
             a.download = fileName;
             a.click();
 
+            $scope.bDownloadingData = false;
+
         }, function(data)
         {
             console.log("OnError");
-
+            $scope.bDownloadingData = false;
         });
     }
 
