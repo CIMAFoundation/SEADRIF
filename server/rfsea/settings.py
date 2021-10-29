@@ -123,6 +123,7 @@ POP_FILE_NAME = 'output_pop.csv'
 RUN_IMAGES_DIR_NAME = 'images'
 
 DELTARES_WORK_DIR = '/home/doy/tmp/seadrif/Work'
+DELTARES_OUTPUT_DIR = '/home/doy/tmp/seadrif/Output'
 DELTARES_LOG_DIR = '/home/doy/tmp/logs'
 
 SPOOL_DIR = '/home/doy/tmp/seadrift/spool'

@@ -4,7 +4,7 @@ dds client resources
 import glob
 import io
 import os
-from rfsea.settings import DATA_BASE_DIR, DELTARES_LOG_DIR, DELTARES_WORK_DIR
+from rfsea.settings import DATA_BASE_DIR, DELTARES_LOG_DIR, DELTARES_OUTPUT_DIR, DELTARES_WORK_DIR
 from acroweb.core.resources import AcrowebResource, URLHelper
 from rfsea.service.deltares_reader import DeltaresReader
 from rfsea.models import Country
@@ -335,6 +335,7 @@ class RFSEAResource(AcrowebResource):
         add_logbook_activity(request, 'download wok: %s'%(day))
         
         work_run_dir = os.path.join(DELTARES_WORK_DIR, day.strftime('%Y-%m-%d'))
+        out_run_dir = os.path.join(DELTARES_OUTPUT_DIR, day.strftime('%Y-%m-%d'))
 
         output = io.BytesIO()
 
@@ -345,6 +346,11 @@ class RFSEAResource(AcrowebResource):
         for f in csv_files:
             zip_file.write(f, 'work_%s/%s'%(day.strftime('%Y%m%d'), os.path.basename(f)))
         
+        #add all aoutmatch files to archive
+        outmatch_files = glob.glob(os.path.join(out_run_dir, 'outmatch??.txt')) 
+        for f in outmatch_files:
+            zip_file.write(f, 'work_%s/%s'%(day.strftime('%Y%m%d'), os.path.basename(f)))
+
         #add log files
         for log_file_base_name in ['log', 'log_deltares', 'log_pelc']:      
             log_file = os.path.join(DELTARES_LOG_DIR, '%s_%s.txt'%(log_file_base_name, day_run.strftime('%Y-%m-%d')))
