@@ -332,7 +332,7 @@ class RFSEAResource(AcrowebResource):
         #go to the next days for the work dir
         day = day_run + datetime.timedelta(days=1)
 
-        add_logbook_activity(request, 'download wok: %s'%(day))
+        add_logbook_activity(request, 'download work: %s'%(day))
         
         work_run_dir = os.path.join(DELTARES_WORK_DIR, day.strftime('%Y-%m-%d'))
         out_run_dir = os.path.join(DELTARES_OUTPUT_DIR, day.strftime('%Y-%m-%d'))
@@ -353,7 +353,7 @@ class RFSEAResource(AcrowebResource):
 
         #add log files
         for log_file_base_name in ['log', 'log_deltares', 'log_pelc']:      
-            log_file = os.path.join(DELTARES_LOG_DIR, '%s_%s.txt'%(log_file_base_name, day_run.strftime('%Y-%m-%d')))
+            log_file = os.path.join(DELTARES_LOG_DIR, '%s_%s.txt'%(log_file_base_name, day.strftime('%Y-%m-%d')))
             if os.path.exists(log_file):
                 zip_file.write(log_file, 'work_%s/%s'%(day.strftime('%Y%m%d'), os.path.basename(log_file)))
 
