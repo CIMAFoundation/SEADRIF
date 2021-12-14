@@ -130,7 +130,6 @@ rfseaApp.controller('rfseafooterCtrl', function($rootScope, $scope, rfseaSrv, $f
 
     $scope.downloadLogBook = function () {
 
-        console.log($rootScope.dateSelectedGlobal);
         let sYear = $rootScope.dateSelectedGlobal.substr(0,4);
         let sMonth = $rootScope.dateSelectedGlobal.substr(4,2);
         let sDay = $rootScope.dateSelectedGlobal.substr(6,2);
@@ -140,7 +139,7 @@ rfseaApp.controller('rfseafooterCtrl', function($rootScope, $scope, rfseaSrv, $f
 
         let selectedDate = new Date(sSelectedDate);
 
-        fromDate = selectedDate.setDate(selectedDate.getDate() -1);
+        fromDate = selectedDate.setDate(selectedDate.getDate() -30);
         selectedDate = new Date(sSelectedDate);
         toDate = selectedDate.setDate(selectedDate.getDate() + 2);
 
