@@ -108,7 +108,7 @@ if __name__ == '__main__':
         palette = palettes[the_set]
         values = palette['values']
 
-        continue
+        # continue
         
         shapefile_path = '/home/doy/tmp/rfsea/provinces/provinces.shp'
         output_dir = os.path.join(output_base_dir, the_set)

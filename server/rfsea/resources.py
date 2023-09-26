@@ -244,7 +244,17 @@ class RFSEAResource(AcrowebResource):
         response = self._checkCountryPermission(request, kwargs['country'])
         if response: return response
 
-        day = datetime.datetime.strptime(request.GET['d'], '%Y%m%d') if 'd' in request.GET else datetime.date.today()
+        if 'd' not in request.GET: 
+            day = datetime.date.today()
+        else:
+            str_date = request.GET['d']
+            try:
+                day = datetime.datetime.strptime(str_date, '%Y%m%d')
+            except:
+                str_date = " ".join(str_date.split(" ")[:4])
+                print(str_date)                
+                day = datetime.datetime.strptime(str_date, '%a %b %d %Y')
+
         country = Country.objects.get(pk=kwargs['country'])
 
         add_logbook_activity(request, 'download eo: %s;%s'%(country.name, day))
